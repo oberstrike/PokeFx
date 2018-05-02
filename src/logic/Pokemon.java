@@ -1,8 +1,10 @@
 package logic;
 
-public class pokemon {
+public class Pokemon {
 
 	private int id;
+	private int level;
+	private int type;
 	private String name;
 	private double att;
 	private double deff;
@@ -12,9 +14,12 @@ public class pokemon {
 	
 	// Konstruktor
 	
-	public pokemon(int id, String name, double att, double deff, double motivation, double init, double hp) {
+	public Pokemon(int id, int level, int type, String name, double att, double deff, double motivation, double init,
+			double hp) {
 		super();
 		this.id = id;
+		this.level = level;
+		this.type = type;
 		this.name = name;
 		this.att = att;
 		this.deff = deff;
@@ -22,8 +27,24 @@ public class pokemon {
 		this.init = init;
 		this.hp = hp;
 	}
-	
+
 	//Getter + Setter
+	
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
 	
 	public int getId() {
 		return id;
@@ -67,4 +88,6 @@ public class pokemon {
 	public void setHp(double hp) {
 		this.hp = hp;
 	}
+	
+	public 
 }

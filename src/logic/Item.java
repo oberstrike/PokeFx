@@ -1,6 +1,6 @@
 package logic;
 
-public class item {
+public class Item {
 	
 	private int id;
 	private String name;
@@ -10,7 +10,7 @@ public class item {
 	
 	// Konstruktor
 	
-	public item(int id, String name, String effect, String entity, double rate) {
+	public Item(int id, String name, String effect, String entity, double rate) {
 		super();
 		this.id = id;
 		this.name = name;
