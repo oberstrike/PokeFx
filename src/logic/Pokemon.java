@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Random;
+
 public class Pokemon {
 
 	private int id;
@@ -103,12 +105,12 @@ public class Pokemon {
 		// wer beginnt?
 		if (mon1.getInit() >= mon2.getInit()) {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
-				mon2.setHp(mon2.getHp() - attMon1);
+				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()));
 				if (mon2.getHp() <= 0) {
 					winner = mon1;
 					return winner;
 				}
-				mon1.setHp(mon1.getHp() - attMon2);
+				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
 					return winner;
@@ -117,12 +119,12 @@ public class Pokemon {
 			return null;
 		} else {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
-				mon1.setHp(mon1.getHp() - attMon2);
+				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
 					return winner;
 				}
-				mon2.setHp(mon2.getHp() - attMon1);
+				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()));
 				if (mon2.getHp() <= 0) {
 					winner = mon1;
 					return winner;
@@ -140,6 +142,18 @@ public class Pokemon {
 	public int calculateDeff() {
 		int deff = (int) (this.getMotivation()*(this.getDeff() * (1 + (this.getLevel()/10))));
 		return deff;
+	}
+	
+	public static float randomCrit() {
+		float crit = 1;
+		Random r = new Random();
+		float chance = r.nextFloat();
+		if (chance <= 0.05f) {
+			crit = 2;
+		} else if (chance >= 0.95) {
+			crit = (float) 0.5;
+		}
+		return crit;
 	}
 	
 }
