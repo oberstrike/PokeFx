@@ -98,7 +98,7 @@ public class Pokemon {
 		int deffMon2 = calculateDeff(mon2);
 			
 		// wer beginnt?
-		if (mon1.getInit() > mon2.getInit()) {
+		if (mon1.getInit() >= mon2.getInit()) {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
 				mon2.setHp(mon2.getHp() - attMon1);
 				if (mon2.getHp() <= 0) {
