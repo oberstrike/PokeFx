@@ -15,7 +15,7 @@ public class Field {
 		this.setX(x);
 		this.setY(y);
 	}
-
+// Kommentar
 
 	public FieldType getType() {
 		return type;
