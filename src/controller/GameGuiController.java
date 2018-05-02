@@ -46,7 +46,7 @@ public class GameGuiController implements Initializable {
 		Random random = new Random();
 		for(int i = 0; i < 400; i+=20) {
 			for(int j = 0; j < 400; j+=20) {
-				fields.add(new Field(i, j, (random.nextFloat() * 100 - 1) > 30 ? FieldType.GRASS : FieldType.BLOCKED));
+				fields.add(new Field(i, j, (random.nextFloat() * 100 - 1) > 20 ? FieldType.GRASS : FieldType.BLOCKED));
 			}
 		}
 		this.fill();
