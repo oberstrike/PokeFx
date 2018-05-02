@@ -14,47 +14,27 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import logic.Field;
 import logic.FieldType;
+import logic.GameLogic;
 
 public class GameGuiController implements Initializable {
 
-	List<Field> fields = new ArrayList<>();
-	GraphicsContext context;
-	
 	@FXML
 	private Canvas canvas;
-	
-	
-	private void fill() {
-		for(Field field: fields) {
-			if(field.getType().equals(FieldType.GRASS)) {
-				context.setFill(Color.GREEN);
-				context.fillRect(field.getX(), field.getY(), 20, 20);
-
-			}else {
-				context.setFill(Color.BROWN);
-				context.fillRect(field.getX(), field.getY(), 20, 20);
-			}
-		}
-	}
-	
 	
 	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		context = canvas.getGraphicsContext2D();
+		List<Field> fields = new ArrayList<>();
 		Random random = new Random();
 		for(int i = 0; i < 400; i+=20) {
 			for(int j = 0; j < 400; j+=20) {
 				fields.add(new Field(i, j, (random.nextFloat() * 100 - 1) > 20 ? FieldType.GRASS : FieldType.BLOCKED));
 			}
 		}
-		this.fill();
-		
-		
-		
-		
-		
+		GameLogic logic = new GameLogic(canvas.getGraphicsContext2D(), fields);
+		logic.setDaemon(true);
+		logic.start();
 	}
 
 }
