@@ -18,16 +18,16 @@ public class GameLogic extends Thread{
 	
 	@Override
 	public void run() {
-		Platform.runLater(() -> {
-			this.reset();
+		
+		while(true) {
+			Platform.runLater(() -> this.fill());	
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Fülle");
-			this.fill();
-		});
+			Platform.runLater(() -> this.reset());
+		}
 	}
 	
 	private void fill() {

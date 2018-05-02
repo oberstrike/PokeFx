@@ -33,6 +33,7 @@ public class GameGuiController implements Initializable {
 			}
 		}
 		GameLogic logic = new GameLogic(canvas.getGraphicsContext2D(), fields);
+		logic.setDaemon(true);
 		logic.start();
 	}
 

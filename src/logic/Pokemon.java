@@ -88,6 +88,5 @@ public class Pokemon {
 	public void setHp(double hp) {
 		this.hp = hp;
 	}
-	
-	public 
+
 }
