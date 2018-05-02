@@ -8,11 +8,6 @@ import javafx.scene.layout.AnchorPane;
 
 
 public class Main extends Application {
-<<<<<<< HEAD
-	//test2
-=======
-	//Test1
->>>>>>> ae8505e3175e9e4b8126eb7e400f51bb2ce6f24e
 	@Override
 	public void start(Stage primaryStage) {
 		try {
