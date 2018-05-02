@@ -86,16 +86,19 @@ public class Pokemon {
 		return hp;
 	}
 	public void setHp(double hp) {
+		if (hp < 0) {
+			hp = 0;
+		}
 		this.hp = hp;
 	}
 	
-	public Object fight(Pokemon mon1, Pokemon mon2) {
+	public static Pokemon fight(Pokemon mon1, Pokemon mon2) {
 		Pokemon winner;
 		
-		int attMon1 = calculateAtt(mon1);
-		int deffMon1 = calculateDeff(mon1);
-		int attMon2 = calculateAtt(mon2);
-		int deffMon2 = calculateDeff(mon2);
+		int attMon1 = mon1.calculateAtt();
+		int deffMon1 = mon1.calculateDeff();
+		int attMon2 = mon2.calculateAtt();
+		int deffMon2 = mon2.calculateDeff();
 			
 		// wer beginnt?
 		if (mon1.getInit() >= mon2.getInit()) {
@@ -129,13 +132,13 @@ public class Pokemon {
 		}
 	}
 	
-	public int calculateAtt(Pokemon mon) {
-		int att = (int) (mon.getMotivation()*(mon.getAtt() * (1 + (mon.getLevel()/10))));
+	public int calculateAtt() {
+		int att = (int) (this.getMotivation()*(this.getAtt() * (1 + (this.getLevel()/10))));
 		return att;
 	}
 	
-	public int calculateDeff(Pokemon mon) {
-		int deff = (int) (mon.getMotivation()*(mon.getDeff() * (1 + (mon.getLevel()/10))));
+	public int calculateDeff() {
+		int deff = (int) (this.getMotivation()*(this.getDeff() * (1 + (this.getLevel()/10))));
 		return deff;
 	}
 	
