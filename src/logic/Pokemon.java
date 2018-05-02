@@ -111,6 +111,7 @@ public class Pokemon {
 					return winner;
 				}
 			}
+			return null;
 		} else {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
 				mon1.setHp(mon1.getHp() - attMon2);
@@ -124,6 +125,7 @@ public class Pokemon {
 					return winner;
 				}
 			}
+			return null;
 		}
 	}
 	
