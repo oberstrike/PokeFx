@@ -3,6 +3,9 @@ package logic;
 import java.util.List;
 import java.util.Optional;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.StaxDriver;
+
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -18,6 +21,10 @@ public class GameLogic extends Thread{
 		this.context = context;
 		player = new Player();
 		player.setField(fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).findAny().get());
+		XStream stream = new XStream(new StaxDriver());
+		stream.processAnnotations(Field.class);
+		System.out.println(stream.toXML(player.getField()));
+	
 	}
 	
 	@Override

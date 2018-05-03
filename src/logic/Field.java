@@ -1,14 +1,20 @@
 package logic;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import javafx.scene.image.Image;
 
+@XStreamAlias("field")
 public class Field {
 	private FieldType type;
 	private double x;
-	
 	private double y;
-	public Field() {};
+	
+	@XStreamOmitField
 	private Image image;
+	
+	public Field() {};
 	
 	public Field(double x, double y, FieldType type){
 		this();
@@ -16,7 +22,6 @@ public class Field {
 		this.setX(x);
 		this.setY(y);
 	}
-// Kommentar
 
 	public FieldType getType() {
 		return type;
@@ -52,8 +57,6 @@ public class Field {
 	public Image getImage() {
 		return image;
 	}
-
-
 
 	public void setImage(Image image) {
 		this.image = image;
