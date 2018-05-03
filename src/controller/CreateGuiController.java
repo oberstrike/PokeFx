@@ -61,26 +61,27 @@ public class CreateGuiController implements Initializable {
     	fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
     
     	File selectedFile = fileChooser.showOpenDialog((Stage)((Button)event.getSource()).getScene().getWindow());
-    	
-    	String name = "";
-    	if(selectedFile != null) {
-    		System.out.println(selectedFile.getName());
+    	if(selectedFile == null) {
+    		System.out.println("Keine Datei geladen");
+    	}else {
+    		String name = selectedFile.getName();
+    		System.out.println(name);
+    		FileReader reader;
+        	try {
+    			reader = new FileReader(name);
+    			Object object = stream.fromXML(reader);
+    			fields = (ArrayList<Field>) object;
+    			reader.close();
+    			new Alert(AlertType.INFORMATION, "Geladen").show();
+    		} catch (FileNotFoundException e) {
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+        	
     	}
     	
     	
-    	FileReader reader;
-    	
-    	try {
-			reader = new FileReader("save.xml");
-			Object object = stream.fromXML(reader);
-			fields = (ArrayList<Field>) object;
-			reader.close();
-			new Alert(AlertType.INFORMATION, "Geladen").show();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
     	
     	
     }
