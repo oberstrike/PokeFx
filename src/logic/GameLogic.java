@@ -55,8 +55,11 @@ public class GameLogic extends Thread{
 					context.setFill(Color.YELLOW);
 					context.fillOval(field.getX(), field.getY(), 15, 15);
 				}
-			}else {
+			}else if(field.getType().equals(FieldType.BLOCKED)) {
 				context.setFill(Color.BROWN);
+				context.fillRect(field.getX(), field.getY(), 20, 20);
+			}else {
+				context.setFill(Color.DARKGREEN);
 				context.fillRect(field.getX(), field.getY(), 20, 20);
 			}
 		}

@@ -1,5 +1,6 @@
 package logic;
 
+import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -32,6 +33,9 @@ public class Field {
 		this.type = type;
 	}
 
+	public Vec2d toVector() {
+		return new Vec2d(this.x+10, this.y+10);
+	}
 
 	public double getX() {
 		return x;

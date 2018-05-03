@@ -1,5 +1,5 @@
 package logic;
 
 public enum FieldType {
-	BLOCKED, GRASS, LONGGRASS, PLAYER, ITEM, POKEMON
+	BLOCKED, GRASS, HOHESGRASS
 }

@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateGuiController">
    <children>
-      <Canvas fx:id="canvas" height="500.0" layoutX="8.0" width="600.0" />
+      <Canvas fx:id="canvas" height="500.0" layoutX="8.0" onMouseClicked="#setMaterial" width="600.0" />
       <Label layoutX="729.0" layoutY="14.0" text="Übersicht" />
       <Label layoutX="697.0" layoutY="47.0" text="Grass" />
       <Label layoutX="700.0" layoutY="75.0" text="Stein" />
@@ -20,5 +20,7 @@
       <Button layoutX="760.0" layoutY="394.0" mnemonicParsing="false" onAction="#load" prefHeight="31.0" prefWidth="83.0" text="Laden" />
       <TextField fx:id="name" layoutX="628.0" layoutY="435.0" prefHeight="31.0" prefWidth="114.0" />
       <Label layoutX="627.0" layoutY="399.0" text="Name:" />
+      <Label layoutX="653.0" layoutY="170.0" text="Aktuell:" />
+      <Label fx:id="activeMaterial" layoutX="712.0" layoutY="170.0" />
    </children>
 </AnchorPane>
