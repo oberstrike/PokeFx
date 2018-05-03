@@ -2,7 +2,6 @@ package logic;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Queue;
 
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
