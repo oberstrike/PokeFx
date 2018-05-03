@@ -105,12 +105,12 @@ public class Pokemon {
 		// wer beginnt?
 		if (mon1.getInit() >= mon2.getInit()) {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
-				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()));
+				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()-(deffMon1/2)));
 				if (mon2.getHp() <= 0) {
 					winner = mon1;
 					return winner;
 				}
-				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()));
+				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon1/2)));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
 					return winner;
@@ -119,12 +119,12 @@ public class Pokemon {
 			return null;
 		} else {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
-				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()));
+				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon1/2)));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
 					return winner;
 				}
-				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()));
+				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()-(deffMon1/2)));
 				if (mon2.getHp() <= 0) {
 					winner = mon1;
 					return winner;

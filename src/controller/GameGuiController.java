@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import com.sun.glass.events.MouseEvent;
+
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import logic.Field;
@@ -18,10 +23,15 @@ import logic.GameLogic;
 
 public class GameGuiController implements Initializable {
 
+	GameLogic logic;
+	
 	@FXML
 	private Canvas canvas;
 	
-	
+    @FXML
+    void move(KeyEvent event) {
+    	logic.moveEvent(event.getCode().getName());
+    }
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -32,9 +42,13 @@ public class GameGuiController implements Initializable {
 				fields.add(new Field(i, j, (random.nextFloat() * 100 - 1) > 20 ? FieldType.GRASS : FieldType.BLOCKED));
 			}
 		}
-		GameLogic logic = new GameLogic(canvas.getGraphicsContext2D(), fields);
+		logic = new GameLogic(canvas.getGraphicsContext2D(), fields);
 		logic.setDaemon(true);
 		logic.start();
+		canvas.setOnMouseClicked(event -> {
+			canvas.requestFocus();
+		});
+		
 	}
 
 }
