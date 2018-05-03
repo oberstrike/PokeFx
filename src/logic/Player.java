@@ -9,13 +9,9 @@ public class Player {
 
 
 	private Pokemon[] pokemon = new Pokemon[3];
-<<<<<<< HEAD
 	private Item[] item = new Item[5];
 	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
-=======
 	//private Item[] item = new Item[5];
-	private float motivation;
->>>>>>> 836da98a8d93f1fecebf2c213b758dbcb0904dd4
 	
 	public Player(){
 		
