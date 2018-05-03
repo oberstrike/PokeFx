@@ -2,9 +2,12 @@ package logic;
 
 public class Player {
 
+	private String name;
 	private double x;
 	private double y;
-	private Pokemon pokemon;
+	private Pokemon[] pokemon = new Pokemon[3];
+	private Item[] item = new Item[5];
+	private float motivation;
 	
 	public Player(){
 		
@@ -29,6 +32,5 @@ public class Player {
 	public Player(double x, double y) {
 		
 	}
-	
 	
 }
