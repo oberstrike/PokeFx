@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateGuiController">
+   <children>
+      <Canvas fx:id="canvas" height="500.0" layoutX="8.0" width="600.0" />
+      <Label layoutX="729.0" layoutY="14.0" text="Übersicht" />
+      <Label layoutX="697.0" layoutY="47.0" text="Grass" />
+      <Label layoutX="700.0" layoutY="75.0" text="Stein" />
+      <Label layoutX="653.0" layoutY="106.0" text="Hohes Grass" />
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="736.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="736.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="736.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
