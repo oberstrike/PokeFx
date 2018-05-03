@@ -7,7 +7,7 @@ public class Player {
 	private double y;
 	private Pokemon[] pokemon = new Pokemon[3];
 	private Item[] item = new Item[5];
-	private float motivation;
+	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
 	
 	public Player(){
 		
