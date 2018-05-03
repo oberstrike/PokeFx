@@ -27,7 +27,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import logic.Field;
 import logic.FieldType;
 
@@ -40,23 +45,40 @@ public class CreateGuiController implements Initializable {
     	Alert alert = new Alert(AlertType.CONFIRMATION, "Wollen Sie den aktuellen Zustand verwerfen?");
     	alert.showAndWait().ifPresent((button) ->{
     		if(button.getText().equals("OK")) {
-    			load();
-    			System.out.println("Neu geladen");
+    			loadFile(event);
     		}
     	}); 
     	
     }
+    
+    @FXML
+    private TextField name;
 	
     @SuppressWarnings("unchecked")
-	private void load() {
+	private void loadFile(ActionEvent event) {
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Open XML");
+    	fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
+    
+    	File selectedFile = fileChooser.showOpenDialog((Stage)((Button)event.getSource()).getScene().getWindow());
+    	
+    	String name = "";
+    	if(selectedFile != null) {
+    		System.out.println(selectedFile.getName());
+    	}
+    	
+    	
     	FileReader reader;
     	
     	try {
 			reader = new FileReader("save.xml");
-			System.out.println(stream.fromXML(reader).getClass().getName());
-		//	fields = (List<Field>) stream.fromXML(reader);
-			
+			Object object = stream.fromXML(reader);
+			fields = (ArrayList<Field>) object;
+			reader.close();
+			new Alert(AlertType.INFORMATION, "Geladen").show();
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	
@@ -64,20 +86,21 @@ public class CreateGuiController implements Initializable {
     }
     
 	@FXML
-	private void save(ActionEvent event) {
-		
-		
+	private void save(ActionEvent event) {	
 		FileWriter writer;
-		try {
-			writer = new FileWriter("save.xml", false);
-			
-			System.out.println("Speichere..");
-			stream.toXML(this.fields, writer);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	
+		if(this.name.getText().length()<1 || this.name.getText().length()>12) {
+			new Alert(AlertType.ERROR, "Bitte geben Sie einen Namen ein, der zwischen 4-12 Zeichen besitzt").show();
+		}else {
+			try {
+				writer = new FileWriter("save.xml", false);
+				System.out.println("Speichere..");
+				stream.toXML(this.fields, writer);
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}
 	}
 	
 	@FXML
@@ -114,7 +137,7 @@ public class CreateGuiController implements Initializable {
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);
 		stream.addPermission(PrimitiveTypePermission.PRIMITIVES);
-		stream.autodetectAnnotations(true);
+		stream.processAnnotations(Field.class);
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
 		

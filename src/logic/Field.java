@@ -5,7 +5,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import javafx.scene.image.Image;
 
-@XStreamAlias("field")
+@XStreamAlias("FIELD")
 public class Field {
 	private FieldType type;
 	private double x;
