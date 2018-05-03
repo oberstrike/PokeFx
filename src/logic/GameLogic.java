@@ -1,8 +1,8 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,14 +12,13 @@ public class GameLogic extends Thread{
 	List<Field> fields;
 	GraphicsContext context;
 	Player player;
+	long lastMovement = 0;
+	
 	public GameLogic(GraphicsContext context, List<Field> fields) {
-		
-		Field playerField = fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).findAny().get();
 		this.fields = fields;
 		this.context = context;
-		player = new Player(playerField.getX(), playerField.getY());
-		
-		
+		player = new Player();
+		player.setField(fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).findAny().get());
 	}
 	
 	@Override
@@ -49,6 +48,7 @@ public class GameLogic extends Thread{
 				context.fillRect(field.getX(), field.getY(), 20, 20);
 			}
 		}
+		
 	}
 	
 	public void moveEvent(String keyName) {
@@ -76,8 +76,12 @@ public class GameLogic extends Thread{
 		Optional<Field> newField = fields.stream().filter(each -> each.getX() == x && each.getY() == y).findFirst();
 		if(newField.isPresent()) {
 			if(!newField.get().getType().equals(FieldType.BLOCKED)) {
-				player.setX(newX);
-				player.setY(newY);
+				if(lastMovement == 0 || System.currentTimeMillis() - lastMovement > 120) {
+					lastMovement = System.currentTimeMillis();
+					player.setX(newX);
+					player.setY(newY);
+				}
+				
 			}
 		}
 
