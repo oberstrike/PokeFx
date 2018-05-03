@@ -1,5 +1,8 @@
 package logic;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("player")
 public class Player {
 
 	private String name;

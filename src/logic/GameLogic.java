@@ -1,20 +1,26 @@
 package logic;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
+import com.thoughtworks.xstream.security.NoTypePermission;
+import com.thoughtworks.xstream.security.NullPermission;
+import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
 public class GameLogic extends Thread{
 	List<Field> fields;
 	GraphicsContext context;
 	Player player;
 	long lastMovement = 0;
+	XStream stream;
 	
 	public GameLogic(GraphicsContext context, List<Field> fields) {
 		this.fields = fields;
@@ -22,9 +28,24 @@ public class GameLogic extends Thread{
 		player = new Player();
 		player.setField(fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).findAny().get());
 		XStream stream = new XStream(new StaxDriver());
+		stream.addPermission(NoTypePermission.NONE);
+		
+		
+		stream.addPermission(NullPermission.NULL);
+		stream.addPermission(PrimitiveTypePermission.PRIMITIVES);
+		stream.allowTypeHierarchy(Collection.class);
+		stream.allowTypeHierarchy(Player.class);
+		
+		
 		stream.processAnnotations(Field.class);
-		System.out.println(stream.toXML(player.getField()));
-	
+		stream.processAnnotations(Player.class);
+		System.out.println(stream.toXML(fields));
+		String s  = stream.toXML(player);
+		Object obj = stream.fromXML(s);
+		System.out.println(obj.getClass().getName());
+		
+		Player fies = (Player)obj;
+		
 	}
 	
 	@Override

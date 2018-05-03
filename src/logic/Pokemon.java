@@ -2,11 +2,16 @@ package logic;
 
 import java.util.Random;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
+
+@XStreamAlias("pokemon")
 public class Pokemon {
 
 	private int id;
 	private int level;
 	private int type;
+	@XStreamAsAttribute
 	private String name;
 	private double att;
 	private double deff;
