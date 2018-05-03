@@ -161,6 +161,7 @@ public class CreateGuiController implements Initializable {
 				fields.add(new Field(i, j, FieldType.GRASS));
 			}
 		}
+		System.out.println("test");
 
 		executor.schedule(() -> this.fill(), 200, TimeUnit.MILLISECONDS);
 
