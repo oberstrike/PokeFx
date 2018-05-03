@@ -20,32 +20,17 @@ public class GameLogic extends Thread{
 	GraphicsContext context;
 	Player player;
 	long lastMovement = 0;
-	XStream stream;
 	
 	public GameLogic(GraphicsContext context, List<Field> fields) {
 		this.fields = fields;
 		this.context = context;
 		player = new Player();
 		player.setField(fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).findAny().get());
-		XStream stream = new XStream(new StaxDriver());
-		stream.addPermission(NoTypePermission.NONE);
-		
-		
-		stream.addPermission(NullPermission.NULL);
-		stream.addPermission(PrimitiveTypePermission.PRIMITIVES);
-		stream.allowTypeHierarchy(Collection.class);
-		stream.allowTypeHierarchy(Player.class);
-		
-		
-		stream.processAnnotations(Field.class);
-		stream.processAnnotations(Player.class);
-		System.out.println(stream.toXML(fields));
-		String s  = stream.toXML(player);
-		Object obj = stream.fromXML(s);
-		System.out.println(obj.getClass().getName());
-		
-		Player fies = (Player)obj;
-		
+	}
+	
+	public GameLogic(Player player, List<Field> fields) {
+		this.player = player;
+		this.fields = fields;
 	}
 	
 	@Override
