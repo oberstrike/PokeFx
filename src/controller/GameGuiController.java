@@ -37,9 +37,9 @@ public class GameGuiController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		List<Field> fields = new ArrayList<>();
 		Random random = new Random();
-		for(int i = 0; i < 400; i+=20) {
-			for(int j = 0; j < 400; j+=20) {
-				fields.add(new Field(i, j, (random.nextFloat() * 100 - 1) > 20 ? FieldType.GRASS : FieldType.BLOCKED));
+		for(int i = 0; i < 600; i+=20) {
+			for(int j = 0; j < 500; j+=20) {
+				fields.add(new Field(i, j, (random.nextFloat() * 100 - 1) > 10 ? FieldType.GRASS : FieldType.BLOCKED));
 			}
 		}
 		logic = new GameLogic(canvas.getGraphicsContext2D(), fields);
