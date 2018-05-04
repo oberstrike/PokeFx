@@ -3,6 +3,8 @@ package logic;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -25,7 +27,11 @@ public class GameLogic extends Thread{
 		this.fields = fields;
 		this.context = context;
 		player = new Player();
-		player.setField(fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).findAny().get());
+		List<Field> grassFields = fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).collect(Collectors.toList());
+		System.out.println(grassFields.size());
+		Field field = grassFields.get(new Random().nextInt(grassFields.size()) - 1);
+		System.out.println(field);
+		player.setField(field);
 	}
 	
 	public GameLogic(Player player, List<Field> fields) {
@@ -48,19 +54,11 @@ public class GameLogic extends Thread{
 	
 	private void fill() {
 		for(Field field: fields) {
-			if(field.getType().equals(FieldType.GRASS)) {
-				context.setFill(Color.GREEN);
-				context.fillRect(field.getX(), field.getY(), 20, 20);
-				if(field.equals(new Field(player.getX(), player.getY(), FieldType.GRASS))) {
-					context.setFill(Color.YELLOW);
-					context.fillOval(field.getX(), field.getY(), 15, 15);
-				}
-			}else if(field.getType().equals(FieldType.BLOCKED)) {
-				context.setFill(Color.BROWN);
-				context.fillRect(field.getX(), field.getY(), 20, 20);
-			}else {
-				context.setFill(Color.DARKGREEN);
-				context.fillRect(field.getX(), field.getY(), 20, 20);
+			context.setFill(field.getType().getColor());
+			context.fillRect(field.getX(), field.getY(), 20, 20);
+			if(field.equals(player.getField())) {
+				context.setFill(Color.YELLOW);
+				context.fillOval(field.getX(), field.getY(), 15, 15);
 			}
 		}
 		

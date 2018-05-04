@@ -1,4 +1,4 @@
-/logic/
-/guis/
-/controller/
 /application/
+/controller/
+/guis/
+/logic/

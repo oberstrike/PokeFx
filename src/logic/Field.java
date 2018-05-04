@@ -8,6 +8,11 @@ import javafx.scene.image.Image;
 
 @XStreamAlias("FIELD")
 public class Field {
+	@Override
+	public String toString() {
+		return "Field [x=" + x + ", y=" + y + "]";
+	}
+
 	private FieldType type;
 	private double x;
 	private double y;
