@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.ResourceBundle;
 
 import com.sun.glass.events.MouseEvent;
 
+import application.Main;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,39 +17,53 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import logic.Field;
 import logic.FieldType;
 import logic.GameLogic;
+import views.MapView;
+import views.PokemonView;
 
 public class GameGuiController implements Initializable {
 
 	GameLogic logic;
 	
-	@FXML
-	private Canvas canvas;
-	
     @FXML
-    void move(KeyEvent event) {
-    	logic.moveEvent(event.getCode().getName());
-    }
-	
+    private AnchorPane anchor2;
+    
+    @FXML
+    private AnchorPane anchor;
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		List<Field> fields = new ArrayList<>();
-		Random random = new Random();
-		for(int i = 0; i < 600; i+=20) {
-			for(int j = 0; j < 500; j+=20) {
-				fields.add(new Field(i, j, (random.nextFloat() * 100 - 1) > 10 ? FieldType.GRASS : FieldType.BLOCKED));
-			}
+		PokemonView pv = new PokemonView();
+		pv.setLayoutX(40);
+		pv.setLayoutY(15);
+		anchor2.getChildren().add(pv);
+		
+		if(Main.mapView == null) {
+			 Main.mapView = new MapView();
 		}
-		logic = new GameLogic(canvas.getGraphicsContext2D(), fields);
+		Main.mapView.setPrefWidth(600);
+		Main.mapView.setPrefHeight(500);
+		anchor.getChildren().add(Main.mapView);
+		
+		anchor.setFocusTraversable(false);
+		anchor.requestFocus();
+		
+		logic = new GameLogic(Main.mapView);
 		logic.setDaemon(true);
 		logic.start();
-		canvas.setOnMouseClicked(event -> {
-			canvas.requestFocus();
+
+		Main.mapView.setOnKeyPressed(event -> {
+			logic.moveEvent(event.getCode().getName());
 		});
+		Main.mapView.setFocusTraversable(true);
+		Main.mapView.requestFocus();
+		
+		System.out.println("Startet");
 		
 	}
 

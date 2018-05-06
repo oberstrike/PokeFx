@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateGuiController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateGuiController">
    <children>
-      <Canvas fx:id="canvas" height="500.0" layoutX="8.0" onMouseClicked="#setMaterial" width="600.0" />
       <Label layoutX="729.0" layoutY="14.0" text="Übersicht" />
-      <Label layoutX="697.0" layoutY="47.0" text="Grass" />
-      <Label layoutX="700.0" layoutY="75.0" text="Stein" />
-      <Label layoutX="648.0" layoutY="107.0" text="Hohes Grass" />
-      <Canvas fx:id="grass" height="20.0" layoutX="736.0" layoutY="47.0" width="20.0" />
-      <Canvas fx:id="stein" height="20.0" layoutX="736.0" layoutY="76.0" width="20.0" />
-      <Canvas fx:id="hohesGrass" height="20.0" layoutX="736.0" layoutY="107.0" width="20.0" />
-      <Button layoutX="760.0" layoutY="435.0" mnemonicParsing="false" onAction="#save" text="Speichern" />
-      <Button layoutX="760.0" layoutY="394.0" mnemonicParsing="false" onAction="#load" prefHeight="31.0" prefWidth="83.0" text="Laden" />
-      <TextField fx:id="name" layoutX="628.0" layoutY="435.0" prefHeight="31.0" prefWidth="114.0" />
-      <Label layoutX="627.0" layoutY="399.0" text="Name:" />
-      <Label layoutX="653.0" layoutY="170.0" text="Aktuell:" />
+      <Button layoutX="629.0" layoutY="405.0" mnemonicParsing="false" onAction="#save" text="Speichern" />
+      <Button layoutX="712.0" layoutY="405.0" mnemonicParsing="false" onAction="#load" prefHeight="17.0" prefWidth="69.0" text="Laden" />
+      <TextField fx:id="name" layoutX="667.0" layoutY="370.0" prefHeight="25.0" prefWidth="91.0" />
+      <Label layoutX="628.0" layoutY="374.0" text="Name:" />
+      <Label layoutX="654.0" layoutY="242.0" text="Aktuell:" />
       <Label fx:id="activeMaterial" layoutX="712.0" layoutY="170.0" />
+      <ListView fx:id="liste" layoutX="660.0" layoutY="31.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button layoutX="628.0" layoutY="444.0" mnemonicParsing="false" onAction="#saveAs" text="Speichern als.." />
+      <Button layoutX="821.0" layoutY="247.0" mnemonicParsing="false" onAction="#newMap" text="Neu" />
    </children>
 </AnchorPane>

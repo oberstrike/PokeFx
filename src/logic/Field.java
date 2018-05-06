@@ -1,67 +1,108 @@
 package logic;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 @XStreamAlias("FIELD")
 public class Field {
+
 	@Override
 	public String toString() {
-		return "Field [x=" + x + ", y=" + y + "]";
+		return "Field [x=" + x + ", y=" + y + ", image=" + image + "]";
 	}
 
 	private FieldType type;
 	private double x;
 	private double y;
-	
+	private Entity entity;
 	@XStreamOmitField
 	private Image image;
-	
-	public Field() {};
-	
-	public Field(double x, double y, FieldType type){
+
+	public Field() {
+	};
+
+	public Field(double x, double y, FieldType type) {
 		this();
 		this.setType(type);
 		this.setX(x);
 		this.setY(y);
+		applyImage();
 	}
 
 	public FieldType getType() {
 		return type;
 	}
 
-
 	public void setType(FieldType type) {
 		this.type = type;
+		applyImage();
 	}
 
 	public Vec2d toVector() {
-		return new Vec2d(this.x+10, this.y+10);
+		return new Vec2d(this.x + 20, this.y + 20);
 	}
 
 	public double getX() {
 		return x;
 	}
 
-
 	public void setX(double x) {
 		this.x = x;
 	}
-
 
 	public double getY() {
 		return y;
 	}
 
-
 	public void setY(double y) {
 		this.y = y;
 	}
 
+	public void applyImage() {
+		switch (type) {
+		case GRASS:
+			setImage(new Image("/images/grass.png"));
+			break;
+		case HOHESGRASS:
+			setImage(new Image("/images/hohesgrass.png"));
+			break;
+		case SAND:
+			setImage(new Image("/images/sand.png"));
+			break;
+		case BLOCKED:
+			setImage(new Image("/images/blocked.png"));
+			break;
+		default:
+			setImage(new Image("/images/grass.png"));
+			break;
+		}
 
+		if (entity != null) {
+			BufferedImage image = SwingFXUtils.fromFXImage(getImage(), null);
+			BufferedImage entitysImage = SwingFXUtils.fromFXImage(entity.getImage(), null);
+
+			BufferedImage combined = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+			Graphics g = combined.getGraphics();
+			g.drawImage(image, 0, 0, null);
+			g.drawImage(entitysImage, 0, 0, null);
+
+			Image combinedImage = SwingFXUtils.toFXImage(combined, null);
+			setImage(combinedImage);
+			
+		}
+
+	}
 
 	public Image getImage() {
 		return image;
@@ -70,7 +111,7 @@ public class Field {
 	public void setImage(Image image) {
 		this.image = image;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,5 +138,13 @@ public class Field {
 		if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y))
 			return false;
 		return true;
+	}
+
+	public Entity getEntity() {
+		return entity;
+	}
+
+	public void setEntity(Entity entity) {
+		this.entity = entity;
 	}
 }

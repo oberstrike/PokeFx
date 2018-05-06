@@ -2,14 +2,15 @@ package logic;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+
 @XStreamAlias("player")
-public class Player {
+public class Player implements Entity {
 
 	private String name;
-	private double x;
-	private double y;
 	private Field field;
-
+	private Image image;
 
 	private Pokemon[] pokemon = new Pokemon[3];
 	private Item[] item = new Item[5];
@@ -18,22 +19,6 @@ public class Player {
 	
 	public Player(){
 		
-	}
-
-	public double getX() {
-		return x;
-	}
-
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
 	}
 
 	public Player(double x, double y) {
@@ -62,6 +47,15 @@ public class Player {
 
 	public void setField(Field field) {
 		this.field = field;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
+	@Override
+	public Image getImage() {
+		return this.image;
 	}
 
 

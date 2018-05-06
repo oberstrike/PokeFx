@@ -16,93 +16,83 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-public class GameLogic extends Thread{
-	List<Field> fields;
-	GraphicsContext context;
+import views.MapView;
+
+public class GameLogic extends Thread {
+	MapView mapView;
 	Player player;
 	long lastMovement = 0;
-	
-	public GameLogic(GraphicsContext context, List<Field> fields) {
-		this.fields = fields;
-		this.context = context;
+
+	public GameLogic(MapView mapView) {
+		this.mapView = mapView;
+		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.getType().equals(FieldType.BLOCKED))
+				.collect(Collectors.toList());
+
+		Field f = field.get(new Random().nextInt(field.size()));
 		player = new Player();
-		List<Field> grassFields = fields.stream().filter(each -> each.getType().equals(FieldType.GRASS)).collect(Collectors.toList());
-		System.out.println(grassFields.size());
-		Field field = grassFields.get(new Random().nextInt(grassFields.size()) - 1);
-		System.out.println(field);
-		player.setField(field);
+		player.setImage(new Image("/images/player_straight.png"));
+		player.setField(f);
+		f.setEntity(player);
+		mapView.update();
 	}
-	
-	public GameLogic(Player player, List<Field> fields) {
-		this.player = player;
-		this.fields = fields;
-	}
-	
+
 	@Override
 	public void run() {
-		while(true) {
-			Platform.runLater(() -> this.fill());	
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			Platform.runLater(() -> this.reset());
+		while (true) {
+//			Platform.runLater(() -> this.mapView.update());
+//			try {
+//				Thread.sleep(200);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
-	
-	private void fill() {
-		for(Field field: fields) {
-			context.setFill(field.getType().getColor());
-			context.fillRect(field.getX(), field.getY(), 20, 20);
-			if(field.equals(player.getField())) {
-				context.setFill(Color.YELLOW);
-				context.fillOval(field.getX(), field.getY(), 15, 15);
-			}
-		}
-		
-	}
-	
+
 	public void moveEvent(String keyName) {
-		double newX = player.getX();
-		double newY = player.getY();
-		
+		double newX = player.getField().getX();
+		double newY = player.getField().getY();
+
 		switch (keyName) {
-			case "W":
-				newY -= 20;
-				break;
-			case "D":
-				newX += 20;
-				break;
-			case "S":
-				newY += 20;
-				break;
-			case "A":
-				newX -= 20;
-				break;
+		case "W":
+			newY -= 40;
+			player.setImage(new Image("/images/player_straight.png"));
+			break;
+		case "D":
+			newX += 40;
+			player.setImage(new Image("/images/player_right.png"));
+			break;
+		case "S":
+			newY += 40;
+			player.setImage(new Image("/images/player_back.png"));
+			break;
+		case "A":
+			newX -= 40;
+			player.setImage(new Image("/images/player_left.png"));
+			break;
 		default:
 			break;
 		}
 		double x = newX;
 		double y = newY;
-		Optional<Field> newField = fields.stream().filter(each -> each.getX() == x && each.getY() == y).findFirst();
-		if(newField.isPresent()) {
-			if(!newField.get().getType().equals(FieldType.BLOCKED)) {
-				if(lastMovement == 0 || System.currentTimeMillis() - lastMovement > 120) {
+		
+		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
+				.findFirst();
+		if (newField.isPresent()) {
+			if (!newField.get().getType().equals(FieldType.BLOCKED)) {
+				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement >  120) {
 					lastMovement = System.currentTimeMillis();
-					player.setX(newX);
-					player.setY(newY);
+					Field newF = newField.get();
+					player.getField().setEntity(null);
+					newF.setEntity(player);
+					player.setField(newField.get());
+					Platform.runLater(() -> mapView.update());
+					mapView.update();
 				}
-				
+
 			}
 		}
 
 	}
-	
-	private void reset() {
-		context.clearRect(0, 0, 400, 400);
-	}
-	
-	
 }
