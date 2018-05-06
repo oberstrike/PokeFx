@@ -89,7 +89,7 @@ public class CreateGuiController implements Initializable {
         	List<Vec2d> listOfVector = mapView.getFields().stream().map(Field::toVector).collect(Collectors.toList());	
         	double distance = listOfVector.stream().map(each -> localPoint.distance(each)).sorted().findFirst().get();
         	Vec2d vec = listOfVector.stream().filter(each -> each.distance(localPoint) == distance).findFirst().get(); ;
-        	Field field = mapView.getFields().stream().filter(each -> each.getX() == vec.x-10 && each.getY() == vec.y-10).findFirst().get();
+        	Field field = mapView.getFields().stream().filter(each -> each.getX() == vec.x-20 && each.getY() == vec.y-20).findFirst().get();
         	field.setType(FieldType.valueOf(selected));
         	mapView.update();
     	}

@@ -97,18 +97,20 @@ public class MapView extends AnchorPane {
 
 	public void update() {
 		this.getChildren().clear();
-		for(Field f: fields) {
-			f.applyImage();
-			ImageView image = new ImageView(f.getImage());
-			image.setX(f.getX());
-			image.setY(f.getY());
+		fields.stream().forEach(each -> {
+			each.applyImage();
+			ImageView image = new ImageView(each.getImage());
+			image.setX(each.getX());
+			image.setY(each.getY());
 			image.setFitWidth(40);
 			image.setFitHeight(40);
-
 			this.getChildren().add(image);	
-		}
+		});
+	
 		
 	}
+
+
 
 
 	public void save(FileWriter writer) {

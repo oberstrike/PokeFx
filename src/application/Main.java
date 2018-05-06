@@ -16,7 +16,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
-			AnchorPane root = FXMLLoader.load(getClass().getResource("/guis/GameGui.fxml"));
+			AnchorPane root = FXMLLoader.load(getClass().getResource("/guis/MenuGui.fxml"));
 			
 			
 //			Scene scene = new Scene(root,330,400);
