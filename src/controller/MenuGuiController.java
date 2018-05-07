@@ -46,9 +46,7 @@ public class MenuGuiController implements Initializable{
     	WindowChanger changer = new WindowChanger();
     	changer.changeWindow("/guis/CreateGui.fxml", event, "Erstellen einer Karte");	
     }
-    
 
-    
     
 
 	@Override

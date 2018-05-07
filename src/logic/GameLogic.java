@@ -1,27 +1,18 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import com.thoughtworks.xstream.io.xml.StaxDriver;
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.NullPermission;
-import com.thoughtworks.xstream.security.PrimitiveTypePermission;
-
 import application.Main;
 import field.Field;
 import field.FieldType;
 import javafx.application.Platform;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import views.MapView;
 
 public class GameLogic extends Thread {
@@ -53,6 +44,26 @@ public class GameLogic extends Thread {
 			}
 		}
 	}
+	
+	private void contextMenu() {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Aktions Fenster");
+		alert.setHeaderText("Ein wildes Pokemon ist erschienen");
+		alert.setContentText("Bitte waehle deine Aktion.");
+	
+		ButtonType kampfButton = new ButtonType("Angreifen");
+		ButtonType fangButton = new ButtonType("Fangen");
+		ButtonType fliehButton = new ButtonType("Fliehen");
+	
+		alert.getButtonTypes().setAll(kampfButton, fliehButton);
+		if(player.getPokemon().length != 0) {
+			alert.getButtonTypes().add(fangButton);
+		}
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		System.out.println(result.get());
+	}
+	
 
 	public void moveEvent(String keyName) {
 		double newX = player.getField().getX();
@@ -93,6 +104,14 @@ public class GameLogic extends Thread {
 					newF.setEntity(player);
 					player.setField(newField.get());
 					Platform.runLater(() -> mapView.update());
+			//		mapView.update();
+					if(newF.getType().equals(FieldType.HOHESGRASS)) {
+						int randDig = new Random().nextInt(100);
+						if(randDig < 14) {
+							System.out.println("Ein wildes Pokemon erscheint...");
+							contextMenu();
+						}
+					}
 					mapView.update();
 				}
 
