@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Effectives {
+	
+	//
+	
+	
 	private HashMap<PokemonType, Double> boden;
 	private HashMap<PokemonType, Double> drache;
 	private HashMap<PokemonType, Double> eis;
@@ -24,6 +28,12 @@ public class Effectives {
 	
 	public Effectives() {
 		super();
+		
+		HashMap<PokemonType, HashMap<PokemonType, Double>> table = new HashMap<>();
+		
+		table.put(PokemonType.BODEN, boden);
+		
+		
 		
 		this.boden = new HashMap<PokemonType, Double>();
 		this.boden.put(PokemonType.KAMPF, 2.0);
