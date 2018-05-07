@@ -109,15 +109,15 @@ public class Pokemon {
 	public static Pokemon fight(Pokemon mon1, Pokemon mon2) {
 		Pokemon winner;
 		
-		int attMon1 = mon1.calculateAtt();
-		int deffMon1 = mon1.calculateDeff();
-		int attMon2 = mon2.calculateAtt();
-		int deffMon2 = mon2.calculateDeff();
-		
 		Effectives effekt = new Effectives();
 		
 		double multiplierMon1 = Effectives.table.get(mon2.type).get(mon1.type);
 		double multiplierMon2 = Effectives.table.get(mon1.type).get(mon2.type);
+		
+		int attMon1 = (int) (mon1.calculateAtt() * multiplierMon1);
+		int deffMon1 = mon1.calculateDeff();
+		int attMon2 = (int) (mon2.calculateAtt() * multiplierMon2);
+		int deffMon2 = mon2.calculateDeff();
 		
 		// wer beginnt?
 		if (mon1.getInit() >= mon2.getInit()) {
