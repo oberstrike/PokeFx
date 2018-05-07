@@ -113,7 +113,12 @@ public class Pokemon {
 		int deffMon1 = mon1.calculateDeff();
 		int attMon2 = mon2.calculateAtt();
 		int deffMon2 = mon2.calculateDeff();
-			
+		
+		Effectives effekt = new Effectives();
+		
+		double multiplierMon1 = Effectives.table.get(mon2.type).get(mon1.type);
+		double multiplierMon2 = Effectives.table.get(mon1.type).get(mon2.type);
+		
 		// wer beginnt?
 		if (mon1.getInit() >= mon2.getInit()) {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
