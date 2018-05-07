@@ -6,14 +6,14 @@ import java.util.Random;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
-@XStreamAlias("pokemon")
+@XStreamAlias("Pokemon")
 public class Pokemon {
 	
 	@XStreamAsAttribute
 	private String name;
 	private int id;
 	private int level;
-	private int type;
+	private PokemonType type;
 	private double att;
 	private double deff;
 	private double motivation;
@@ -28,7 +28,7 @@ public class Pokemon {
 	//--------------------------------------------------------
 	
 	// Konstruktor
-	public Pokemon(int id, int level, int type, String name, double att, double deff, double motivation, double init,
+	public Pokemon(int id, int level, PokemonType type, String name, double att, double deff, double motivation, double init,
 			double hp) {
 		this();
 		this.id = id;
@@ -52,11 +52,11 @@ public class Pokemon {
 		this.level = level;
 	}
 
-	public int getType() {
+	public PokemonType getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(PokemonType type) {
 		this.type = type;
 	}
 	

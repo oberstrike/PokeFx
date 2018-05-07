@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,6 +18,8 @@ import field.Field;
 import field.FieldType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import pokemon.Pokemon;
+import pokemon.PokemonType;
 
 public class MapView extends AnchorPane {
 
@@ -29,8 +32,28 @@ public class MapView extends AnchorPane {
 		stream.addPermission(NullPermission.NULL);
 		stream.addPermission(PrimitiveTypePermission.PRIMITIVES);
 		stream.processAnnotations(Field.class);
+		stream.processAnnotations(Pokemon.class);
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
+		stream.allowTypeHierarchy(Pokemon.class);
+		
+		List<Pokemon> pokemons = new ArrayList<>();
+		Pokemon bisasam = new Pokemon(1, 1, PokemonType.PFLANZE, "Bisasam", 6.5, 6.5, 1, 4.5, 4.5);
+		Pokemon bisaknosp = new Pokemon(2, 16, PokemonType.PFLANZE, "Bisaknosp", 8.0, 8.0, 1, 6.0, 6.0);
+		Pokemon bisaflor = new Pokemon(3, 32, PokemonType.PFLANZE, "Bisaflor", 10, 10, 1, 8.0, 8.0);
+		
+		pokemons.addAll(Arrays.asList(bisasam, bisaknosp, bisaflor));
+		
+		FileWriter writer;
+		try {
+			writer = new FileWriter("pokemons.xml");
+			stream.toXML(pokemons, writer);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		
 	}
 	
