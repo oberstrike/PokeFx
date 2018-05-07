@@ -377,7 +377,7 @@
 <Pokemon name='Pipi'>
 		<id>35</id>
 		<level>1</level>
-		<type>fee</type>
+		<type>normal</type>
 		<att>60</att>
 		<deff>65</deff>
 		<motivation>100</motivation>
@@ -388,7 +388,7 @@
 <Pokemon name='Pixi'>
 		<id>36</id>
 		<level>1</level>
-		<type>fee</type>
+		<type>normal</type>
 		<att>95</att>
 		<deff>90</deff>
 		<motivation>100</motivation>
@@ -421,7 +421,7 @@
 <Pokemon name='Pummeluff'>
 		<id>39</id>
 		<level>1</level>
-		<type>fee</type>
+		<type>normal</type>
 		<att>45</att>
 		<deff>25</deff>
 		<motivation>100</motivation>
@@ -432,7 +432,7 @@
 <Pokemon name='Fluffeluff'>
 		<id>40</id>
 		<level>1</level>
-		<type>fee</type>
+		<type>normal</type>
 		<att>85</att>
 		<deff>50</deff>
 		<motivation>100</motivation>

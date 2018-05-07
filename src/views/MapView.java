@@ -3,10 +3,13 @@ package views;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
@@ -36,24 +39,19 @@ public class MapView extends AnchorPane {
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
 		stream.allowTypeHierarchy(Pokemon.class);
-		
-		List<Pokemon> pokemons = new ArrayList<>();
-		Pokemon bisasam = new Pokemon(1, 1, PokemonType.PFLANZE, "Bisasam", 6.5, 6.5, 1, 4.5, 4.5);
-		Pokemon bisaknosp = new Pokemon(2, 16, PokemonType.PFLANZE, "Bisaknosp", 8.0, 8.0, 1, 6.0, 6.0);
-		Pokemon bisaflor = new Pokemon(3, 32, PokemonType.PFLANZE, "Bisaflor", 10, 10, 1, 8.0, 8.0);
-		
-		pokemons.addAll(Arrays.asList(bisasam, bisaknosp, bisaflor));
-		
-		FileWriter writer;
-		try {
-			writer = new FileWriter("pokemons.xml");
-			stream.toXML(pokemons, writer);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		stream.allowTypeHierarchy(Map.class);
+		stream.allowTypeHierarchy(String.class);
+		stream.allowTypeHierarchy(Integer.class);
+		stream.alias("map", Map.class);
 
+		HashMap<String, HashMap<Integer, String>> map = new HashMap<>();
+		HashMap<Integer, String> mMap = new HashMap<>();
+		
+		Object object = stream.fromXML(new File("evolvingFile.xml"));
+		System.out.println((HashMap<Integer, String>)object);
+		
+		
+		
 		
 	}
 	

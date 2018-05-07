@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<map>
+<entry>
+<string>Bisasam</string>
+<map><entry><int>16</int><string>Bisaknosp</string></entry></map>
+</entry>
+<entry>
+<string>Bisaknosp</string>
+<map><entry><int>32</int><string>Bisaflor</string></entry></map>
+</entry>
+<entry>
+<string>Glumanda</string>
+<map><entry><int>16</int><string>Glutexo</string></entry></map>
+</entry>
+<entry>
+<string>Glutexo</string>
+<map><entry><int>32</int><string>Glurak</string></entry></map>
+</entry>
+<entry>
+<string>Schiggy</string>
+<map><entry><int>16</int><string>Schillok</string></entry></map>
+</entry>
+<entry>
+<string>Schillok</string>
+<map><entry><int>32</int><string>Turtok</string></entry></map>
+</entry>
+</map>
