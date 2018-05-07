@@ -13,10 +13,10 @@ import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
+import field.Field;
+import field.FieldType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import logic.Field;
-import logic.FieldType;
 
 public class MapView extends AnchorPane {
 

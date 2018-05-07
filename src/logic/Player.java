@@ -2,8 +2,10 @@ package logic;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import field.Field;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import pokemon.Pokemon;
 
 @XStreamAlias("player")
 public class Player implements Entity {

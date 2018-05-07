@@ -1,4 +1,4 @@
-package logic;
+package field;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -14,6 +14,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import application.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import logic.Entity;
 
 @XStreamAlias("FIELD")
 public class Field {

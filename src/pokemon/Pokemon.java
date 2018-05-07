@@ -1,5 +1,6 @@
-package logic;
+package pokemon;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -7,23 +8,29 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 @XStreamAlias("pokemon")
 public class Pokemon {
-
+	
+	@XStreamAsAttribute
+	private String name;
 	private int id;
 	private int level;
 	private int type;
-	@XStreamAsAttribute
-	private String name;
 	private double att;
 	private double deff;
 	private double motivation;
 	private double init;
 	private double hp;
 	
-	// Konstruktor
 	
+	public Pokemon() {
+		super();
+	}
+	
+	//--------------------------------------------------------
+	
+	// Konstruktor
 	public Pokemon(int id, int level, int type, String name, double att, double deff, double motivation, double init,
 			double hp) {
-		super();
+		this();
 		this.id = id;
 		this.level = level;
 		this.type = type;

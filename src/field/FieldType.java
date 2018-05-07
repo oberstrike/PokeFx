@@ -1,4 +1,4 @@
-package logic;
+package field;
 
 public enum FieldType {
 	STEIN,

@@ -27,6 +27,8 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import application.Main;
 import application.WindowChanger;
+import field.Field;
+import field.FieldType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -47,8 +49,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import logic.Field;
-import logic.FieldType;
 import views.MapView;
 
 public class CreateGuiController implements Initializable {

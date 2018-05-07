@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 import com.sun.glass.events.MouseEvent;
 
 import application.Main;
+import field.Field;
+import field.FieldType;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,8 +22,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import logic.Field;
-import logic.FieldType;
 import logic.GameLogic;
 import views.MapView;
 import views.PokemonView;
