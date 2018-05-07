@@ -1,7 +1,8 @@
 package logic;
 
 public enum FieldType {
-	BLOCKED,
+	STEIN,
+	WASSER,
 	GRASS,
 	HOHESGRASS,
 	SAND;

@@ -29,8 +29,7 @@ public class Field {
 	@XStreamOmitField
 	private Image image;
 
-	public Field() {
-	};
+	public Field() {};
 
 	public Field(double x, double y, FieldType type) {
 		this();
@@ -68,6 +67,10 @@ public class Field {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	public boolean isBlocked() {
+		return this.type.equals(FieldType.STEIN)||this.type.equals(FieldType.WASSER);
+	}
 
 	public void applyImage() {
 		switch (type) {
@@ -80,8 +83,11 @@ public class Field {
 		case SAND:
 			setImage(new Image("/images/sand.png"));
 			break;
-		case BLOCKED:
-			setImage(new Image("/images/blocked.png"));
+		case STEIN:
+			setImage(new Image("/images/stein.png"));
+			break;
+		case WASSER:
+			setImage(new Image("/images/wasser.png"));
 			break;
 		default:
 			setImage(new Image("/images/grass.png"));

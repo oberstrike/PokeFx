@@ -28,7 +28,7 @@ public class GameLogic extends Thread {
 
 	public GameLogic(MapView mapView) {
 		this.mapView = mapView;
-		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.getType().equals(FieldType.BLOCKED))
+		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
 				.collect(Collectors.toList());
 
 		Field f = field.get(new Random().nextInt(field.size()));
@@ -81,7 +81,7 @@ public class GameLogic extends Thread {
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
 		if (newField.isPresent()) {
-			if (!newField.get().getType().equals(FieldType.BLOCKED)) {
+			if (!newField.get().isBlocked()) {
 				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement >  120) {
 					lastMovement = System.currentTimeMillis();
 					Field newF = newField.get();
