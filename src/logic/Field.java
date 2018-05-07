@@ -11,6 +11,7 @@ import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import application.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -75,22 +76,25 @@ public class Field {
 	public void applyImage() {
 		switch (type) {
 		case GRASS:
-			setImage(new Image("/images/grass.png"));
+			setImage(Main.grass);
 			break;
 		case HOHESGRASS:
-			setImage(new Image("/images/hohesgrass.png"));
+			setImage(Main.hohesgrass);
 			break;
 		case SAND:
-			setImage(new Image("/images/sand.png"));
+			setImage(Main.sand);
+			break;
+		case TIEFERSAND:
+			setImage(Main.tiefersand);
 			break;
 		case STEIN:
-			setImage(new Image("/images/stein.png"));
+			setImage(Main.stein);
 			break;
 		case WASSER:
-			setImage(new Image("/images/wasser.png"));
+			setImage(Main.wasser);
 			break;
 		default:
-			setImage(new Image("/images/grass.png"));
+			setImage(Main.grass);
 			break;
 		}
 

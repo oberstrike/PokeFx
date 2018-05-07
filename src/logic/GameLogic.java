@@ -15,6 +15,7 @@ import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
+import application.Main;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -42,12 +43,12 @@ public class GameLogic extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-//			Platform.runLater(() -> this.mapView.update());
-//			try {
-//				Thread.sleep(200);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+			Platform.runLater(() -> this.mapView.update());
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -58,19 +59,19 @@ public class GameLogic extends Thread {
 		switch (keyName) {
 		case "W":
 			newY -= 40;
-			player.setImage(new Image("/images/player_straight.png"));
+			player.setImage(Main.player_straight);
 			break;
 		case "D":
 			newX += 40;
-			player.setImage(new Image("/images/player_right.png"));
+			player.setImage(Main.player_right);
 			break;
 		case "S":
 			newY += 40;
-			player.setImage(new Image("/images/player_back.png"));
+			player.setImage(Main.player_back);
 			break;
 		case "A":
 			newX -= 40;
-			player.setImage(new Image("/images/player_left.png"));
+			player.setImage(Main.player_left);
 			break;
 		default:
 			break;
@@ -82,7 +83,8 @@ public class GameLogic extends Thread {
 				.findFirst();
 		if (newField.isPresent()) {
 			if (!newField.get().isBlocked()) {
-				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement >  120) {
+				int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 250 : 110;
+				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement > difference) {
 					lastMovement = System.currentTimeMillis();
 					Field newF = newField.get();
 					player.getField().setEntity(null);

@@ -5,6 +5,7 @@ public enum FieldType {
 	WASSER,
 	GRASS,
 	HOHESGRASS,
+	TIEFERSAND,
 	SAND;
 
 }
