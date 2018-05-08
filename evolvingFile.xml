@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <map>
 
-<entry
+<entry>
 	<string>Bisasam</string>
 	<map>
 		<entry>
@@ -11,7 +11,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Bisaknosp</string>
 	<map>
 		<entry>
@@ -21,7 +21,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Glumanda</string>
 	<map>
 		<entry>
@@ -31,7 +31,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Glutexo</string>
 	<map>
 		<entry>
@@ -41,7 +41,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Schiggy</string>
 	<map>
 		<entry>
@@ -51,7 +51,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Schillok</string>
 	<map>
 		<entry>
@@ -61,7 +61,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Raupy</string>
 	<map>
 		<entry>
@@ -71,7 +71,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Safcon</string>
 	<map>
 		<entry>
@@ -81,7 +81,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Hornliu</string>
 	<map>
 		<entry>
@@ -91,7 +91,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Kokuna</string>
 	<map>
 		<entry>
@@ -101,7 +101,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Taubsi</string>
 	<map>
 		<entry>
@@ -111,7 +111,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Tauboga</string>
 	<map>
 		<entry>
@@ -121,7 +121,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Rattfratz</string>
 	<map>
 		<entry>
@@ -131,7 +131,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Habitak</string>
 	<map>
 		<entry>
@@ -141,7 +141,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Rettan</string>
 	<map>
 		<entry>
@@ -151,7 +151,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Sandan</string>
 	<map>
 		<entry>
@@ -161,7 +161,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Nidoran w.</string>
 	<map>
 		<entry>
@@ -171,7 +171,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Nidoran m.</string>
 	<map>
 		<entry>
@@ -181,7 +181,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Zubat</string>
 	<map>
 		<entry>
@@ -191,7 +191,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Myrapla</string>
 	<map>
 		<entry>
@@ -201,7 +201,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Paras</string>
 	<map>
 		<entry>
@@ -211,7 +211,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Bluzuk</string>
 	<map>
 		<entry>
@@ -221,7 +221,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Digda</string>
 	<map>
 		<entry>
@@ -231,7 +231,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Mauzi</string>
 	<map>
 		<entry>
@@ -241,7 +241,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Enton</string>
 	<map>
 		<entry>
@@ -251,7 +251,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Menki</string>
 	<map>
 		<entry>
@@ -261,7 +261,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Quapsel</string>
 	<map>
 		<entry>
@@ -271,7 +271,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Abra</string>
 	<map>
 		<entry>
@@ -281,7 +281,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Machollo</string>
 	<map>
 		<entry>
@@ -291,7 +291,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Knofensa</string>
 	<map>
 		<entry>
@@ -301,7 +301,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Tentacha</string>
 	<map>
 		<entry>
@@ -311,7 +311,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Kleinstein</string>
 	<map>
 		<entry>
@@ -321,7 +321,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Ponita</string>
 	<map>
 		<entry>
@@ -331,7 +331,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Flegmon</string>
 	<map>
 		<entry>
@@ -341,7 +341,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Magnetilo</string>
 	<map>
 		<entry>
@@ -351,7 +351,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Dodu</string>
 	<map>
 		<entry>
@@ -361,7 +361,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Jurob</string>
 	<map>
 		<entry>
@@ -371,7 +371,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Sleima</string>
 	<map>
 		<entry>
@@ -381,7 +381,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Nebulak</string>
 	<map>
 		<entry>
@@ -391,7 +391,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Traumato</string>
 	<map>
 		<entry>
@@ -401,7 +401,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Krabby</string>
 	<map>
 		<entry>
@@ -411,7 +411,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Voltobal</string>
 	<map>
 		<entry>
@@ -421,7 +421,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Tragosso</string>
 	<map>
 		<entry>
@@ -431,7 +431,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Smogon</string>
 	<map>
 		<entry>
@@ -441,7 +441,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Rihorn</string>
 	<map>
 		<entry>
@@ -451,7 +451,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Seeper</string>
 	<map>
 		<entry>
@@ -461,7 +461,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Goldini</string>
 	<map>
 		<entry>
@@ -471,7 +471,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Karpador</string>
 	<map>
 		<entry>
@@ -481,7 +481,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Amonitas</string>
 	<map>
 		<entry>
@@ -491,7 +491,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Kabuto</string>
 	<map>
 		<entry>
@@ -501,7 +501,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Dratini</string>
 	<map>
 		<entry>
@@ -511,7 +511,7 @@
 	</map>
 </entry>
 
-<entry
+<entry>
 	<string>Dragonir</string>
 	<map>
 		<entry>
