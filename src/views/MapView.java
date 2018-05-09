@@ -20,7 +20,6 @@ public class MapView extends AnchorPane {
 	public MapView(List<Field> fields) {
 		map = new Map(fields);
 		for(Field field: map.getFields()) {
-	//		System.out.println(field.getType());
 			ImageView image = new ImageView(field.getImage());
 			image.setX(field.getX());
 			image.setY(field.getY());

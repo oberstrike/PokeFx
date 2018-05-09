@@ -2,10 +2,10 @@ package xml;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
@@ -16,6 +16,7 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import field.Field;
 import logic.Map;
 import pokemon.Pokemon;
+import pokemon.PokemonType;
 
 public class XmlControll {
 	
@@ -51,8 +52,11 @@ public class XmlControll {
 	public Pokemon getPokemonByName(String name) {
 		return pokedex.stream().filter(each -> each.getName().equals(name)).findFirst().get();
 	}
+	
+	public List<Pokemon> getPokemonsByType(PokemonType type){
+		return pokedex.stream().filter(each -> each.getType().equals(type)).collect(Collectors.toList());
+	}
 
-	@SuppressWarnings("unchecked")
 	public Map getMap(File file) {
 		Map map = (Map)getObject(file);
 		map.getFields().forEach(each -> each.applyImage());

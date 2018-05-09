@@ -15,6 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import pokemon.Pokemon;
+import pokemon.PokemonType;
 import views.MapView;
 import views.PokemonView;
 import xml.XmlControll;
@@ -69,7 +70,11 @@ public class GameLogic extends Thread {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktions Fenster");
 
+		PokemonType type = mapView.getMap().getPokemontyp();
+		List<Pokemon> listOfPokemons = Main.xmlControll.getPokemonsByType(type);
+		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(System.out::println);
 		
+				
 		
 		alert.setHeaderText("Ein wildes " + Main.xmlControll.getPokedex().get(2).getName() + " ist erschienen");
 		alert.setContentText("Bitte waehle deine Aktion.");

@@ -21,6 +21,11 @@ public class Pokemon {
 	private double hp;
 	private double spawn;
 	
+	@Override
+	public String toString() {
+		return "Pokemon [name=" + name + ", type=" + type + ", spawn=" + spawn + "]";
+	}
+
 	public Pokemon() {
 		super();
 	}

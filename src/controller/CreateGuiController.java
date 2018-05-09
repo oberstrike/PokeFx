@@ -145,12 +145,14 @@ public class CreateGuiController implements Initializable {
 					if(type != null) {
 						if(!type.getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
 							writer = new FileWriter(file, false);
+							mapView.getMap().setPokemontyp(pokeComboBox.getValue());
 							Main.xmlControll.saveMap(mapView.getMap(), writer);
 							new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!").show();
 						}
 					}
 				}else {
 					writer = new FileWriter(file, false);
+					mapView.getMap().setPokemontyp(pokeComboBox.getValue());
 					Main.xmlControll.saveMap(mapView.getMap(), writer);
 					new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!").show();
 				}
@@ -166,10 +168,8 @@ public class CreateGuiController implements Initializable {
     void newMap(ActionEvent event) {
     	String selected =liste.getSelectionModel().getSelectedItem();
     	if(selected!=null) {
-        	mapView.getFields().forEach(each -> {
-        		each.setType(FieldType.valueOf(selected));
-        		each.applyImage();
-        	});
+    		Map map = new Map(FieldType.valueOf(selected));
+    		mapView.setMap(map);
         	mapView.update();
     	}
 
@@ -188,7 +188,7 @@ public class CreateGuiController implements Initializable {
 			FileWriter writer;
 			try {
 				writer = new FileWriter(selectedFile);	
-				System.out.println(mapView.getMap().getFields());
+				mapView.getMap().setPokemontyp(pokeComboBox.getValue());
 				Main.xmlControll.saveMap(mapView.getMap(), writer);
 				new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!");
 			} catch (IOException e) {
@@ -211,7 +211,7 @@ public class CreateGuiController implements Initializable {
 		anchor.getChildren().add(mapView);
 		
 		pokeComboBox.getItems().addAll(Arrays.asList(PokemonType.values()));
-
+		pokeComboBox.getSelectionModel().select(11);
 	}
 	
 
