@@ -9,6 +9,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>45</hp>
+		<spawn>0.69</spawn>
 	</Pokemon>
 
 <Pokemon name='Bisaknosp'>
@@ -20,6 +21,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>60</hp>
+		<spawn>0.042</spawn>
 	</Pokemon>
 
 <Pokemon name='Bisaflor'>
@@ -31,6 +33,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>80</hp>
+		<spawn>0.017</spawn>
 	</Pokemon>
 
 <Pokemon name='Glumanda'>
@@ -42,6 +45,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>39</hp>
+		<spawn>0.253</spawn>
 	</Pokemon>
 
 <Pokemon name='Glutexo'>
@@ -53,6 +57,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>58</hp>
+		<spawn>0.012</spawn>
 	</Pokemon>
 
 <Pokemon name='Glurak'>
@@ -64,6 +69,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>78</hp>
+		<spawn>0.0031</spawn>
 	</Pokemon>
 
 <Pokemon name='Schiggy'>
@@ -75,6 +81,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>44</hp>
+		<spawn>0.58</spawn>
 	</Pokemon>
 
 <Pokemon name='Schillok'>
@@ -86,6 +93,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>59</hp>
+		<spawn>0.034</spawn>
 	</Pokemon>
 
 <Pokemon name='Turtok'>
@@ -97,6 +105,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>79</hp>
+		<spawn>0.0067</spawn>
 	</Pokemon>
 
 <Pokemon name='Raupy'>
@@ -108,6 +117,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>45</hp>
+		<spawn>3.032</spawn>
 	</Pokemon>
 
 <Pokemon name='Safcon'>
@@ -119,6 +129,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>50</hp>
+		<spawn>0.187</spawn>
 	</Pokemon>
 
 <Pokemon name='Smettbo'>
@@ -130,6 +141,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>60</hp>
+		<spawn>0.022</spawn>
 	</Pokemon>
 
 <Pokemon name='Hornliu'>
@@ -141,6 +153,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>40</hp>
+		<spawn>7.12</spawn>
 	</Pokemon>
 
 <Pokemon name='Kokuna'>
@@ -152,6 +165,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>45</hp>
+		<spawn>0.44</spawn>
 	</Pokemon>
 
 <Pokemon name='Bibor'>
@@ -163,6 +177,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>65</hp>
+		<spawn>0.051</spawn>
 	</Pokemon>
 
 <Pokemon name='Taubsi'>
@@ -174,6 +189,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>40</hp>
+		<spawn>15.98</spawn>
 	</Pokemon>
 
 <Pokemon name='Tauboga'>
@@ -185,6 +201,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>63</hp>
+		<spawn>1.02</spawn>
 	</Pokemon>
 
 <Pokemon name='Tauboss'>
@@ -196,6 +213,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>83</hp>
+		<spawn>0.13</spawn>
 	</Pokemon>
 
 <Pokemon name='Rattfratz'>
@@ -207,6 +225,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>30</hp>
+		<spawn>13.05</spawn>
 	</Pokemon>
 
 <Pokemon name='Rattikarl'>
@@ -218,6 +237,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>55</hp>
+		<spawn>0.41</spawn>
 	</Pokemon>
 
 <Pokemon name='Habitak'>
@@ -229,6 +249,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>40</hp>
+		<spawn>4.73</spawn>
 	</Pokemon>
 
 <Pokemon name='Ibitak'>
@@ -240,6 +261,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>65</hp>
+		<spawn>0.15</spawn>
 	</Pokemon>
 
 <Pokemon name='Rettan'>
@@ -251,6 +273,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>35</hp>
+		<spawn>2.27</spawn>
 	</Pokemon>
 
 <Pokemon name='Arbok'>
@@ -262,6 +285,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>60</hp>
+		<spawn>0.072</spawn>
 	</Pokemon>
 
 <Pokemon name='Pikachu'>
@@ -273,6 +297,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>35</hp>
+		<spawn>0.21</spawn>
 	</Pokemon>
 
 <Pokemon name='Raichu'>
@@ -284,6 +309,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>60</hp>
+		<spawn>0.0076</spawn>
 	</Pokemon>
 
 <Pokemon name='Sandan'>
@@ -295,6 +321,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>50</hp>
+		<spawn>1.11</spawn>
 	</Pokemon>
 
 <Pokemon name='Sandamer'>
@@ -306,6 +333,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>75</hp>
+		<spawn>0.037</spawn>
 	</Pokemon>
 
 <Pokemon name='Nidoran w.'>
@@ -317,6 +345,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>55</hp>
+		<spawn>1.38</spawn>
 	</Pokemon>
 
 <Pokemon name='Nidorina'>
@@ -328,6 +357,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>70</hp>
+		<spawn>0.088</spawn>
 	</Pokemon>
 
 <Pokemon name='Nidoqueen'>
@@ -339,6 +369,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>90</hp>
+		<spawn>0.012</spawn>
 	</Pokemon>
 
 <Pokemon name='Nidoran m.'>
@@ -350,6 +381,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>46</hp>
+		<spawn>1.31</spawn>
 	</Pokemon>
 
 <Pokemon name='Nidorino'>
@@ -361,6 +393,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>61</hp>
+		<spawn>0.083</spawn>
 	</Pokemon>
 
 <Pokemon name='Nidoking'>
@@ -372,9 +405,10 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>81</hp>
+		<spawn>0.017</spawn>
 	</Pokemon>
 
-<Pokemon name='Pipie'>
+<Pokemon name='Piepi'>
 		<id>35</id>
 		<level>1</level>
 		<type>normal</type>
@@ -383,6 +417,7 @@
 		<motivation>100</motivation>
 		<init>87</init>
 		<hp>70</hp>
+		<spawn>0.92</spawn>
 	</Pokemon>
 
 <Pokemon name='Pixi'>
@@ -394,6 +429,7 @@
 		<motivation>100</motivation>
 		<init>97</init>
 		<hp>95</hp>
+		<spawn>0.012</spawn>
 	</Pokemon>
 
 <Pokemon name='Vulpix'>
@@ -405,6 +441,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>38</hp>
+		<spawn>0.22</spawn>
 	</Pokemon>
 
 <Pokemon name='Vulnona'>
@@ -416,6 +453,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>73</hp>
+		<spawn>0.0077</spawn>
 	</Pokemon>
 
 <Pokemon name='Pummeluff'>
@@ -427,6 +465,7 @@
 		<motivation>100</motivation>
 		<init>87</init>
 		<hp>115</hp>
+		<spawn>0.39</spawn>
 	</Pokemon>
 
 <Pokemon name='Fluffeluff'>
@@ -438,6 +477,7 @@
 		<motivation>100</motivation>
 		<init>97</init>
 		<hp>140</hp>
+		<spawn>0.018</spawn>
 	</Pokemon>
 
 <Pokemon name='Zubat'>
@@ -449,6 +489,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>40</hp>
+		<spawn>6.52</spawn>
 	</Pokemon>
 
 <Pokemon name='Golbat'>
@@ -460,6 +501,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>75</hp>
+		<spawn>0.42</spawn>
 	</Pokemon>
 
 <Pokemon name='Myrapla'>
@@ -471,6 +513,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>45</hp>
+		<spawn>1.02</spawn>
 	</Pokemon>
 
 <Pokemon name='Duflor'>
@@ -482,6 +525,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>60</hp>
+		<spawn>0.064</spawn>
 	</Pokemon>
 
 <Pokemon name='Giflor'>
@@ -493,6 +537,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>75</hp>
+		<spawn>0.0097</spawn>
 	</Pokemon>
 
 <Pokemon name='Paras'>
@@ -504,6 +549,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>35</hp>
+		<spawn>2.36</spawn>
 	</Pokemon>
 
 <Pokemon name='Parasek'>
@@ -515,6 +561,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>60</hp>
+		<spawn>0.074</spawn>
 	</Pokemon>
 
 <Pokemon name='Bluzuk'>
@@ -526,6 +573,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>60</hp>
+		<spawn>2.28</spawn>
 	</Pokemon>
 
 <Pokemon name='Omot'>
@@ -537,6 +585,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>70</hp>
+		<spawn>0.072</spawn>
 	</Pokemon>
 
 <Pokemon name='Digda'>
@@ -548,6 +597,7 @@
 		<motivation>100</motivation>
 		<init>87</init>
 		<hp>10</hp>
+		<spawn>0.4</spawn>
 	</Pokemon>
 
 <Pokemon name='Digdri'>
@@ -559,6 +609,7 @@
 		<motivation>100</motivation>
 		<init>97</init>
 		<hp>35</hp>
+		<spawn>0.014</spawn>
 	</Pokemon>
 
 <Pokemon name='Mauzi'>
@@ -570,6 +621,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>40</hp>
+		<spawn>0.86</spawn>
 	</Pokemon>
 
 <Pokemon name='Snobilikat'>
@@ -581,6 +633,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>65</hp>
+		<spawn>0.022</spawn>
 	</Pokemon>
 
 <Pokemon name='Enton'>
@@ -592,6 +645,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>50</hp>
+		<spawn>2.54</spawn>
 	</Pokemon>
 
 <Pokemon name='Entoron'>
@@ -603,6 +657,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>80</hp>
+		<spawn>0.087</spawn>
 	</Pokemon>
 
 <Pokemon name='Menki'>
@@ -614,6 +669,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>40</hp>
+		<spawn>0.92</spawn>
 	</Pokemon>
 
 <Pokemon name='Rasaff'>
@@ -625,6 +681,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>65</hp>
+		<spawn>0.031</spawn>
 	</Pokemon>
 
 <Pokemon name='Fukano'>
@@ -636,6 +693,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>55</hp>
+		<spawn>0.92</spawn>
 	</Pokemon>
 
 <Pokemon name='Arkani'>
@@ -647,6 +705,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>90</hp>
+		<spawn>0.017</spawn>
 	</Pokemon>
 
 <Pokemon name='Quapsel'>
@@ -658,6 +717,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>40</hp>
+		<spawn>2.19</spawn>
 	</Pokemon>
 
 <Pokemon name='Quaputzi'>
@@ -669,6 +729,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>65</hp>
+		<spawn>0.13</spawn>
 	</Pokemon>
 
 <Pokemon name='Quappo'>
@@ -680,6 +741,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>90</hp>
+		<spawn>0.011</spawn>
 	</Pokemon>
 
 <Pokemon name='Abra'>
@@ -691,6 +753,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>25</hp>
+		<spawn>0.42</spawn>
 	</Pokemon>
 
 <Pokemon name='Kadabra'>
@@ -702,6 +765,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>40</hp>
+		<spawn>0.027</spawn>
 	</Pokemon>
 
 <Pokemon name='Simsala'>
@@ -713,6 +777,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>55</hp>
+		<spawn>0.0073</spawn>
 	</Pokemon>
 
 <Pokemon name='Machollo'>
@@ -724,6 +789,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>70</hp>
+		<spawn>0.49</spawn>
 	</Pokemon>
 
 <Pokemon name='Maschock'>
@@ -735,6 +801,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>80</hp>
+		<spawn>0.034</spawn>
 	</Pokemon>
 
 <Pokemon name='Machomei'>
@@ -746,6 +813,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>90</hp>
+		<spawn>0.0068</spawn>
 	</Pokemon>
 
 <Pokemon name='Knofensa'>
@@ -757,6 +825,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>50</hp>
+		<spawn>1.15</spawn>
 	</Pokemon>
 
 <Pokemon name='Ultrigaria'>
@@ -768,6 +837,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>65</hp>
+		<spawn>0.072</spawn>
 	</Pokemon>
 
 <Pokemon name='Sarzenia'>
@@ -779,6 +849,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>80</hp>
+		<spawn>0.0059</spawn>
 	</Pokemon>
 
 <Pokemon name='Tentacha'>
@@ -790,6 +861,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>40</hp>
+		<spawn>0.81</spawn>
 	</Pokemon>
 
 <Pokemon name='Tentoxa'>
@@ -801,6 +873,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>80</hp>
+		<spawn>0.082</spawn>
 	</Pokemon>
 
 <Pokemon name='Kleinstein'>
@@ -812,6 +885,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>40</hp>
+		<spawn>1.19</spawn>
 	</Pokemon>
 
 <Pokemon name='Georok'>
@@ -823,6 +897,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>55</hp>
+		<spawn>0.071</spawn>
 	</Pokemon>
 
 <Pokemon name='Geowaz'>
@@ -834,6 +909,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>80</hp>
+		<spawn>0.0047</spawn>
 	</Pokemon>
 
 <Pokemon name='Ponita'>
@@ -845,6 +921,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>50</hp>
+		<spawn>0.51</spawn>
 	</Pokemon>
 
 <Pokemon name='Gallopa'>
@@ -856,6 +933,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>65</hp>
+		<spawn>0.011</spawn>
 	</Pokemon>
 
 <Pokemon name='Flegmon'>
@@ -867,6 +945,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>90</hp>
+		<spawn>1.05</spawn>
 	</Pokemon>
 
 <Pokemon name='Lahmus'>
@@ -878,6 +957,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>95</hp>
+		<spawn>0.036</spawn>
 	</Pokemon>
 
 <Pokemon name='Magnetilo'>
@@ -889,6 +969,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>25</hp>
+		<spawn>0.71</spawn>
 	</Pokemon>
 
 <Pokemon name='Magneton'>
@@ -900,6 +981,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>50</hp>
+		<spawn>0.023</spawn>
 	</Pokemon>
 
 <Pokemon name='Porenta'>
@@ -911,6 +993,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>52</hp>
+		<spawn>0.0212</spawn>
 	</Pokemon>
 
 <Pokemon name='Dodu'>
@@ -922,6 +1005,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>35</hp>
+		<spawn>0.52</spawn>
 	</Pokemon>
 
 <Pokemon name='Dodri'>
@@ -933,6 +1017,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>60</hp>
+		<spawn>0.22</spawn>
 	</Pokemon>
 
 <Pokemon name='Jurob'>
@@ -944,6 +1029,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>65</hp>
+		<spawn>0.28</spawn>
 	</Pokemon>
 
 <Pokemon name='Jugong'>
@@ -955,6 +1041,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>90</hp>
+		<spawn>0.013</spawn>
 	</Pokemon>
 
 <Pokemon name='Sleima'>
@@ -966,6 +1053,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>80</hp>
+		<spawn>0.052</spawn>
 	</Pokemon>
 
 <Pokemon name='Sleimok'>
@@ -977,6 +1065,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>105</hp>
+		<spawn>0.0031</spawn>
 	</Pokemon>
 
 <Pokemon name='Muschas'>
@@ -988,6 +1077,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>30</hp>
+		<spawn>0.52</spawn>
 	</Pokemon>
 
 <Pokemon name='Austos'>
@@ -999,6 +1089,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>50</hp>
+		<spawn>0.015</spawn>
 	</Pokemon>
 
 <Pokemon name='Nebulak'>
@@ -1010,6 +1101,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>30</hp>
+		<spawn>0.79</spawn>
 	</Pokemon>
 
 <Pokemon name='Alpollo'>
@@ -1021,6 +1113,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>45</hp>
+		<spawn>0.052</spawn>
 	</Pokemon>
 
 <Pokemon name='Gengar'>
@@ -1032,6 +1125,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>60</hp>
+		<spawn>0.0067</spawn>
 	</Pokemon>
 
 <Pokemon name='Onix'>
@@ -1043,6 +1137,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>35</hp>
+		<spawn>0.1</spawn>
 	</Pokemon>
 
 <Pokemon name='Traumato'>
@@ -1054,6 +1149,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>60</hp>
+		<spawn>3.21</spawn>
 	</Pokemon>
 
 <Pokemon name='Hypno'>
@@ -1065,6 +1161,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>85</hp>
+		<spawn>0.1</spawn>
 	</Pokemon>
 
 <Pokemon name='Krabby'>
@@ -1076,6 +1173,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>30</hp>
+		<spawn>2.12</spawn>
 	</Pokemon>
 
 <Pokemon name='Kingler'>
@@ -1087,6 +1185,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>55</hp>
+		<spawn>0.062</spawn>
 	</Pokemon>
 
 <Pokemon name='Voltobal'>
@@ -1098,6 +1197,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>40</hp>
+		<spawn>0.65</spawn>
 	</Pokemon>
 
 <Pokemon name='Lektrobal'>
@@ -1109,6 +1209,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>60</hp>
+		<spawn>0.02</spawn>
 	</Pokemon>
 
 <Pokemon name='Owei'>
@@ -1120,6 +1221,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>60</hp>
+		<spawn>0.78</spawn>
 	</Pokemon>
 
 <Pokemon name='Kokowei'>
@@ -1131,6 +1233,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>95</hp>
+		<spawn>0.014</spawn>
 	</Pokemon>
 
 <Pokemon name='Tragosso'>
@@ -1142,6 +1245,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>50</hp>
+		<spawn>0.61</spawn>
 	</Pokemon>
 
 <Pokemon name='Knogga'>
@@ -1153,6 +1257,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>60</hp>
+		<spawn>0.02</spawn>
 	</Pokemon>
 
 <Pokemon name='Kicklee'>
@@ -1164,6 +1269,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>50</hp>
+		<spawn>0.02</spawn>
 	</Pokemon>
 
 <Pokemon name='Nockchan'>
@@ -1175,6 +1281,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>50</hp>
+		<spawn>0.022</spawn>
 	</Pokemon>
 
 <Pokemon name='Schlurp'>
@@ -1186,6 +1293,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>90</hp>
+		<spawn>0.011</spawn>
 	</Pokemon>
 
 <Pokemon name='Smogon'>
@@ -1197,6 +1305,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>40</hp>
+		<spawn>0.2</spawn>
 	</Pokemon>
 
 <Pokemon name='Smogmog'>
@@ -1208,6 +1317,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>65</hp>
+		<spawn>0.016</spawn>
 	</Pokemon>
 
 <Pokemon name='Rihorn'>
@@ -1219,6 +1329,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>80</hp>
+		<spawn>0.63</spawn>
 	</Pokemon>
 
 <Pokemon name='Rizeros'>
@@ -1230,6 +1341,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>105</hp>
+		<spawn>0.022</spawn>
 	</Pokemon>
 
 <Pokemon name='Chaneira'>
@@ -1241,6 +1353,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>250</hp>
+		<spawn>0.013</spawn>
 	</Pokemon>
 
 <Pokemon name='Tangela'>
@@ -1252,6 +1365,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>65</hp>
+		<spawn>0.228</spawn>
 	</Pokemon>
 
 <Pokemon name='Kangama'>
@@ -1263,6 +1377,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>105</hp>
+		<spawn>0.0086</spawn>
 	</Pokemon>
 
 <Pokemon name='Seeper'>
@@ -1274,6 +1389,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>30</hp>
+		<spawn>1.13</spawn>
 	</Pokemon>
 
 <Pokemon name='Seemon'>
@@ -1285,6 +1401,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>55</hp>
+		<spawn>0.034</spawn>
 	</Pokemon>
 
 <Pokemon name='Goldini'>
@@ -1296,6 +1413,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>45</hp>
+		<spawn>2.18</spawn>
 	</Pokemon>
 
 <Pokemon name='Golking'>
@@ -1307,6 +1425,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>80</hp>
+		<spawn>0.08</spawn>
 	</Pokemon>
 
 <Pokemon name='Sterndu'>
@@ -1318,6 +1437,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>30</hp>
+		<spawn>1.95</spawn>
 	</Pokemon>
 
 <Pokemon name='Starmie'>
@@ -1329,6 +1449,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>60</hp>
+		<spawn>0.034</spawn>
 	</Pokemon>
 
 <Pokemon name='Pantimos'>
@@ -1340,6 +1461,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>40</hp>
+		<spawn>0.0031</spawn>
 	</Pokemon>
 
 <Pokemon name='Sichlor'>
@@ -1351,6 +1473,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>70</hp>
+		<spawn>0.14</spawn>
 	</Pokemon>
 
 <Pokemon name='Rossana'>
@@ -1362,6 +1485,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>65</hp>
+		<spawn>0.35</spawn>
 	</Pokemon>
 
 <Pokemon name='Elektek'>
@@ -1373,6 +1497,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>65</hp>
+		<spawn>0.074</spawn>
 	</Pokemon>
 
 <Pokemon name='Magmar'>
@@ -1384,6 +1509,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>65</hp>
+		<spawn>0.1</spawn>
 	</Pokemon>
 
 <Pokemon name='Pinsir'>
@@ -1395,6 +1521,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>65</hp>
+		<spawn>0.99</spawn>
 	</Pokemon>
 
 <Pokemon name='Tauros'>
@@ -1406,6 +1533,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>75</hp>
+		<spawn>0.12</spawn>
 	</Pokemon>
 
 <Pokemon name='Karpador'>
@@ -1417,6 +1545,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>20</hp>
+		<spawn>4.78</spawn>
 	</Pokemon>
 
 <Pokemon name='Garados'>
@@ -1428,6 +1557,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>95</hp>
+		<spawn>0.0032</spawn>
 	</Pokemon>
 
 <Pokemon name='Lapras'>
@@ -1439,6 +1569,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>130</hp>
+		<spawn>0.006</spawn>
 	</Pokemon>
 
 <Pokemon name='Ditto'>
@@ -1450,6 +1581,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>48</hp>
+		<spawn>0.015</spawn>
 	</Pokemon>
 
 <Pokemon name='Evoli'>
@@ -1461,6 +1593,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>55</hp>
+		<spawn>2.75</spawn>
 	</Pokemon>
 
 <Pokemon name='Aquana'>
@@ -1472,6 +1605,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>130</hp>
+		<spawn>0.014</spawn>
 	</Pokemon>
 
 <Pokemon name='Blitza'>
@@ -1483,6 +1617,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>65</hp>
+		<spawn>0.012</spawn>
 	</Pokemon>
 
 <Pokemon name='Flamara'>
@@ -1494,6 +1629,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>65</hp>
+		<spawn>0.017</spawn>
 	</Pokemon>
 
 <Pokemon name='Porygon'>
@@ -1505,6 +1641,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>65</hp>
+		<spawn>0.012</spawn>
 	</Pokemon>
 
 <Pokemon name='Amonitas'>
@@ -1516,6 +1653,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>35</hp>
+		<spawn>0.14</spawn>
 	</Pokemon>
 
 <Pokemon name='Amoroso'>
@@ -1527,6 +1665,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>70</hp>
+		<spawn>0.0061</spawn>
 	</Pokemon>
 
 <Pokemon name='Kabuto'>
@@ -1538,6 +1677,7 @@
 		<motivation>100</motivation>
 		<init>85</init>
 		<hp>30</hp>
+		<spawn>0.1</spawn>
 	</Pokemon>
 
 <Pokemon name='Kabutops'>
@@ -1549,6 +1689,7 @@
 		<motivation>100</motivation>
 		<init>95</init>
 		<hp>60</hp>
+		<spawn>0.0032</spawn>
 	</Pokemon>
 
 <Pokemon name='Aerodactyl'>
@@ -1560,6 +1701,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>80</hp>
+		<spawn>0.018</spawn>
 	</Pokemon>
 
 <Pokemon name='Relaxo'>
@@ -1571,6 +1713,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>160</hp>
+		<spawn>0.016</spawn>
 	</Pokemon>
 
 <Pokemon name='Arktos'>
@@ -1582,6 +1725,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>90</hp>
+		<spawn>0.0025</spawn>
 	</Pokemon>
 
 <Pokemon name='Zapdos'>
@@ -1593,6 +1737,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>90</hp>
+		<spawn>0.0025</spawn>
 	</Pokemon>
 
 <Pokemon name='Lavados'>
@@ -1604,6 +1749,7 @@
 		<motivation>100</motivation>
 		<init>99</init>
 		<hp>90</hp>
+		<spawn>0.0025</spawn>
 	</Pokemon>
 
 <Pokemon name='Dratini'>
@@ -1615,6 +1761,7 @@
 		<motivation>100</motivation>
 		<init>80</init>
 		<hp>41</hp>
+		<spawn>0.3</spawn>
 	</Pokemon>
 
 <Pokemon name='Dragonir'>
@@ -1626,6 +1773,7 @@
 		<motivation>100</motivation>
 		<init>90</init>
 		<hp>61</hp>
+		<spawn>0.02</spawn>
 	</Pokemon>
 
 <Pokemon name='Dragoran'>
@@ -1637,6 +1785,7 @@
 		<motivation>100</motivation>
 		<init>100</init>
 		<hp>91</hp>
+		<spawn>0.0011</spawn>
 	</Pokemon>
 
 <Pokemon name='Mewtu'>
@@ -1648,6 +1797,7 @@
 		<motivation>100</motivation>
 		<init>110</init>
 		<hp>106</hp>
+		<spawn>0.0005</spawn>
 	</Pokemon>
 
 <Pokemon name='Mew'>
@@ -1659,6 +1809,7 @@
 		<motivation>100</motivation>
 		<init>120</init>
 		<hp>100</hp>
+		<spawn>0.0005</spawn>
 	</Pokemon>
 
 </list>
