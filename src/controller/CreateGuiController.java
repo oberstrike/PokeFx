@@ -33,6 +33,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -42,12 +43,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import logic.Map;
+import pokemon.PokemonType;
 import javafx.stage.Stage;
 import views.MapView;
 import xml.XmlControll;
@@ -62,8 +68,9 @@ public class CreateGuiController implements Initializable {
 	@FXML
 	private TextField name;
 	
-	@FXML
-	private Label activeMaterial;
+
+    @FXML
+    private ComboBox<PokemonType> pokeComboBox;
 	
     @FXML
     private ListView<String> liste;
@@ -111,7 +118,8 @@ public class CreateGuiController implements Initializable {
 			String name = selectedFile.getName();
 			System.out.println(name);
 			try {
-				mapView = Main.xmlControll.getMap(selectedFile);
+				Map map = Main.xmlControll.getMap(selectedFile);
+				mapView.setMap(map);
 				mapView.update();
 				new Alert(AlertType.INFORMATION, "Geladen").show();				
 			}catch(Exception e){
@@ -129,10 +137,24 @@ public class CreateGuiController implements Initializable {
 			new Alert(AlertType.ERROR, "Bitte geben Sie einen Namen ein, der zwischen 4-12 Zeichen besitzt").show();
 		} else {
 			try {
-				writer = new FileWriter(this.name.getText() + ".xml", false);
-				System.out.println("Speichere..");
-				Main.xmlControll.saveMap(mapView, writer);
-				new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!");
+				String pathname = this.name.getText() + ".xml";
+				File file = new File(pathname);
+				if(file.exists()) {
+					Optional<ButtonType> result = new Alert(AlertType.CONFIRMATION, "Wollen Sie die Datei überschreiben?").showAndWait();
+					ButtonType type = result.get();
+					if(type != null) {
+						if(!type.getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
+							writer = new FileWriter(file, false);
+							Main.xmlControll.saveMap(mapView.getMap(), writer);
+							new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!").show();
+						}
+					}
+				}else {
+					writer = new FileWriter(file, false);
+					Main.xmlControll.saveMap(mapView.getMap(), writer);
+					new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!").show();
+				}
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -165,9 +187,10 @@ public class CreateGuiController implements Initializable {
 		}else {
 			FileWriter writer;
 			try {
-				writer = new FileWriter(selectedFile);			
-				Main.xmlControll.saveMap(mapView, writer);
-				
+				writer = new FileWriter(selectedFile);	
+				System.out.println(mapView.getMap().getFields());
+				Main.xmlControll.saveMap(mapView.getMap(), writer);
+				new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -187,6 +210,8 @@ public class CreateGuiController implements Initializable {
 		mapView.setOnMouseClicked(this::setMaterial);
 		anchor.getChildren().add(mapView);
 		
+		pokeComboBox.getItems().addAll(Arrays.asList(PokemonType.values()));
+
 	}
 	
 

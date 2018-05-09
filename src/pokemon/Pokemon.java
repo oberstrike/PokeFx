@@ -19,7 +19,7 @@ public class Pokemon {
 	private double motivation;
 	private double init;
 	private double hp;
-	
+	private double spawn;
 	
 	public Pokemon() {
 		super();
@@ -171,6 +171,14 @@ public class Pokemon {
 			crit = (float) 0.5;
 		}
 		return crit;
+	}
+
+	public double getSpawn() {
+		return spawn;
+	}
+
+	public void setSpawn(double spawn) {
+		this.spawn = spawn;
 	}
 	
 }

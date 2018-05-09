@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
@@ -15,8 +14,8 @@ import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
 import field.Field;
+import logic.Map;
 import pokemon.Pokemon;
-import views.MapView;
 
 public class XmlControll {
 	
@@ -34,14 +33,16 @@ public class XmlControll {
 		stream.addPermission(NullPermission.NULL);
 		stream.addPermission(PrimitiveTypePermission.PRIMITIVES);
 		stream.processAnnotations(Field.class);
+		stream.processAnnotations(Map.class);
 		stream.processAnnotations(Pokemon.class);
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
 		stream.allowTypeHierarchy(Pokemon.class);
-		stream.allowTypeHierarchy(Map.class);
+		stream.allowTypeHierarchy(java.util.Map.class);
 		stream.allowTypeHierarchy(String.class);
 		stream.allowTypeHierarchy(Integer.class);
-		stream.alias("map", Map.class);
+		stream.alias("map", java.util.Map.class);
+		stream.allowTypeHierarchy(Map.class);
 		
 		pokedex = (List<Pokemon>) this.getObject(new File(pokeFileName));
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(new File(evolveFileName));
@@ -52,14 +53,10 @@ public class XmlControll {
 	}
 
 	@SuppressWarnings("unchecked")
-	public MapView getMap(File file) {
-		List<Field> fields = (List<Field>)getObject(file);
-		fields.forEach(each -> each.applyImage());
-		MapView mapView = new MapView();
-		mapView.setField(fields);
-		System.out.println(mapView.getFields());
-		
-		return mapView;
+	public Map getMap(File file) {
+		Map map = (Map)getObject(file);
+		map.getFields().forEach(each -> each.applyImage());
+		return map;
 	}
 	
 	public Object getObject(File file) {
@@ -67,18 +64,19 @@ public class XmlControll {
 	}
 	
 	public void saveObject(Object object, FileWriter writer) {
-		this.stream.toXML(object,writer);
+		String string = this.stream.toXML(object);
 		try {
+			writer.write(string);
 			writer.flush();
 			writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 
-	public void saveMap(MapView fields, FileWriter writer) {
-		this.saveObject(fields.getFields(), writer);
+	public void saveMap(Map map, FileWriter writer) {
+		this.saveObject(map, writer);
 	}
 
 	public List<Pokemon> getPokedex() {
