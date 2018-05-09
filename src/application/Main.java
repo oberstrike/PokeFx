@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import views.MapView;
+import xml.XmlControll;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -21,6 +22,7 @@ public class Main extends Application {
 	public static Image player_right;
 	public static Image player_straight;
 	public static Image player_back;
+	public static XmlControll xmlControll;
 	
 	
 	@Override
@@ -41,6 +43,8 @@ public class Main extends Application {
 			player_right = new Image("/images/player_right.png");
 			player_straight = new Image("/images/player_straight.png");
 			player_back = new Image("/images/player_back.png");
+			
+			xmlControll = new XmlControll();
 			
 			Scene scene = new Scene(root, 330, 400);
 			// Scene scene = new Scene(root,900,500);

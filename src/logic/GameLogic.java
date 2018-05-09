@@ -13,30 +13,50 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import pokemon.Pokemon;
 import views.MapView;
+import views.PokemonView;
+import xml.XmlControll;
 
 public class GameLogic extends Thread {
 	MapView mapView;
 	Player player;
 	long lastMovement = 0;
-
-	public GameLogic(MapView mapView) {
+	AnchorPane anchor2;
+	
+	public GameLogic(MapView mapView, AnchorPane anchor2) {
 		this.mapView = mapView;
 		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
 				.collect(Collectors.toList());
 
 		Field f = field.get(new Random().nextInt(field.size()));
 		player = new Player();
+		
+		player.getPokemon()[0] = Main.xmlControll.getPokedex().get(2);
 		player.setImage(new Image("/images/player_straight.png"));
 		player.setField(f);
 		f.setEntity(player);
 		mapView.update();
+		this.anchor2 = anchor2;
+	}
+	
+	public void update() {
+		Platform.runLater(() ->{
+			this.mapView.update();
+			for(Pokemon pokemon: player.getPokemon()) {
+				PokemonView pv = new PokemonView(pokemon);
+				pv.setLayoutX(45);
+				pv.setLayoutY(10);
+				anchor2.getChildren().add(pv);
+			}
+		});
 	}
 
 	@Override
 	public void run() {
 		while (true) {
-			Platform.runLater(() -> this.mapView.update());
+			update();
 			try {
 				Thread.sleep(200);
 			} catch (InterruptedException e) {
@@ -48,7 +68,10 @@ public class GameLogic extends Thread {
 	private void contextMenu() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktions Fenster");
-		alert.setHeaderText("Ein wildes Pokemon ist erschienen");
+
+		
+		
+		alert.setHeaderText("Ein wildes " + Main.xmlControll.getPokedex().get(2).getName() + " ist erschienen");
 		alert.setContentText("Bitte waehle deine Aktion.");
 	
 		ButtonType kampfButton = new ButtonType("Angreifen");

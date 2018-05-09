@@ -21,7 +21,7 @@ public class Field {
 
 	@Override
 	public String toString() {
-		return "Field [x=" + x + ", y=" + y + ", image=" + image + "]";
+		return "Field [type=" + type + ", x=" + x + ", y=" + y + ", image=" + image + "]";
 	}
 
 	private FieldType type;
@@ -97,8 +97,7 @@ public class Field {
 		default:
 			setImage(Main.grass);
 			break;
-		}
-
+		}	
 		if (entity != null) {
 			BufferedImage image = SwingFXUtils.fromFXImage(getImage(), null);
 			BufferedImage entitysImage = SwingFXUtils.fromFXImage(entity.getImage(), null);

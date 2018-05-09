@@ -28,10 +28,9 @@ public class MenuGuiController implements Initializable{
 		if(selectedFile == null) {
 			
 		}else {
-			Main.mapView = new MapView();
-			Main.mapView.loadFile(selectedFile);
+			Main.mapView = Main.xmlControll.getMap(selectedFile);
+			System.out.println(Main.mapView.getFields());
 			WindowChanger changer = new WindowChanger();
-			
 			changer.changeWindow("/guis/GameGui.fxml", event);
 		}
     }

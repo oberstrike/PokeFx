@@ -50,6 +50,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import views.MapView;
+import xml.XmlControll;
 
 public class CreateGuiController implements Initializable {
 
@@ -110,7 +111,7 @@ public class CreateGuiController implements Initializable {
 			String name = selectedFile.getName();
 			System.out.println(name);
 			try {
-				mapView.loadFile(selectedFile);
+				mapView = Main.xmlControll.getMap(selectedFile);
 				mapView.update();
 				new Alert(AlertType.INFORMATION, "Geladen").show();				
 			}catch(Exception e){
@@ -130,7 +131,7 @@ public class CreateGuiController implements Initializable {
 			try {
 				writer = new FileWriter(this.name.getText() + ".xml", false);
 				System.out.println("Speichere..");
-				mapView.save(writer);
+				Main.xmlControll.saveMap(mapView, writer);
 				new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!");
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -141,7 +142,6 @@ public class CreateGuiController implements Initializable {
 	
     @FXML
     void newMap(ActionEvent event) {
-    	
     	String selected =liste.getSelectionModel().getSelectedItem();
     	if(selected!=null) {
         	mapView.getFields().forEach(each -> {
@@ -166,7 +166,7 @@ public class CreateGuiController implements Initializable {
 			FileWriter writer;
 			try {
 				writer = new FileWriter(selectedFile);			
-				mapView.save(writer);
+				Main.xmlControll.saveMap(mapView, writer);
 				
 			} catch (IOException e) {
 				e.printStackTrace();

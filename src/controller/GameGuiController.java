@@ -38,14 +38,10 @@ public class GameGuiController implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		PokemonView pv = new PokemonView();
-		pv.setLayoutX(40);
-		pv.setLayoutY(15);
-		anchor2.getChildren().add(pv);
-		
 		if(Main.mapView == null) {
 			 Main.mapView = new MapView();
 		}
+		
 		Main.mapView.setPrefWidth(600);
 		Main.mapView.setPrefHeight(500);
 		anchor.getChildren().add(Main.mapView);
@@ -53,10 +49,11 @@ public class GameGuiController implements Initializable {
 		anchor.setFocusTraversable(false);
 		anchor.requestFocus();
 		
-		logic = new GameLogic(Main.mapView);
+		logic = new GameLogic(Main.mapView, anchor2);
 		logic.setDaemon(true);
 		logic.start();
 
+		
 		Main.mapView.setOnKeyPressed(event -> {
 			logic.moveEvent(event.getCode().getName());
 		});
