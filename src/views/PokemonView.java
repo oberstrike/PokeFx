@@ -8,11 +8,16 @@ import pokemon.Pokemon;
 
 public class PokemonView extends AnchorPane {
 	
+	
+	private Label hp;
+	private Label name;
+	private Label level;
+	
 	public PokemonView(Pokemon pokemon) {
 		if(pokemon != null) {
-			registerLabel(String.valueOf(pokemon.getHp()), 15, 15);
-			registerLabel(pokemon.getName(), 65, 35);
-			registerLabel(String.valueOf(pokemon.getLevel()), 65, 50);
+			hp = registerLabel(String.valueOf(pokemon.getHp()), 15, 15);
+			name = registerLabel(pokemon.getName(), 65, 35);
+			level = registerLabel(String.valueOf(pokemon.getLevel()), 65, 50);
 
 			ProgressBar hpBar = new ProgressBar();
 			hpBar.setProgress(1);
@@ -31,11 +36,20 @@ public class PokemonView extends AnchorPane {
 	}
 	
 	
-	private void registerLabel(String text, double x, double y) {
+	private Label registerLabel(String text, double x, double y) {
 		Label label = new Label(text);
 		label.setLayoutX(x);
 		label.setLayoutY(y);
 		this.getChildren().add(label);
+		return label;
+	}
+
+
+	public void setPokemon(Pokemon pokemon) {
+		hp.setText(String.valueOf(pokemon.getHp()));
+		name.setText(pokemon.getName());
+		level.setText(String.valueOf(pokemon.getLevel()));
+		
 	}
 	
 	

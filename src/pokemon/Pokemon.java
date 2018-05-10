@@ -116,8 +116,18 @@ public class Pokemon {
 		
 		Effectives effekt = new Effectives();
 		
-		double multiplierMon1 = Effectives.table.get(mon2.type).get(mon1.type);
-		double multiplierMon2 = Effectives.table.get(mon1.type).get(mon2.type);
+		
+		
+		double multiplierMon1 = 1;
+		if(effekt.table.get(mon2.getType()).containsKey(mon1.getType()))		
+			multiplierMon1 = effekt.table.get(mon2.getType()).get(mon1.getType());
+		
+		double multiplierMon2 = 1;
+		if(effekt.table.get(mon1.getType()).containsKey(mon2.getType()))		
+			multiplierMon2 = effekt.table.get(mon1.getType()).get(mon2.getType());
+		
+		
+
 		
 		int attMon1 = (int) (mon1.calculateAtt() * multiplierMon1);
 		int deffMon1 = mon1.calculateDeff();

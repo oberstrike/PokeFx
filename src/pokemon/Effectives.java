@@ -26,7 +26,7 @@ public class Effectives {
 	private HashMap<PokemonType, Double> psycho;
 	private HashMap<PokemonType, Double> wasser;
 	
-	public static HashMap<PokemonType, HashMap<PokemonType, Double>> table = new HashMap<>();
+	public HashMap<PokemonType, HashMap<PokemonType, Double>> table = new HashMap<>();
 	
 	public Effectives() {
 		super();

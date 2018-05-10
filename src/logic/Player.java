@@ -1,5 +1,8 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 import field.Field;
@@ -14,7 +17,7 @@ public class Player implements Entity {
 	private Field field;
 	private Image image;
 
-	private Pokemon[] pokemon = new Pokemon[3];
+	private List<Pokemon> pokemons = new ArrayList<>();
 	private Item[] item = new Item[5];
 	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
 	//private Item[] item = new Item[5];
@@ -35,12 +38,12 @@ public class Player implements Entity {
 		this.name = name;
 	}
 
-	public Pokemon[] getPokemon() {
-		return pokemon;
+	public List<Pokemon> getPokemon() {
+		return pokemons;
 	}
 
-	public void setPokemon(Pokemon[] pokemon) {
-		this.pokemon = pokemon;
+	public void setPokemon(List<Pokemon> pokemons) {
+		this.pokemons = pokemons;
 	}
 
 	public Field getField() {

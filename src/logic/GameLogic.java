@@ -10,6 +10,7 @@ import application.Main;
 import field.Field;
 import field.FieldType;
 import javafx.application.Platform;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -35,7 +36,8 @@ public class GameLogic extends Thread {
 		Field f = field.get(new Random().nextInt(field.size()));
 		player = new Player();
 		
-		player.getPokemon()[0] = Main.xmlControll.getPokedex().get(2);
+//		player.getPokemon().add(Main.xmlControll.getPokedex().get(2));
+//		player.getPokemon().add(Main.xmlControll.getPokedex().get(1));
 		player.setImage(new Image("/images/player_straight.png"));
 		player.setField(f);
 		f.setEntity(player);
@@ -46,12 +48,23 @@ public class GameLogic extends Thread {
 	public void update() {
 		Platform.runLater(() ->{
 			this.mapView.update();
-			for(Pokemon pokemon: player.getPokemon()) {
-				PokemonView pv = new PokemonView(pokemon);
-				pv.setLayoutX(45);
-				pv.setLayoutY(10);
-				anchor2.getChildren().add(pv);
+			
+			long count = anchor2.getChildren().stream().filter(each -> each.getClass().equals(PokemonView.class)).count();
+			
+			if(count < player.getPokemon().size()) {
+				for(int i = 0; i < player.getPokemon().size(); i++) {
+					Pokemon pokemon = player.getPokemon().get(i);
+					PokemonView pv = new PokemonView(pokemon);
+					pv.setLayoutX(45);
+					pv.setLayoutY(10+i*55);
+					anchor2.getChildren().add(pv);
+				}
+			}else {
+				for(int i = 0; i < player.getPokemon().size(); i++) {
+					((PokemonView)anchor2.getChildren().get(i)).setPokemon(player.getPokemon().get(i));
+				}
 			}
+
 		});
 	}
 
@@ -73,28 +86,75 @@ public class GameLogic extends Thread {
 
 		List<PokemonType> pokemonTypes = mapView.getMap().getPokemonTypes();
 		List<Pokemon> listOfPokemons = new ArrayList<>();
+	
 		for(PokemonType type: pokemonTypes) {
 			listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));			
 		}
 		
-		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(System.out::println);
+		List<Pokemon> allPokemons = new ArrayList<>();
+		if(player.getPokemon().size() > 0 ) {
+			for(Pokemon pokemon: listOfPokemons) {
+				int i = (int) (pokemon.getSpawn() * 100);
+				for(int j = 0; j < i; j++) {
+					allPokemons.add(pokemon);
+				}
+			}	
+		}else {
+			allPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
+			allPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
+			allPokemons.add(Main.xmlControll.getPokemonByName("Glumanda"));
+		}
 		
+	
+		System.out.println(allPokemons);
+		Pokemon pokemon = allPokemons.get(new Random().nextInt(allPokemons.size()));
+		pokemon.setLevel(2);
 				
 		
-		alert.setHeaderText("Ein wildes " + Main.xmlControll.getPokedex().get(2).getName() + " ist erschienen");
+		alert.setHeaderText("Ein wildes " + pokemon.getName() + " level:  " + pokemon.getLevel() + " ist erschienen");
 		alert.setContentText("Bitte waehle deine Aktion.");
 	
 		ButtonType kampfButton = new ButtonType("Angreifen");
 		ButtonType fangButton = new ButtonType("Fangen");
 		ButtonType fliehButton = new ButtonType("Fliehen");
 	
-		alert.getButtonTypes().setAll(kampfButton, fliehButton);
-		if(player.getPokemon().length != 0) {
+		alert.getButtonTypes().add(fliehButton);
+		if(player.getPokemon().size() != 0) {
+			alert.getButtonTypes().add(kampfButton);
+		}
+		
+		if(player.getPokemon().size() < 3) {
 			alert.getButtonTypes().add(fangButton);
 		}
 		
 		Optional<ButtonType> result = alert.showAndWait();
-		System.out.println(result.get());
+		ButtonType buttonType = result.get();
+		if(buttonType != null) {
+			if(buttonType.equals(kampfButton)) {
+				Pokemon.fight(pokemon, player.getPokemon().get(0));
+			}else if(buttonType.equals(fangButton)) {
+				if(player.getPokemon().size() == 0) {
+					player.getPokemon().add(pokemon);
+				}else {
+					int iValue = new Random().nextInt(100);
+					if(pokemon.getSpawn()>3) {
+						if(iValue>45)
+							player.getPokemon().add(pokemon);
+					}else if(pokemon.getSpawn()>2) {
+						if(iValue>60)
+							player.getPokemon().add(pokemon);
+					}else if(pokemon.getSpawn()>1) {
+						if(iValue>70) 
+							player.getPokemon().add(pokemon);
+					}else {
+						if(iValue>80)
+							player.getPokemon().add(pokemon);
+					}
+				}
+			}else {
+				
+			}
+		}
 	}
 	
 
