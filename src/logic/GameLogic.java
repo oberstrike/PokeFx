@@ -91,6 +91,7 @@ public class GameLogic extends Thread {
 			listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));			
 		}
 		
+<<<<<<< HEAD
 		List<Pokemon> allPokemons = new ArrayList<>();
 		if(player.getPokemon().size() > 0 ) {
 			for(Pokemon pokemon: listOfPokemons) {
@@ -104,6 +105,32 @@ public class GameLogic extends Thread {
 			allPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
 			allPokemons.add(Main.xmlControll.getPokemonByName("Glumanda"));
 		}
+=======
+		List<Double> chances = new ArrayList<>();
+		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(chances::add);
+		double sumChances = 0.0;
+		for(double chance : chances) {
+			sumChances += chance;
+		}
+		Random r = new Random();
+		double randomValue = 0 + sumChances * r.nextDouble();
+		
+		System.out.println(randomValue);
+		System.out.println(sumChances);
+		
+		Pokemon spawnedPokemon = null;
+		for(Pokemon currentPokemon : listOfPokemons) {
+			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
+				spawnedPokemon = currentPokemon;
+				break;
+			} else {
+				sumChances -= currentPokemon.getSpawn();
+			}
+		}
+		
+		System.out.println(listOfPokemons);
+		
+>>>>>>> b6f46e3a5e17d636db29ccaca7ce9ebe34f3ea22
 		
 	
 		System.out.println(allPokemons);
@@ -111,7 +138,11 @@ public class GameLogic extends Thread {
 		pokemon.setLevel(2);
 				
 		
+<<<<<<< HEAD
 		alert.setHeaderText("Ein wildes " + pokemon.getName() + " level:  " + pokemon.getLevel() + " ist erschienen");
+=======
+		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " ist erschienen");
+>>>>>>> b6f46e3a5e17d636db29ccaca7ce9ebe34f3ea22
 		alert.setContentText("Bitte waehle deine Aktion.");
 	
 		ButtonType kampfButton = new ButtonType("Angreifen");
