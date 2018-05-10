@@ -77,11 +77,31 @@ public class GameLogic extends Thread {
 			listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));			
 		}
 		
-		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(System.out::println);
+		List<Double> chances = new ArrayList<>();
+		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(chances::add);
+		double sumChances = 0.0;
+		for(double chance : chances) {
+			sumChances += chance;
+		}
+		Random r = new Random();
+		double randomValue = 0 + sumChances * r.nextDouble();
+		Pokemon spawnedPokemon = null;
+		for(Pokemon currentPokemon : listOfPokemons) {
+			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
+				spawnedPokemon = currentPokemon;
+				break;
+			} else {
+				sumChances -= currentPokemon.getSpawn();
+			}
+		}
 		
+		System.out.println(listOfPokemons);
+		
+		System.out.println(randomValue);
+		System.out.println(sumChances);
 				
 		
-		alert.setHeaderText("Ein wildes " + Main.xmlControll.getPokedex().get(2).getName() + " ist erschienen");
+		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " ist erschienen");
 		alert.setContentText("Bitte waehle deine Aktion.");
 	
 		ButtonType kampfButton = new ButtonType("Angreifen");
