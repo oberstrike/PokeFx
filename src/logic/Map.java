@@ -23,7 +23,7 @@ public class Map {
 	@XStreamOmitField
 	private double sides = 40;
 	
-	private PokemonType pokemontyp;
+	private List<PokemonType> pokemontypes = new ArrayList<>();
 	
 	public Map(List<Field> fields) {
 		this.fields = fields;
@@ -55,12 +55,12 @@ public class Map {
 		});
 	}
 
-	public PokemonType getPokemontyp() {
-		return pokemontyp;
+	public List<PokemonType> getPokemonTypes() {
+		return pokemontypes;
 	}
 
-	public void setPokemontyp(PokemonType pokemontyp) {
-		this.pokemontyp = pokemontyp;
+	public void setPokemonTypes(List<PokemonType> pokemonTypes) {
+		this.pokemontypes = pokemonTypes;
 	}
 
 	public double getWidth() {

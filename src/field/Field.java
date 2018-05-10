@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 
@@ -41,6 +43,15 @@ public class Field {
 		applyImage();
 	}
 
+	public static Field findFieldNextTo(double x, double y, List<Field> listOfFields) {
+    	Vec2d localPoint = new Vec2d(x, y);
+    	List<Vec2d> listOfVector = listOfFields.stream().map(Field::toVector).collect(Collectors.toList());	
+    	double distance = listOfVector.stream().map(each -> localPoint.distance(each)).sorted().findFirst().get();
+    	Vec2d vec = listOfVector.stream().filter(each -> each.distance(localPoint) == distance).findFirst().get(); ;
+    	Field field = listOfFields.stream().filter(each -> each.getX() == vec.x-20 && each.getY() == vec.y-20).findFirst().get();
+    	return field;
+	}
+	
 	public FieldType getType() {
 		return type;
 	}

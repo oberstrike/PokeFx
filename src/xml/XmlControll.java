@@ -39,6 +39,7 @@ public class XmlControll {
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
 		stream.allowTypeHierarchy(Pokemon.class);
+		stream.allowTypeHierarchy(PokemonType.class);
 		stream.allowTypeHierarchy(java.util.Map.class);
 		stream.allowTypeHierarchy(String.class);
 		stream.allowTypeHierarchy(Integer.class);

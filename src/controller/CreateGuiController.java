@@ -67,17 +67,52 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	private TextField name;
-	
 
-    @FXML
-    private ComboBox<PokemonType> pokeComboBox;
-	
-    @FXML
-    private ListView<String> liste;
+	@FXML
+	private ListView<PokemonType> pokeTypeList;
 
-    @FXML
-    private AnchorPane anchor;
+	@FXML
+	private ComboBox<PokemonType> pokeComboBox;
+
+	@FXML
+	private ListView<String> liste;
+
+	@FXML
+	private AnchorPane anchor;
+
+	@FXML
+	private Button addBtn;
 	
+    @FXML
+    void back(ActionEvent event) {
+    	WindowChanger changer = new WindowChanger();
+    	changer.changeWindow("/guis/MenuGui.fxml", event);
+    }
+
+	@FXML
+	void addPokeType(ActionEvent event) {
+		ObservableList<PokemonType> listOfPokemonTypes = pokeTypeList.getItems();
+		PokemonType pokemonType = pokeComboBox.getValue();
+		if (!listOfPokemonTypes.contains(pokemonType)) {
+			pokeTypeList.getItems().add(pokemonType);
+			mapView.getMap().getPokemonTypes().add(pokemonType);
+		}
+		if (pokeTypeList.getItems().size() > 2) {
+			addBtn.setDisable(true);
+		}
+	}
+
+	@FXML
+	void deletePokeType(ActionEvent event) {
+		PokemonType pokemonType = pokeTypeList.getSelectionModel().getSelectedItem();
+		if (pokemonType != null) {
+			pokeTypeList.getItems().remove(pokemonType);
+			mapView.getMap().getPokemonTypes().remove(pokemonType);
+			addBtn.setDisable(false);
+		}
+
+	}
+
 	@FXML
 	void load(ActionEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION, "Wollen Sie den aktuellen Zustand verwerfen?");
@@ -87,24 +122,18 @@ public class CreateGuiController implements Initializable {
 			}
 		});
 	}
-	
-    @FXML
-    void setMaterial(MouseEvent event) {
-    	String selected =liste.getSelectionModel().getSelectedItem();
-  
-    	if(selected!=null) {
-        	Vec2d localPoint = new Vec2d(event.getX(), event.getY());
-        	List<Vec2d> listOfVector = mapView.getFields().stream().map(Field::toVector).collect(Collectors.toList());	
-        	double distance = listOfVector.stream().map(each -> localPoint.distance(each)).sorted().findFirst().get();
-        	Vec2d vec = listOfVector.stream().filter(each -> each.distance(localPoint) == distance).findFirst().get(); ;
-        	Field field = mapView.getFields().stream().filter(each -> each.getX() == vec.x-20 && each.getY() == vec.y-20).findFirst().get();
-        	field.setType(FieldType.valueOf(selected));
-        	mapView.update();
-    	}
-  
-   }
 
+	@FXML
+	void setMaterial(MouseEvent event) {
+		String selected = liste.getSelectionModel().getSelectedItem();
 
+		if (selected != null) {
+			Field field = Field.findFieldNextTo(event.getX(), event.getY(), mapView.getFields());
+			field.setType(FieldType.valueOf(selected));
+			mapView.update();
+		}
+
+	}
 
 	private void loadFile(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
@@ -121,8 +150,8 @@ public class CreateGuiController implements Initializable {
 				Map map = Main.xmlControll.getMap(selectedFile);
 				mapView.setMap(map);
 				mapView.update();
-				new Alert(AlertType.INFORMATION, "Geladen").show();				
-			}catch(Exception e){
+				new Alert(AlertType.INFORMATION, "Geladen").show();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
@@ -136,85 +165,103 @@ public class CreateGuiController implements Initializable {
 		if (this.name.getText().length() < 1 || this.name.getText().length() > 12) {
 			new Alert(AlertType.ERROR, "Bitte geben Sie einen Namen ein, der zwischen 4-12 Zeichen besitzt").show();
 		} else {
-			try {
-				String pathname = this.name.getText() + ".xml";
-				File file = new File(pathname);
-				if(file.exists()) {
-					Optional<ButtonType> result = new Alert(AlertType.CONFIRMATION, "Wollen Sie die Datei überschreiben?").showAndWait();
-					ButtonType type = result.get();
-					if(type != null) {
-						if(!type.getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
-							writer = new FileWriter(file, false);
-							mapView.getMap().setPokemontyp(pokeComboBox.getValue());
-							Main.xmlControll.saveMap(mapView.getMap(), writer);
-							new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!").show();
+			String pathname = this.name.getText() + ".xml";
+			File file = new File(pathname);
+			if (file.exists()) {
+				Optional<ButtonType> result = new Alert(AlertType.CONFIRMATION, "Wollen Sie die Datei überschreiben?")
+						.showAndWait();
+				ButtonType type = result.get();
+				if (type != null) {
+					if (!type.getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
+						if (pokeTypeList.getItems().size() == 0) {
+							Optional<ButtonType> oButtonType = new Alert(AlertType.CONFIRMATION,
+									"Sie haben kein Pokemon Type ausgewählt.").showAndWait();
+							if (oButtonType.isPresent()) {
+								if (!oButtonType.get().getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
+									write(file);
+								}
+							}
+						} else {
+							write(file);
 						}
 					}
-				}else {
-					writer = new FileWriter(file, false);
-					mapView.getMap().setPokemontyp(pokeComboBox.getValue());
-					Main.xmlControll.saveMap(mapView.getMap(), writer);
-					new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!").show();
 				}
-
-			} catch (IOException e) {
-				e.printStackTrace();
+			} else {
+				if (pokeTypeList.getItems().size() == 0) {
+					Optional<ButtonType> oButtonType = new Alert(AlertType.CONFIRMATION,
+							"Sie haben kein Pokemon Type ausgewählt.").showAndWait();
+					if (oButtonType.isPresent()) {
+						if (!oButtonType.get().getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
+							write(file);
+						}
+					}
+				} else {
+					write(file);
+				}
 			}
 		}
 	}
 
-	
-    @FXML
-    void newMap(ActionEvent event) {
-    	String selected =liste.getSelectionModel().getSelectedItem();
-    	if(selected!=null) {
-    		Map map = new Map(FieldType.valueOf(selected));
-    		mapView.setMap(map);
-        	mapView.update();
-    	}
+	public void write(File file) {
+		FileWriter writer;
+		try {
+			writer = new FileWriter(file, false);
+			Main.xmlControll.saveMap(mapView.getMap(), writer);
+			new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!").show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    }
-	
+	@FXML
+	void newMap(ActionEvent event) {
+		String selected = liste.getSelectionModel().getSelectedItem();
+		if (selected != null) {
+			Map map = new Map(FieldType.valueOf(selected));
+			mapView.setMap(map);
+			mapView.update();
+		}
 
-    @FXML
-    void saveAs(ActionEvent event) {
-    	FileChooser fileChooser = new FileChooser();
+	}
+
+	@FXML
+	void saveAs(ActionEvent event) {
+		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open XML");
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
 		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
-		if(selectedFile == null) {
-			
-		}else {
-			FileWriter writer;
-			try {
-				writer = new FileWriter(selectedFile);	
-				mapView.getMap().setPokemontyp(pokeComboBox.getValue());
-				Main.xmlControll.saveMap(mapView.getMap(), writer);
-				new Alert(AlertType.INFORMATION, "Erfolgreich gespeichert!");
-			} catch (IOException e) {
-				e.printStackTrace();
+		if (selectedFile == null) {
+
+		} else {
+			if (pokeTypeList.getItems().size() == 0) {
+				Optional<ButtonType> oButtonType = new Alert(AlertType.CONFIRMATION,
+						"Sie haben kein Pokemon Type ausgewählt.").showAndWait();
+				if (oButtonType.isPresent()) {
+					if (!oButtonType.get().getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
+						write(selectedFile);
+					}
+				}
+			} else {
+				write(selectedFile);
 			}
 
 		}
-    }
-	
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ObservableList<String> data = FXCollections.observableArrayList();
-		for(FieldType type: FieldType.values()) {
+		for (FieldType type : FieldType.values()) {
 			data.add(type.toString());
 		}
-		
+
 		liste.setItems(data);
 		mapView = new MapView();
 		mapView.setOnMouseClicked(this::setMaterial);
 		anchor.getChildren().add(mapView);
-		
+
 		pokeComboBox.getItems().addAll(Arrays.asList(PokemonType.values()));
 		pokeComboBox.getSelectionModel().select(11);
 	}
-	
-
-	
 
 }

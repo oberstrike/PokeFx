@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -70,8 +71,12 @@ public class GameLogic extends Thread {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktions Fenster");
 
-		PokemonType type = mapView.getMap().getPokemontyp();
-		List<Pokemon> listOfPokemons = Main.xmlControll.getPokemonsByType(type);
+		List<PokemonType> pokemonTypes = mapView.getMap().getPokemonTypes();
+		List<Pokemon> listOfPokemons = new ArrayList<>();
+		for(PokemonType type: pokemonTypes) {
+			listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));			
+		}
+		
 		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(System.out::println);
 		
 				
