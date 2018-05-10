@@ -67,7 +67,7 @@ public class GameLogic extends Thread {
 		}
 	}
 	
-	private void contextMenu() {
+	private void fightMenu() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktions Fenster");
 
@@ -138,11 +138,11 @@ public class GameLogic extends Thread {
 					player.setField(newField.get());
 					Platform.runLater(() -> mapView.update());
 			//		mapView.update();
-					if(newF.getType().equals(FieldType.HOHESGRASS)) {
+					if(newF.getType().equals(FieldType.HOHESGRASS) || newF.getType().equals(FieldType.TIEFERSAND)) {
 						int randDig = new Random().nextInt(100);
 						if(randDig < 14) {
-							System.out.println("Ein wildes Pokemon erscheint...");
-							contextMenu();
+							System.out.println("Ein wildes Pokemon greift an...");
+							fightMenu();
 						}
 					}
 					mapView.update();

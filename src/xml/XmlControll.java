@@ -36,6 +36,7 @@ public class XmlControll {
 		stream.processAnnotations(Field.class);
 		stream.processAnnotations(Map.class);
 		stream.processAnnotations(Pokemon.class);
+		stream.processAnnotations(PokemonType.class);
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
 		stream.allowTypeHierarchy(Pokemon.class);
