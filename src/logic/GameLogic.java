@@ -85,6 +85,10 @@ public class GameLogic extends Thread {
 		}
 		Random r = new Random();
 		double randomValue = 0 + sumChances * r.nextDouble();
+		
+		System.out.println(randomValue);
+		System.out.println(sumChances);
+		
 		Pokemon spawnedPokemon = null;
 		for(Pokemon currentPokemon : listOfPokemons) {
 			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
@@ -97,8 +101,7 @@ public class GameLogic extends Thread {
 		
 		System.out.println(listOfPokemons);
 		
-		System.out.println(randomValue);
-		System.out.println(sumChances);
+		
 				
 		
 		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " ist erschienen");
