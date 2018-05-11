@@ -147,6 +147,8 @@ public class Pokemon {
 					winner = mon2;
 					return winner;
 				}
+				System.out.println(mon1.getName() + " HP: " + mon1.getHp());
+				System.out.println(mon2.getName() + " HP: " + mon2.getHp());
 			}
 			return null;
 		} else {
@@ -167,12 +169,14 @@ public class Pokemon {
 	}
 	
 	public int calculateAtt() {
-		int att = (int) (this.getMotivation()*(this.getAtt() * (1 + (this.getLevel()/10))));
+		int att = (int) ((this.getMotivation()*0.01)*(this.getAtt() * (1 + (this.getLevel()/5)))*0.2);
+		System.out.println(this.getName() + "Angriff: " + att);
 		return att;
 	}
 	
 	public int calculateDeff() {
-		int deff = (int) (this.getMotivation()*(this.getDeff() * (1 + (this.getLevel()/10))));
+		int deff = (int) ((this.getMotivation()*0.01)*(this.getDeff() * (1 + (this.getLevel()/5)))*0.2);
+		System.out.println(this.getName() + "Verteidigung: " + deff);
 		return deff;
 	}
 	

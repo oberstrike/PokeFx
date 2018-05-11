@@ -84,28 +84,33 @@ public class GameLogic extends Thread {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktions Fenster");
 
-		List<PokemonType> pokemonTypes = mapView.getMap().getPokemonTypes();
-		List<Pokemon> listOfPokemons = new ArrayList<>();
-	
-		for(PokemonType type: pokemonTypes) {
-			listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));			
-		}
+		
 
-		List<Pokemon> allPokemons = new ArrayList<>();
-		if(player.getPokemon().size() > 0 ) {
-			for(Pokemon pokemon: listOfPokemons) {
-				int i = (int) (pokemon.getSpawn() * 100);
-				for(int j = 0; j < i; j++) {
-					allPokemons.add(pokemon);
-				}
-			}	
-		}else {
-			allPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
-			allPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
-			allPokemons.add(Main.xmlControll.getPokemonByName("Glumanda"));
-		}
+//		List<Pokemon> allPokemons = new ArrayList<>();
 		List<Double> chances = new ArrayList<>();
+		List<Pokemon> listOfPokemons = new ArrayList<>();
+		
+		if(player.getPokemon().size() > 0 ) {
+//			for(Pokemon pokemon: listOfPokemons) {
+//				int i = (int) (pokemon.getSpawn() * 100);
+//				for(int j = 0; j < i; j++) {
+//					allPokemons.add(pokemon);
+//				}
+//			}
+			List<PokemonType> pokemonTypes = mapView.getMap().getPokemonTypes();
+		
+			for(PokemonType type: pokemonTypes) {
+				listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));			
+			}
+			
+		}else {
+			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
+			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
+			listOfPokemons.add(Main.xmlControll.getPokemonByName("Glumanda"));
+		}
+		
 		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(chances::add);
+		
 		double sumChances = 0.0;
 		for(double chance : chances) {
 			sumChances += chance;
@@ -130,11 +135,16 @@ public class GameLogic extends Thread {
 
 		
 	
-		System.out.println(allPokemons);
-		Pokemon pokemon = allPokemons.get(new Random().nextInt(allPokemons.size()));
-		pokemon.setLevel(2);
+		// System.out.println(allPokemons);
+		// Pokemon pokemon = allPokemons.get(new Random().nextInt(allPokemons.size()));
+		if (spawnedPokemon.getId() == 1 || spawnedPokemon.getId() == 4 || spawnedPokemon.getId() == 7) {
+			spawnedPokemon.setLevel(5);
+		} else {
+			spawnedPokemon.setLevel(2);
+		}
+		
 
-		alert.setHeaderText("Ein wildes " + pokemon.getName() + " level:  " + pokemon.getLevel() + " ist erschienen");
+		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " ist erschienen");
 
 		alert.setContentText("Bitte waehle deine Aktion.");
 	
@@ -155,24 +165,24 @@ public class GameLogic extends Thread {
 		ButtonType buttonType = result.get();
 		if(buttonType != null) {
 			if(buttonType.equals(kampfButton)) {
-				Pokemon.fight(pokemon, player.getPokemon().get(0));
+				Pokemon.fight(spawnedPokemon, player.getPokemon().get(0));
 			}else if(buttonType.equals(fangButton)) {
 				if(player.getPokemon().size() == 0) {
-					player.getPokemon().add(pokemon);
+					player.getPokemon().add(spawnedPokemon);
 				}else {
 					int iValue = new Random().nextInt(100);
-					if(pokemon.getSpawn()>3) {
+					if(spawnedPokemon.getSpawn()>3) {
 						if(iValue>45)
-							player.getPokemon().add(pokemon);
-					}else if(pokemon.getSpawn()>2) {
+							player.getPokemon().add(spawnedPokemon);
+					}else if(spawnedPokemon.getSpawn()>2) {
 						if(iValue>60)
-							player.getPokemon().add(pokemon);
-					}else if(pokemon.getSpawn()>1) {
+							player.getPokemon().add(spawnedPokemon);
+					}else if(spawnedPokemon.getSpawn()>1) {
 						if(iValue>70) 
-							player.getPokemon().add(pokemon);
+							player.getPokemon().add(spawnedPokemon);
 					}else {
 						if(iValue>80)
-							player.getPokemon().add(pokemon);
+							player.getPokemon().add(spawnedPokemon);
 					}
 				}
 			}else {
@@ -189,7 +199,7 @@ public class GameLogic extends Thread {
 		switch (keyName) {
 		case "W":
 			newY -= 40;
-			player.setImage(Main.player_straight);
+			player.setImage(Main.player_back);
 			break;
 		case "D":
 			newX += 40;
@@ -197,7 +207,7 @@ public class GameLogic extends Thread {
 			break;
 		case "S":
 			newY += 40;
-			player.setImage(Main.player_back);
+			player.setImage(Main.player_straight);
 			break;
 		case "A":
 			newX -= 40;
@@ -208,6 +218,19 @@ public class GameLogic extends Thread {
 		}
 		double x = newX;
 		double y = newY;
+		
+		for (Pokemon mon : player.getPokemon()) {
+			int id = mon.getId();
+			double hp = mon.getHp();
+			double hpBase = Main.xmlControll.getPokemonsById(id).getHp();
+			if (hpBase > hp) {
+				hp = mon.getHp();
+				hp = hp + 1.0;
+				mon.setHp(hp);
+			}
+			System.out.println(mon.getName() + " HP " + mon.getHp() + " new HP: " + hp + " Base: " + hpBase);
+		}
+		
 		
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();

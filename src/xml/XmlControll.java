@@ -93,5 +93,9 @@ public class XmlControll {
 		return evolutiondex;
 	}
 
+	public Pokemon getPokemonsById(int id) {
+		return pokedex.get(id-1);
+	}
+
 	
 }
