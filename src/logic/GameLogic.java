@@ -222,9 +222,8 @@ public class GameLogic extends Thread {
 		for (Pokemon mon : player.getPokemon()) {
 			int id = mon.getId();
 			double hp = mon.getHp();
-			double hpBase = Main.xmlControll.getPokemonsById(id).getHp();
+			double hpBase = mon.getMaxHp();
 			if (hpBase > hp) {
-				hp = mon.getHp();
 				hp = hp + 1.0;
 				mon.setHp(hp);
 			}

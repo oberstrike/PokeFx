@@ -19,6 +19,9 @@ public class Pokemon {
 	private double motivation;
 	private double init;
 	private double hp;
+	private double maxHp;
+	
+
 	private double spawn;
 	
 	@Override
@@ -45,6 +48,7 @@ public class Pokemon {
 		this.motivation = motivation;
 		this.init = init;
 		this.hp = hp;
+		this.setMaxHp(hp);
 	}
 
 	//Getter + Setter
@@ -109,6 +113,14 @@ public class Pokemon {
 			hp = 0;
 		}
 		this.hp = hp;
+	}
+	
+	public double getMaxHp() {
+		return maxHp;
+	}
+
+	private void setMaxHp(double maxHp) {
+		this.maxHp = (1+(this.getLevel()/10))*maxHp;
 	}
 	
 	public static Pokemon fight(Pokemon mon1, Pokemon mon2) {
