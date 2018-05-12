@@ -20,6 +20,7 @@ public class Pokemon {
 	private double init;
 	private double hp;
 	private double maxHp;
+	private int xp;
 	
 
 	private double spawn;
@@ -37,7 +38,7 @@ public class Pokemon {
 	
 	// Konstruktor
 	public Pokemon(int id, int level, PokemonType type, String name, double att, double deff, double motivation, double init,
-			double hp) {
+			double hp, int xp) {
 		this();
 		this.id = id;
 		this.level = level;
@@ -49,6 +50,23 @@ public class Pokemon {
 		this.init = init;
 		this.hp = hp;
 		this.setMaxHp(hp);
+		this.xp = xp;
+	}
+	
+	public Pokemon newPokemon() {
+		Pokemon mon2 = new Pokemon();
+		mon2.setId(this.getId());
+		mon2.setLevel(this.getLevel());
+		mon2.setType(this.getType());
+		mon2.setName(this.getName());
+		mon2.setAtt(this.getAtt());
+		mon2.setDeff(this.getDeff());
+		mon2.setMotivation(this.getMotivation());
+		mon2.setInit(this.getInit());
+		mon2.setHp(this.getHp());
+		mon2.setMaxHp(this.getMaxHp());
+		mon2.setXp(this.getXp());
+		return mon2;
 	}
 
 	//Getter + Setter
@@ -125,12 +143,29 @@ public class Pokemon {
 		}
 	}
 	
+	public int getXp() {
+		return xp;
+	}
+
+	public void setXp(int xp) {
+		this.xp = xp;
+		updateLevel();
+	}
+	
+	public double getSpawn() {
+		return spawn;
+	}
+
+	public void setSpawn(double spawn) {
+		this.spawn = spawn;
+	}
+
 	public static Pokemon fight(Pokemon mon1, Pokemon mon2) {
 		Pokemon winner;
 		
 		Effectives effekt = new Effectives();
 		
-		if (mon2.getHp() == 0) {
+		if (mon2.getHp() <= 0) {
 			return mon1;
 		}
 		
@@ -161,6 +196,9 @@ public class Pokemon {
 				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon1/2)));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
+					mon2.setXp(mon2.getXp() + calcXp(mon1, mon2));
+					mon2.updateLevel();
+					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + calcXp(mon1, mon2) + " Erfahrung erhalten.");
 					return winner;
 				}
 				System.out.println(mon1.getName() + " HP: " + mon1.getHp());
@@ -172,6 +210,9 @@ public class Pokemon {
 				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon1/2)));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
+					mon2.setXp(mon2.getXp() + calcXp(mon1, mon2));
+					mon2.updateLevel();
+					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + calcXp(mon1, mon2) + " Erfahrung erhalten.");
 					return winner;
 				}
 				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()-(deffMon1/2)));
@@ -188,13 +229,13 @@ public class Pokemon {
 	
 	public int calculateAtt() {
 		int att = (int) ((this.getMotivation()*0.01)*(this.getAtt() * (1 + (this.getLevel()/5)))*0.2);
-		System.out.println(this.getName() + "Angriff: " + att);
+		System.out.println(this.getName() + " Angriff: " + att + " HP: " + this.getHp());
 		return att;
 	}
 	
 	public int calculateDeff() {
 		int deff = (int) ((this.getMotivation()*0.01)*(this.getDeff() * (1 + (this.getLevel()/5)))*0.2);
-		System.out.println(this.getName() + "Verteidigung: " + deff);
+		System.out.println(this.getName() + " Verteidigung: " + deff + " HP: " + this.getHp());
 		return deff;
 	}
 	
@@ -209,13 +250,30 @@ public class Pokemon {
 		}
 		return crit;
 	}
-
-	public double getSpawn() {
-		return spawn;
+	
+	public static int calcXp(Pokemon mon1, Pokemon mon2) {
+		int xp = 0;
+		int levelDiff = mon1.getLevel() - mon2.getLevel()/2;
+		if (levelDiff <= 0) {
+			levelDiff = 1/(Math.abs(levelDiff)+1);
+		}
+		int attDiff = mon1.calculateAtt() - mon2.calculateAtt()/2;
+		if (attDiff <= 0) {
+			attDiff = 1/(Math.abs(attDiff)+1);
+		}
+		int deffDiff = mon1.calculateDeff() - mon2.calculateDeff()/2;
+		if (deffDiff <= 0) {
+			deffDiff = 1/(Math.abs(deffDiff)+1);
+		}
+		xp = (int) Math.sqrt(mon1.getLevel() + Math.pow(mon2.getLevel(), 3) * (levelDiff + attDiff + deffDiff));
+		return xp;
+	
 	}
-
-	public void setSpawn(double spawn) {
-		this.spawn = spawn;
+	
+	public void updateLevel() {
+		int xp = this.getXp();
+		int level = (int) Math.floor(Math.sqrt(xp)/4);
+		this.setLevel(level);
 	}
 	
 }

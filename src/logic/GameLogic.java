@@ -124,7 +124,7 @@ public class GameLogic extends Thread {
 		Pokemon spawnedPokemon = null;
 		for(Pokemon currentPokemon : listOfPokemons) {
 			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
-				spawnedPokemon = currentPokemon;
+				spawnedPokemon = currentPokemon.newPokemon();
 				break;
 			} else {
 				sumChances -= currentPokemon.getSpawn();
@@ -138,9 +138,9 @@ public class GameLogic extends Thread {
 		// System.out.println(allPokemons);
 		// Pokemon pokemon = allPokemons.get(new Random().nextInt(allPokemons.size()));
 		if (spawnedPokemon.getId() == 1 || spawnedPokemon.getId() == 4 || spawnedPokemon.getId() == 7) {
-			spawnedPokemon.setLevel(5);
+			spawnedPokemon.setXp(400);
 		} else {
-			spawnedPokemon.setLevel(2);
+			spawnedPokemon.setXp(64);
 		}
 		
 
@@ -168,7 +168,7 @@ public class GameLogic extends Thread {
 				int q = 0;
 				Pokemon winner = null;
 				while (player.getPokemon().size() > q && winner != player.getPokemon().get(q)) {
-					Pokemon.fight(spawnedPokemon, player.getPokemon().get(q));
+					winner = Pokemon.fight(spawnedPokemon, player.getPokemon().get(q));
 					q++;
 				}
 			}else if(buttonType.equals(fangButton)) {
@@ -235,7 +235,6 @@ public class GameLogic extends Thread {
 						double hp = mon.getHp();
 						mon.setMaxHp(hp);
 						double hpBase = mon.getMaxHp();
-						System.out.println(hpBase);
 						if (hpBase > hp) {
 							hp = hp + 1.0;
 							mon.setHp(hp);
