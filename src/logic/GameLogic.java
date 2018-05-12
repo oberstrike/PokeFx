@@ -109,15 +109,12 @@ public class GameLogic extends Thread {
 
 
 		Pokemon spawnedPokemon = null;
-<<<<<<< HEAD
 		for(Pokemon currentPokemon : listOfPokemons) {
 			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
 				spawnedPokemon = currentPokemon.newPokemon();
-=======
 		for (Pokemon currentPokemon : listOfPokemons) {
 			if ((sumChances - currentPokemon.getSpawn()) < randomValue) {
 				spawnedPokemon = currentPokemon;
->>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 				break;
 			} else {
 				sumChances -= currentPokemon.getSpawn();

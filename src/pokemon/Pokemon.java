@@ -21,11 +21,7 @@ public class Pokemon {
 	private double motivation;
 	private double init;
 	private double hp;
-<<<<<<< HEAD
-	private double maxHp;
 	private int xp;
-=======
->>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 	
 
 	private double spawn;
@@ -54,8 +50,6 @@ public class Pokemon {
 		this.motivation = motivation;
 		this.init = init;
 		this.hp = hp;
-<<<<<<< HEAD
-		this.setMaxHp(hp);
 		this.xp = xp;
 	}
 	
@@ -70,10 +64,8 @@ public class Pokemon {
 		mon2.setMotivation(this.getMotivation());
 		mon2.setInit(this.getInit());
 		mon2.setHp(this.getHp());
-		mon2.setMaxHp(this.getMaxHp());
 		mon2.setXp(this.getXp());
 		return mon2;
-=======
 	}
 	
 	
@@ -90,7 +82,6 @@ public class Pokemon {
 		this.init = pokemon.init;
 		this.hp = pokemon.hp;
 		this.spawn = pokemon.spawn;
->>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 	}
 
 	//Getter + Setter
@@ -158,8 +149,6 @@ public class Pokemon {
 		return (1 + level/11)*Main.xmlControll.getPokemonsById(id).getHp(); 
 	}
 
-	
-<<<<<<< HEAD
 	public int getXp() {
 		return xp;
 	}
@@ -177,9 +166,7 @@ public class Pokemon {
 		this.spawn = spawn;
 	}
 
-=======
 	//Kampfsimulator
->>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 	public static Pokemon fight(Pokemon mon1, Pokemon mon2) {
 		Pokemon winner;
 		
@@ -241,22 +228,14 @@ public class Pokemon {
 	}
 	
 	public int calculateAtt() {
-<<<<<<< HEAD
-		int att = (int) ((this.getMotivation()*0.01)*(this.getAtt() * (1 + (this.getLevel()/5)))*0.2);
-		System.out.println(this.getName() + " Angriff: " + att + " HP: " + this.getHp());
-=======
 		int att = (int) ((this.getMotivation()*0.01)*(this.getAtt() * (1 + (this.getLevel()/5)))*0.15);
->>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
+		System.out.println(this.getName() + " Angriff: " + att + " HP: " + this.getHp());
 		return att;
 	}
 	
 	public int calculateDeff() {
-<<<<<<< HEAD
-		int deff = (int) ((this.getMotivation()*0.01)*(this.getDeff() * (1 + (this.getLevel()/5)))*0.2);
-		System.out.println(this.getName() + " Verteidigung: " + deff + " HP: " + this.getHp());
-=======
 		int deff = (int) ((this.getMotivation()*0.01)*(this.getDeff() * (1 + (this.getLevel()/5)))*0.15);
->>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
+		System.out.println(this.getName() + " Verteidigung: " + deff + " HP: " + this.getHp());
 		return deff;
 	}
 	
