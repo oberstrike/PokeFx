@@ -42,7 +42,7 @@ public class PokemonView extends AnchorPane {
 			this.pokemon = pokemon;
 			
 			xpBar = new ProgressBar();
-			xpBar.setProgress(1);
+			xpBar.setProgress(0);
 			xpBar.setPrefWidth(140);
 			xpBar.setPrefHeight(20);
 			xpBar.setLayoutX(65);
@@ -66,7 +66,7 @@ public class PokemonView extends AnchorPane {
 		hp.setText("HP: " + String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.getMaxHp())));
 		name.setText(pokemon.getName());
 		level.setText("Lvl: " + String.valueOf(pokemon.getLevel()));
-		xpBar.setProgress(pokemon.getXpPerLevel()/pokemon.getMaxXpPerLevel());
+		xpBar.setProgress((double)(pokemon.getXpPerLevel()/pokemon.getMaxXpPerLevel()));
 		xp.setText("XP: " + String.valueOf(pokemon.getXpPerLevel() + "/" + String.valueOf(pokemon.getMaxXpPerLevel())));
 	}
 	
