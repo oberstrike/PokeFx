@@ -265,7 +265,7 @@ public class Pokemon {
 		if (deffDiff <= 0) {
 			deffDiff = 1/(Math.abs(deffDiff)+1);
 		}
-		xp = (int) Math.sqrt(mon1.getLevel() + Math.pow(mon2.getLevel(), 3) * (levelDiff + attDiff + deffDiff));
+		xp = (int) Math.sqrt(mon1.getLevel() + Math.pow(mon2.getLevel(), 3) * 1.5 * (levelDiff + attDiff + deffDiff));
 		return xp;
 	
 	}
@@ -274,6 +274,16 @@ public class Pokemon {
 		int xp = this.getXp();
 		int level = (int) Math.floor(Math.sqrt(xp)/4);
 		this.setLevel(level);
+	}
+	
+	public int getXpPerLevel() {
+		int xp = (int) (this.getXp() - Math.pow((this.getLevel()*4), 2));
+		return xp;
+	}
+	
+	public int getMaxXpPerLevel() {
+		int xp = (int) (Math.pow((this.getLevel()+1)*4, 2) - Math.pow((this.getLevel()*4), 2));
+		return xp;
 	}
 	
 }
