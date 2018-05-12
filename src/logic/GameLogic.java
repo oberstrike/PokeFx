@@ -199,7 +199,7 @@ public class GameLogic extends Thread {
 		switch (keyName) {
 		case "W":
 			newY -= 40;
-			player.setImage(Main.player_back);
+			player.setImage(Main.player_straight);
 			break;
 		case "D":
 			newX += 40;
@@ -207,7 +207,7 @@ public class GameLogic extends Thread {
 			break;
 		case "S":
 			newY += 40;
-			player.setImage(Main.player_straight);
+			player.setImage(Main.player_back);
 			break;
 		case "A":
 			newX -= 40;
