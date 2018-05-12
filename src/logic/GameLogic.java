@@ -20,14 +20,13 @@ import pokemon.Pokemon;
 import pokemon.PokemonType;
 import views.MapView;
 import views.PokemonView;
-import xml.XmlControll;
 
 public class GameLogic extends Thread {
 	MapView mapView;
 	Player player;
 	long lastMovement = 0;
 	AnchorPane anchor2;
-	
+
 	public GameLogic(MapView mapView, AnchorPane anchor2) {
 		this.mapView = mapView;
 		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
@@ -36,32 +35,31 @@ public class GameLogic extends Thread {
 		Field f = field.get(new Random().nextInt(field.size()));
 		player = new Player();
 		
-//		player.getPokemon().add(Main.xmlControll.getPokedex().get(2));
-//		player.getPokemon().add(Main.xmlControll.getPokedex().get(1));
 		player.setImage(new Image("/images/player_straight.png"));
 		player.setField(f);
 		f.setEntity(player);
 		mapView.update();
 		this.anchor2 = anchor2;
 	}
-	
+
 	public void update() {
-		Platform.runLater(() ->{
+		Platform.runLater(() -> {
 			this.mapView.update();
-			
-			long count = anchor2.getChildren().stream().filter(each -> each.getClass().equals(PokemonView.class)).count();
-			
-			if(count < player.getPokemon().size()) {
-				for(int i = 0; i < player.getPokemon().size(); i++) {
+
+			long count = anchor2.getChildren().stream().filter(each -> each.getClass().equals(PokemonView.class))
+					.count();
+
+			if (count < player.getPokemon().size()) {
+				for (int i = (int) count; i < player.getPokemon().size(); i++) {
 					Pokemon pokemon = player.getPokemon().get(i);
 					PokemonView pv = new PokemonView(pokemon);
 					pv.setLayoutX(45);
-					pv.setLayoutY(10+i*55);
+					pv.setLayoutY(10 + i * 55);
 					anchor2.getChildren().add(pv);
 				}
-			}else {
-				for(int i = 0; i < player.getPokemon().size(); i++) {
-					((PokemonView)anchor2.getChildren().get(i)).setPokemon(player.getPokemon().get(i));
+			} else {
+				for (int i = 0; i < player.getPokemon().size(); i++) {
+					((PokemonView) anchor2.getChildren().get(i)).update();
 				}
 			}
 
@@ -79,62 +77,48 @@ public class GameLogic extends Thread {
 			}
 		}
 	}
-	
+
 	private void fightMenu() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktions Fenster");
 
-		
-
-//		List<Pokemon> allPokemons = new ArrayList<>();
 		List<Double> chances = new ArrayList<>();
 		List<Pokemon> listOfPokemons = new ArrayList<>();
-		
-		if(player.getPokemon().size() > 0 ) {
-//			for(Pokemon pokemon: listOfPokemons) {
-//				int i = (int) (pokemon.getSpawn() * 100);
-//				for(int j = 0; j < i; j++) {
-//					allPokemons.add(pokemon);
-//				}
-//			}
+
+		if (player.getPokemon().size() > 0) {
 			List<PokemonType> pokemonTypes = mapView.getMap().getPokemonTypes();
-		
-			for(PokemonType type: pokemonTypes) {
-				listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));			
+
+			for (PokemonType type : pokemonTypes) {
+				listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));
 			}
-			
-		}else {
+
+		} else {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Glumanda"));
 		}
-		
-		listOfPokemons.stream().map((each)->each.getSpawn()).forEach(chances::add);
-		
+
+		listOfPokemons.stream().map((each) -> each.getSpawn()).forEach(chances::add);
+
 		double sumChances = 0.0;
-		for(double chance : chances) {
+		for (double chance : chances) {
 			sumChances += chance;
 		}
 		Random r = new Random();
 		double randomValue = 0 + sumChances * r.nextDouble();
-		
-		System.out.println(randomValue);
-		System.out.println(sumChances);
-		
+
+
 		Pokemon spawnedPokemon = null;
-		for(Pokemon currentPokemon : listOfPokemons) {
-			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
+		for (Pokemon currentPokemon : listOfPokemons) {
+			if ((sumChances - currentPokemon.getSpawn()) < randomValue) {
 				spawnedPokemon = currentPokemon;
 				break;
 			} else {
 				sumChances -= currentPokemon.getSpawn();
 			}
 		}
-		
-		System.out.println(listOfPokemons);
 
-		
-	
+
 		// System.out.println(allPokemons);
 		// Pokemon pokemon = allPokemons.get(new Random().nextInt(allPokemons.size()));
 		if (spawnedPokemon.getId() == 1 || spawnedPokemon.getId() == 4 || spawnedPokemon.getId() == 7) {
@@ -142,60 +126,58 @@ public class GameLogic extends Thread {
 		} else {
 			spawnedPokemon.setLevel(2);
 		}
-		
 
 		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " ist erschienen");
 
 		alert.setContentText("Bitte waehle deine Aktion.");
-	
+
 		ButtonType kampfButton = new ButtonType("Angreifen");
 		ButtonType fangButton = new ButtonType("Fangen");
 		ButtonType fliehButton = new ButtonType("Fliehen");
-	
-		alert.getButtonTypes().add(fliehButton);
-		if(player.getPokemon().size() != 0) {
+
+		alert.getButtonTypes().setAll(fliehButton);
+		if (player.getPokemon().size() != 0) {
 			alert.getButtonTypes().add(kampfButton);
 		}
-		
-		if(player.getPokemon().size() < 3) {
+
+		if (player.getPokemon().size() < 3) {
 			alert.getButtonTypes().add(fangButton);
 		}
-		
+
 		Optional<ButtonType> result = alert.showAndWait();
 		ButtonType buttonType = result.get();
-		if(buttonType != null) {
-			if(buttonType.equals(kampfButton)) {
+		if (buttonType != null) {
+			if (buttonType.equals(kampfButton)) {
 				int q = 0;
 				Pokemon winner = null;
 				while (player.getPokemon().size() > q && winner != player.getPokemon().get(q)) {
 					Pokemon.fight(spawnedPokemon, player.getPokemon().get(q));
 					q++;
 				}
-			}else if(buttonType.equals(fangButton)) {
-				if(player.getPokemon().size() == 0) {
+			} else if (buttonType.equals(fangButton)) {
+				if (player.getPokemon().size() == 0) {
 					player.getPokemon().add(spawnedPokemon);
-				}else {
+				} else {
 					int iValue = new Random().nextInt(100);
-					if(spawnedPokemon.getSpawn()>3) {
-						if(iValue>45)
+					if (spawnedPokemon.getSpawn() > 3) {
+						if (iValue > 45)
 							player.getPokemon().add(spawnedPokemon);
-					}else if(spawnedPokemon.getSpawn()>2) {
-						if(iValue>60)
+					} else if (spawnedPokemon.getSpawn() > 2) {
+						if (iValue > 60)
 							player.getPokemon().add(spawnedPokemon);
-					}else if(spawnedPokemon.getSpawn()>1) {
-						if(iValue>70) 
+					} else if (spawnedPokemon.getSpawn() > 1) {
+						if (iValue > 70)
 							player.getPokemon().add(spawnedPokemon);
-					}else {
-						if(iValue>80)
+					} else {
+						if (iValue > 80)
 							player.getPokemon().add(spawnedPokemon);
 					}
 				}
-			}else {
-				
+			} else {
+
 			}
 		}
 	}
-	
 
 	public void moveEvent(String keyName) {
 		double newX = player.getField().getX();
@@ -223,8 +205,7 @@ public class GameLogic extends Thread {
 		}
 		double x = newX;
 		double y = newY;
-		
-		
+
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
 		if (newField.isPresent()) {
@@ -233,26 +214,21 @@ public class GameLogic extends Thread {
 				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement > difference) {
 					for (Pokemon mon : player.getPokemon()) {
 						double hp = mon.getHp();
-						mon.setMaxHp(hp);
 						double hpBase = mon.getMaxHp();
-						System.out.println(hpBase);
 						if (hpBase > hp) {
 							hp = hp + 1.0;
 							mon.setHp(hp);
 						}
-						// System.out.println(mon.getName() + " HP " + mon.getHp() + " new HP: " + hp + " Base: " + hpBase);
 					}
-					
 					lastMovement = System.currentTimeMillis();
 					Field newF = newField.get();
 					player.getField().setEntity(null);
 					newF.setEntity(player);
 					player.setField(newField.get());
 					Platform.runLater(() -> mapView.update());
-			//		mapView.update();
-					if(newF.getType().equals(FieldType.HOHESGRASS) || newF.getType().equals(FieldType.TIEFERSAND)) {
+					if (newF.getType().equals(FieldType.HOHESGRASS) || newF.getType().equals(FieldType.TIEFERSAND)) {
 						int randDig = new Random().nextInt(100);
-						if(randDig < 14) {
+						if (randDig < 14) {
 							System.out.println("Ein wildes Pokemon greift an...");
 							fightMenu();
 						}

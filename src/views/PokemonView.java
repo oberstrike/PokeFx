@@ -1,6 +1,5 @@
 package views;
 
-import javax.xml.bind.annotation.XmlAccessOrder;
 
 import application.Main;
 import javafx.scene.control.Label;
@@ -16,10 +15,11 @@ public class PokemonView extends AnchorPane {
 	private Label name;
 	private Label level;
 	private ProgressBar hpBar;
+	private Pokemon pokemon;
 	
 	public PokemonView(Pokemon pokemon) {
 		if(pokemon != null) {
-			hp = registerLabel(String.valueOf(pokemon.getHp()), 15, 15);
+			hp = registerLabel(String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.getMaxHp())) , 0, 15);
 			name = registerLabel(pokemon.getName(), 65, 35);
 			level = registerLabel(String.valueOf(pokemon.getLevel()), 65, 50);
 
@@ -36,6 +36,7 @@ public class PokemonView extends AnchorPane {
 			picture.setLayoutY(35);
 			picture.setFitWidth(50);
 			picture.setFitHeight(50);
+			this.pokemon = pokemon;
 		}
 	}
 	
@@ -49,12 +50,11 @@ public class PokemonView extends AnchorPane {
 	}
 
 
-	public void setPokemon(Pokemon pokemon) {
-		hpBar.setProgress( pokemon.getHp()/Main.xmlControll.getPokemonsById(pokemon.getId()).getHp());
-		hp.setText(String.valueOf(pokemon.getHp()));
+	public void update() {
+		hpBar.setProgress(pokemon.getHp()/pokemon.getMaxHp());
+		hp.setText(String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.getMaxHp())));
 		name.setText(pokemon.getName());
 		level.setText(String.valueOf(pokemon.getLevel()));
-		
 	}
 	
 	
