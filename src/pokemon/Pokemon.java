@@ -119,8 +119,10 @@ public class Pokemon {
 		return maxHp;
 	}
 
-	private void setMaxHp(double maxHp) {
-		this.maxHp = (1+(this.getLevel()/10))*maxHp;
+	public void setMaxHp(double maxHp) {
+		if (this.maxHp == 0.0) {
+			this.maxHp = (1+(level/10))*hp;
+		}
 	}
 	
 	public static Pokemon fight(Pokemon mon1, Pokemon mon2) {
@@ -128,7 +130,9 @@ public class Pokemon {
 		
 		Effectives effekt = new Effectives();
 		
-		
+		if (mon2.getHp() == 0) {
+			return mon1;
+		}
 		
 		double multiplierMon1 = 1;
 		if(effekt.table.get(mon2.getType()).containsKey(mon1.getType()))		
@@ -175,6 +179,8 @@ public class Pokemon {
 					winner = mon1;
 					return winner;
 				}
+				System.out.println(mon1.getName() + " HP: " + mon1.getHp());
+				System.out.println(mon2.getName() + " HP: " + mon2.getHp());
 			}
 			return null;
 		}
