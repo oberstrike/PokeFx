@@ -165,7 +165,12 @@ public class GameLogic extends Thread {
 		ButtonType buttonType = result.get();
 		if(buttonType != null) {
 			if(buttonType.equals(kampfButton)) {
-				Pokemon.fight(spawnedPokemon, player.getPokemon().get(0));
+				int q = 0;
+				Pokemon winner = null;
+				while (player.getPokemon().size() > q && winner != player.getPokemon().get(q)) {
+					Pokemon.fight(spawnedPokemon, player.getPokemon().get(q));
+					q++;
+				}
 			}else if(buttonType.equals(fangButton)) {
 				if(player.getPokemon().size() == 0) {
 					player.getPokemon().add(spawnedPokemon);
@@ -219,17 +224,6 @@ public class GameLogic extends Thread {
 		double x = newX;
 		double y = newY;
 		
-		for (Pokemon mon : player.getPokemon()) {
-			int id = mon.getId();
-			double hp = mon.getHp();
-			double hpBase = mon.getMaxHp();
-			if (hpBase > hp) {
-				hp = hp + 1.0;
-				mon.setHp(hp);
-			}
-			System.out.println(mon.getName() + " HP " + mon.getHp() + " new HP: " + hp + " Base: " + hpBase);
-		}
-		
 		
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
@@ -237,6 +231,18 @@ public class GameLogic extends Thread {
 			if (!newField.get().isBlocked()) {
 				int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 250 : 110;
 				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement > difference) {
+					for (Pokemon mon : player.getPokemon()) {
+						double hp = mon.getHp();
+						mon.setMaxHp(hp);
+						double hpBase = mon.getMaxHp();
+						System.out.println(hpBase);
+						if (hpBase > hp) {
+							hp = hp + 1.0;
+							mon.setHp(hp);
+						}
+						// System.out.println(mon.getName() + " HP " + mon.getHp() + " new HP: " + hp + " Base: " + hpBase);
+					}
+					
 					lastMovement = System.currentTimeMillis();
 					Field newF = newField.get();
 					player.getField().setEntity(null);
