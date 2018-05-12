@@ -6,6 +6,8 @@ import java.util.Random;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
+import application.Main;
+
 @XStreamAlias("Pokemon")
 public class Pokemon {
 	
@@ -19,15 +21,18 @@ public class Pokemon {
 	private double motivation;
 	private double init;
 	private double hp;
+<<<<<<< HEAD
 	private double maxHp;
 	private int xp;
+=======
+>>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 	
 
 	private double spawn;
 	
 	@Override
 	public String toString() {
-		return "Pokemon [name=" + name + ", type=" + type + ", spawn=" + spawn + "]";
+		return "Pokemon [name=" + name + ", level=" + level + ", att=" + att + ", deff=" + deff + ", hp=" + hp + "]";
 	}
 
 	public Pokemon() {
@@ -49,6 +54,7 @@ public class Pokemon {
 		this.motivation = motivation;
 		this.init = init;
 		this.hp = hp;
+<<<<<<< HEAD
 		this.setMaxHp(hp);
 		this.xp = xp;
 	}
@@ -67,6 +73,24 @@ public class Pokemon {
 		mon2.setMaxHp(this.getMaxHp());
 		mon2.setXp(this.getXp());
 		return mon2;
+=======
+	}
+	
+	
+	//Copy Konstruktor
+	public Pokemon(Pokemon pokemon) {
+		this();
+		this.id = pokemon.id;
+		this.level = pokemon.level;
+		this.type = pokemon.type;
+		this.name = pokemon.name;
+		this.att = pokemon.att;
+		this.deff = pokemon.deff;
+		this.motivation = pokemon.motivation;
+		this.init = pokemon.init;
+		this.hp = pokemon.hp;
+		this.spawn = pokemon.spawn;
+>>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 	}
 
 	//Getter + Setter
@@ -127,22 +151,15 @@ public class Pokemon {
 		return hp;
 	}
 	public void setHp(double hp) {
-		if (hp < 0) {
-			hp = 0;
-		}
-		this.hp = hp;
+		this.hp = hp < 0 ? 0 : hp;
 	}
 	
 	public double getMaxHp() {
-		return maxHp;
+		return (1 + level/11)*Main.xmlControll.getPokemonsById(id).getHp(); 
 	}
 
-	public void setMaxHp(double maxHp) {
-		if (this.maxHp == 0.0) {
-			this.maxHp = (1+(level/10))*hp;
-		}
-	}
 	
+<<<<<<< HEAD
 	public int getXp() {
 		return xp;
 	}
@@ -160,6 +177,9 @@ public class Pokemon {
 		this.spawn = spawn;
 	}
 
+=======
+	//Kampfsimulator
+>>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 	public static Pokemon fight(Pokemon mon1, Pokemon mon2) {
 		Pokemon winner;
 		
@@ -176,9 +196,6 @@ public class Pokemon {
 		double multiplierMon2 = 1;
 		if(effekt.table.get(mon1.getType()).containsKey(mon2.getType()))		
 			multiplierMon2 = effekt.table.get(mon1.getType()).get(mon2.getType());
-		
-		
-
 		
 		int attMon1 = (int) (mon1.calculateAtt() * multiplierMon1);
 		int deffMon1 = mon1.calculateDeff();
@@ -201,13 +218,11 @@ public class Pokemon {
 					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + calcXp(mon1, mon2) + " Erfahrung erhalten.");
 					return winner;
 				}
-				System.out.println(mon1.getName() + " HP: " + mon1.getHp());
-				System.out.println(mon2.getName() + " HP: " + mon2.getHp());
 			}
 			return null;
 		} else {
 			while (mon1.getHp() > 0 && mon2.getHp() > 0) {
-				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon1/2)));
+				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon2/2)));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
 					mon2.setXp(mon2.getXp() + calcXp(mon1, mon2));
@@ -215,27 +230,33 @@ public class Pokemon {
 					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + calcXp(mon1, mon2) + " Erfahrung erhalten.");
 					return winner;
 				}
-				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()-(deffMon1/2)));
+				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()-(deffMon2/2)));
 				if (mon2.getHp() <= 0) {
 					winner = mon1;
 					return winner;
 				}
-				System.out.println(mon1.getName() + " HP: " + mon1.getHp());
-				System.out.println(mon2.getName() + " HP: " + mon2.getHp());
 			}
 			return null;
 		}
 	}
 	
 	public int calculateAtt() {
+<<<<<<< HEAD
 		int att = (int) ((this.getMotivation()*0.01)*(this.getAtt() * (1 + (this.getLevel()/5)))*0.2);
 		System.out.println(this.getName() + " Angriff: " + att + " HP: " + this.getHp());
+=======
+		int att = (int) ((this.getMotivation()*0.01)*(this.getAtt() * (1 + (this.getLevel()/5)))*0.15);
+>>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 		return att;
 	}
 	
 	public int calculateDeff() {
+<<<<<<< HEAD
 		int deff = (int) ((this.getMotivation()*0.01)*(this.getDeff() * (1 + (this.getLevel()/5)))*0.2);
 		System.out.println(this.getName() + " Verteidigung: " + deff + " HP: " + this.getHp());
+=======
+		int deff = (int) ((this.getMotivation()*0.01)*(this.getDeff() * (1 + (this.getLevel()/5)))*0.15);
+>>>>>>> e422b813234dc2fed9770a157a66aaee393c4da8
 		return deff;
 	}
 	
