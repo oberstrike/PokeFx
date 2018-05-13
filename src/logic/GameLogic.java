@@ -87,7 +87,8 @@ public class GameLogic extends Thread {
 			List<PokemonType> pokemonTypes = mapView.getMap().getPokemonTypes();
 
 			for (PokemonType type : pokemonTypes) {
-				listOfPokemons.addAll(Main.xmlControll.getPokemonsByType(type));
+				listOfPokemons = new ArrayList<>(Main.xmlControll.getPokemonsByType(type));
+				listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel())));
 			}
 
 		} else {
@@ -111,7 +112,7 @@ public class GameLogic extends Thread {
 			}
 		}
 
-		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " ist erschienen");
+		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel() + " ist erschienen");
 		alert.setContentText("Bitte waehle deine Aktion.");
 
 		ButtonType kampfButton = new ButtonType("Angreifen");
@@ -131,13 +132,12 @@ public class GameLogic extends Thread {
 		ButtonType buttonType = result.get();
 		if (buttonType != null) {
 			if (buttonType.equals(kampfButton)) {
-				int q = 0;
 				Pokemon winner = null;
 				for (int i = 0; i < player.getPokemon().size(); i++) {
 					Pokemon pokemon = player.getPokemon().get(i);
 					winner = pokemon.fight(spawnedPokemon);
 					if(winner != null) {
-						System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " erhalten");
+						System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " Xp erhalten");
 						winner.addXp(spawnedPokemon.calcXp());
 						break;
 					}

@@ -29,6 +29,10 @@ public class Player implements Entity {
 	public Player(double x, double y) {
 
 	}
+	
+	public int getAverageLevel() {
+		return (int) pokemons.stream().mapToInt(Pokemon::getLevel).average().getAsDouble();
+	}
 
 	public String getName() {
 		return name;

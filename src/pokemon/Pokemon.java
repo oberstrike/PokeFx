@@ -219,7 +219,7 @@ public class Pokemon {
 	}
 
 	public int calculateHp() {
-		int hp = (int) (((base_hp + 8) * 2 + (1 / 4)) * level / 100) + 10;
+		int hp = (int) (((base_hp + 8) * 2 + (1 / 4)) * level / 100) + level + 10;
 		return hp;
 	}
 
@@ -256,7 +256,6 @@ public class Pokemon {
 		int a = 1; // Wildes Pokemon
 		int t = 1; // Eigenes Pokemon
 		int b = Main.xmlControll.getPokemonByName(name).getXp(); // Basiserfahrung
-		System.out.println(Main.xmlControll.getPokemonsById(id));
 		int e = 1; // Glückseifaktor
 		int l = level; // Level des gegnerischen Pokemons;
 		int s = 1; // Anzahl an Pokemon die beteiligt waren;

@@ -53,20 +53,6 @@ public class XmlControll {
 		stream.allowTypeHierarchy(Map.class);
 
 		pokedex = (List<Pokemon>) this.getObject(new File(pokeFileName));
-//		List<Pokemon> newpokedex = pokedex.stream().peek(each -> {
-//			models.pokemon.Pokemon pokemon = client.getPokemonById(each.getId());
-//			System.out.println(pokemon.getName());
-//			int xp = pokemon.getBaseExperience();
-//			each.setXp(xp);
-//		}).collect(Collectors.toList());
-		
-//		try {
-//			stream.toXML(newpokedex, new FileWriter("newpokedex.xml"));
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(new File(evolveFileName));
 	}
 
