@@ -88,7 +88,7 @@ public class GameLogic extends Thread {
 
 			for (PokemonType type : pokemonTypes) {
 				listOfPokemons = new ArrayList<>(Main.xmlControll.getPokemonsByType(type));
-				listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel())));
+				listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel())+1));
 			}
 
 		} else {
