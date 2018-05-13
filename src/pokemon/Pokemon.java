@@ -266,7 +266,7 @@ public class Pokemon {
 	public void updateLevel() {
 		int xp = this.getXp();
 		if (xp >= getXpForNextLevel()) {
-			xp = (getXpForNextLevel() - xp);
+			this.xp = (getXpForNextLevel() - xp);
 			this.level++;
 
 		}
