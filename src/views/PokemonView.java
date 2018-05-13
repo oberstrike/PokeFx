@@ -24,7 +24,7 @@ public class PokemonView extends AnchorPane {
 			hp = registerLabel(String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.getMaxHp())) , 0, 60);
 			name = registerLabel(pokemon.getName(), 65, 15);
 			level = registerLabel(String.valueOf(pokemon.getLevel()), 65, 35);
-			xp = registerLabel(String.valueOf((int)pokemon.getXpPerLevel() + "/" + String.valueOf((int)pokemon.getMaxXpPerLevel())) , 0, 85);
+			xp = registerLabel("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())), 0, 85);
 
 			hpBar = new ProgressBar();
 			hpBar.setProgress(1);
@@ -66,8 +66,8 @@ public class PokemonView extends AnchorPane {
 		hp.setText("HP: " + String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.getMaxHp())));
 		name.setText(pokemon.getName());
 		level.setText("Lvl: " + String.valueOf(pokemon.getLevel()));
-		xpBar.setProgress((double)(pokemon.getXpPerLevel()/pokemon.getMaxXpPerLevel()));
-		xp.setText("XP: " + String.valueOf(pokemon.getXpPerLevel() + "/" + String.valueOf(pokemon.getMaxXpPerLevel())));
+		xpBar.setProgress(pokemon.getXp()/pokemon.getXpForNextLevel());
+		xp.setText("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())));
 	}
 	
 	

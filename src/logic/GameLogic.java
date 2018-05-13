@@ -81,8 +81,6 @@ public class GameLogic extends Thread {
 	private void fightMenu() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktions Fenster");
-
-		List<Double> chances = new ArrayList<>();
 		List<Pokemon> listOfPokemons = new ArrayList<>();
 
 		if (player.getPokemon().size() > 0) {
@@ -96,39 +94,24 @@ public class GameLogic extends Thread {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Glumanda"));
+			listOfPokemons.forEach(each -> each.setLevel(5));
 		}
 
-		listOfPokemons.stream().map((each) -> each.getSpawn()).forEach(chances::add);
-
-		double sumChances = 0.0;
-		for (double chance : chances) {
-			sumChances += chance;
-		}
-		Random r = new Random();
-		double randomValue = 0 + sumChances * r.nextDouble();
-
+		List<Double> chances = listOfPokemons.stream().map((each) -> each.getSpawn()).collect(Collectors.toList());
+		double sumChances = chances.stream().reduce(0.0, (a,b) -> a + b);
+		double randomValue = sumChances * new Random().nextDouble();
 
 		Pokemon spawnedPokemon = null;
 		for(Pokemon currentPokemon : listOfPokemons) {
 			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
-				spawnedPokemon = currentPokemon.newPokemon();
+				spawnedPokemon = new Pokemon(currentPokemon);
 				break;
 			} else {
 				sumChances -= currentPokemon.getSpawn();
 			}
 		}
 
-
-		// System.out.println(allPokemons);
-		// Pokemon pokemon = allPokemons.get(new Random().nextInt(allPokemons.size()));
-		if (spawnedPokemon.getId() == 1 || spawnedPokemon.getId() == 4 || spawnedPokemon.getId() == 7) {
-			spawnedPokemon.setXp(400);
-		} else {
-			spawnedPokemon.setXp(64);
-		}
-
 		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " ist erschienen");
-
 		alert.setContentText("Bitte waehle deine Aktion.");
 
 		ButtonType kampfButton = new ButtonType("Angreifen");
@@ -155,6 +138,7 @@ public class GameLogic extends Thread {
 					q++;
 				}
 			} else if (buttonType.equals(fangButton)) {
+				spawnedPokemon.setXp(0);
 				if (player.getPokemon().size() == 0) {
 					player.getPokemon().add(spawnedPokemon);
 				} else {

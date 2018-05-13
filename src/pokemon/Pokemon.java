@@ -22,13 +22,11 @@ public class Pokemon {
 	private double init;
 	private double hp;
 	private int xp;
-	
-
 	private double spawn;
 	
 	@Override
 	public String toString() {
-		return "Pokemon [name=" + name + ", level=" + level + ", att=" + att + ", deff=" + deff + ", hp=" + hp + "]";
+		return "Pokemon [name=" + name + ", level=" + level + ", hp=" + hp + ", xp=" + xp + ", spawn=" + spawn + "]";
 	}
 
 	public Pokemon() {
@@ -53,22 +51,13 @@ public class Pokemon {
 		this.xp = xp;
 	}
 	
-	public Pokemon newPokemon() {
-		Pokemon mon2 = new Pokemon();
-		mon2.setId(this.getId());
-		mon2.setLevel(this.getLevel());
-		mon2.setType(this.getType());
-		mon2.setName(this.getName());
-		mon2.setAtt(this.getAtt());
-		mon2.setDeff(this.getDeff());
-		mon2.setMotivation(this.getMotivation());
-		mon2.setInit(this.getInit());
-		mon2.setHp(this.getHp());
-		mon2.setXp(this.getXp());
-		return mon2;
+
+	
+	
+	public void setXp(int xp) {
+		this.xp = xp;
 	}
-	
-	
+
 	//Copy Konstruktor
 	public Pokemon(Pokemon pokemon) {
 		this();
@@ -82,6 +71,7 @@ public class Pokemon {
 		this.init = pokemon.init;
 		this.hp = pokemon.hp;
 		this.spawn = pokemon.spawn;
+		this.xp = pokemon.xp;
 	}
 
 	//Getter + Setter
@@ -153,8 +143,8 @@ public class Pokemon {
 		return xp;
 	}
 
-	public void setXp(int xp) {
-		this.xp = xp;
+	public void addXp(int xp) {
+		this.xp += xp;
 		updateLevel();
 	}
 	
@@ -200,9 +190,8 @@ public class Pokemon {
 				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon1/2)));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
-					mon2.setXp(mon2.getXp() + calcXp(mon1, mon2));
-					mon2.updateLevel();
-					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + calcXp(mon1, mon2) + " Erfahrung erhalten.");
+					mon2.addXp(mon1.calcXp());
+					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + mon1.calcXp() + " Erfahrung erhalten.");
 					return winner;
 				}
 			}
@@ -212,9 +201,9 @@ public class Pokemon {
 				mon1.setHp(mon1.getHp() - (attMon2*randomCrit()-(deffMon2/2)));
 				if (mon1.getHp() <= 0) {
 					winner = mon2;
-					mon2.setXp(mon2.getXp() + calcXp(mon1, mon2));
+					mon2.addXp(mon1.calcXp());
 					mon2.updateLevel();
-					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + calcXp(mon1, mon2) + " Erfahrung erhalten.");
+					System.out.println("Dein Pokemon " + mon2.getName() + " hat " + mon1.calcXp() + " Erfahrung erhalten.");
 					return winner;
 				}
 				mon2.setHp(mon2.getHp() - (attMon1*randomCrit()-(deffMon2/2)));
@@ -251,39 +240,36 @@ public class Pokemon {
 		return crit;
 	}
 	
-	public static int calcXp(Pokemon mon1, Pokemon mon2) {
-		int xp = 0;
-		int levelDiff = mon1.getLevel() - mon2.getLevel()/2;
-		if (levelDiff <= 0) {
-			levelDiff = 1/(Math.abs(levelDiff)+1);
-		}
-		int attDiff = mon1.calculateAtt() - mon2.calculateAtt()/2;
-		if (attDiff <= 0) {
-			attDiff = 1/(Math.abs(attDiff)+1);
-		}
-		int deffDiff = mon1.calculateDeff() - mon2.calculateDeff()/2;
-		if (deffDiff <= 0) {
-			deffDiff = 1/(Math.abs(deffDiff)+1);
-		}
-		xp = (int) Math.sqrt(mon1.getLevel() + Math.pow(mon2.getLevel(), 3) * 1.5 * (levelDiff + attDiff + deffDiff));
-		return xp;
+	/* Orginal Pokemon 1 bis 4. Generation
+	 * Erfahrungsrechner
+	 * 
+	 */
 	
+	public int calcXp() {
+		int a = 1; //Wildes Pokemon
+		int t = 1; //Eigenes Pokemon
+		int b = Main.xmlControll.getPokemonByName(name).getXp(); //Basiserfahrung
+		System.out.println(Main.xmlControll.getPokemonsById(id));
+		int e = 1; //Glückseifaktor
+		int l = level; //Level des gegnerischen Pokemons;
+		int s = 1; //Anzahl an Pokemon die beteiligt waren;
+		
+		
+		return (a * t * b * e * l) / (7 * s);
 	}
 	
 	public void updateLevel() {
 		int xp = this.getXp();
-		int level = (int) Math.floor(Math.sqrt(xp)/4);
-		this.setLevel(level);
+		if(xp >= getXpForNextLevel()) {
+			xp = (getXpForNextLevel() - xp);
+			this.level++;
+			
+		}
 	}
-	
-	public int getXpPerLevel() {
-		int xp = (int) (this.getXp() - Math.pow((this.getLevel()*4), 2));
-		return xp;
+
+	public int getXpForNextLevel() {
+		return (int) (Math.pow(level, 3));
 	}
-	
-	public int getMaxXpPerLevel() {
-		int xp = (int) (Math.pow((this.getLevel()+1)*4, 2) - Math.pow((this.getLevel()*4), 2));
-		return xp;
-	}
+
 	
 }

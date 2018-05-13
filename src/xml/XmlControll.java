@@ -2,6 +2,7 @@ package xml;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,8 +15,10 @@ import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
+import api.Client;
 import field.Field;
 import logic.Map;
+import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
 
@@ -30,6 +33,7 @@ public class XmlControll {
 
 	@SuppressWarnings("unchecked")
 	public XmlControll() {
+		Client client = new Client();
 		stream = new XStream(new StaxDriver());
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);
@@ -49,16 +53,31 @@ public class XmlControll {
 		stream.allowTypeHierarchy(Map.class);
 
 		pokedex = (List<Pokemon>) this.getObject(new File(pokeFileName));
+//		List<Pokemon> newpokedex = pokedex.stream().peek(each -> {
+//			models.pokemon.Pokemon pokemon = client.getPokemonById(each.getId());
+//			System.out.println(pokemon.getName());
+//			int xp = pokemon.getBaseExperience();
+//			each.setXp(xp);
+//		}).collect(Collectors.toList());
+		
+//		try {
+//			stream.toXML(newpokedex, new FileWriter("newpokedex.xml"));
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(new File(evolveFileName));
 	}
 
-	public Pokemon getPokemonByName(String name) {
+	synchronized public Pokemon getPokemonByName(String name) {
 		return new Pokemon(pokedex.stream().filter(each -> each.getName().equals(name)).findFirst().get());
 	}
 
-	public List<Pokemon> getPokemonsByType(PokemonType type) {
-		return new ArrayList<>(
-				pokedex.stream().filter(each -> each.getType().equals(type)).collect(Collectors.toList()));
+	synchronized public List<Pokemon> getPokemonsByType(PokemonType type) {
+		List<Pokemon> pokemons = pokedex.stream().filter(each -> each.getType().equals(type)).collect(Collectors.toList());
+		pokemons.forEach(each -> new Pokemon(each));
+		return pokemons;
 	}
 
 	public Map getMap(File file) {
