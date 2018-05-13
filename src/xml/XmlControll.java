@@ -15,10 +15,10 @@ import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
-import api.Client;
+//import api.Client;
 import field.Field;
 import logic.Map;
-import models.evolution.EvolutionChain;
+//import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
 
@@ -33,7 +33,7 @@ public class XmlControll {
 
 	@SuppressWarnings("unchecked")
 	public XmlControll() {
-		Client client = new Client();
+		//Client client = new Client();
 		stream = new XStream(new StaxDriver());
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);

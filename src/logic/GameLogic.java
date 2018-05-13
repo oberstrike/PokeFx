@@ -34,7 +34,7 @@ public class GameLogic extends Thread {
 
 		Field f = field.get(new Random().nextInt(field.size()));
 		player = new Player();
-		
+
 		player.setImage(new Image("/images/player_straight.png"));
 		player.setField(f);
 		f.setEntity(player);
@@ -98,12 +98,12 @@ public class GameLogic extends Thread {
 		}
 
 		List<Double> chances = listOfPokemons.stream().map((each) -> each.getSpawn()).collect(Collectors.toList());
-		double sumChances = chances.stream().reduce(0.0, (a,b) -> a + b);
+		double sumChances = chances.stream().reduce(0.0, (a, b) -> a + b);
 		double randomValue = sumChances * new Random().nextDouble();
 
 		Pokemon spawnedPokemon = null;
-		for(Pokemon currentPokemon : listOfPokemons) {
-			if((sumChances - currentPokemon.getSpawn()) < randomValue) {
+		for (Pokemon currentPokemon : listOfPokemons) {
+			if ((sumChances - currentPokemon.getSpawn()) < randomValue) {
 				spawnedPokemon = new Pokemon(currentPokemon);
 				break;
 			} else {
@@ -133,9 +133,14 @@ public class GameLogic extends Thread {
 			if (buttonType.equals(kampfButton)) {
 				int q = 0;
 				Pokemon winner = null;
-				while (player.getPokemon().size() > q && winner != player.getPokemon().get(q)) {
-					winner = Pokemon.fight(spawnedPokemon, player.getPokemon().get(q));
-					q++;
+				for (int i = 0; i < player.getPokemon().size(); i++) {
+					Pokemon pokemon = player.getPokemon().get(i);
+					winner = pokemon.fight(spawnedPokemon);
+					if(winner != null) {
+						System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " erhalten");
+						winner.addXp(spawnedPokemon.calcXp());
+						break;
+					}
 				}
 			} else if (buttonType.equals(fangButton)) {
 				spawnedPokemon.setXp(0);
@@ -198,7 +203,7 @@ public class GameLogic extends Thread {
 				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement > difference) {
 					for (Pokemon mon : player.getPokemon()) {
 						double hp = mon.getHp();
-						double hpBase = mon.getMaxHp();
+						double hpBase = mon.calculateHp();
 						if (hpBase > hp) {
 							hp = hp + 1.0;
 							mon.setHp(hp);
