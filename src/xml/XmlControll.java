@@ -49,6 +49,7 @@ public class XmlControll {
 		stream.allowTypeHierarchy(java.util.Map.class);
 		stream.allowTypeHierarchy(String.class);
 		stream.allowTypeHierarchy(Integer.class);
+		stream.allowTypeHierarchy(GameData.class);
 		stream.alias("map", java.util.Map.class);
 		stream.allowTypeHierarchy(Map.class);
 
@@ -77,6 +78,11 @@ public class XmlControll {
 		Map map = (Map) getObject(file);
 		map.getFields().forEach(each -> each.applyImage());
 		return map;
+	}
+	
+	public GameData getGame(File file) {
+		GameData data = (GameData) getObject(file);
+		return data;
 	}
 
 	public Object getObject(File file) {

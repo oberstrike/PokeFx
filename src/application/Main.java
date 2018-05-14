@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import views.MapView;
+import xml.GameData;
 import xml.XmlControll;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -11,7 +12,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
 
-	public static MapView mapView;
+	public static GameData gameData;
 	public static Image stein;
 	public static Image wasser;
 	public static Image grass;

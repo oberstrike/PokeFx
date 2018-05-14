@@ -37,6 +37,7 @@ import logic.Map;
 import pokemon.Pokemon;
 import javafx.stage.Stage;
 import views.MapView;
+import xml.GameData;
 
 public class CreateGuiController implements Initializable {
 
@@ -68,7 +69,7 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	void back(ActionEvent event) {
-		Main.mapView = mapView;
+		Main.gameData = new GameData(mapView.getMap());
 		WindowChanger changer = new WindowChanger();
 		changer.changeWindow("/guis/MenuGui.fxml", event);
 	}
@@ -246,10 +247,12 @@ public class CreateGuiController implements Initializable {
 		}
 
 		liste.setItems(data);
-		if(Main.mapView == null)
+		if(Main.gameData.getMap() == null)
 			mapView = new MapView();
 		else
-			mapView = Main.mapView;
+			mapView = new MapView();
+			mapView.setMap(Main.gameData.getMap());
+			
 		mapView.setLayoutY(30);
 		mapView.setOnMouseClicked(this::setMaterial);
 		anchor.getChildren().add(mapView);

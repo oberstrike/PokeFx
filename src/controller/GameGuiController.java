@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,6 +31,12 @@ public class GameGuiController implements Initializable {
 
 	GameLogic logic;
 	
+	@FXML
+	void save(ActionEvent event) {
+		
+	}
+	
+	
     @FXML
     private AnchorPane anchor2;
     
@@ -38,27 +45,34 @@ public class GameGuiController implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(Main.mapView == null) {
-			 Main.mapView = new MapView();
+		MapView mapView = null;
+		
+		if(Main.gameData.getMap() == null) {
+			mapView = new MapView();
+			Main.gameData.setMap(mapView.getMap());
+		}else {
+			mapView = new MapView();
+			mapView.setMap(Main.gameData.getMap());
 		}
 		
-		Main.mapView.setPrefWidth(600);
-		Main.mapView.setPrefHeight(500);
-		anchor.getChildren().add(Main.mapView);
+		
+		mapView.setPrefWidth(600);
+		mapView.setPrefHeight(500);
+		anchor.getChildren().add(mapView);
 		
 		anchor.setFocusTraversable(false);
 		anchor.requestFocus();
 		
-		logic = new GameLogic(Main.mapView, anchor2);
+		logic = new GameLogic(mapView, anchor2);
 		logic.setDaemon(true);
 		logic.start();
 
 		
-		Main.mapView.setOnKeyPressed(event -> {
+		mapView.setOnKeyPressed(event -> {
 			logic.moveEvent(event.getCode().getName());
 		});
-		Main.mapView.setFocusTraversable(true);
-		Main.mapView.requestFocus();
+		mapView.setFocusTraversable(true);
+		mapView.requestFocus();
 		
 		System.out.println("Startet");
 		

@@ -13,10 +13,27 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import views.MapView;
+import xml.GameData;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class MenuGuiController implements Initializable{
 
+	
+    @FXML
+    void loadGame(ActionEvent event) {
+    	FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Save as xml");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
+		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
+		if(selectedFile == null) {
+			
+		}else {
+			
+			Main.gameData = Main.xmlControll.getGame(selectedFile);
+			WindowChanger changer = new WindowChanger();
+			changer.changeWindow("/guis/GameGui.fxml", event);
+		}
+    }
 	
 	
     @FXML
@@ -28,9 +45,10 @@ public class MenuGuiController implements Initializable{
 		if(selectedFile == null) {
 			
 		}else {
-			Main.mapView = new MapView();
-			Main.mapView.setMap(Main.xmlControll.getMap(selectedFile));
-			System.out.println(Main.mapView.getFields());
+			MapView mapView = new MapView();
+			mapView.setMap(Main.xmlControll.getMap(selectedFile));
+			Main.gameData = new GameData(mapView.getMap());
+			
 			WindowChanger changer = new WindowChanger();
 			changer.changeWindow("/guis/GameGui.fxml", event);
 		}
