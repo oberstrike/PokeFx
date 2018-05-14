@@ -54,7 +54,7 @@ public class GameLogic extends Thread {
 					Pokemon pokemon = player.getPokemon().get(i);
 					PokemonView pv = new PokemonView(pokemon);
 					pv.setLayoutX(45);
-					pv.setLayoutY(10 + i * 65);
+					pv.setLayoutY(10 + i * 95);
 					anchor2.getChildren().add(pv);
 				}
 			} else {

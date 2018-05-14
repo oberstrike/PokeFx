@@ -1,6 +1,7 @@
 package pokemon;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.Random;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -263,6 +264,18 @@ public class Pokemon {
 
 		return (a * t * b * e * l) / (7 * s);
 	}
+	
+	public void evolveTo(Pokemon pokemon) {
+		this.id = pokemon.id;
+		this.type = pokemon.type;
+		this.name = pokemon.name;
+		this.att = pokemon.att;
+		this.deff = pokemon.deff;
+		this.motivation = pokemon.motivation;
+		this.init = pokemon.init;
+		this.base_hp = pokemon.base_hp;
+		this.hp = pokemon.hp;
+	}
 
 	public void updateLevel() {
 		int xp = this.getXp();
@@ -271,26 +284,21 @@ public class Pokemon {
 			System.out.println(this.name + " ist eine Stufe aufgestiegen.");
 			this.xp = (xpForNextLevel - xp) < 0 ? 0 : (xpForNextLevel - xp); 
 			this.level++;
-			if(Main.xmlControll.getEvolutiondex().containsKey(name)) {
-				HashMap<Integer, String> dex = (Main.xmlControll.getEvolutiondex().get(name));
-				System.out.println(dex);
-				if(dex.containsKey(level)) {
-					Pokemon pokemon = Main.xmlControll.getPokemonByName(dex.get(level));
-					this.id = pokemon.id;
-					this.level = pokemon.level;
-					this.type = pokemon.type;
-					this.name = pokemon.name;
-					this.att = pokemon.att;
-					this.deff = pokemon.deff;
-					this.motivation = pokemon.motivation;
-					this.init = pokemon.init;
-					this.base_hp = pokemon.base_hp;
-					this.spawn = pokemon.spawn;
-					this.xp = pokemon.xp;
-					this.hp = calculateHp();
+			
+			HashMap<Integer, String> evolvingdex = Main.xmlControll.getEvolutiondex().get(name);
+			if (evolvingdex != null) {
+				Optional<Integer> key = evolvingdex.keySet().stream().filter(each -> each.intValue() <= level).findFirst();
+				if(key.isPresent()) {
+					Pokemon pokemon = Main.xmlControll.getPokemonByName(evolvingdex.get(key.get()));
+					evolveTo(pokemon);
+					
 				}
 				
+				
 			}
+			
+			
+			
 
 		}
 	}
