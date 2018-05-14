@@ -54,7 +54,7 @@ public class GameLogic extends Thread {
 					Pokemon pokemon = player.getPokemon().get(i);
 					PokemonView pv = new PokemonView(pokemon);
 					pv.setLayoutX(45);
-					pv.setLayoutY(10 + i * 55);
+					pv.setLayoutY(10 + i * 65);
 					anchor2.getChildren().add(pv);
 				}
 			} else {
@@ -137,9 +137,13 @@ public class GameLogic extends Thread {
 					Pokemon pokemon = player.getPokemon().get(i);
 					winner = pokemon.fight(spawnedPokemon);
 					if(winner != null) {
-						System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " Xp erhalten");
-						winner.addXp(spawnedPokemon.calcXp());
-						break;
+						if(player.getPokemon().contains(winner)){
+							System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " Xp erhalten");
+							winner.addXp(spawnedPokemon.calcXp());
+							break;	
+						}else {
+							System.out.println("Dein Pokemon: " + pokemon.getName());
+						}
 					}
 				}
 			} else if (buttonType.equals(fangButton)) {

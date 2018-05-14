@@ -25,8 +25,8 @@ import pokemon.PokemonType;
 public class XmlControll {
 
 	XStream stream;
-	private List<Pokemon> pokedex;
-	private HashMap<String, HashMap<Integer, String>> evolutiondex;
+	private final List<Pokemon> pokedex;
+	private final HashMap<String, HashMap<Integer, String>> evolutiondex;
 
 	private static String pokeFileName = "pokedex.xml";
 	private static String evolveFileName = "evolvingdex.xml";

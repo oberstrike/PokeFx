@@ -27,7 +27,8 @@ public class Pokemon {
 
 	@Override
 	public String toString() {
-		return "Pokemon [name=" + name + ", level=" + level + ", hp=" + hp + ", xp=" + xp + ", spawn=" + spawn + "]";
+		return "Pokemon [name=" + name + ", id=" + id + ", hp=" + hp + ", xp=" + xp + ", base_hp=" + base_hp
+				+ ", spawn=" + spawn + ", calculateHp()=" + calculateHp() + "]";
 	}
 
 	public Pokemon() {
@@ -190,11 +191,11 @@ public class Pokemon {
 		// wer beginnt?
 		if (this.getInit() >= mon2.getInit()) {
 			while (this.getHp() > 0 && mon2.getHp() > 0) {
-				mon2.setHp(mon2.getHp() - (attMon1 * randomCrit() - (deffMon1 / 2)));
+				mon2.setHp(mon2.getHp() - (attMon1 * randomCrit() - (deffMon1 / 1.5)));
 				if (mon2.getHp() <= 0) {
 					return this;
 				}
-				this.setHp(this.getHp() - (attMon2 * randomCrit() - (deffMon1 / 2)));
+				this.setHp(this.getHp() - (attMon2 * randomCrit() - (deffMon1 / 1.5)));
 				if (this.getHp() <= 0) {
 					winner = mon2;
 					return winner;
@@ -203,12 +204,12 @@ public class Pokemon {
 			return null;
 		} else {
 			while (this.getHp() > 0 && mon2.getHp() > 0) {
-				this.setHp(this.getHp() - (attMon2 * randomCrit() - (deffMon2 / 2)));
+				this.setHp(this.getHp() - (attMon2 * randomCrit() - (deffMon2 / 1.5)));
 				if (this.getHp() <= 0) {
 					winner = mon2;
 					return winner;
 				}
-				mon2.setHp(mon2.getHp() - (attMon1 * randomCrit() - (deffMon2 / 2)));
+				mon2.setHp(mon2.getHp() - (attMon1 * randomCrit() - (deffMon2 / 1.5)));
 				if (mon2.getHp() <= 0) {
 					winner = this;
 					return winner;
@@ -265,9 +266,31 @@ public class Pokemon {
 
 	public void updateLevel() {
 		int xp = this.getXp();
-		if (xp >= getXpForNextLevel()) {
-			this.xp = (getXpForNextLevel() - xp);
+		int xpForNextLevel = getXpForNextLevel();
+		if (xp >= xpForNextLevel) {
+			System.out.println(this.name + " ist eine Stufe aufgestiegen.");
+			this.xp = (xpForNextLevel - xp) < 0 ? 0 : (xpForNextLevel - xp); 
 			this.level++;
+			if(Main.xmlControll.getEvolutiondex().containsKey(name)) {
+				HashMap<Integer, String> dex = (Main.xmlControll.getEvolutiondex().get(name));
+				System.out.println(dex);
+				if(dex.containsKey(level)) {
+					Pokemon pokemon = Main.xmlControll.getPokemonByName(dex.get(level));
+					this.id = pokemon.id;
+					this.level = pokemon.level;
+					this.type = pokemon.type;
+					this.name = pokemon.name;
+					this.att = pokemon.att;
+					this.deff = pokemon.deff;
+					this.motivation = pokemon.motivation;
+					this.init = pokemon.init;
+					this.base_hp = pokemon.base_hp;
+					this.spawn = pokemon.spawn;
+					this.xp = pokemon.xp;
+					this.hp = calculateHp();
+				}
+				
+			}
 
 		}
 	}

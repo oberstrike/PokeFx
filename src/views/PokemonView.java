@@ -61,12 +61,19 @@ public class PokemonView extends AnchorPane {
 
 
 	public void update() {
-		hpBar.setProgress(pokemon.getHp()/pokemon.calculateHp());
-		hp.setText("HP: " + String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateHp())));
-		name.setText(pokemon.getName());
-		level.setText("Lvl: " + String.valueOf(pokemon.getLevel()));
-		xpBar.setProgress(pokemon.getXp()/pokemon.getXpForNextLevel());
-		xp.setText("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())));
+		
+		try {
+			hpBar.setProgress(pokemon.getHp()/pokemon.calculateHp());
+			hp.setText("HP: " + String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateHp())));
+			name.setText(pokemon.getName());
+			level.setText("Lvl: " + String.valueOf(pokemon.getLevel()));
+			xpBar.setProgress(pokemon.getXp()/pokemon.getXpForNextLevel());
+			xp.setText("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())));
+		}catch (Exception e) {
+			System.err.println(pokemon);
+			e.printStackTrace();
+		}
+
 	}
 	
 	
