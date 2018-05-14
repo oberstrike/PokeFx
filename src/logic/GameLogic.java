@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import pokemon.Pokemon;
 import views.MapView;
@@ -119,6 +120,14 @@ public class GameLogic extends Thread {
 
 		alert.setHeaderText(
 				"Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel() + " ist erschienen");
+		String pathToImg = "/pokemon/images/" + spawnedPokemon.getId() + ".png";
+		ImageView picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
+		picture.setLayoutX(0);
+		picture.setLayoutY(0);
+		picture.setFitWidth(128);
+		picture.setFitHeight(128);
+		alert.setGraphic(picture);
+		
 		alert.setContentText("Bitte waehle deine Aktion.");
 
 		ButtonType kampfButton = new ButtonType("Angreifen");
