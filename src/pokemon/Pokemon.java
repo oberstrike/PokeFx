@@ -177,29 +177,45 @@ public class Pokemon {
 		if (mon2.getHp() <= 0) {
 			return this;
 		}
+		String output = "";
+		String output2 = "";
 
 		double multiplierMon1 = 1;
 		if (effekt.table.get(mon2.getType()).containsKey(this.getType()))
 			multiplierMon1 = effekt.table.get(mon2.getType()).get(this.getType());
+		output = "==================== \n" + this.getName() + "\n------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
 
 		double multiplierMon2 = 1;
 		if (effekt.table.get(this.getType()).containsKey(mon2.getType()))
 			multiplierMon2 = effekt.table.get(this.getType()).get(mon2.getType());
+		output2 = "___________________ \n" + mon2.getName() + "\n------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
 
 		int attMon1 = (int) (this.calculateAtt() * multiplierMon1);
 		int deffMon1 = this.calculateDeff();
 		int attMon2 = (int) (mon2.calculateAtt() * multiplierMon2);
 		int deffMon2 = mon2.calculateDeff();
+		
+		output += "\n ATK: " + attMon1 + " || DEF: " + deffMon1;
+		output2 += "\n ATK: " + attMon2 + " || DEF: " + deffMon2;
 
 		// wer beginnt?
 		if (this.getInit() >= mon2.getInit()) {
 			while (this.getHp() > 0 && mon2.getHp() > 0) {
-				mon2.setHp(mon2.getHp() - (attMon1 * randomCrit() - (deffMon1 / 1.5)));
+				double crit = randomCrit();
+				double damage = (attMon1 * crit - deffMon2);
+				if (damage <= 0) { damage = 1; }
+				mon2.setHp(mon2.getHp() - damage);
+				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + ") || Crit: " + crit;
 				if (mon2.getHp() <= 0) {
+					System.out.println(output + "\n" + output2);
 					return this;
 				}
-				this.setHp(this.getHp() - (attMon2 * randomCrit() - (deffMon1 / 1.5)));
+				damage = (attMon2 * randomCrit() - deffMon1);
+				if (damage <= 0) { damage = 1; }
+				this.setHp(this.getHp() - damage);
+				output += "\n HP: " + this.getHp() + " (-" + damage + ") || Crit: " + crit;
 				if (this.getHp() <= 0) {
+					System.out.println(output + "\n" + output2);
 					winner = mon2;
 					return winner;
 				}
@@ -207,13 +223,22 @@ public class Pokemon {
 			return null;
 		} else {
 			while (this.getHp() > 0 && mon2.getHp() > 0) {
-				this.setHp(this.getHp() - (attMon2 * randomCrit() - (deffMon2 / 1.5)));
+				double crit = randomCrit();
+				double damage = (attMon2 * crit - deffMon1);
+				if (damage <= 0) { damage = 1; }
+				this.setHp(this.getHp() - damage);
+				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + ") || Crit: " + crit;
 				if (this.getHp() <= 0) {
+					System.out.println(output + "\n" + output2);
 					winner = mon2;
 					return winner;
 				}
-				mon2.setHp(mon2.getHp() - (attMon1 * randomCrit() - (deffMon2 / 1.5)));
+				damage = (attMon1 * randomCrit() - deffMon2);
+				if (damage <= 0) { damage = 1; }
+				mon2.setHp(mon2.getHp() - damage);
+				output += "\n HP: " + this.getHp() + " (-" + damage + " ||) Crit: " + crit;
 				if (mon2.getHp() <= 0) {
+					System.out.println(output + "\n" + output2);
 					winner = this;
 					return winner;
 				}
@@ -228,14 +253,14 @@ public class Pokemon {
 	}
 
 	public int calculateAtt() {
-		int att = (int) (((this.att + 8) * 2 + (1/4)) * level / 100) + 5;
-		System.out.println(this.getName() + " Angriff: " + att + " HP: " + this.getHp());
+		int att = (int) ((Math.pow(level, 1.5) + 0.5) / 50 * this.att);
+		// int att = (int) (((this.att + 8) * 2 + (1/4)) * level / 100) + 5;
 		return att;
 	}
 
 	public int calculateDeff() {
-		int deff = (int) (((this.deff + 8) * 2 + (1/4)) * level / 100) + 5;
-		System.out.println(this.getName() + " Verteidigung: " + deff + " HP: " + this.getHp());
+		int deff = (int) ((Math.pow(level, 1.5) + 10) / 100 * this.deff);
+		// int deff = (int) (((this.deff + 8) * 2 + (1/4)) * level / 100) + 5;
 		return deff;
 	}
 
