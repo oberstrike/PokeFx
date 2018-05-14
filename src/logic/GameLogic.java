@@ -10,16 +10,15 @@ import application.Main;
 import field.Field;
 import field.FieldType;
 import javafx.application.Platform;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import pokemon.Pokemon;
-import pokemon.PokemonType;
 import views.MapView;
 import views.PokemonView;
+
 
 public class GameLogic extends Thread {
 	MapView mapView;
