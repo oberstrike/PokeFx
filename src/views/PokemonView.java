@@ -18,6 +18,7 @@ public class PokemonView extends AnchorPane {
 	private ProgressBar hpBar;
 	private Pokemon pokemon;
 	private ProgressBar xpBar;
+	private Label img;
 	
 	public PokemonView(Pokemon pokemon) {
 		if(pokemon != null) {
@@ -25,6 +26,7 @@ public class PokemonView extends AnchorPane {
 			name = registerLabel(pokemon.getName(), 65, 15);
 			level = registerLabel(String.valueOf(pokemon.getLevel()), 65, 35);
 			xp = registerLabel("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())), 0, 85);
+			
 			hpBar = new ProgressBar();
 			hpBar.setProgress(1);
 			hpBar.setPrefWidth(140);
@@ -33,11 +35,13 @@ public class PokemonView extends AnchorPane {
 			hpBar.setLayoutY(60);
 			this.getChildren().add(hpBar);
 			
-			ImageView picture = new ImageView();
-			picture.setLayoutX(15);
-			picture.setLayoutY(35);
-			picture.setFitWidth(50);
-			picture.setFitHeight(50);
+			String pathToImg = "/pokemon/images/" + pokemon.getId() + ".png";
+			ImageView picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
+			picture.setLayoutX(0);
+			picture.setLayoutY(0);
+			picture.setFitWidth(75);
+			picture.setFitHeight(75);
+			this.getChildren().add(picture);
 			this.pokemon = pokemon;
 			
 			xpBar = new ProgressBar();
