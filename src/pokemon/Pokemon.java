@@ -195,8 +195,8 @@ public class Pokemon {
 		int attMon2 = (int) (mon2.calculateAtt() * multiplierMon2);
 		int deffMon2 = mon2.calculateDeff();
 		
-		output += "\n ATK: " + attMon1 + " || DEF: " + deffMon1;
-		output2 += "\n ATK: " + attMon2 + " || DEF: " + deffMon2;
+		output += "\n ATK: " + attMon1 + " || DEF: " + deffMon1 + " || MOT: " + this.motivation;
+		output2 += "\n ATK: " + attMon2 + " || DEF: " + deffMon2 + " || MOT " + mon2.motivation;
 
 		// wer beginnt?
 		if (this.getInit() >= mon2.getInit()) {
@@ -208,6 +208,7 @@ public class Pokemon {
 				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + ") || Crit: " + crit;
 				if (mon2.getHp() <= 0) {
 					System.out.println(output + "\n" + output2);
+					this.updateMotivation(true);
 					return this;
 				}
 				damage = (attMon2 * randomCrit() - deffMon1);
@@ -217,6 +218,7 @@ public class Pokemon {
 				if (this.getHp() <= 0) {
 					System.out.println(output + "\n" + output2);
 					winner = mon2;
+					this.updateMotivation(false);
 					return winner;
 				}
 			}
@@ -231,6 +233,7 @@ public class Pokemon {
 				if (this.getHp() <= 0) {
 					System.out.println(output + "\n" + output2);
 					winner = mon2;
+					this.updateMotivation(false);
 					return winner;
 				}
 				damage = (attMon1 * randomCrit() - deffMon2);
@@ -240,6 +243,7 @@ public class Pokemon {
 				if (mon2.getHp() <= 0) {
 					System.out.println(output + "\n" + output2);
 					winner = this;
+					this.updateMotivation(true);
 					return winner;
 				}
 			}
@@ -253,13 +257,13 @@ public class Pokemon {
 	}
 
 	public int calculateAtt() {
-		int att = (int) ((Math.pow(level, 1.5) + 0.5) / 50 * this.att);
+		int att = (int) ((Math.pow(level, 1.5) + 0.5) / 50 * this.att * (this.motivation/100));
 		// int att = (int) (((this.att + 8) * 2 + (1/4)) * level / 100) + 5;
 		return att;
 	}
 
 	public int calculateDeff() {
-		int deff = (int) ((Math.pow(level, 1.5) + 10) / 100 * this.deff);
+		int deff = (int) ((Math.pow(level, 1.5) + 10) / 100 * this.deff * (this.motivation/100));
 		// int deff = (int) (((this.deff + 8) * 2 + (1/4)) * level / 100) + 5;
 		return deff;
 	}
@@ -327,6 +331,22 @@ public class Pokemon {
 			
 			
 
+		}
+	}
+	
+	public void updateMotivation(boolean win) {
+		if (win == true) {
+			if (this.motivation < 100) {
+				this.setMotivation(100);
+			} else if (this.motivation < 119) {
+				this.setMotivation(this.motivation + 2);
+			}
+		} else {
+			if (this.motivation > 100) {
+				this.setMotivation(100);
+			} else if (this.motivation > 81) {
+				this.setMotivation(this.motivation - 2);
+			}
 		}
 	}
 
