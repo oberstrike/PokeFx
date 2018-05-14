@@ -23,13 +23,12 @@ import views.PokemonView;
 
 /* Noch fehlt:
 
-	- mehr als 3 mögliche Pokemon pro Karte (im Editor)
-	- Kampflogik (aktuell sind die meisten Pokemon mit einem Hit hinüber, unabhängig vom Level. Wenn ein Raupy Lvl 1 ein Bisasam Lvl 5 besiegt, sieht das komisch aus
 	- evtl Level (automatisches Laden der nächsten Karte bei Besiegen eines Trainers o.Ä.
 	- Bilder der Pokemon, sowohl rechts in der Liste als auch beim Kampf
 	- Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
 	- Motivation abhängig vom Ausgang der letzten 5-10 Kämpfe setzen
 	- XP-Balken zeigt noch keinen Fortschritt
+	- Klick auf Beenden beendet Spiel
 
 */
 
