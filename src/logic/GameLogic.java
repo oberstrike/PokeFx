@@ -80,7 +80,8 @@ public class GameLogic extends Thread {
 
 	private void fightMenu() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Aktions Fenster");
+		Alert acceptAlert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Aktionsfenster");
 		List<Pokemon> listOfPokemons = new ArrayList<>();
 
 		if (player.getPokemon().size() > 0) {
@@ -131,11 +132,21 @@ public class GameLogic extends Thread {
 				Pokemon winner = null;
 				for (int i = 0; i < player.getPokemon().size(); i++) {
 					Pokemon pokemon = player.getPokemon().get(i);
+					int currentLvl = pokemon.getLevel();
 					winner = pokemon.fight(spawnedPokemon);
 					if (winner != null) {
 						if (player.getPokemon().contains(winner)) {
 							System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " Xp erhalten");
 							winner.addXp(spawnedPokemon.calcXp());
+							acceptAlert.setHeaderText(
+									winner.getName() + " hat " + spawnedPokemon.calcXp() + " Erfahrungspunkte erhalten.");
+							if (winner.getLevel() != currentLvl) {
+								acceptAlert.setContentText(winner.getName() + " ist ein Level aufgestiegen.");
+							}
+							ButtonType acceptButton = new ButtonType("Ok");
+							acceptAlert.getButtonTypes().setAll(acceptButton);
+							result = acceptAlert.showAndWait();
+							buttonType = result.get();
 							break;
 						} else {
 							System.out.println("Dein Pokemon: " + pokemon.getName());
