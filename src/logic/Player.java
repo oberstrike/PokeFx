@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import field.Field;
 import javafx.embed.swing.SwingFXUtils;
@@ -15,6 +16,8 @@ public class Player implements Entity {
 
 	private String name;
 	private Field field;
+	
+	@XStreamOmitField
 	private Image image;
 
 	private List<Pokemon> pokemons = new ArrayList<>();

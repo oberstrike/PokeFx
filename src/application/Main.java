@@ -24,6 +24,7 @@ public class Main extends Application {
 	public static Image player_straight;
 	public static Image player_back;
 	public static XmlControll xmlControll;
+	public static Stage kprimaryStage;
 	
 	
 	@Override
@@ -52,6 +53,7 @@ public class Main extends Application {
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
+			kprimaryStage = primaryStage;
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

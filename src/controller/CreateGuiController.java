@@ -66,6 +66,9 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	private Button addBtn;
+	
+	
+
 
 	@FXML
 	void back(ActionEvent event) {
@@ -214,7 +217,9 @@ public class CreateGuiController implements Initializable {
 		}
 
 	}
+	
 
+	
 	@FXML
 	void saveAs(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();

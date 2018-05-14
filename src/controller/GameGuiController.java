@@ -1,31 +1,22 @@
 package controller;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 
-import com.sun.glass.events.MouseEvent;
-
 import application.Main;
-import field.Field;
-import field.FieldType;
-import javafx.event.EventType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 import logic.GameLogic;
 import views.MapView;
-import views.PokemonView;
 
 public class GameGuiController implements Initializable {
 
@@ -33,7 +24,26 @@ public class GameGuiController implements Initializable {
 	
 	@FXML
 	void save(ActionEvent event) {
-		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open XML");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
+		File selectedFile = fileChooser.showOpenDialog(Main.kprimaryStage);
+		if (selectedFile == null) {
+
+		} else {
+			try {
+				FileWriter writer = new FileWriter(selectedFile);
+				Main.xmlControll.saveGameData(Main.gameData, writer);
+				System.out.println("Gespeichert.");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+
+		}
 	}
 	
 	
@@ -58,6 +68,7 @@ public class GameGuiController implements Initializable {
 		
 		mapView.setPrefWidth(600);
 		mapView.setPrefHeight(500);
+		mapView.setLayoutY(30);
 		anchor.getChildren().add(mapView);
 		
 		anchor.setFocusTraversable(false);
