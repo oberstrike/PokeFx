@@ -19,6 +19,19 @@ import pokemon.Pokemon;
 import views.MapView;
 import views.PokemonView;
 
+<<<<<<< HEAD
+=======
+/* Noch fehlt:
+
+	- evtl Level (automatisches Laden der nächsten Karte bei Besiegen eines Trainers o.Ä.
+	- Bilder der Pokemon, sowohl rechts in der Liste als auch beim Kampf
+	- Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
+	- Motivation abhängig vom Ausgang der letzten 5-10 Kämpfe setzen
+	- XP-Balken zeigt noch keinen Fortschritt
+	- Klick auf Beenden beendet Spiel
+
+*/
+>>>>>>> ef89fcc4cca61b3b843d815642d14a070a4252a2
 
 public class GameLogic extends Thread {
 	MapView mapView;

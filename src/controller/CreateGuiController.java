@@ -82,7 +82,7 @@ public class CreateGuiController implements Initializable {
 		if (!listOfpokemons.contains(pokemon)) {
 			addPoke(pokemon);
 		}
-		if (pokeTypeList.getItems().size() > 2) {
+		if (pokeTypeList.getItems().size() > 20) {
 			addBtn.setDisable(true);
 		}
 	}
