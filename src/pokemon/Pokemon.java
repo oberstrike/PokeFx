@@ -28,8 +28,7 @@ public class Pokemon {
 
 	@Override
 	public String toString() {
-		return "Pokemon [name=" + name + ", id=" + id + ", hp=" + hp + ", xp=" + xp + ", base_hp=" + base_hp
-				+ ", spawn=" + spawn + ", calculateHp()=" + calculateHp() + "]";
+		return "Pokemon [name=" + name + "]";
 	}
 
 	public Pokemon() {

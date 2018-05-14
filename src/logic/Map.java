@@ -8,6 +8,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import field.Field;
 import field.FieldType;
+import pokemon.Pokemon;
 import pokemon.PokemonType;
 @XStreamAlias("PokemonMap")
 public class Map {
@@ -23,7 +24,7 @@ public class Map {
 	@XStreamOmitField
 	private double sides = 40;
 	
-	private List<PokemonType> pokemontypes = new ArrayList<>();
+	private List<Pokemon> pokemons = new ArrayList<>();
 	
 	public Map(List<Field> fields) {
 		this.fields = fields;
@@ -55,12 +56,12 @@ public class Map {
 		});
 	}
 
-	public List<PokemonType> getPokemonTypes() {
-		return pokemontypes;
+	public List<Pokemon> getPokemons() {
+		return pokemons;
 	}
 
-	public void setPokemonTypes(List<PokemonType> pokemonTypes) {
-		this.pokemontypes = pokemonTypes;
+	public void setPokemons(List<Pokemon> pokemons) {
+		this.pokemons = pokemons;
 	}
 
 	public double getWidth() {

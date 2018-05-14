@@ -30,6 +30,7 @@ public class Field {
 	private double x;
 	private double y;
 	private Entity entity;
+	
 	@XStreamOmitField
 	private Image image;
 

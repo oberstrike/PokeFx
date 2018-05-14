@@ -84,13 +84,8 @@ public class GameLogic extends Thread {
 		List<Pokemon> listOfPokemons = new ArrayList<>();
 
 		if (player.getPokemon().size() > 0) {
-			List<PokemonType> pokemonTypes = mapView.getMap().getPokemonTypes();
-
-			for (PokemonType type : pokemonTypes) {
-				listOfPokemons = new ArrayList<>(Main.xmlControll.getPokemonsByType(type));
-				listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel())+1));
-			}
-
+			listOfPokemons = mapView.getMap().getPokemons();
+			listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel()) + 1));
 		} else {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
@@ -112,7 +107,8 @@ public class GameLogic extends Thread {
 			}
 		}
 
-		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel() + " ist erschienen");
+		alert.setHeaderText(
+				"Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel() + " ist erschienen");
 		alert.setContentText("Bitte waehle deine Aktion.");
 
 		ButtonType kampfButton = new ButtonType("Angreifen");
@@ -136,12 +132,12 @@ public class GameLogic extends Thread {
 				for (int i = 0; i < player.getPokemon().size(); i++) {
 					Pokemon pokemon = player.getPokemon().get(i);
 					winner = pokemon.fight(spawnedPokemon);
-					if(winner != null) {
-						if(player.getPokemon().contains(winner)){
+					if (winner != null) {
+						if (player.getPokemon().contains(winner)) {
 							System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " Xp erhalten");
 							winner.addXp(spawnedPokemon.calcXp());
-							break;	
-						}else {
+							break;
+						} else {
 							System.out.println("Dein Pokemon: " + pokemon.getName());
 						}
 					}

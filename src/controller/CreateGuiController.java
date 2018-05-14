@@ -1,30 +1,15 @@
 package controller;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Observable;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
-import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.StaxDriver;
-import com.thoughtworks.xstream.security.NoTypePermission;
-import com.thoughtworks.xstream.security.NullPermission;
-import com.thoughtworks.xstream.security.PrimitiveTypePermission;
-
 import application.Main;
 import application.WindowChanger;
 import field.Field;
@@ -32,12 +17,8 @@ import field.FieldType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
@@ -46,17 +27,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.StringConverter;
 import logic.Map;
-import pokemon.PokemonType;
+import pokemon.Pokemon;
 import javafx.stage.Stage;
 import views.MapView;
-import xml.XmlControll;
 
 public class CreateGuiController implements Initializable {
 
@@ -69,10 +49,13 @@ public class CreateGuiController implements Initializable {
 	private TextField name;
 
 	@FXML
-	private ListView<PokemonType> pokeTypeList;
+	private ListView<Pokemon> pokeTypeList;
 
 	@FXML
-	private ComboBox<PokemonType> pokeComboBox;
+	private ComboBox<Pokemon> pokeComboBox;
+
+	@FXML
+	private TextField pokemonName;
 
 	@FXML
 	private ListView<String> liste;
@@ -82,32 +65,40 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	private Button addBtn;
-	
-    @FXML
-    void back(ActionEvent event) {
-    	WindowChanger changer = new WindowChanger();
-    	changer.changeWindow("/guis/MenuGui.fxml", event);
-    }
+
+	@FXML
+	void back(ActionEvent event) {
+		Main.mapView = mapView;
+		WindowChanger changer = new WindowChanger();
+		changer.changeWindow("/guis/MenuGui.fxml", event);
+	}
 
 	@FXML
 	void addPokeType(ActionEvent event) {
-		ObservableList<PokemonType> listOfPokemonTypes = pokeTypeList.getItems();
-		PokemonType pokemonType = pokeComboBox.getValue();
-		if (!listOfPokemonTypes.contains(pokemonType)) {
-			pokeTypeList.getItems().add(pokemonType);
-			mapView.getMap().getPokemonTypes().add(pokemonType);
+
+		ObservableList<Pokemon> listOfpokemons = pokeTypeList.getItems();
+		Pokemon pokemon = pokeComboBox.getValue();
+
+		if (!listOfpokemons.contains(pokemon)) {
+			addPoke(pokemon);
 		}
 		if (pokeTypeList.getItems().size() > 2) {
 			addBtn.setDisable(true);
 		}
 	}
 
+	void addPoke(Pokemon pokemon) {
+		pokeTypeList.getItems().add(pokemon);
+		mapView.getMap().getPokemons().add(pokemon);
+
+	}
+
 	@FXML
 	void deletePokeType(ActionEvent event) {
-		PokemonType pokemonType = pokeTypeList.getSelectionModel().getSelectedItem();
-		if (pokemonType != null) {
-			pokeTypeList.getItems().remove(pokemonType);
-			mapView.getMap().getPokemonTypes().remove(pokemonType);
+		Pokemon pokemon = pokeTypeList.getSelectionModel().getSelectedItem();
+		if (pokemon != null) {
+			pokeTypeList.getItems().remove(pokemon);
+			// mapView.getMap().getPokemonTypes()().remove(pokemon);
 			addBtn.setDisable(false);
 		}
 
@@ -161,7 +152,6 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	private void save(ActionEvent event) {
-		FileWriter writer;
 		if (this.name.getText().length() < 1 || this.name.getText().length() > 12) {
 			new Alert(AlertType.ERROR, "Bitte geben Sie einen Namen ein, der zwischen 4-12 Zeichen besitzt").show();
 		} else {
@@ -175,7 +165,7 @@ public class CreateGuiController implements Initializable {
 					if (!type.getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
 						if (pokeTypeList.getItems().size() == 0) {
 							Optional<ButtonType> oButtonType = new Alert(AlertType.CONFIRMATION,
-									"Sie haben kein Pokemon Type ausgewählt.").showAndWait();
+									"Sie haben kein Pokemon ausgewählt.").showAndWait();
 							if (oButtonType.isPresent()) {
 								if (!oButtonType.get().getButtonData().equals(ButtonData.CANCEL_CLOSE)) {
 									write(file);
@@ -256,12 +246,60 @@ public class CreateGuiController implements Initializable {
 		}
 
 		liste.setItems(data);
-		mapView = new MapView();
+		if(Main.mapView == null)
+			mapView = new MapView();
+		else
+			mapView = Main.mapView;
+		mapView.setLayoutY(30);
 		mapView.setOnMouseClicked(this::setMaterial);
 		anchor.getChildren().add(mapView);
 
-		pokeComboBox.getItems().addAll(Arrays.asList(PokemonType.values()));
-		pokeComboBox.getSelectionModel().select(11);
+		pokeTypeList.setCellFactory(param -> new ListCell<Pokemon>() {
+			@Override
+			protected void updateItem(Pokemon item, boolean empty) {
+				super.updateItem(item, empty);
+
+				if (empty || item == null || item.getName() == null) {
+					setText(null);
+				} else {
+					setText(item.getName());
+				}
+			}
+		});
+
+		pokeComboBox.setConverter(new StringConverter<Pokemon>() {
+
+			@Override
+			public String toString(Pokemon object) {
+				if (object == null)
+					return null;
+				else
+					return object.getName();
+			}
+
+			@Override
+			public Pokemon fromString(String string) {
+				return null;
+			}
+		});
+		pokeComboBox.getItems().addAll(Main.xmlControll.getPokedex());
+		pokeComboBox.getSelectionModel().select(1);
+	
+		pokemonName.setOnKeyReleased(event -> {
+			Optional<Pokemon> oPokemon = pokeComboBox.getItems().stream().filter(each -> each.getName().toLowerCase().equals(pokemonName.getText().toLowerCase()) ).findFirst();
+			
+			if(!oPokemon.isPresent())
+				oPokemon = pokeComboBox.getItems().stream().filter(each -> each.getName().toLowerCase().indexOf(pokemonName.getText().toLowerCase()) != -1 ).findFirst();
+			
+			
+			if(oPokemon.isPresent()) {
+				Pokemon pokemon = oPokemon.get();
+				if(pokemon != null) {
+					pokeComboBox.getSelectionModel().select(pokemon);
+				}
+			}
+			
+		});
 	}
 
 }

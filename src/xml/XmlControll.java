@@ -33,7 +33,7 @@ public class XmlControll {
 
 	@SuppressWarnings("unchecked")
 	public XmlControll() {
-		//Client client = new Client();
+		// Client client = new Client();
 		stream = new XStream(new StaxDriver());
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);
@@ -56,12 +56,19 @@ public class XmlControll {
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(new File(evolveFileName));
 	}
 
-	synchronized public Pokemon getPokemonByName(String name) {
-		return new Pokemon(pokedex.stream().filter(each -> each.getName().equals(name)).findFirst().get());
+	public Pokemon getPokemonByName(String name) {
+		if (contains(name))
+			return new Pokemon(pokedex.stream().filter(each -> each.getName().equals(name)).findFirst().get());
+		return null;
+	}
+
+	public boolean contains(String name) {
+		return pokedex.stream().anyMatch(each -> each.getName().equals(name));
 	}
 
 	synchronized public List<Pokemon> getPokemonsByType(PokemonType type) {
-		List<Pokemon> pokemons = pokedex.stream().filter(each -> each.getType().equals(type)).collect(Collectors.toList());
+		List<Pokemon> pokemons = pokedex.stream().filter(each -> each.getType().equals(type))
+				.collect(Collectors.toList());
 		pokemons.forEach(each -> new Pokemon(each));
 		return pokemons;
 	}
