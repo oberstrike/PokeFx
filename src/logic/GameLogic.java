@@ -29,11 +29,11 @@ import xml.GameData;
 	- 		Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
 	- CHECK	Motivation abhängig vom Ausgang der letzten 5-10 Kämpfe setzen
 	- CHECK XP-Balken zeigt noch keinen Fortschritt CHECK
-	- 		Klick auf Beenden beendet Spiel
+	- CHECK	Klick auf Beenden beendet Spiel
 	- CHECK Spielerposition bei Kartenwechsel anpassen
 	- CHECK	mehrere Übergänge auf einer Map
 	- 		Bild bei Entwicklung anpassen
-	- 		Maps bauen
+	- CHECK	Maps bauen
 
 */
 

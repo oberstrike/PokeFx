@@ -39,12 +39,12 @@ public class MenuGuiController implements Initializable{
 	
     @FXML
     void load(ActionEvent event) {
-    	FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save as xml");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
-		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
+    	File selectedFile = new File("maps/start.xml");
 		if(selectedFile == null) {
-			
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Save as xml");
+			fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
+			selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
 		}else {
 			MapView mapView = new MapView();
 			mapView.setMap(Main.xmlControll.getMap(selectedFile));
@@ -57,7 +57,7 @@ public class MenuGuiController implements Initializable{
 
     @FXML
     void exit(ActionEvent event) {
-
+    	System.exit(0);
     }
     
     @FXML
