@@ -55,8 +55,6 @@ public class GameLogic extends Thread {
 			player = gameData.getPlayer();
 			System.out.println("Player: " + player);
 		}
-		
-		
 		mapView.update();
 		this.anchor2 = anchor2;
 	}
@@ -209,7 +207,8 @@ public class GameLogic extends Thread {
 	public void moveEvent(String keyName) {
 		double newX = player.getField().getX();
 		double newY = player.getField().getY();
-
+		
+		System.out.println(keyName);
 		switch (keyName) {
 		case "W":
 			newY -= 40;
@@ -226,6 +225,13 @@ public class GameLogic extends Thread {
 		case "A":
 			newX -= 40;
 			player.setImage(Main.player_left);
+			break;
+		case "Space":
+			int direction = player.getDirection();
+			List<Field> successors = mapView.getMap().getSuccesors(player.getField());
+			System.out.println(successors);
+			System.out.println(direction);
+			
 			break;
 		default:
 			break;

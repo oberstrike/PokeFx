@@ -6,6 +6,7 @@ import java.util.List;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import application.Main;
 import field.Field;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -74,6 +75,30 @@ public class Player implements Entity {
 	public Image getImage() {
 		return this.image;
 	}
+	
+	public int getDirection() {
+		if(image != null) {
+			if(image.equals(Main.player_straight)) {
+				return 2;
+			}else if(image.equals(Main.player_left)) {
+				return 1;
+			}else if(image.equals(Main.player_right)) {
+				return 3;
+			}else if(image.equals(Main.player_back)) {
+				return 4;
+			}
+		}
+		return 0;
+	}
+
+	//Not needed.
+	@Override
+	public <T extends Entity> void interact(T entity) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 
 
 }

@@ -7,5 +7,4 @@ public enum FieldType {
 	HOHESGRASS,
 	TIEFERSAND,
 	SAND;
-
 }

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,7 +87,7 @@ public class Field {
 	public boolean isBlocked() {
 		return this.type.equals(FieldType.STEIN)||this.type.equals(FieldType.WASSER);
 	}
-
+	
 	public void applyImage() {
 		switch (type) {
 		case GRASS:
