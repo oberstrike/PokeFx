@@ -33,10 +33,11 @@ import xml.GameData;
 */
 
 public class GameLogic extends Thread {
-	MapView mapView;
-	Player player;
-	long lastMovement = 0;
-	AnchorPane anchor2;
+	private MapView mapView;
+	private Player player;
+	private long lastMovementTime = 0;
+	private String lastMovement;
+	private AnchorPane anchor2;
 
 	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
 		this.mapView = mapView;
@@ -44,21 +45,21 @@ public class GameLogic extends Thread {
 				.collect(Collectors.toList());
 
 		Field f = field.get(new Random().nextInt(field.size()));
-		
-		if(gameData.getPlayer()==null) {
+
+		if (gameData.getPlayer() == null) {
 			player = new Player();
 			player.setImage(new Image("/images/player_straight.png"));
 			player.setField(f);
 			f.setEntity(player);
 			Main.gameData.setPlayer(player);
-		}else {
+		} else {
 			player = gameData.getPlayer();
 			System.out.println("Player: " + player);
 		}
 		mapView.update();
 		this.anchor2 = anchor2;
 	}
-	
+
 	public void update() {
 		Platform.runLater(() -> {
 			this.mapView.update();
@@ -103,7 +104,7 @@ public class GameLogic extends Thread {
 
 		if (player.getPokemon().size() > 0) {
 			listOfPokemons = mapView.getMap().getPokemons();
-			listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel()) + 1));
+			listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemon().size()));
 		} else {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
@@ -134,7 +135,7 @@ public class GameLogic extends Thread {
 		picture.setFitWidth(128);
 		picture.setFitHeight(128);
 		alert.setGraphic(picture);
-		
+
 		alert.setContentText("Bitte waehle deine Aktion.");
 
 		ButtonType kampfButton = new ButtonType("Angreifen");
@@ -163,8 +164,8 @@ public class GameLogic extends Thread {
 						if (player.getPokemon().contains(winner)) {
 							System.out.println(pokemon.getName() + " hat " + spawnedPokemon.calcXp() + " Xp erhalten");
 							winner.addXp(spawnedPokemon.calcXp());
-							acceptAlert.setHeaderText(
-									winner.getName() + " hat " + spawnedPokemon.calcXp() + " Erfahrungspunkte erhalten.");
+							acceptAlert.setHeaderText(winner.getName() + " hat " + spawnedPokemon.calcXp()
+									+ " Erfahrungspunkte erhalten.");
 							if (winner.getLevel() != currentLvl) {
 								acceptAlert.setContentText(winner.getName() + " ist ein Level aufgestiegen.");
 							}
@@ -207,8 +208,7 @@ public class GameLogic extends Thread {
 	public void moveEvent(String keyName) {
 		double newX = player.getField().getX();
 		double newY = player.getField().getY();
-		
-		System.out.println(keyName);
+
 		switch (keyName) {
 		case "W":
 			newY -= 40;
@@ -227,11 +227,32 @@ public class GameLogic extends Thread {
 			player.setImage(Main.player_left);
 			break;
 		case "Space":
-			int direction = player.getDirection();
-			List<Field> successors = mapView.getMap().getSuccesors(player.getField());
-			System.out.println(successors);
-			System.out.println(direction);
-			
+			Optional<Field> oField = null;
+			if (lastMovement != null) {
+				switch (lastMovement) {
+				case "W":
+					oField = mapView.getMap().upField(player.getField());
+					break;
+				case "A":
+					oField = mapView.getMap().leftField(player.getField());
+					break;
+				case "S":
+					oField = mapView.getMap().bottomField(player.getField());
+					break;
+				case "D":
+					oField = mapView.getMap().rightField(player.getField());
+					break;
+				default:
+					break;
+				}
+				System.out.println(oField);
+				if (oField.isPresent()) {
+					Field field = oField.get();
+					if (field.getEntity() != null) {
+						field.getEntity().interact(player);
+					}
+				}
+			}
 			break;
 		default:
 			break;
@@ -242,33 +263,37 @@ public class GameLogic extends Thread {
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
 		if (newField.isPresent()) {
-			if (!newField.get().isBlocked()) {
-				int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 250 : 110;
-				if (lastMovement == 0 || System.currentTimeMillis() - lastMovement > difference) {
-					for (Pokemon mon : player.getPokemon()) {
-						double hp = mon.getHp();
-						double hpBase = mon.calculateHp();
-						if (hpBase > hp) {
-							hp = hp + 1.0;
-							mon.setHp(hp);
+			if (!newField.get().equals(player.getField())) {
+				if (!newField.get().isBlocked()) {
+					int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 250 : 110;
+					if (lastMovementTime == 0 || System.currentTimeMillis() - lastMovementTime > difference) {
+						for (Pokemon mon : player.getPokemon()) {
+							double hp = mon.getHp();
+							double hpBase = mon.calculateHp();
+							if (hpBase > hp) {
+								hp = hp + 1.0;
+								mon.setHp(hp);
+							}
 						}
-					}
-					lastMovement = System.currentTimeMillis();
-					Field newF = newField.get();
-					player.getField().setEntity(null);
-					newF.setEntity(player);
-					player.setField(newField.get());
-					Platform.runLater(() -> mapView.update());
-					if (newF.getType().equals(FieldType.HOHESGRASS) || newF.getType().equals(FieldType.TIEFERSAND)) {
-						int randDig = new Random().nextInt(100);
-						if (randDig < 14) {
-							System.out.println("Ein wildes Pokemon greift an...");
-							fightMenu();
+						lastMovementTime = System.currentTimeMillis();
+						lastMovement = keyName;
+						Field newF = newField.get();
+						player.getField().setEntity(null);
+						newF.setEntity(player);
+						player.setField(newField.get());
+						Platform.runLater(() -> mapView.update());
+						if (newF.getType().equals(FieldType.HOHESGRASS)
+								|| newF.getType().equals(FieldType.TIEFERSAND)) {
+							int randDig = new Random().nextInt(100);
+							if (randDig < 14) {
+								System.out.println("Ein wildes Pokemon greift an...");
+								fightMenu();
+							}
 						}
+						mapView.update();
 					}
-					mapView.update();
-				}
 
+				}
 			}
 		}
 

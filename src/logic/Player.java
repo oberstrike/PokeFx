@@ -17,7 +17,7 @@ public class Player implements Entity {
 
 	private String name;
 	private Field field;
-	
+
 	@XStreamOmitField
 	private Image image;
 
@@ -76,20 +76,6 @@ public class Player implements Entity {
 		return this.image;
 	}
 	
-	public int getDirection() {
-		if(image != null) {
-			if(image.equals(Main.player_straight)) {
-				return 2;
-			}else if(image.equals(Main.player_left)) {
-				return 1;
-			}else if(image.equals(Main.player_right)) {
-				return 3;
-			}else if(image.equals(Main.player_back)) {
-				return 4;
-			}
-		}
-		return 0;
-	}
 
 	//Not needed.
 	@Override

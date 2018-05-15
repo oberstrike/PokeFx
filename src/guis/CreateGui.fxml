@@ -68,14 +68,9 @@
                   <MenuItem mnemonicParsing="false" onAction="#newMap" text="Neu" />
                   <SeparatorMenuItem mnemonicParsing="false" onAction="#save" />
               <MenuItem mnemonicParsing="false" onAction="#save" text="Speichern" />
-                  <MenuItem fx:id="saveAs" mnemonicParsing="false" text="Speichern als..." />
+                  <MenuItem onAction="#saveAs" mnemonicParsing="false" text="Speichern als..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#load" text="Öffnen unter..." />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

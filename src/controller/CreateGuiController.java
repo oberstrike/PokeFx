@@ -66,9 +66,6 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	private Button addBtn;
-	
-	
-
 
 	@FXML
 	void back(ActionEvent event) {
@@ -132,8 +129,8 @@ public class CreateGuiController implements Initializable {
 
 	private void loadFile(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open XML");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
+		fileChooser.setTitle("Choose XML");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(".xml", "*.xml"));
 
 		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
 		if (selectedFile == null) {
@@ -217,14 +214,12 @@ public class CreateGuiController implements Initializable {
 		}
 
 	}
-	
 
-	
 	@FXML
 	void saveAs(ActionEvent event) {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open XML");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
+		fileChooser.setTitle("Choose XML");
+		fileChooser.getExtensionFilters().add(new ExtensionFilter(".xml", "*.xml"));
 		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
 		if (selectedFile == null) {
 
@@ -252,12 +247,14 @@ public class CreateGuiController implements Initializable {
 		}
 
 		liste.setItems(data);
-		if(Main.gameData.getMap() == null)
+		if (Main.gameData.getMap() == null) {
 			mapView = new MapView();
-		else
+			Main.gameData.setMap(mapView.getMap());
+		} else {
 			mapView = new MapView();
 			mapView.setMap(Main.gameData.getMap());
-			
+		}
+
 		mapView.setLayoutY(30);
 		mapView.setOnMouseClicked(this::setMaterial);
 		anchor.getChildren().add(mapView);
@@ -292,22 +289,25 @@ public class CreateGuiController implements Initializable {
 		});
 		pokeComboBox.getItems().addAll(Main.xmlControll.getPokedex());
 		pokeComboBox.getSelectionModel().select(1);
-	
+
 		pokemonName.setOnKeyReleased(event -> {
-			Optional<Pokemon> oPokemon = pokeComboBox.getItems().stream().filter(each -> each.getName().toLowerCase().equals(pokemonName.getText().toLowerCase()) ).findFirst();
-			
-			if(!oPokemon.isPresent())
-				oPokemon = pokeComboBox.getItems().stream().filter(each -> each.getName().toLowerCase().indexOf(pokemonName.getText().toLowerCase()) != -1 ).findFirst();
-			
-			
-			if(oPokemon.isPresent()) {
+			Optional<Pokemon> oPokemon = pokeComboBox.getItems().stream()
+					.filter(each -> each.getName().toLowerCase().equals(pokemonName.getText().toLowerCase()))
+					.findFirst();
+			if (!oPokemon.isPresent())
+				oPokemon = pokeComboBox.getItems().stream()
+						.filter(each -> each.getName().toLowerCase().indexOf(pokemonName.getText().toLowerCase()) != -1)
+						.findFirst();
+			if (oPokemon.isPresent()) {
 				Pokemon pokemon = oPokemon.get();
-				if(pokemon != null) {
+				if (pokemon != null) {
 					pokeComboBox.getSelectionModel().select(pokemon);
 				}
 			}
-			
 		});
+
+		mapView.update();
+
 	}
 
 }

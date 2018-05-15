@@ -12,6 +12,7 @@ import field.Field;
 import field.FieldType;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
+
 @XStreamAlias("PokemonMap")
 public class Map {
 
@@ -25,38 +26,58 @@ public class Map {
 
 	@XStreamOmitField
 	private double sides = 40;
-	
+
 	private List<Pokemon> pokemons = new ArrayList<>();
-	
+
 	public Map(List<Field> fields) {
 		this.fields = fields;
 	}
-	
+
 	public Map() {
 		this(FieldType.GRASS);
 	}
-	
+
 	public Map(FieldType fieldType) {
-		for(int i = 0; i < width; i+=sides) {
-			for(int j = 0; j < height; j+=sides) {
-				fields.add(new Field(i,j,fieldType));
+		for (int i = 0; i < width; i += sides) {
+			for (int j = 0; j < height; j += sides) {
+				fields.add(new Field(i, j, fieldType));
 			}
 		}
 	}
-	
-	public List<Field> getSuccesors(Field field){
+
+	public List<Field> getSuccesors(Field field) {
 		double x = field.getX();
 		double y = field.getY();
-		
-		List<Optional<Field>> oList = new ArrayList<>();;
-		oList.add(this.getFields().stream().filter(each -> each.getX() == x+sides && each.getY()==y).findFirst());
-		oList.add(this.getFields().stream().filter(each -> each.getX() == x-sides && each.getY()==y).findFirst());
-		oList.add(this.getFields().stream().filter(each -> each.getX() == x && each.getY()==y+sides).findFirst());
-		oList.add(this.getFields().stream().filter(each -> each.getX() == x && each.getY()==0-sides).findFirst());
-		
+
+		List<Optional<Field>> oList = new ArrayList<>();
+		oList.add(leftField(field));
+		oList.add(rightField(field));
+		oList.add(upField(field));
+		oList.add(bottomField(field));
+
 		return oList.stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 	}
- 
+
+	public Optional<Field> leftField(Field field) {
+		return this.getFields().stream()
+				.filter(each -> each.getX() == field.getX() - sides && each.getY() == field.getY()).findFirst();
+	}
+
+	public Optional<Field> rightField(Field field) {
+		return this.getFields().stream()
+				.filter(each -> each.getX() == field.getX() + sides && each.getY() == field.getY()).findFirst();
+	}
+
+	public Optional<Field> bottomField(Field field) {
+		return this.getFields().stream()
+				.filter(each -> each.getX() == field.getX() && each.getY() == field.getY() + sides).findFirst();
+	}
+
+	public Optional<Field> upField(Field field) {
+		return this.getFields().stream()
+				.filter(each -> each.getX() == field.getX() && each.getY() == field.getY() - sides).findFirst();
+	}
+
 	public List<Field> getFields() {
 		return fields;
 	}
@@ -64,7 +85,7 @@ public class Map {
 	public void setFields(List<Field> fields) {
 		this.fields = fields;
 	}
-	
+
 	public void update() {
 		fields.stream().forEach(each -> {
 			each.applyImage();
@@ -94,5 +115,5 @@ public class Map {
 	public void setHeight(double height) {
 		this.height = height;
 	}
-	
+
 }
