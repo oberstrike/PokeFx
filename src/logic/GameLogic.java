@@ -24,12 +24,14 @@ import xml.GameData;
 
 /* Noch fehlt:
 
-	- evtl Level (automatisches Laden der nächsten Karte bei Besiegen eines Trainers o.Ä.
-	- Bilder der Pokemon, sowohl rechts in der Liste als auch beim Kampf
-	- Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
-	- Motivation abhängig vom Ausgang der letzten 5-10 Kämpfe setzen
-	- XP-Balken zeigt noch keinen Fortschritt CHECK
-	- Klick auf Beenden beendet Spiel
+	- NN	evtl Level (automatisches Laden der nächsten Karte bei Besiegen eines Trainers o.Ä.
+	- CHECK Bilder der Pokemon, sowohl rechts in der Liste als auch beim Kampf
+	- 		Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
+	- CHECK	Motivation abhängig vom Ausgang der letzten 5-10 Kämpfe setzen
+	- CHECK XP-Balken zeigt noch keinen Fortschritt CHECK
+	- 		Klick auf Beenden beendet Spiel
+	- CHECK Spielerposition bei Kartenwechsel anpassen
+	- CHECK	mehrere Übergänge auf einer Map
 
 */
 
@@ -278,7 +280,7 @@ public class GameLogic extends Thread {
 		double x = newX;
 		double y = newY;
 
-		System.out.println("Playerposition: (" + x + "|" + y + ")");
+		// System.out.println("Playerposition: (" + x + "|" + y + ")");
 		
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
@@ -305,7 +307,7 @@ public class GameLogic extends Thread {
 							} else if (x == 0) {
 								newX = 570;
 							} else if (y == 480) {
-								newY = 30;
+								newY = 0;
 							} else if (y == 0) {
 								newY = 480;
 							}

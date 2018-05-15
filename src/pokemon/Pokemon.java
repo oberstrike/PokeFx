@@ -185,11 +185,15 @@ public class Pokemon {
 		double multiplierMon1 = 1;
 		if (effekt.table.get(mon2.getType()).containsKey(this.getType()))
 			multiplierMon1 = effekt.table.get(mon2.getType()).get(this.getType());
+		
+		// System.out.println(effekt.table.get(this.getType()).get(this.getType()));
 		output = "==================== \n\nDein Pokemon:\n" + this.getName() + " Lvl: " + this.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
 
 		double multiplierMon2 = 1;
 		if (effekt.table.get(this.getType()).containsKey(mon2.getType()))
 			multiplierMon2 = effekt.table.get(this.getType()).get(mon2.getType());
+		
+		// System.out.println(effekt.table.get(mon2.getType()).get(mon2.getType()));
 		output2 = "___________________ \n\nGegnerisches Pokemon:\n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
 
 		int attMon1 = (int) (this.calculateAtt() * multiplierMon1);
