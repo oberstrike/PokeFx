@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -130,7 +131,7 @@ public class Field {
 			
 			BufferedImage entitysImage = SwingFXUtils.fromFXImage(eImage, null);
 
-			BufferedImage combined = new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
+			BufferedImage combined = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 			Graphics g = combined.getGraphics();
 			g.drawImage(image, 0, 0, null);
 			g.drawImage(entitysImage, 0, 0, null);

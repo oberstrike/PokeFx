@@ -191,20 +191,29 @@ public class GameLogic extends Thread {
 				spawnedPokemon.setXp(0);
 				if (player.getPokemon().size() == 0) {
 					player.getPokemon().add(spawnedPokemon);
+					spawnedPokemon.setTrained(true);
 				} else {
 					int iValue = new Random().nextInt(100);
 					if (spawnedPokemon.getSpawn() > 3) {
-						if (iValue > 45)
+						if (iValue > 45) {
 							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
 					} else if (spawnedPokemon.getSpawn() > 2) {
-						if (iValue > 60)
+						if (iValue > 60) {
 							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
 					} else if (spawnedPokemon.getSpawn() > 1) {
-						if (iValue > 70)
+						if (iValue > 70) {
 							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
 					} else {
-						if (iValue > 80)
+						if (iValue > 80) {
 							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
 					}
 				}
 			} else {
@@ -216,7 +225,7 @@ public class GameLogic extends Thread {
 	public void moveEvent(String keyName) {
 		double newX = player.getField().getX();
 		double newY = player.getField().getY();
-
+		
 		switch (keyName) {
 		case "W":
 			newY -= 30;
@@ -265,11 +274,15 @@ public class GameLogic extends Thread {
 		default:
 			break;
 		}
+		
 		double x = newX;
 		double y = newY;
 
+		System.out.println("Playerposition: (" + x + "|" + y + ")");
+		
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
+		
 		if (newField.isPresent()) {
 			if (!newField.get().equals(player.getField())) {
 				if (!newField.get().isBlocked()) {
@@ -286,6 +299,23 @@ public class GameLogic extends Thread {
 						lastMovementTime = System.currentTimeMillis();
 						lastMovement = keyName;
 						Field newF = newField.get();
+						if (newF.getType().equals(FieldType.UEBERGANG)) {
+							if (x == 570) {
+								newX = 0;
+							} else if (x == 0) {
+								newX = 570;
+							} else if (y == 480) {
+								newY = 30;
+							} else if (y == 0) {
+								newY = 480;
+							}
+							newF.setX(newX);
+							newF.setY(newY);
+							double xx = newX;
+							double yy = newY;
+							newField = mapView.getFields().stream().filter(each -> each.getX() == xx && each.getY() == yy)
+									.findFirst();
+						}
 						player.getField().setEntity(null);
 						newF.setEntity(player);
 						player.setField(newField.get());
@@ -306,6 +336,7 @@ public class GameLogic extends Thread {
 					}
 
 				}
+				
 			}
 		}
 

@@ -28,6 +28,7 @@ public class Pokemon {
 	private int xp;
 	private double base_hp;
 	private double spawn;
+	private boolean trained;
 
 	@Override
 	public String toString() {
@@ -75,6 +76,7 @@ public class Pokemon {
 		this.spawn = pokemon.spawn;
 		this.xp = pokemon.xp;
 		this.hp = calculateHp();
+		this.trained = false;
 	}
 
 	// Getter + Setter
@@ -183,12 +185,12 @@ public class Pokemon {
 		double multiplierMon1 = 1;
 		if (effekt.table.get(mon2.getType()).containsKey(this.getType()))
 			multiplierMon1 = effekt.table.get(mon2.getType()).get(this.getType());
-		output = "==================== \n\n" + this.getName() + " Lvl: " + this.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
+		output = "==================== \n\nDein Pokemon:\n" + this.getName() + " Lvl: " + this.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
 
 		double multiplierMon2 = 1;
 		if (effekt.table.get(this.getType()).containsKey(mon2.getType()))
 			multiplierMon2 = effekt.table.get(this.getType()).get(mon2.getType());
-		output2 = "___________________ \n\n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
+		output2 = "___________________ \n\nGegnerisches Pokemon:\n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
 
 		int attMon1 = (int) (this.calculateAtt() * multiplierMon1);
 		int deffMon1 = this.calculateDeff();
@@ -202,7 +204,7 @@ public class Pokemon {
 		if (this.getInit() >= mon2.getInit()) {
 			while (this.getHp() > 0 && mon2.getHp() > 0) {
 				double crit = randomCrit();
-				double damage = (attMon1 * crit - (deffMon2 * 0.5));
+				double damage = (attMon1 * crit - (deffMon2 * 0.75));
 				if (damage <= 0) { damage = 1; }
 				mon2.setHp(mon2.getHp() - damage);
 				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + ") || Crit: " + crit;
@@ -257,14 +259,21 @@ public class Pokemon {
 	}
 
 	public int calculateAtt() {
-		int att = (int) ((Math.pow(level, 1.5) + 0.5) / 50 * this.att * (this.motivation/100));
+		int att = (int) ((level + 0.5) / 50 * this.att * (this.motivation/100));
 		// int att = (int) (((this.att + 8) * 2 + (1/4)) * level / 100) + 5;
+		if (this.trained == true) {
+			att = (int) (att * 1.5);
+		}
 		return att;
 	}
 
 	public int calculateDeff() {
-		int deff = (int) ((Math.pow(level, 1.5) + 10) / 100 * this.deff * (this.motivation/100));
+		int deff = (int) ((level + 0.5) / 50 * this.deff * (this.motivation/100));
 		// int deff = (int) (((this.deff + 8) * 2 + (1/4)) * level / 100) + 5;
+		if (this.trained == true) {
+			deff = (int) (deff * 1.5);
+		}
+		System.out.println("\nTrainerpokemon: " + this.trained + "\n");
 		return deff;
 	}
 
@@ -360,6 +369,14 @@ public class Pokemon {
 
 	public void setBase_hp(int base_hp) {
 		this.base_hp = base_hp;
+	}
+	
+	public boolean isTrained() {
+		return trained;
+	}
+
+	public void setTrained(boolean trained) {
+		this.trained = trained;
 	}
 
 }
