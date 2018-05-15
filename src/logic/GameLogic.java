@@ -32,6 +32,8 @@ import xml.GameData;
 	- 		Klick auf Beenden beendet Spiel
 	- CHECK Spielerposition bei Kartenwechsel anpassen
 	- CHECK	mehrere Übergänge auf einer Map
+	- 		Bild bei Entwicklung anpassen
+	- 		Maps bauen
 
 */
 
@@ -157,7 +159,7 @@ public class GameLogic extends Thread {
 			alert.getButtonTypes().add(kampfButton);
 		}
 
-		if (player.getPokemon().size() < 3) {
+		if (player.getPokemon().size() < 5) {
 			alert.getButtonTypes().add(fangButton);
 		}
 
