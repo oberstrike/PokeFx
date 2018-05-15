@@ -17,6 +17,7 @@ import application.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import logic.Entity;
+import logic.Player;
 
 @XStreamAlias("FIELD")
 public class Field {
@@ -112,7 +113,14 @@ public class Field {
 		}	
 		if (entity != null) {
 			BufferedImage image = SwingFXUtils.fromFXImage(getImage(), null);
-			BufferedImage entitysImage = SwingFXUtils.fromFXImage(entity.getImage(), null);
+			Image eImage = entity.getImage();
+			if(entity.getClass().equals(Player.class)) {
+				if(eImage==null) {
+					eImage = Main.player_straight;
+				}
+			}
+			
+			BufferedImage entitysImage = SwingFXUtils.fromFXImage(eImage, null);
 
 			BufferedImage combined = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 			Graphics g = combined.getGraphics();

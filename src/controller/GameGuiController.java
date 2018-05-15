@@ -74,7 +74,7 @@ public class GameGuiController implements Initializable {
 		anchor.setFocusTraversable(false);
 		anchor.requestFocus();
 		
-		logic = new GameLogic(mapView, anchor2);
+		logic = new GameLogic(mapView, anchor2, Main.gameData);
 		logic.setDaemon(true);
 		logic.start();
 

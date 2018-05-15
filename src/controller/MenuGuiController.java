@@ -30,6 +30,7 @@ public class MenuGuiController implements Initializable{
 		}else {
 			
 			Main.gameData = Main.xmlControll.getGame(selectedFile);
+			System.out.println(Main.gameData.getPlayer());
 			WindowChanger changer = new WindowChanger();
 			changer.changeWindow("/guis/GameGui.fxml", event);
 		}

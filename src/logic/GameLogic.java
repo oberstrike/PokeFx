@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import pokemon.Pokemon;
 import views.MapView;
 import views.PokemonView;
+import xml.GameData;
 
 /* Noch fehlt:
 
@@ -37,21 +38,29 @@ public class GameLogic extends Thread {
 	long lastMovement = 0;
 	AnchorPane anchor2;
 
-	public GameLogic(MapView mapView, AnchorPane anchor2) {
+	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
 		this.mapView = mapView;
 		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
 				.collect(Collectors.toList());
 
 		Field f = field.get(new Random().nextInt(field.size()));
-		player = new Player();
-
-		player.setImage(new Image("/images/player_straight.png"));
-		player.setField(f);
-		f.setEntity(player);
+		
+		if(gameData.getPlayer()==null) {
+			player = new Player();
+			player.setImage(new Image("/images/player_straight.png"));
+			player.setField(f);
+			f.setEntity(player);
+			Main.gameData.setPlayer(player);
+		}else {
+			player = gameData.getPlayer();
+			System.out.println("Player: " + player);
+		}
+		
+		
 		mapView.update();
 		this.anchor2 = anchor2;
 	}
-
+	
 	public void update() {
 		Platform.runLater(() -> {
 			this.mapView.update();

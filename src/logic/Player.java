@@ -20,6 +20,11 @@ public class Player implements Entity {
 	@XStreamOmitField
 	private Image image;
 
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", field=" + field + ", pokemons=" + pokemons + "]";
+	}
+
 	private List<Pokemon> pokemons = new ArrayList<>();
 	private Item[] item = new Item[5];
 	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
