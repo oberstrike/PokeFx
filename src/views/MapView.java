@@ -23,8 +23,8 @@ public class MapView extends AnchorPane {
 			ImageView image = new ImageView(field.getImage());
 			image.setX(field.getX());
 			image.setY(field.getY());
-			image.setFitWidth(40);
-			image.setFitHeight(40);
+			image.setFitWidth(30);
+			image.setFitHeight(30);
 			this.getChildren().add(image);
 		}
 	}
@@ -40,8 +40,8 @@ public class MapView extends AnchorPane {
 			ImageView image = new ImageView(field.getImage());
 			image.setX(field.getX());
 			image.setY(field.getY());
-			image.setFitWidth(40);
-			image.setFitHeight(40);
+			image.setFitWidth(30);
+			image.setFitHeight(30);
 			this.getChildren().add(image);
 		}
 	}
@@ -53,8 +53,8 @@ public class MapView extends AnchorPane {
 			ImageView image = new ImageView(each.getImage());
 			image.setX(each.getX());
 			image.setY(each.getY());
-			image.setFitWidth(40);
-			image.setFitHeight(40);
+			image.setFitWidth(30);
+			image.setFitHeight(30);
 			this.getChildren().add(image);	
 		});	
 	}
