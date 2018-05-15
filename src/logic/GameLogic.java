@@ -219,19 +219,19 @@ public class GameLogic extends Thread {
 
 		switch (keyName) {
 		case "W":
-			newY -= 40;
+			newY -= 30;
 			player.setImage(Main.player_straight);
 			break;
 		case "D":
-			newX += 40;
+			newX += 30;
 			player.setImage(Main.player_right);
 			break;
 		case "S":
-			newY += 40;
+			newY += 30;
 			player.setImage(Main.player_back);
 			break;
 		case "A":
-			newX -= 40;
+			newX -= 30;
 			player.setImage(Main.player_left);
 			break;
 		case "Space":
