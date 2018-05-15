@@ -23,6 +23,7 @@ public class Main extends Application {
 	public static Image player_right;
 	public static Image player_straight;
 	public static Image player_back;
+	public static Image uebergang;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
 	
@@ -40,6 +41,8 @@ public class Main extends Application {
 			hohesgrass = new Image("/images/hohesgrass.png");
 			sand = new Image("/images/sand.png");
 			tiefersand = new Image("/images/tiefersand.png");
+			uebergang = new Image("/images/uebergang.png");
+			
 			
 			player_left = new Image("/images/player_left.png");
 			player_right = new Image("/images/player_right.png");

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -46,17 +47,22 @@ public class Map {
 	}
 
 	public List<Field> getSuccesors(Field field) {
-		double x = field.getX();
-		double y = field.getY();
-
 		List<Optional<Field>> oList = new ArrayList<>();
 		oList.add(leftField(field));
 		oList.add(rightField(field));
 		oList.add(upField(field));
 		oList.add(bottomField(field));
-
 		return oList.stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 	}
+	
+	public double distanceTo(Field field1, Field field2) {
+		Vec2d v1 = new Vec2d(field1.getX(), field1.getY());
+		Vec2d v2 = new Vec2d(field2.getX(), field2.getY());
+		return v1.distance(v2);
+	}
+	
+
+	
 
 	public Optional<Field> leftField(Field field) {
 		return this.getFields().stream()

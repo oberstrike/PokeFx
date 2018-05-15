@@ -1,5 +1,6 @@
 package logic;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +63,13 @@ public class GameLogic extends Thread {
 
 	public void update() {
 		Platform.runLater(() -> {
+			
+			if(this.mapView.getFields().stream().anyMatch(each -> each.getEntity()!=null)) {
+				Field field = player.getField();
+				Field new_field = this.mapView.getFields().stream().filter(each -> each.getX() == field.getX() && each.getY() == field.getY()).findFirst().get();
+				player.setField(new_field);
+			}
+			
 			this.mapView.update();
 
 			long count = anchor2.getChildren().stream().filter(each -> each.getClass().equals(PokemonView.class))
@@ -104,7 +112,7 @@ public class GameLogic extends Thread {
 
 		if (player.getPokemon().size() > 0) {
 			listOfPokemons = mapView.getMap().getPokemons();
-			listOfPokemons.forEach(each -> each.setLevel(new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemon().size()));
+			listOfPokemons.forEach(each -> each.setLevel(1 + new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemon().size()));
 		} else {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
@@ -289,6 +297,10 @@ public class GameLogic extends Thread {
 								System.out.println("Ein wildes Pokemon greift an...");
 								fightMenu();
 							}
+						}else if(newF.getNextMap()!= null){
+							Map map = Main.xmlControll.getMap(new File(newF.getNextMap()));
+							mapView.setMap(map);
+							Main.gameData.setMap(map);
 						}
 						mapView.update();
 					}

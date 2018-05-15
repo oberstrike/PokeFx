@@ -30,6 +30,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.StringConverter;
@@ -122,6 +123,26 @@ public class CreateGuiController implements Initializable {
 		if (selected != null) {
 			Field field = Field.findFieldNextTo(event.getX(), event.getY(), mapView.getFields());
 			field.setType(FieldType.valueOf(selected));
+			if(field.getType().equals(FieldType.UEBERGANG)) {
+				TextInputDialog dialog = new TextInputDialog();
+				dialog.setTitle("Map Name");
+				dialog.setHeaderText("Fuellen Sie den Map-Namen ein");
+				dialog.setContentText("Name: ");
+				
+				Optional<String> result = dialog.showAndWait();
+				if(result.isPresent()) {
+					String string = result.get();
+					File file = new File("maps/" + string + ".xml");
+					System.out.println(file.exists());
+					System.out.println(file.getAbsolutePath());
+					if(file.exists()) {
+						field.setNextMap("maps/" + string + ".xml");
+					}
+				}
+				
+				
+			}
+			
 			mapView.update();
 		}
 
@@ -132,7 +153,7 @@ public class CreateGuiController implements Initializable {
 		fileChooser.setTitle("Choose XML");
 		fileChooser.getExtensionFilters().add(new ExtensionFilter(".xml", "*.xml"));
 
-		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
+		File selectedFile = fileChooser.showOpenDialog(Main.kprimaryStage);
 		if (selectedFile == null) {
 			System.out.println("Keine Datei geladen");
 		} else {

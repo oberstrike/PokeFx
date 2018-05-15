@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
@@ -19,6 +20,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import logic.Entity;
 import logic.Player;
+import xml.GameData;
 
 @XStreamAlias("FIELD")
 public class Field {
@@ -32,6 +34,7 @@ public class Field {
 	private double x;
 	private double y;
 	private Entity entity;
+	private String nextMap;
 	
 	@XStreamOmitField
 	private Image image;
@@ -45,6 +48,7 @@ public class Field {
 		this.setY(y);
 		applyImage();
 	}
+	
 
 	public static Field findFieldNextTo(double x, double y, List<Field> listOfFields) {
     	Vec2d localPoint = new Vec2d(x, y);
@@ -107,6 +111,9 @@ public class Field {
 			break;
 		case WASSER:
 			setImage(Main.wasser);
+			break;
+		case UEBERGANG:
+			setImage(Main.uebergang);
 			break;
 		default:
 			setImage(Main.grass);
@@ -178,4 +185,19 @@ public class Field {
 	public void setEntity(Entity entity) {
 		this.entity = entity;
 	}
+
+	/**
+	 * @return the nextMap
+	 */
+	public String getNextMap() {
+		return nextMap;
+	}
+
+	/**
+	 * @param nextMap the nextMap to set
+	 */
+	public void setNextMap(String nextMap) {
+		this.nextMap = nextMap;
+	}
+
 }
