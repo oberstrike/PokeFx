@@ -183,20 +183,20 @@ public class Pokemon {
 		double multiplierMon1 = 1;
 		if (effekt.table.get(mon2.getType()).containsKey(this.getType()))
 			multiplierMon1 = effekt.table.get(mon2.getType()).get(this.getType());
-		output = "==================== \n" + this.getName() + " Lvl: " + this.getLevel() + "\n------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
+		output = "==================== \n\n" + this.getName() + " Lvl: " + this.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
 
 		double multiplierMon2 = 1;
 		if (effekt.table.get(this.getType()).containsKey(mon2.getType()))
 			multiplierMon2 = effekt.table.get(this.getType()).get(mon2.getType());
-		output2 = "___________________ \n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
+		output2 = "___________________ \n\n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
 
 		int attMon1 = (int) (this.calculateAtt() * multiplierMon1);
 		int deffMon1 = this.calculateDeff();
 		int attMon2 = (int) (mon2.calculateAtt() * multiplierMon2);
 		int deffMon2 = mon2.calculateDeff();
 		
-		output += "\n ATK: " + attMon1 + " || DEF: " + deffMon1 + " || MOT: " + this.motivation;
-		output2 += "\n ATK: " + attMon2 + " || DEF: " + deffMon2 + " || MOT " + mon2.motivation;
+		output += "\n ATK: " + attMon1 + " || DEF: " + deffMon1 + " || MOT: " + this.motivation + "\n-------------- \n";
+		output2 += "\n ATK: " + attMon2 + " || DEF: " + deffMon2 + " || MOT " + mon2.motivation + "\n-------------- \n";
 
 		// wer beginnt?
 		if (this.getInit() >= mon2.getInit()) {
