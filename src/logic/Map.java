@@ -26,7 +26,7 @@ public class Map {
 	private double height = 500;
 
 	@XStreamOmitField
-	private double sides = 40;
+	private double sides = 30;
 
 	private List<Pokemon> pokemons = new ArrayList<>();
 

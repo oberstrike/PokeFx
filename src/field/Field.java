@@ -55,7 +55,7 @@ public class Field {
     	List<Vec2d> listOfVector = listOfFields.stream().map(Field::toVector).collect(Collectors.toList());	
     	double distance = listOfVector.stream().map(each -> localPoint.distance(each)).sorted().findFirst().get();
     	Vec2d vec = listOfVector.stream().filter(each -> each.distance(localPoint) == distance).findFirst().get(); ;
-    	Field field = listOfFields.stream().filter(each -> each.getX() == vec.x-20 && each.getY() == vec.y-20).findFirst().get();
+    	Field field = listOfFields.stream().filter(each -> each.getX() == vec.x-15 && each.getY() == vec.y-15).findFirst().get();
     	return field;
 	}
 	
@@ -69,7 +69,7 @@ public class Field {
 	}
 
 	public Vec2d toVector() {
-		return new Vec2d(this.x + 20, this.y + 20);
+		return new Vec2d(this.x + 15, this.y + 15);
 	}
 
 	public double getX() {
@@ -130,7 +130,7 @@ public class Field {
 			
 			BufferedImage entitysImage = SwingFXUtils.fromFXImage(eImage, null);
 
-			BufferedImage combined = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
+			BufferedImage combined = new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
 			Graphics g = combined.getGraphics();
 			g.drawImage(image, 0, 0, null);
 			g.drawImage(entitysImage, 0, 0, null);
