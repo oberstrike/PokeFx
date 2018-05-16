@@ -1,10 +1,8 @@
-/pokemon/
-/images/
 /application/
 /controller/
 /field/
-/guis/
 /logic/
+/pokemon/
 /views/
 /xml/
-/maps/
+/guis/

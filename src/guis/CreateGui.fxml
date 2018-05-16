@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -14,7 +17,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateGuiController">
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CreateGuiController">
    <children>
       <Label layoutX="729.0" layoutY="14.0" text="Bodenarten" />
       <ListView fx:id="liste" layoutX="660.0" layoutY="46.0" prefHeight="200.0" prefWidth="200.0" />
@@ -40,7 +43,7 @@
                   <ComboBox fx:id="pokeComboBox" prefHeight="31.0" prefWidth="127.0" promptText="Auswählen" GridPane.rowIndex="3" />
                   <Label text="Pokemontyp:" GridPane.rowIndex="1" />
                   <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addPokeType" prefHeight="31.0" prefWidth="92.0" text="Hinufügen" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" onAction="#deletePokeType" prefHeight="31.0" prefWidth="92.0" text="Entfernen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#deletePoke" prefHeight="31.0" prefWidth="92.0" text="Entfernen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="pokemonName" GridPane.rowIndex="2" />
                </children>
             </GridPane>
@@ -68,7 +71,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#newMap" text="Neu" />
                   <SeparatorMenuItem mnemonicParsing="false" onAction="#save" />
               <MenuItem mnemonicParsing="false" onAction="#save" text="Speichern" />
-                  <MenuItem onAction="#saveAs" mnemonicParsing="false" text="Speichern als..." />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Speichern als..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#load" text="Öffnen unter..." />
             </items>
@@ -78,6 +81,11 @@
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#entityMenu" text="Entity hinzufügen" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>

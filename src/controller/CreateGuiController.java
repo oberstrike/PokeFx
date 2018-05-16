@@ -6,9 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
 import com.thoughtworks.xstream.XStream;
 import application.Main;
 import application.WindowChanger;
@@ -45,7 +42,6 @@ public class CreateGuiController implements Initializable {
 	XStream stream;
 	String active = "";
 	MapView mapView;
-	ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
 
 	@FXML
 	private TextField name;
@@ -67,6 +63,13 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	private Button addBtn;
+	
+    @FXML
+    void entityMenu(ActionEvent event) {
+    	
+    	
+    }
+	
 
 	@FXML
 	void back(ActionEvent event) {
@@ -96,11 +99,11 @@ public class CreateGuiController implements Initializable {
 	}
 
 	@FXML
-	void deletePokeType(ActionEvent event) {
+	void deletePoke(ActionEvent event) {
 		Pokemon pokemon = pokeTypeList.getSelectionModel().getSelectedItem();
 		if (pokemon != null) {
 			pokeTypeList.getItems().remove(pokemon);
-			// mapView.getMap().getPokemonTypes()().remove(pokemon);
+			mapView.getMap().getPokemons().remove(pokemon);
 			addBtn.setDisable(false);
 		}
 
@@ -241,7 +244,7 @@ public class CreateGuiController implements Initializable {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose XML");
 		fileChooser.getExtensionFilters().add(new ExtensionFilter(".xml", "*.xml"));
-		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
+		File selectedFile = fileChooser.showOpenDialog(Main.kprimaryStage);
 		if (selectedFile == null) {
 
 		} else {
