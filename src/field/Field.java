@@ -130,12 +130,18 @@ public class Field {
 			}
 			
 			BufferedImage entitysImage = SwingFXUtils.fromFXImage(eImage, null);
-
+			BufferedImage inGrass = SwingFXUtils.fromFXImage(Main.inGrass, null);
+			
+			
 			BufferedImage combined = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 			Graphics g = combined.getGraphics();
 			g.drawImage(image, 0, 0, null);
 			g.drawImage(entitysImage, 0, 0, null);
-
+			if(type.equals(FieldType.HOHESGRASS) ) {
+				g.drawImage(inGrass, 0, 0, null);
+			}
+			
+			
 			Image combinedImage = SwingFXUtils.toFXImage(combined, null);
 			setImage(combinedImage);
 			
