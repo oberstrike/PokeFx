@@ -34,6 +34,7 @@ import xml.GameData;
 	- CHECK	mehrere Übergänge auf einer Map
 	- 		Bild bei Entwicklung anpassen
 	- CHECK	Maps bauen
+	- 		Pokedex im Spiel
 
 */
 
@@ -53,6 +54,11 @@ public class GameLogic extends Thread {
 
 		if (gameData.getPlayer() == null) {
 			player = new Player();
+			List<Integer> pokedexList = new ArrayList<>();
+			for (int i = 0; i <= 150; i++) {
+				pokedexList.add(0);
+			}
+			player.setPokedex(pokedexList);
 			player.setImage(new Image("/images/player_straight.png"));
 			player.setField(f);
 			f.setEntity(player);
@@ -137,9 +143,20 @@ public class GameLogic extends Thread {
 				sumChances -= currentPokemon.getSpawn();
 			}
 		}
+		
+		int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
+		String entryOutput = "";
+		if (entryPokedex == 1) {
+			entryOutput = "Du hast dieses Pokemon bereits gesehen.";
+		} else if (entryPokedex == 2) {
+			entryOutput = "Du hast dieses Pokemon bereits gefangen.";
+		} else {
+			entryOutput = "Ein Eintrag im Pokedex wurde hinzugefügt";
+			player.setPokedex(spawnedPokemon, 1);
+		}
 
 		alert.setHeaderText(
-				"Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel() + " ist erschienen");
+				"Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel() + " ist erschienen.\n" + entryOutput);
 		String pathToImg = "/pokemon/images/" + spawnedPokemon.getId() + ".png";
 		ImageView picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
 		picture.setLayoutX(0);
@@ -218,6 +235,9 @@ public class GameLogic extends Thread {
 							player.getPokemon().add(spawnedPokemon);
 							spawnedPokemon.setTrained(true);
 						}
+					}
+					if (spawnedPokemon.isTrained() == true) {
+						player.setPokedex(spawnedPokemon, 2);
 					}
 				}
 			} else {

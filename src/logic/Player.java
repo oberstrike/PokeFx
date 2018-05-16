@@ -29,7 +29,7 @@ public class Player implements Entity {
 	private List<Pokemon> pokemons = new ArrayList<>();
 	private Item[] item = new Item[5];
 	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
-	//private Item[] item = new Item[5];
+	private List<Integer> pokedex = new ArrayList<>();
 	
 	public Player(){
 		
@@ -77,6 +77,22 @@ public class Player implements Entity {
 	}
 	
 
+	public List<Integer> getPokedex() {
+		return pokedex;
+	}
+
+	public void setPokedex(Pokemon mon, int type) {
+		this.pokedex.set(mon.getId(), type);
+	}
+
+	public void setPokedex(int i, int type) {
+		this.pokedex.set(i, type);
+	}
+
+	public void setPokedex(List<Integer> pokedex) {
+		this.pokedex = pokedex;
+	}
+	
 	//Not needed.
 	@Override
 	public <T extends Entity> void interact(T entity) {
