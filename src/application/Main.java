@@ -25,6 +25,16 @@ public class Main extends Application {
 	public static Image player_back;
 	public static Image uebergang;
 	public static Image inGrass;
+	public static Image cactus_bottom;
+	public static Image cactus_top;
+	public static Image mtlb_grass;
+	public static Image mtlb_sand;
+	public static Image mtlf_grass;
+	public static Image mtlf_sand;
+	public static Image mtrb_grass;
+	public static Image mtrb_sand;
+	public static Image mtrf_grass;
+	public static Image mtrf_sand;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
 	
@@ -44,7 +54,16 @@ public class Main extends Application {
 			tiefersand = new Image("/images/tiefersand.png");
 			uebergang = new Image("/images/uebergang.png");
 			inGrass = new Image("/images/inGrass.png");
-			
+			cactus_bottom = new Image("/images/cactus_bottom.png");
+			cactus_top = new Image("/images/cactus_top.png");
+			mtlb_grass = new Image("/images/mtlb_grass.png");
+			mtlb_sand = new Image("/images/mtlb_sand.png");
+			mtlf_grass = new Image("/images/mtlf_grass.png");
+			mtlf_sand = new Image("/images/mtlf_sand.png");
+			mtrb_grass = new Image("/images/mtrb_grass.png");
+			mtrb_sand = new Image("/images/mtrb_sand.png");
+			mtrf_grass = new Image("/images/mtrf_grass.png");
+			mtrf_sand = new Image("/images/mtrf_sand.png");
 			
 			player_left = new Image("/images/player_left.png");
 			player_right = new Image("/images/player_right.png");

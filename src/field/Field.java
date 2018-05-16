@@ -116,6 +116,33 @@ public class Field {
 		case UEBERGANG:
 			setImage(Main.uebergang);
 			break;
+		case CACTUS_BOTTOM:
+			setImage(Main.cactus_bottom);
+			break;
+		case MTLB_GRASS:
+			setImage(Main.mtlb_grass);
+			break;
+		case MTLF_GRASS:
+			setImage(Main.mtlf_grass);
+			break;
+		case MTLF_SAND:
+			setImage(Main.mtlf_sand);
+			break;
+		case MTLB_SAND:
+			setImage(Main.mtlb_sand);
+			break;
+		case MTRB_GRASS:
+			setImage(Main.mtrb_grass);
+			break;
+		case MTRF_GRASS:
+			setImage(Main.mtrf_grass);
+			break;
+		case MTRF_SAND:
+			setImage(Main.mtrf_sand);
+			break;
+		case MTRB_SAND:
+			setImage(Main.mtrb_sand);
+			break;
 		default:
 			setImage(Main.grass);
 			break;
