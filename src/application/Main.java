@@ -31,6 +31,9 @@ public class Main extends Application {
 	public static Image baum_bottom;
 	public static Image baum_top;
 	
+	public static Image fels_water;
+	public static Image fels_grass;
+	public static Image fels_sand;
 	public static Image grass_bl;
 	
 	public static Image mtr_grass;
@@ -97,6 +100,9 @@ public class Main extends Application {
 			baum_bottom = new Image("/images/baum_bottom.png");
 			baum_top = new Image("/images/baum_top.png");
 			
+			fels_water = new Image("/images/fels_water.png");
+			fels_grass = new Image("/images/fels_grass.png");
+			fels_sand = new Image("/images/fels_sand.png");
 			grass_bl = new Image("/images/grass_bl.png");
 			
 			mtr_grass = new Image("/images/mtr_grass.png");
