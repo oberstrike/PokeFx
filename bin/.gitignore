@@ -1,8 +1,8 @@
-/logic/
 /application/
-/field/
-/images/
-/pokemon/
 /controller/
-/guis/
+/field/
+/logic/
+/pokemon/
 /views/
+/xml/
+/images/

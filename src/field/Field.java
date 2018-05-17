@@ -90,7 +90,28 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
-		return this.type.equals(FieldType.STEIN)||this.type.equals(FieldType.WASSER);
+		return this.type.equals(FieldType.STEIN)||
+				this.type.equals(FieldType.WASSER)||
+				this.type.equals(FieldType.MTLF_GRASS)||
+				this.type.equals(FieldType.MTLF_SAND)||
+				this.type.equals(FieldType.MTLF_WATER)||
+				this.type.equals(FieldType.MTRF_GRASS)||
+				this.type.equals(FieldType.MTRF_SAND)||
+				this.type.equals(FieldType.MTRF_WATER)||
+				this.type.equals(FieldType.MTLB_GRASS)||
+				this.type.equals(FieldType.MTLB_SAND)||
+				this.type.equals(FieldType.MTLB_WATER)||
+				this.type.equals(FieldType.MTRB_GRASS)||
+				this.type.equals(FieldType.MTRB_SAND)||
+				this.type.equals(FieldType.MTRB_WATER)||
+				this.type.equals(FieldType.MTIRB_WATER)||
+				this.type.equals(FieldType.MTIRF_WATER)||
+				this.type.equals(FieldType.MTILB_WATER)||
+				this.type.equals(FieldType.MTILF_WATER)||
+				this.type.equals(FieldType.CACTUS_BOTTOM)||
+				this.type.equals(FieldType.CACTUS_TOP)||
+				this.type.equals(FieldType.BAUM_BOTTOM)||
+				this.type.equals(FieldType.BAUM_TOP);
 	}
 	
 	public void applyImage() {
@@ -154,6 +175,18 @@ public class Field {
 			break;
 		case MTRB_WATER:
 			setImage(Main.mtrb_water);
+			break;
+		case MTR_SAND:
+			setImage(Main.mtr_sand);
+			break;
+		case MTL_SAND:
+			setImage(Main.mtl_sand);
+			break;
+		case MTB_SAND:
+			setImage(Main.mtb_sand);
+			break;
+		case MTF_SAND:
+			setImage(Main.mtf_sand);
 			break;
 		default:
 			setImage(Main.grass);

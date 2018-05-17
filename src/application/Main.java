@@ -27,6 +27,8 @@ public class Main extends Application {
 	public static Image inGrass;
 	public static Image cactus_bottom;
 	public static Image cactus_top;
+	public static Image baum_bottom;
+	public static Image baum_top;
 	public static Image mtlb_grass;
 	public static Image mtlb_sand;
 	public static Image mtlb_water;
@@ -39,6 +41,14 @@ public class Main extends Application {
 	public static Image mtrf_grass;
 	public static Image mtrf_sand;
 	public static Image mtrf_water;
+	public static Image mtirf_water;
+	public static Image mtirb_water;
+	public static Image mtilf_water;
+	public static Image mtilb_water;
+	public static Image mtr_sand;
+	public static Image mtb_sand;
+	public static Image mtf_sand;
+	public static Image mtl_sand;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
 	
@@ -60,6 +70,8 @@ public class Main extends Application {
 			inGrass = new Image("/images/inGrass.png");
 			cactus_bottom = new Image("/images/cactus_bottom.png");
 			cactus_top = new Image("/images/cactus_top.png");
+			baum_bottom = new Image("/images/baum_bottom.png");
+			baum_top = new Image("/images/baum_top.png");
 			mtlb_grass = new Image("/images/mtlb_grass.png");
 			mtlb_sand = new Image("/images/mtlb_sand.png");
 			mtlf_grass = new Image("/images/mtlf_grass.png");
@@ -73,6 +85,14 @@ public class Main extends Application {
 			mtrb_sand = new Image("/images/mtrb_sand.png");
 			mtrf_grass = new Image("/images/mtrf_grass.png");
 			mtrf_sand = new Image("/images/mtrf_sand.png");
+			mtilf_water = new Image("/images/mtilf_water.png");
+			mtilb_water = new Image("/images/mtilb_water.png");
+			mtirf_water = new Image("/images/mtirf_water.png");
+			mtirb_water = new Image("/images/mtirb_water.png");
+			mtr_sand = new Image("/images/mtr_sand.png");
+			mtl_sand = new Image("/images/mtl_sand.png");
+			mtb_sand = new Image("/images/mtb_sand.png");
+			mtf_sand = new Image("/images/mtf_sand.png");
 			
 			player_left = new Image("/images/player_left.png");
 			player_right = new Image("/images/player_right.png");
