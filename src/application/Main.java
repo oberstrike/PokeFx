@@ -39,6 +39,7 @@ public class Main extends Application {
 	public static Image mtrf_grass;
 	public static Image mtrf_sand;
 	public static Image mtrf_water;
+	public static Image man_1_straight;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
 	
@@ -78,6 +79,10 @@ public class Main extends Application {
 			player_right = new Image("/images/player_right.png");
 			player_straight = new Image("/images/player_straight.png");
 			player_back = new Image("/images/player_back.png");
+			
+			man_1_straight = new Image("/images/man_1_straight.png");
+			
+			
 			
 			xmlControll = new XmlControll();
 			

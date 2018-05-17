@@ -9,8 +9,12 @@ import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import application.Main;
 import field.Field;
 import field.FieldType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
 
@@ -39,11 +43,31 @@ public class Map {
 	}
 
 	public Map(FieldType fieldType) {
+		
 		for (int i = 0; i < width; i += sides) {
 			for (int j = 0; j < height; j += sides) {
 				fields.add(new Field(i, j, fieldType));
 			}
 		}
+		
+		Entity entity = null;
+		if(!fieldType.isBlocked()) {
+			entity = new Entity() {
+				
+				@Override
+				public <T extends Entity> void interact(T entity) {
+					new Alert(AlertType.INFORMATION, "Hallo").show();					
+				}
+				
+				@Override
+				public Image getImage() {
+					return Main.man_1_straight;
+				}
+			};
+			fields.stream().findAny().get().setEntity(entity);
+		}
+		
+		
 	}
 
 	public List<Field> getSuccesors(Field field) {
@@ -60,9 +84,6 @@ public class Map {
 		Vec2d v2 = new Vec2d(field2.getX(), field2.getY());
 		return v1.distance(v2);
 	}
-	
-
-	
 
 	public Optional<Field> leftField(Field field) {
 		return this.getFields().stream()

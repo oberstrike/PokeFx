@@ -90,7 +90,7 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
-		return this.type.equals(FieldType.STEIN)||this.type.equals(FieldType.WASSER);
+		return this.getType().isBlocked();
 	}
 	
 	public void applyImage() {
