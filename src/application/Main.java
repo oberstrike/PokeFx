@@ -63,7 +63,6 @@ public class Main extends Application {
 	public static Image mtb_sand;
 	public static Image mtf_sand;
 	public static Image mtl_sand;
-<<<<<<< HEAD
 	public static Image mtlb_sand;
 	public static Image mtlf_sand;
 	public static Image mtrf_sand;
@@ -73,8 +72,6 @@ public class Main extends Application {
 	public static Image mtilf_sand;
 	public static Image mtilb_sand;
 
-=======
->>>>>>> 6a994c49163726a71387d72df2b98e625b039284
 	public static Image man_1_straight;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
