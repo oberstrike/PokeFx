@@ -1,39 +1,6 @@
 package field;
 
 public enum FieldType {
-<<<<<<< HEAD
-	STEIN,
-	WASSER,
-	GRASS,
-	HOHESGRASS,
-	UEBERGANG,
-	TIEFERSAND,
-	SAND,
-	CACTUS_BOTTOM,
-	CACTUS_TOP,
-	MTLB_GRASS,
-	MTLB_SAND,
-	MTLF_GRASS,
-	MTLF_SAND,
-	MTRB_GRASS,
-	MTRB_SAND,
-	MTRF_GRASS,
-	MTRF_SAND,
-	MTLB_WATER,
-	MTLF_WATER,
-	MTRB_WATER,
-	MTRF_WATER,
-	MTILB_WATER,
-	MTILF_WATER,
-	MTIRB_WATER,
-	MTIRF_WATER,
-	BAUM_TOP,
-	BAUM_BOTTOM,
-	MTR_SAND,
-	MTL_SAND,
-	MTB_SAND,
-	MTF_SAND;
-=======
 	STEIN(true),
 	WASSER(true),
 	GRASS(false),
@@ -41,20 +8,51 @@ public enum FieldType {
 	UEBERGANG(false),
 	TIEFERSAND(false),
 	SAND(false),
+	
 	CACTUS_BOTTOM(true),
 	CACTUS_TOP(true),
-	MTLB_GRASS(false),
-	MTLB_SAND(false),
-	MTLF_GRASS(false),
-	MTLF_SAND(false),
-	MTRB_GRASS(false),
-	MTRB_SAND(false),
-	MTRF_GRASS(false),
-	MTRF_SAND(false),
+	BAUM_TOP(true),
+	BAUM_BOTTOM(true),
+	
+	GRASS_BL(true),
+	MTR_GRASS(true),
+	MTL_GRASS(true),
+	MTB_GRASS(true),
+	MTF_GRASS(true),
+	MTLB_GRASS(true),
+	MTLF_GRASS(true),
+	MTRB_GRASS(true),
+	MTRF_GRASS(true),
+	MTILB_GRASS(true),
+	MTILF_GRASS(true),
+	MTIRB_GRASS(true),
+	MTIRF_GRASS(true),
+	
+	MTR_WATER(true),
+	MTL_WATER(true),
+	MTB_WATER(true),
+	MTF_WATER(true),
 	MTLB_WATER(true),
 	MTLF_WATER(true),
 	MTRB_WATER(true),
-	MTRF_WATER(true);
+	MTRF_WATER(true),
+	MTILB_WATER(true),
+	MTILF_WATER(true),
+	MTIRB_WATER(true),
+	MTIRF_WATER(true),
+	
+	MTR_SAND(true),
+	MTL_SAND(true),
+	MTB_SAND(true),
+	MTF_SAND(true),
+	MTLB_SAND(true),
+	MTLF_SAND(true),
+	MTRB_SAND(true),
+	MTRF_SAND(true),
+	MTILB_SAND(true),
+	MTILF_SAND(true),
+	MTIRB_SAND(true),
+	MTIRF_SAND(true),;
 	
 	final private boolean blocked;
 	
@@ -65,7 +63,4 @@ public enum FieldType {
 	private FieldType(boolean blocked) {
 		this.blocked = blocked;
 	}
-	
-	
->>>>>>> eae0be5c315c28424600bc3bd386003e2ae7c5a0
 }

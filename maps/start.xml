@@ -627,12 +627,12 @@
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_SAND</type>
 			<x>210.0</x>
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_SAND</type>
 			<x>210.0</x>
 			<y>210.0</y>
 		</FIELD>
@@ -707,22 +707,22 @@
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTILB_SAND</type>
 			<x>240.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>240.0</x>
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>240.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTF_SAND</type>
 			<x>240.0</x>
 			<y>240.0</y>
 		</FIELD>

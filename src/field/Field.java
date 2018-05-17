@@ -90,32 +90,9 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
-<<<<<<< HEAD
-		return this.type.equals(FieldType.STEIN)||
-				this.type.equals(FieldType.WASSER)||
-				this.type.equals(FieldType.MTLF_GRASS)||
-				this.type.equals(FieldType.MTLF_SAND)||
-				this.type.equals(FieldType.MTLF_WATER)||
-				this.type.equals(FieldType.MTRF_GRASS)||
-				this.type.equals(FieldType.MTRF_SAND)||
-				this.type.equals(FieldType.MTRF_WATER)||
-				this.type.equals(FieldType.MTLB_GRASS)||
-				this.type.equals(FieldType.MTLB_SAND)||
-				this.type.equals(FieldType.MTLB_WATER)||
-				this.type.equals(FieldType.MTRB_GRASS)||
-				this.type.equals(FieldType.MTRB_SAND)||
-				this.type.equals(FieldType.MTRB_WATER)||
-				this.type.equals(FieldType.MTIRB_WATER)||
-				this.type.equals(FieldType.MTIRF_WATER)||
-				this.type.equals(FieldType.MTILB_WATER)||
-				this.type.equals(FieldType.MTILF_WATER)||
-				this.type.equals(FieldType.CACTUS_BOTTOM)||
-				this.type.equals(FieldType.CACTUS_TOP)||
-				this.type.equals(FieldType.BAUM_BOTTOM)||
-				this.type.equals(FieldType.BAUM_TOP);
-=======
+
 		return this.getType().isBlocked();
->>>>>>> eae0be5c315c28424600bc3bd386003e2ae7c5a0
+
 	}
 	
 	public void applyImage() {
@@ -144,17 +121,24 @@ public class Field {
 		case CACTUS_BOTTOM:
 			setImage(Main.cactus_bottom);
 			break;
+			
+		case MTR_GRASS:
+			setImage(Main.mtr_grass);
+			break;
+		case MTL_GRASS:
+			setImage(Main.mtl_grass);
+			break;
+		case MTB_GRASS:
+			setImage(Main.mtb_grass);
+			break;
+		case MTF_GRASS:
+			setImage(Main.mtf_grass);
+			break;
 		case MTLB_GRASS:
 			setImage(Main.mtlb_grass);
 			break;
 		case MTLF_GRASS:
 			setImage(Main.mtlf_grass);
-			break;
-		case MTLF_SAND:
-			setImage(Main.mtlf_sand);
-			break;
-		case MTLB_SAND:
-			setImage(Main.mtlb_sand);
 			break;
 		case MTRB_GRASS:
 			setImage(Main.mtrb_grass);
@@ -162,11 +146,30 @@ public class Field {
 		case MTRF_GRASS:
 			setImage(Main.mtrf_grass);
 			break;
-		case MTRF_SAND:
-			setImage(Main.mtrf_sand);
+		case MTILB_GRASS:
+			setImage(Main.mtilb_grass);
 			break;
-		case MTRB_SAND:
-			setImage(Main.mtrb_sand);
+		case MTILF_GRASS:
+			setImage(Main.mtilf_grass);
+			break;
+		case MTIRB_GRASS:
+			setImage(Main.mtirb_grass);
+			break;
+		case MTIRF_GRASS:
+			setImage(Main.mtirf_grass);
+			break;
+			
+		case MTR_WATER:
+			setImage(Main.mtr_water);
+			break;
+		case MTL_WATER:
+			setImage(Main.mtl_water);
+			break;
+		case MTB_WATER:
+			setImage(Main.mtb_water);
+			break;
+		case MTF_WATER:
+			setImage(Main.mtf_water);
 			break;
 		case MTLF_WATER:
 			setImage(Main.mtlf_water);
@@ -180,6 +183,19 @@ public class Field {
 		case MTRB_WATER:
 			setImage(Main.mtrb_water);
 			break;
+		case MTILF_WATER:
+			setImage(Main.mtilf_water);
+			break;
+		case MTILB_WATER:
+			setImage(Main.mtilb_water);
+			break;
+		case MTIRF_WATER:
+			setImage(Main.mtirf_water);
+			break;
+		case MTIRB_WATER:
+			setImage(Main.mtirb_water);
+			break;
+			
 		case MTR_SAND:
 			setImage(Main.mtr_sand);
 			break;
@@ -192,6 +208,31 @@ public class Field {
 		case MTF_SAND:
 			setImage(Main.mtf_sand);
 			break;
+		case MTLF_SAND:
+			setImage(Main.mtlf_sand);
+			break;
+		case MTLB_SAND:
+			setImage(Main.mtlb_sand);
+			break;
+		case MTRF_SAND:
+			setImage(Main.mtrf_sand);
+			break;
+		case MTRB_SAND:
+			setImage(Main.mtrb_sand);
+			break;
+		case MTILF_SAND:
+			setImage(Main.mtilf_sand);
+			break;
+		case MTILB_SAND:
+			setImage(Main.mtilb_sand);
+			break;
+		case MTIRF_SAND:
+			setImage(Main.mtirf_sand);
+			break;
+		case MTIRB_SAND:
+			setImage(Main.mtirb_sand);
+			break;	
+			
 		default:
 			setImage(Main.grass);
 			break;
