@@ -90,10 +90,6 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
-<<<<<<< HEAD
-
-=======
->>>>>>> 6a994c49163726a71387d72df2b98e625b039284
 		return this.getType().isBlocked();
 
 	}
@@ -123,8 +119,7 @@ public class Field {
 			break;
 		case CACTUS_BOTTOM:
 			setImage(Main.cactus_bottom);
-			break;
-			
+			break;	
 		case MTR_GRASS:
 			setImage(Main.mtr_grass);
 			break;
@@ -161,7 +156,6 @@ public class Field {
 		case MTIRF_GRASS:
 			setImage(Main.mtirf_grass);
 			break;
-			
 		case MTR_WATER:
 			setImage(Main.mtr_water);
 			break;
