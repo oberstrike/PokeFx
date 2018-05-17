@@ -97,7 +97,6 @@ public class GameLogic extends Thread {
 						Pokemon pokemon = player.getPokemon().get(index);
 						int newIndex = (index == 0 ? player.getPokemon().size() - 1 : index-1);
 						PokemonView view = ((PokemonView) anchor2.getChildren().get(newIndex));
-						System.out.println(newIndex);
 						Pokemon temp = player.getPokemon().get(newIndex);
 						player.getPokemon().set(newIndex, pokemon);
 						player.getPokemon().set(index, temp);
@@ -111,12 +110,7 @@ public class GameLogic extends Thread {
 			} else {
 				for (int i = 0; i < player.getPokemon().size(); i++) {
 					PokemonView view = ((PokemonView) anchor2.getChildren().get(i));
-					if(!view.getPokemon().equals(player.getPokemon().get(i))) {
-						view.setPokemon(player.getPokemon().get(i));
-					}
 					view.update();
-					
-					
 				}
 			}
 			mapView.requestFocus();
