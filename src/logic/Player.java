@@ -17,6 +17,7 @@ public class Player implements Entity {
 
 	private String name;
 	private Field field;
+	private List<Boolean> wins = new ArrayList<>();
 
 	@XStreamOmitField
 	private Image image;
@@ -91,6 +92,18 @@ public class Player implements Entity {
 
 	public void setPokedex(List<Integer> pokedex) {
 		this.pokedex = pokedex;
+	}
+
+	public List<Boolean> getWins() {
+		return wins;
+	}
+	
+	public boolean getWins(int i) {
+		return wins.get(i);
+	}
+
+	public void setWins(List<Boolean> wins) {
+		this.wins = wins;
 	}
 
 

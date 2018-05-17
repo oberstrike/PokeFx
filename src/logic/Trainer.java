@@ -15,6 +15,7 @@ public class Trainer implements Entity{
 	private Image image;
 	
 	private String name;
+	private boolean win;
 	private List<Pokemon> pokemons = new ArrayList<>();
 	
 	public Trainer(Image image, String name, List<Pokemon> pokemons) {
@@ -67,6 +68,14 @@ public class Trainer implements Entity{
 
 	public void setImage(Image image) {
 		this.image = image;
+	}
+
+	public boolean isWin() {
+		return win;
+	}
+
+	public void setWin(boolean win) {
+		this.win = win;
 	}
 
 }

@@ -103,6 +103,7 @@ public class Main extends Application {
 	public static Image mtilf_sand;
 	public static Image mtilb_sand;
 	public static Image man_1_straight;
+	public static Image man_2_straight;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
 	
@@ -207,6 +208,7 @@ public class Main extends Application {
 			player_back = new Image("/images/player_back.png");
 	
 			man_1_straight = new Image("/images/man_1_straight.png");
+			man_2_straight = new Image("/images/man_2_straight.png");
 			xmlControll = new XmlControll();
 			
 			Scene scene = new Scene(root, 330, 400);

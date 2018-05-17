@@ -292,7 +292,7 @@ public class GameLogic extends Thread {
 					oField = mapView.getMap().rightField(player.getField());
 				else if(playerImage.equals(Main.player_straight))
 					oField = mapView.getMap().upField(player.getField());
-				else if(playerImage.equals(Main.player_right))
+				else if(playerImage.equals(Main.player_back))
 					oField = mapView.getMap().bottomField(player.getField());
 				if (oField.isPresent()) {
 					Field field = oField.get();
@@ -329,21 +329,21 @@ public class GameLogic extends Thread {
 
 						Field newF = newField.get();
 						if (newF.getType().equals(FieldType.UEBERGANG)) {
-							if (x == 570) {
-								newX = 0;
-							} else if (x == 0) {
-								newX = 570;
-							} else if (y == 480) {
-								newY = 0;
-							} else if (y == 0) {
-								newY = 480;
-							}
-							newF.setX(newX);
-							newF.setY(newY);
-							double xx = newX;
-							double yy = newY;
-							newField = mapView.getFields().stream()
-									.filter(each -> each.getX() == xx && each.getY() == yy).findFirst();
+								if (x == 570) {
+									newX = 0;
+								} else if (x == 0) {
+									newX = 570;
+								} else if (y == 480) {
+									newY = 0;
+								} else if (y == 0) {
+									newY = 480;
+								}
+								newF.setX(newX);
+								newF.setY(newY);
+								double xx = newX;
+								double yy = newY;
+								newField = mapView.getFields().stream()
+										.filter(each -> each.getX() == xx && each.getY() == yy).findFirst();
 						}
 						player.getField().setEntity(null);
 						newF.setEntity(player);
@@ -371,8 +371,50 @@ public class GameLogic extends Thread {
 	}
 
 	private void fightAgainstTrainer(Trainer entity) {
-		new Alert(AlertType.INFORMATION, "Kampf gegen " + entity.getName()).show();
-		
+//		new Alert(AlertType.CONFIRMATION, "Kampf gegen " + entity.getName() + ". Bereits gewonnen: " + entity.isWin()).show();
+		ButtonType acceptButton = new ButtonType("Ok");
+		Alert acceptAlert = new Alert(AlertType.CONFIRMATION);
+		acceptAlert.setHeaderText("Hey, du!");
+		acceptAlert.setContentText(entity.getName() + ": Ja, du! Meinen Pokemon ist langweilig.\nIch wette, dass sie deine mit links besiegen!");
+		acceptAlert.getButtonTypes().setAll(acceptButton);
+		acceptAlert.showAndWait();
+		Pokemon winner = null;
+		for (int j = 0; j < entity.getPokemons().size(); j++) {
+			Pokemon enemyPokemon = entity.getPokemons().get(j);
+			acceptAlert.setHeaderText("Kampf gegen " + entity.getName());
+			acceptAlert.setContentText(entity.getName() + " schickt " + enemyPokemon.getName() + " Lvl " + enemyPokemon.getLevel() + " in den Kampf.");
+			acceptAlert.getButtonTypes().setAll(acceptButton);
+			acceptAlert.showAndWait();
+			for (int i = 0; i < player.getPokemon().size(); i++) {
+				Pokemon pokemon = player.getPokemon().get(i);
+				int currentLvl = pokemon.getLevel();
+				winner = pokemon.fight(enemyPokemon);
+				if (winner != null) {
+					if (player.getPokemon().contains(winner)) {
+						System.out.println(pokemon.getName() + " hat " + enemyPokemon.calcXp() + " Xp erhalten");
+						winner.addXp(enemyPokemon.calcXp());
+						acceptAlert.setHeaderText(winner.getName() + " hat " + enemyPokemon.calcXp()
+								+ " Erfahrungspunkte erhalten.");
+						if (winner.getLevel() != currentLvl) {
+							acceptAlert.setContentText(winner.getName() + " ist ein Level aufgestiegen.");
+						}
+						acceptAlert.getButtonTypes().setAll(acceptButton);
+						Optional<ButtonType> result = acceptAlert.showAndWait();
+						entity.setWin(true);
+						break;
+					} else {
+//						new Alert(AlertType.INFORMATION, "Haha! Was habe ich gesagt? Meine Pokemon sind nicht so einfach zu besiegen!\n" + winner.getName() + " hat " + " dein Pokemon besiegt.").show();
+						acceptAlert.setHeaderText(winner.getName() + " hat " + " dein Pokemon besiegt.");
+						acceptAlert.setContentText(entity.getName() + ": Haha! Was habe ich gesagt?\nMeine Pokemon sind nicht so einfach zu besiegen!");
+						acceptAlert.getButtonTypes().setAll(acceptButton);
+						acceptAlert.showAndWait();
+						for (int k = 0; k < entity.getPokemons().size(); k++) {
+							entity.getPokemons().get(k).setHp(entity.getPokemons().get(k).getBase_hp());;
+						}
+					}
+				}
+			}
+		}
 		
 	}
 }
