@@ -120,6 +120,9 @@ public class Field {
 		case CACTUS_BOTTOM:
 			setImage(Main.cactus_bottom);
 			break;	
+		case CACTUS_TOP:
+			setImage(Main.cactus_top);
+			break;	
 		case MTR_GRASS:
 			setImage(Main.mtr_grass);
 			break;

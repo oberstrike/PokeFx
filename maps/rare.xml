@@ -717,12 +717,12 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTLB_WATER</type>
 			<x>240.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTLF_WATER</type>
 			<x>240.0</x>
 			<y>240.0</y>
 		</FIELD>
@@ -802,12 +802,12 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTB_WATER</type>
 			<x>270.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTF_WATER</type>
 			<x>270.0</x>
 			<y>240.0</y>
 		</FIELD>
@@ -887,12 +887,12 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTB_WATER</type>
 			<x>300.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTF_WATER</type>
 			<x>300.0</x>
 			<y>240.0</y>
 		</FIELD>
@@ -973,12 +973,12 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRB_WATER</type>
 			<x>330.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRF_WATER</type>
 			<x>330.0</x>
 			<y>240.0</y>
 		</FIELD>
