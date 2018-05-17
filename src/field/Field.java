@@ -90,32 +90,8 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
-<<<<<<< HEAD
-		return this.type.equals(FieldType.STEIN)||
-				this.type.equals(FieldType.WASSER)||
-				this.type.equals(FieldType.MTLF_GRASS)||
-				this.type.equals(FieldType.MTLF_SAND)||
-				this.type.equals(FieldType.MTLF_WATER)||
-				this.type.equals(FieldType.MTRF_GRASS)||
-				this.type.equals(FieldType.MTRF_SAND)||
-				this.type.equals(FieldType.MTRF_WATER)||
-				this.type.equals(FieldType.MTLB_GRASS)||
-				this.type.equals(FieldType.MTLB_SAND)||
-				this.type.equals(FieldType.MTLB_WATER)||
-				this.type.equals(FieldType.MTRB_GRASS)||
-				this.type.equals(FieldType.MTRB_SAND)||
-				this.type.equals(FieldType.MTRB_WATER)||
-				this.type.equals(FieldType.MTIRB_WATER)||
-				this.type.equals(FieldType.MTIRF_WATER)||
-				this.type.equals(FieldType.MTILB_WATER)||
-				this.type.equals(FieldType.MTILF_WATER)||
-				this.type.equals(FieldType.CACTUS_BOTTOM)||
-				this.type.equals(FieldType.CACTUS_TOP)||
-				this.type.equals(FieldType.BAUM_BOTTOM)||
-				this.type.equals(FieldType.BAUM_TOP);
-=======
 		return this.getType().isBlocked();
->>>>>>> eae0be5c315c28424600bc3bd386003e2ae7c5a0
+
 	}
 	
 	public void applyImage() {
