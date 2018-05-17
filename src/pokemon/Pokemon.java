@@ -335,15 +335,8 @@ public class Pokemon {
 				if(key.isPresent()) {
 					Pokemon pokemon = Main.xmlControll.getPokemonByName(evolvingdex.get(key.get()));
 					evolveTo(pokemon);
-					
-				}
-				
-				
+				}	
 			}
-			
-			
-			
-
 		}
 	}
 	
