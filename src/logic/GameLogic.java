@@ -306,7 +306,10 @@ public class GameLogic extends Thread {
 				if (oField.isPresent()) {
 					Field field = oField.get();
 					if (field.getEntity() != null) {
-						field.getEntity().interact(player);
+						if(field.getClass().equals(Trainer.class)) {
+							System.out.println("Hallo von " + ((Trainer)field.getEntity()).getName());
+						}
+						
 					}
 				}
 			}

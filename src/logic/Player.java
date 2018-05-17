@@ -92,14 +92,6 @@ public class Player implements Entity {
 	public void setPokedex(List<Integer> pokedex) {
 		this.pokedex = pokedex;
 	}
-	
-	//Not needed.
-	@Override
-	public <T extends Entity> void interact(T entity) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 
 
 
