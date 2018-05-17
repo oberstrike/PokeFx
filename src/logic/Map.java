@@ -53,10 +53,14 @@ public class Map {
 		Entity entity = null;
 		if(!fieldType.isBlocked()) {
 			entity = new Entity() {
+				private String statement = "Hallo ich mache dich kaputt.";
+				
+				
+				
 				
 				@Override
 				public <T extends Entity> void interact(T entity) {
-					new Alert(AlertType.INFORMATION, "Hallo").show();					
+					
 				}
 				
 				@Override

@@ -71,10 +71,6 @@ public class Main extends Application {
 	public static Image mtirb_sand;
 	public static Image mtilf_sand;
 	public static Image mtilb_sand;
-<<<<<<< HEAD
-=======
-
->>>>>>> 2c1df63d970cf055e224facf13e031bcc0b05046
 	public static Image man_1_straight;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
