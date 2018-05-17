@@ -14,6 +14,10 @@ public enum FieldType {
 	BAUM_TOP(true),
 	BAUM_BOTTOM(true),
 	
+	FELS_WATER(true),
+	FELS_GRASS(true),
+	FELS_SAND(true),
+	
 	GRASS_BL(true),
 	MTR_GRASS(true),
 	MTL_GRASS(true),

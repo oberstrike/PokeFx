@@ -117,6 +117,15 @@ public class Field {
 		case UEBERGANG:
 			setImage(Main.uebergang);
 			break;
+		case FELS_WATER:
+			setImage(Main.fels_water);
+			break;
+		case FELS_GRASS:
+			setImage(Main.fels_grass);
+			break;
+		case FELS_SAND:
+			setImage(Main.fels_sand);
+			break;
 		case CACTUS_BOTTOM:
 			setImage(Main.cactus_bottom);
 			break;	
