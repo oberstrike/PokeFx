@@ -19,6 +19,7 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import field.Field;
 import logic.Map;
 import logic.Player;
+import logic.Trainer;
 //import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
@@ -44,6 +45,7 @@ public class XmlControll {
 		stream.processAnnotations(Pokemon.class);
 		stream.processAnnotations(PokemonType.class);
 		stream.processAnnotations(Player.class);
+		stream.processAnnotations(Trainer.class);
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
 		stream.allowTypeHierarchy(Pokemon.class);
@@ -53,6 +55,7 @@ public class XmlControll {
 		stream.allowTypeHierarchy(Integer.class);
 		stream.allowTypeHierarchy(GameData.class);
 		stream.allowTypeHierarchy(Player.class);
+		stream.allowTypeHierarchy(Trainer.class);
 		stream.alias("map", java.util.Map.class);
 		stream.allowTypeHierarchy(Map.class);
 

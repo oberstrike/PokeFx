@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,26 +51,8 @@ public class Map {
 			}
 		}
 		
-		Entity entity = null;
-		if(!fieldType.isBlocked()) {
-			entity = new Entity() {
-				private String statement = "Hallo ich mache dich kaputt.";
-				
-				
-				
-				
-				@Override
-				public <T extends Entity> void interact(T entity) {
-					
-				}
-				
-				@Override
-				public Image getImage() {
-					return Main.man_1_straight;
-				}
-			};
-			fields.stream().findAny().get().setEntity(entity);
-		}
+		Trainer trainer = new Trainer(Main.man_1_straight, "Dude", Arrays.asList(Main.xmlControll.getPokemonByName("Pikachu")));
+	//	fields.get(0).setEntity(trainer);
 		
 		
 	}
