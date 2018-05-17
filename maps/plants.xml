@@ -58,17 +58,17 @@
 			<y>300.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRB_GRASS</type>
 			<x>0.0</x>
 			<y>330.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRB_GRASS</type>
 			<x>0.0</x>
 			<y>360.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTF_SAND</type>
 			<x>0.0</x>
 			<y>390.0</y>
 		</FIELD>

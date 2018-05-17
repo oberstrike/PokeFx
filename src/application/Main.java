@@ -108,10 +108,10 @@ public class Main extends Application {
 			mtlf_grass = new Image("/images/mtlf_grass.png");
 			mtrb_grass = new Image("/images/mtrb_grass.png");
 			mtrf_grass = new Image("/images/mtrf_grass.png");
-			mtilf_water = new Image("/images/mtilf_grass.png");
-			mtilb_water = new Image("/images/mtilb_grass.png");
-			mtirf_water = new Image("/images/mtirf_grass.png");
-			mtirb_water = new Image("/images/mtirb_grass.png");
+			mtilf_grass = new Image("/images/mtilf_grass.png");
+			mtilb_grass = new Image("/images/mtilb_grass.png");
+			mtirf_grass = new Image("/images/mtirf_grass.png");
+			mtirb_grass = new Image("/images/mtirb_grass.png");
 			
 			mtr_water = new Image("/images/mtr_water.png");
 			mtl_water = new Image("/images/mtl_water.png");

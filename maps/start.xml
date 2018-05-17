@@ -787,7 +787,7 @@
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>MTLB_GRASS</type>
+			<type>MTILB_GRASS</type>
 			<x>270.0</x>
 			<y>120.0</y>
 		</FIELD>
@@ -872,12 +872,12 @@
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRB_GRASS</type>
 			<x>300.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTF_WATER</type>
 			<x>300.0</x>
 			<y>150.0</y>
 		</FIELD>
@@ -887,17 +887,17 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTB_WATER</type>
 			<x>300.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>300.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTILF_SAND</type>
 			<x>300.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -977,12 +977,12 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRB_GRASS</type>
 			<x>330.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_GRASS</type>
 			<x>330.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -1357,7 +1357,7 @@
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_GRASS</type>
 			<x>450.0</x>
 			<y>480.0</y>
 		</FIELD>
@@ -1437,12 +1437,12 @@
 			<y>420.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTILB_GRASS</type>
 			<x>480.0</x>
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>480.0</x>
 			<y>480.0</y>
 		</FIELD>
@@ -1507,27 +1507,27 @@
 			<y>330.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_GRASS</type>
 			<x>510.0</x>
 			<y>360.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_GRASS</type>
 			<x>510.0</x>
 			<y>390.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTILB_GRASS</type>
 			<x>510.0</x>
 			<y>420.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_SAND</type>
 			<x>510.0</x>
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTR_SAND</type>
 			<x>510.0</x>
 			<y>480.0</y>
 		</FIELD>
@@ -1587,22 +1587,22 @@
 			<y>300.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTB_WATER</type>
 			<x>540.0</x>
 			<y>330.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>540.0</x>
 			<y>360.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_SAND</type>
 			<x>540.0</x>
 			<y>390.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTR_SAND</type>
 			<x>540.0</x>
 			<y>420.0</y>
 		</FIELD>
@@ -1673,17 +1673,17 @@
 			<y>300.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTB_WATER</type>
 			<x>570.0</x>
 			<y>330.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>570.0</x>
 			<y>360.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTF_SAND</type>
 			<x>570.0</x>
 			<y>390.0</y>
 		</FIELD>
