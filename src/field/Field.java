@@ -143,6 +143,18 @@ public class Field {
 		case MTRB_SAND:
 			setImage(Main.mtrb_sand);
 			break;
+		case MTLF_WATER:
+			setImage(Main.mtlf_water);
+			break;
+		case MTLB_WATER:
+			setImage(Main.mtlb_water);
+			break;
+		case MTRF_WATER:
+			setImage(Main.mtrf_water);
+			break;
+		case MTRB_WATER:
+			setImage(Main.mtrb_water);
+			break;
 		default:
 			setImage(Main.grass);
 			break;

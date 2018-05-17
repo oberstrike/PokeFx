@@ -29,12 +29,16 @@ public class Main extends Application {
 	public static Image cactus_top;
 	public static Image mtlb_grass;
 	public static Image mtlb_sand;
+	public static Image mtlb_water;
 	public static Image mtlf_grass;
 	public static Image mtlf_sand;
+	public static Image mtlf_water;
 	public static Image mtrb_grass;
 	public static Image mtrb_sand;
+	public static Image mtrb_water;
 	public static Image mtrf_grass;
 	public static Image mtrf_sand;
+	public static Image mtrf_water;
 	public static XmlControll xmlControll;
 	public static Stage kprimaryStage;
 	
@@ -60,6 +64,11 @@ public class Main extends Application {
 			mtlb_sand = new Image("/images/mtlb_sand.png");
 			mtlf_grass = new Image("/images/mtlf_grass.png");
 			mtlf_sand = new Image("/images/mtlf_sand.png");
+			mtlf_water = new Image("/images/mtlf_water.png");
+			mtlb_water = new Image("/images/mtlb_water.png");
+			mtrf_water = new Image("/images/mtrf_water.png");
+			mtrb_water = new Image("/images/mtrb_water.png");
+			mtrb_sand = new Image("/images/mtrb_sand.png");
 			mtrb_grass = new Image("/images/mtrb_grass.png");
 			mtrb_sand = new Image("/images/mtrb_sand.png");
 			mtrf_grass = new Image("/images/mtrf_grass.png");
