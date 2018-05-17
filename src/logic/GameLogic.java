@@ -302,7 +302,6 @@ public class GameLogic extends Thread {
 				default:
 					break;
 				}
-				System.out.println(oField);
 				if (oField.isPresent()) {
 					Field field = oField.get();
 					if (field.getEntity() != null) {
@@ -320,8 +319,6 @@ public class GameLogic extends Thread {
 
 		double x = newX;
 		double y = newY;
-
-		// System.out.println("Playerposition: (" + x + "|" + y + ")");
 
 		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
