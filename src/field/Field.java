@@ -90,7 +90,10 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6a994c49163726a71387d72df2b98e625b039284
 		return this.getType().isBlocked();
 
 	}
