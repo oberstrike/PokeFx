@@ -40,19 +40,20 @@ public class MenuGuiController implements Initializable{
     @FXML
     void load(ActionEvent event) {
     	File selectedFile = new File("maps/start.xml");
-		if(selectedFile == null) {
-			FileChooser fileChooser = new FileChooser();
-			fileChooser.setTitle("Save as xml");
-			fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
-			selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
-		}else {
+//    	File selectedFile = new File("test123.xml");
+//		if(selectedFile == null) {
+//			FileChooser fileChooser = new FileChooser();
+//			fileChooser.setTitle("Save as xml");
+//			fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
+//			selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
+//		}else {
 			MapView mapView = new MapView();
 			mapView.setMap(Main.xmlControll.getMap(selectedFile));
 			Main.gameData = new GameData(mapView.getMap());
 			
 			WindowChanger changer = new WindowChanger();
 			changer.changeWindow("/guis/GameGui.fxml", event);
-		}
+//		}
     }
 
     @FXML

@@ -1,7 +1,6 @@
 package field;
 
 public enum FieldType {
-
 	STEIN(true),
 	WASSER(true),
 	GRASS(false),
@@ -54,7 +53,7 @@ public enum FieldType {
 	MTILF_SAND(true),
 	MTIRB_SAND(true),
 	MTIRF_SAND(true);
-	
+
 	final private boolean blocked;
 
 	public boolean isBlocked() {
@@ -64,5 +63,4 @@ public enum FieldType {
 	private FieldType(boolean blocked) {
 		this.blocked = blocked;
 	}
-
 }
