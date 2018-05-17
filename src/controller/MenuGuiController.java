@@ -40,7 +40,7 @@ public class MenuGuiController implements Initializable{
     @FXML
     void load(ActionEvent event) {
     	File selectedFile = new File("maps/start.xml");
-//    	File selectedFile = new File("test123.xml");
+//    	File selectedFile = new File("save.xml");
 //		if(selectedFile == null) {
 //			FileChooser fileChooser = new FileChooser();
 //			fileChooser.setTitle("Save as xml");

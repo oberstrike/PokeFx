@@ -27,7 +27,7 @@ public class Map {
 	private double height = 500;
 
 	@XStreamOmitField
-	private double sides = 30;
+	private static final double sides = 30;
 
 	private List<Pokemon> pokemons = new ArrayList<>();
 
@@ -48,8 +48,7 @@ public class Map {
 		}
 		
 		Trainer trainer = new Trainer(Main.man_1_straight, "Dude", Arrays.asList(Main.xmlControll.getPokemonByName("Pikachu")));
-	//	fields.get(0).setEntity(trainer);
-		
+		fields.get(0).setEntity(trainer);
 		
 	}
 
@@ -69,25 +68,35 @@ public class Map {
 	}
 
 	public Optional<Field> leftField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() - sides && each.getY() == field.getY()).findFirst();
+		return getFieldWithCoordinates((field.getX()-30), field.getY());
 	}
 
 	public Optional<Field> rightField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() + sides && each.getY() == field.getY()).findFirst();
+		return getFieldWithCoordinates((field.getX()+30), field.getY());
 	}
 
 	public Optional<Field> bottomField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() && each.getY() == field.getY() + sides).findFirst();
+		return getFieldWithCoordinates(field.getX(), (field.getY()+30));
 	}
 
 	public Optional<Field> upField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() && each.getY() == field.getY() - sides).findFirst();
+		return getFieldWithCoordinates(field.getX(), (field.getY()-30));
 	}
 
+	public Optional<Field> getFieldWithCoordinates(double x, double y){
+		System.out.println(x + " " + y);
+		Optional<Field> ofield = Optional.empty();
+		
+		for(Field field: getFields()) {
+			if(field.getX() == x && field.getY() == y)
+				ofield = Optional.of(field);
+		}
+		return ofield;
+		
+	}
+	
+	
+	
 	public List<Field> getFields() {
 		return fields;
 	}

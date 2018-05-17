@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -14,12 +15,12 @@ public class Trainer implements Entity{
 	private Image image;
 	
 	private String name;
-	private List<Pokemon> pokemons;
+	private List<Pokemon> pokemons = new ArrayList<>();
 	
 	public Trainer(Image image, String name, List<Pokemon> pokemons) {
 		this.setImage(image);
 		this.setName(name);
-		this.setPokemons(pokemons);
+		this.getPokemons().addAll(pokemons);
 		this.pokemons.forEach(each -> {
 			each.setTrained(true); 
 			each.setLevel(11);

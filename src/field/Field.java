@@ -90,7 +90,7 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
-		return this.getType().isBlocked();
+		return this.getType().isBlocked() || this.getEntity()!=null;
 
 	}
 	
@@ -338,8 +338,11 @@ public class Field {
 					eImage = Main.player_straight;
 				}
 			}
-			
-			BufferedImage entitysImage = SwingFXUtils.fromFXImage(eImage, null);
+			BufferedImage entitysImage = null;
+			if(eImage!=null)
+				 entitysImage = SwingFXUtils.fromFXImage(eImage, null);
+			else
+				entitysImage = SwingFXUtils.fromFXImage(Main.man_1_straight,null);
 	//		BufferedImage inGrass = SwingFXUtils.fromFXImage(Main.inGrass, null);
 			
 			

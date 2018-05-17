@@ -19,7 +19,6 @@ import field.Field;
 import logic.Map;
 import logic.Player;
 import logic.Trainer;
-import pokemon.Effectives;
 //import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
@@ -58,6 +57,7 @@ public class XmlControll {
 		stream.allowTypeHierarchy(GameData.class);
 		stream.allowTypeHierarchy(Player.class);
 		stream.allowTypeHierarchy(Trainer.class);
+		
 		stream.alias("map", java.util.Map.class);
 		stream.allowTypeHierarchy(Map.class);
 
@@ -130,9 +130,6 @@ public class XmlControll {
 		return new Pokemon(pokedex.get(id - 1));
 	}
 
-	/**
-	 * @return the effectives
-	 */
 	public HashMap<PokemonType,HashMap<PokemonType,Double>> getEffectives() {
 		return effectives;
 	}

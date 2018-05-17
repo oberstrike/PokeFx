@@ -26,7 +26,7 @@ import xml.GameData;
 
 	- NN	evtl Level (automatisches Laden der nächsten Karte bei Besiegen eines Trainers o.Ä.
 	- CHECK Bilder der Pokemon, sowohl rechts in der Liste als auch beim Kampf
-	- 		Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
+	- CHECK	Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
 	- CHECK	Motivation abhängig vom Ausgang der letzten 5-10 Kämpfe setzen
 	- CHECK XP-Balken zeigt noch keinen Fortschritt CHECK
 	- CHECK	Klick auf Beenden beendet Spiel
@@ -34,7 +34,7 @@ import xml.GameData;
 	- CHECK	mehrere Übergänge auf einer Map
 	- 		Bild bei Entwicklung anpassen
 	- CHECK	Maps bauen
-	- 		Pokedex im Spiel
+	- CHECK	Pokedex im Spiel
 
 */
 
@@ -42,7 +42,6 @@ public class GameLogic extends Thread {
 	private MapView mapView;
 	private Player player;
 	private long lastMovementTime = 0;
-	private String lastMovement;
 	private AnchorPane anchor2;
 
 	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
@@ -95,15 +94,14 @@ public class GameLogic extends Thread {
 					pv.getUpButton().setOnAction(event -> {
 						int index = player.getPokemon().indexOf(pv.getPokemon());
 						Pokemon pokemon = player.getPokemon().get(index);
-						int newIndex = (index == 0 ? player.getPokemon().size() - 1 : index-1);
+						int newIndex = (index == 0 ? player.getPokemon().size() - 1 : index - 1);
 						PokemonView view = ((PokemonView) anchor2.getChildren().get(newIndex));
 						Pokemon temp = player.getPokemon().get(newIndex);
 						player.getPokemon().set(newIndex, pokemon);
 						player.getPokemon().set(index, temp);
 						pv.setPokemon(temp);
 						view.setPokemon(temp);
-						
-							
+
 					});
 					anchor2.getChildren().add(pv);
 				}
@@ -265,7 +263,8 @@ public class GameLogic extends Thread {
 	public void moveEvent(String keyName) {
 		double newX = player.getField().getX();
 		double newY = player.getField().getY();
-
+		Optional<Field> newField = null;
+		
 		switch (keyName) {
 		case "W":
 			newY -= 30;
@@ -285,30 +284,20 @@ public class GameLogic extends Thread {
 			break;
 		case "Space":
 			Optional<Field> oField = null;
-			if (lastMovement != null) {
-				switch (lastMovement) {
-				case "W":
-					oField = mapView.getMap().upField(player.getField());
-					break;
-				case "A":
+			if (player.getImage() != null) {
+				Image playerImage = player.getImage();
+				if(playerImage.equals(Main.player_left))
 					oField = mapView.getMap().leftField(player.getField());
-					break;
-				case "S":
-					oField = mapView.getMap().bottomField(player.getField());
-					break;
-				case "D":
+				else if(playerImage.equals(Main.player_right))
 					oField = mapView.getMap().rightField(player.getField());
-					break;
-				default:
-					break;
-				}
+				else if(playerImage.equals(Main.player_straight))
+					oField = mapView.getMap().upField(player.getField());
+				else if(playerImage.equals(Main.player_right))
+					oField = mapView.getMap().bottomField(player.getField());
 				if (oField.isPresent()) {
 					Field field = oField.get();
 					if (field.getEntity() != null) {
-						if(field.getClass().equals(Trainer.class)) {
-							System.out.println("Hallo von " + ((Trainer)field.getEntity()).getName());
-						}
-						
+						fightAgainstTrainer((Trainer) field.getEntity());
 					}
 				}
 			}
@@ -320,13 +309,13 @@ public class GameLogic extends Thread {
 		double x = newX;
 		double y = newY;
 
-		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
+		newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
 
 		if (newField.isPresent()) {
 			if (!newField.get().equals(player.getField())) {
 				if (!newField.get().isBlocked()) {
-					int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 250 : 110;
+					int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 300 : 110;
 					if (lastMovementTime == 0 || System.currentTimeMillis() - lastMovementTime > difference) {
 						for (Pokemon mon : player.getPokemon()) {
 							double hp = mon.getHp();
@@ -337,7 +326,7 @@ public class GameLogic extends Thread {
 							}
 						}
 						lastMovementTime = System.currentTimeMillis();
-						lastMovement = keyName;
+
 						Field newF = newField.get();
 						if (newF.getType().equals(FieldType.UEBERGANG)) {
 							if (x == 570) {
@@ -363,8 +352,7 @@ public class GameLogic extends Thread {
 						if (newF.getType().equals(FieldType.HOHESGRASS)
 								|| newF.getType().equals(FieldType.TIEFERSAND)) {
 							int randDig = new Random().nextInt(100);
-							if (randDig < 14) {
-								System.out.println("Ein wildes Pokemon greift an...");
+							if (randDig < 12) {
 								fightMenu();
 							}
 						} else if (newF.getNextMap() != null) {
@@ -380,5 +368,11 @@ public class GameLogic extends Thread {
 			}
 		}
 
+	}
+
+	private void fightAgainstTrainer(Trainer entity) {
+		new Alert(AlertType.INFORMATION, "Kampf gegen " + entity.getName()).show();
+		
+		
 	}
 }
