@@ -117,6 +117,82 @@ public class Field {
 		case UEBERGANG:
 			setImage(Main.uebergang);
 			break;
+		case HAUS_1a:
+			setImage(Main.haus_1a);
+			break;
+		case HAUS_1b:
+			setImage(Main.haus_1b);
+			break;
+		case HAUS_1c:
+			setImage(Main.haus_1c);
+			break;
+		case HAUS_1d:
+			setImage(Main.haus_1d);
+			break;
+		case HAUS_2a:
+			setImage(Main.haus_2a);
+			break;
+		case HAUS_2b:
+			setImage(Main.haus_2b);
+			break;
+		case HAUS_2c:
+			setImage(Main.haus_2c);
+			break;
+		case HAUS_2d:
+			setImage(Main.haus_2d);
+			break;
+		case HAUS_2e:
+			setImage(Main.haus_2e);
+			break;
+		case HAUS_2f:
+			setImage(Main.haus_2f);
+			break;
+		case HAUS_3a:
+			setImage(Main.haus_3a);
+			break;
+		case HAUS_3b:
+			setImage(Main.haus_3b);
+			break;
+		case HAUS_3c:
+			setImage(Main.haus_3c);
+			break;
+		case HAUS_3d:
+			setImage(Main.haus_3d);
+			break;
+		case HAUS_3e:
+			setImage(Main.haus_3e);
+			break;
+		case HAUS_3f:
+			setImage(Main.haus_3f);
+			break;
+		case HAUS_3g:
+			setImage(Main.haus_3g);
+			break;
+		case HAUS_3h:
+			setImage(Main.haus_3h);
+			break;
+		case HAUS_3i:
+			setImage(Main.haus_3i);
+			break;
+		case HAUS_4a:
+			setImage(Main.haus_4a);
+			break;
+		case HAUS_4b:
+			setImage(Main.haus_4b);
+			break;
+		case HAUS_4c:
+			setImage(Main.haus_4c);
+			break;
+		case HAUS_4d:
+			setImage(Main.haus_4d);
+			break;
+		case HAUS_4e:
+			setImage(Main.haus_4e);
+			break;
+		case HAUS_4f:
+			setImage(Main.haus_4f);
+			break;
+			
 		case FELS_WATER:
 			setImage(Main.fels_water);
 			break;
@@ -132,6 +208,14 @@ public class Field {
 		case CACTUS_TOP:
 			setImage(Main.cactus_top);
 			break;	
+		case BAUM_BOTTOM:
+			setImage(Main.baum_bottom);
+			break;	
+		case BAUM_TOP:
+			setImage(Main.baum_top);
+			break;	
+			
+			
 		case MTR_GRASS:
 			setImage(Main.mtr_grass);
 			break;
