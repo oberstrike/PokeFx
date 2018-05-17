@@ -787,7 +787,7 @@
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTLB_GRASS</type>
 			<x>270.0</x>
 			<y>120.0</y>
 		</FIELD>
@@ -797,17 +797,17 @@
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTR_WATER</type>
 			<x>270.0</x>
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRB_WATER</type>
 			<x>270.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTILF_SAND</type>
 			<x>270.0</x>
 			<y>240.0</y>
 		</FIELD>
