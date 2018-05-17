@@ -90,6 +90,7 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
+<<<<<<< HEAD
 		return this.type.equals(FieldType.STEIN)||
 				this.type.equals(FieldType.WASSER)||
 				this.type.equals(FieldType.MTLF_GRASS)||
@@ -112,6 +113,9 @@ public class Field {
 				this.type.equals(FieldType.CACTUS_TOP)||
 				this.type.equals(FieldType.BAUM_BOTTOM)||
 				this.type.equals(FieldType.BAUM_TOP);
+=======
+		return this.getType().isBlocked();
+>>>>>>> eae0be5c315c28424600bc3bd386003e2ae7c5a0
 	}
 	
 	public void applyImage() {
