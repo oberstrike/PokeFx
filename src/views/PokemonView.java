@@ -1,9 +1,10 @@
 package views;
 
 
-import application.Main;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import pokemon.Pokemon;
@@ -18,14 +19,44 @@ public class PokemonView extends AnchorPane {
 	private ProgressBar hpBar;
 	private Pokemon pokemon;
 	private ProgressBar xpBar;
-	private Label img;
+	private Button upButton;
+	private Button downButton;
+	private ImageView picture;
 	
+	public Button getUpButton() {
+		return upButton;
+	}
+
+
+	public void setUpButton(Button upButton) {
+		this.upButton = upButton;
+	}
+
+
+	public Button getDownButton() {
+		return downButton;
+	}
+
+
+	public void setDownButton(Button downButton) {
+		this.downButton = downButton;
+	}
+
+
 	public PokemonView(Pokemon pokemon) {
 		if(pokemon != null) {
 			hp = registerLabel(String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateHp())) , 0, 60);
 			name = registerLabel(pokemon.getName(), 65, 15);
 			level = registerLabel(String.valueOf(pokemon.getLevel()), 65, 35);
 			xp = registerLabel("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())), 0, 85);
+			
+			upButton = new Button();
+			upButton.setPrefWidth(40);
+			upButton.setPrefHeight(10);
+			upButton.setText("Up");
+			upButton.setLayoutX(130);
+			upButton.setLayoutY(15);
+			this.getChildren().add(upButton);
 			
 			hpBar = new ProgressBar();
 			hpBar.setProgress(1);
@@ -36,7 +67,7 @@ public class PokemonView extends AnchorPane {
 			this.getChildren().add(hpBar);
 			
 			String pathToImg = "/pokemon/images/" + pokemon.getId() + ".png";
-			ImageView picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
+			picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
 			picture.setLayoutX(0);
 			picture.setLayoutY(0);
 			picture.setFitWidth(75);
@@ -54,6 +85,13 @@ public class PokemonView extends AnchorPane {
 		}
 	}
 	
+	public void setPokemon(Pokemon pokemon) {
+		this.pokemon = pokemon;
+	}
+	
+	public Pokemon getPokemon() {
+		return this.pokemon;
+	}
 	
 	private Label registerLabel(String text, double x, double y) {
 		Label label = new Label(text);
@@ -71,8 +109,9 @@ public class PokemonView extends AnchorPane {
 			name.setText(pokemon.getName());
 			level.setText("Lvl: " + String.valueOf(pokemon.getLevel()));
 			xpBar.setProgress((double)pokemon.getXp()/(double)pokemon.getXpForNextLevel());
-			
 			xp.setText("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())));
+			String pathToImg = "/pokemon/images/" + pokemon.getId() + ".png";
+			picture.setImage(new Image(getClass().getResource(pathToImg).toExternalForm()));
 		}catch (Exception e) {
 			System.err.println(pokemon);
 			e.printStackTrace();

@@ -90,7 +90,8 @@ public class Field {
 	}
 	
 	public boolean isBlocked() {
-		return this.type.equals(FieldType.STEIN)||this.type.equals(FieldType.WASSER);
+		return this.getType().isBlocked() || this.getEntity()!=null;
+
 	}
 	
 	public void applyImage() {
@@ -116,6 +117,215 @@ public class Field {
 		case UEBERGANG:
 			setImage(Main.uebergang);
 			break;
+		case HAUS_1a:
+			setImage(Main.haus_1a);
+			break;
+		case HAUS_1b:
+			setImage(Main.haus_1b);
+			break;
+		case HAUS_1c:
+			setImage(Main.haus_1c);
+			break;
+		case HAUS_1d:
+			setImage(Main.haus_1d);
+			break;
+		case HAUS_2a:
+			setImage(Main.haus_2a);
+			break;
+		case HAUS_2b:
+			setImage(Main.haus_2b);
+			break;
+		case HAUS_2c:
+			setImage(Main.haus_2c);
+			break;
+		case HAUS_2d:
+			setImage(Main.haus_2d);
+			break;
+		case HAUS_2e:
+			setImage(Main.haus_2e);
+			break;
+		case HAUS_2f:
+			setImage(Main.haus_2f);
+			break;
+		case HAUS_3a:
+			setImage(Main.haus_3a);
+			break;
+		case HAUS_3b:
+			setImage(Main.haus_3b);
+			break;
+		case HAUS_3c:
+			setImage(Main.haus_3c);
+			break;
+		case HAUS_3d:
+			setImage(Main.haus_3d);
+			break;
+		case HAUS_3e:
+			setImage(Main.haus_3e);
+			break;
+		case HAUS_3f:
+			setImage(Main.haus_3f);
+			break;
+		case HAUS_3g:
+			setImage(Main.haus_3g);
+			break;
+		case HAUS_3h:
+			setImage(Main.haus_3h);
+			break;
+		case HAUS_3i:
+			setImage(Main.haus_3i);
+			break;
+		case HAUS_4a:
+			setImage(Main.haus_4a);
+			break;
+		case HAUS_4b:
+			setImage(Main.haus_4b);
+			break;
+		case HAUS_4c:
+			setImage(Main.haus_4c);
+			break;
+		case HAUS_4d:
+			setImage(Main.haus_4d);
+			break;
+		case HAUS_4e:
+			setImage(Main.haus_4e);
+			break;
+		case HAUS_4f:
+			setImage(Main.haus_4f);
+			break;
+			
+		case FELS_WATER:
+			setImage(Main.fels_water);
+			break;
+		case FELS_GRASS:
+			setImage(Main.fels_grass);
+			break;
+		case FELS_SAND:
+			setImage(Main.fels_sand);
+			break;
+		case CACTUS_BOTTOM:
+			setImage(Main.cactus_bottom);
+			break;	
+		case CACTUS_TOP:
+			setImage(Main.cactus_top);
+			break;	
+		case BAUM_BOTTOM:
+			setImage(Main.baum_bottom);
+			break;	
+		case BAUM_TOP:
+			setImage(Main.baum_top);
+			break;	
+			
+			
+		case MTR_GRASS:
+			setImage(Main.mtr_grass);
+			break;
+		case MTL_GRASS:
+			setImage(Main.mtl_grass);
+			break;
+		case MTB_GRASS:
+			setImage(Main.mtb_grass);
+			break;
+		case MTF_GRASS:
+			setImage(Main.mtf_grass);
+			break;
+		case MTLB_GRASS:
+			setImage(Main.mtlb_grass);
+			break;
+		case MTLF_GRASS:
+			setImage(Main.mtlf_grass);
+			break;
+		case MTRB_GRASS:
+			setImage(Main.mtrb_grass);
+			break;
+		case MTRF_GRASS:
+			setImage(Main.mtrf_grass);
+			break;
+		case MTILB_GRASS:
+			setImage(Main.mtilb_grass);
+			break;
+		case MTILF_GRASS:
+			setImage(Main.mtilf_grass);
+			break;
+		case MTIRB_GRASS:
+			setImage(Main.mtirb_grass);
+			break;
+		case MTIRF_GRASS:
+			setImage(Main.mtirf_grass);
+			break;
+		case MTR_WATER:
+			setImage(Main.mtr_water);
+			break;
+		case MTL_WATER:
+			setImage(Main.mtl_water);
+			break;
+		case MTB_WATER:
+			setImage(Main.mtb_water);
+			break;
+		case MTF_WATER:
+			setImage(Main.mtf_water);
+			break;
+		case MTLF_WATER:
+			setImage(Main.mtlf_water);
+			break;
+		case MTLB_WATER:
+			setImage(Main.mtlb_water);
+			break;
+		case MTRF_WATER:
+			setImage(Main.mtrf_water);
+			break;
+		case MTRB_WATER:
+			setImage(Main.mtrb_water);
+			break;
+		case MTILF_WATER:
+			setImage(Main.mtilf_water);
+			break;
+		case MTILB_WATER:
+			setImage(Main.mtilb_water);
+			break;
+		case MTIRF_WATER:
+			setImage(Main.mtirf_water);
+			break;
+		case MTIRB_WATER:
+			setImage(Main.mtirb_water);
+			break;
+			
+		case MTR_SAND:
+			setImage(Main.mtr_sand);
+			break;
+		case MTL_SAND:
+			setImage(Main.mtl_sand);
+			break;
+		case MTB_SAND:
+			setImage(Main.mtb_sand);
+			break;
+		case MTF_SAND:
+			setImage(Main.mtf_sand);
+			break;
+		case MTLF_SAND:
+			setImage(Main.mtlf_sand);
+			break;
+		case MTLB_SAND:
+			setImage(Main.mtlb_sand);
+			break;
+		case MTRF_SAND:
+			setImage(Main.mtrf_sand);
+			break;
+		case MTRB_SAND:
+			setImage(Main.mtrb_sand);
+			break;
+		case MTILF_SAND:
+			setImage(Main.mtilf_sand);
+			break;
+		case MTILB_SAND:
+			setImage(Main.mtilb_sand);
+			break;
+		case MTIRF_SAND:
+			setImage(Main.mtirf_sand);
+			break;
+		case MTIRB_SAND:
+			setImage(Main.mtirb_sand);
+			break;	
+			
 		default:
 			setImage(Main.grass);
 			break;
@@ -128,19 +338,22 @@ public class Field {
 					eImage = Main.player_straight;
 				}
 			}
-			
-			BufferedImage entitysImage = SwingFXUtils.fromFXImage(eImage, null);
-			BufferedImage inGrass = SwingFXUtils.fromFXImage(Main.inGrass, null);
+			BufferedImage entitysImage = null;
+			if(eImage!=null)
+				 entitysImage = SwingFXUtils.fromFXImage(eImage, null);
+			else
+				entitysImage = SwingFXUtils.fromFXImage(Main.man_1_straight,null);
+	//		BufferedImage inGrass = SwingFXUtils.fromFXImage(Main.inGrass, null);
 			
 			
 			BufferedImage combined = new BufferedImage(40, 40, BufferedImage.TYPE_INT_ARGB);
 			Graphics g = combined.getGraphics();
 			g.drawImage(image, 0, 0, null);
 			g.drawImage(entitysImage, 0, 0, null);
-			if(type.equals(FieldType.HOHESGRASS) ) {
-				g.drawImage(inGrass, 0, 0, null);
-			}
-			
+//			if(type.equals(FieldType.HOHESGRASS) ) {
+//				g.drawImage(inGrass, 0, 0, null);
+//			}
+//			
 			
 			Image combinedImage = SwingFXUtils.toFXImage(combined, null);
 			setImage(combinedImage);

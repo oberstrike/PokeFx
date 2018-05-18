@@ -174,7 +174,9 @@ public class Pokemon {
 	public Pokemon fight(Pokemon mon2) {
 		Pokemon winner;
 
-		Effectives effekt = new Effectives();
+		
+		
+		
 
 		if (mon2.getHp() <= 0) {
 			return this;
@@ -183,15 +185,15 @@ public class Pokemon {
 		String output2 = "";
 
 		double multiplierMon1 = 1;
-		if (effekt.table.get(mon2.getType()).containsKey(this.getType()))
-			multiplierMon1 = effekt.table.get(mon2.getType()).get(this.getType());
+		if (Main.xmlControll.getEffectives().get(mon2.getType()).containsKey(this.getType()))
+			multiplierMon1 = Main.xmlControll.getEffectives().get(mon2.getType()).get(this.getType());
 		
 		// System.out.println(effekt.table.get(this.getType()).get(this.getType()));
 		output = "==================== \n\nDein Pokemon:\n" + this.getName() + " Lvl: " + this.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
 
 		double multiplierMon2 = 1;
-		if (effekt.table.get(this.getType()).containsKey(mon2.getType()))
-			multiplierMon2 = effekt.table.get(this.getType()).get(mon2.getType());
+		if (Main.xmlControll.getEffectives().get(this.getType()).containsKey(mon2.getType()))
+			multiplierMon2 = Main.xmlControll.getEffectives().get(this.getType()).get(mon2.getType());
 		
 		// System.out.println(effekt.table.get(mon2.getType()).get(mon2.getType()));
 		output2 = "___________________ \n\nGegnerisches Pokemon:\n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
@@ -335,15 +337,8 @@ public class Pokemon {
 				if(key.isPresent()) {
 					Pokemon pokemon = Main.xmlControll.getPokemonByName(evolvingdex.get(key.get()));
 					evolveTo(pokemon);
-					
-				}
-				
-				
+				}	
 			}
-			
-			
-			
-
 		}
 	}
 	

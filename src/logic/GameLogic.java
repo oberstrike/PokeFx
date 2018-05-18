@@ -26,7 +26,7 @@ import xml.GameData;
 
 	- NN	evtl Level (automatisches Laden der nächsten Karte bei Besiegen eines Trainers o.Ä.
 	- CHECK Bilder der Pokemon, sowohl rechts in der Liste als auch beim Kampf
-	- 		Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
+	- CHECK	Plätze tauschen (erstes Pokemon der Liste durch ein anderes ersetzen)
 	- CHECK	Motivation abhängig vom Ausgang der letzten 5-10 Kämpfe setzen
 	- CHECK XP-Balken zeigt noch keinen Fortschritt CHECK
 	- CHECK	Klick auf Beenden beendet Spiel
@@ -34,7 +34,7 @@ import xml.GameData;
 	- CHECK	mehrere Übergänge auf einer Map
 	- 		Bild bei Entwicklung anpassen
 	- CHECK	Maps bauen
-	- 		Pokedex im Spiel
+	- CHECK	Pokedex im Spiel
 
 */
 
@@ -42,7 +42,6 @@ public class GameLogic extends Thread {
 	private MapView mapView;
 	private Player player;
 	private long lastMovementTime = 0;
-	private String lastMovement;
 	private AnchorPane anchor2;
 
 	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
@@ -73,13 +72,14 @@ public class GameLogic extends Thread {
 
 	public void update() {
 		Platform.runLater(() -> {
-			
-			if(this.mapView.getFields().stream().anyMatch(each -> each.getEntity()!=null)) {
+
+			if (this.mapView.getFields().stream().anyMatch(each -> each.getEntity() != null)) {
 				Field field = player.getField();
-				Field new_field = this.mapView.getFields().stream().filter(each -> each.getX() == field.getX() && each.getY() == field.getY()).findFirst().get();
+				Field new_field = this.mapView.getFields().stream()
+						.filter(each -> each.getX() == field.getX() && each.getY() == field.getY()).findFirst().get();
 				player.setField(new_field);
 			}
-			
+
 			this.mapView.update();
 
 			long count = anchor2.getChildren().stream().filter(each -> each.getClass().equals(PokemonView.class))
@@ -87,18 +87,31 @@ public class GameLogic extends Thread {
 
 			if (count < player.getPokemon().size()) {
 				for (int i = (int) count; i < player.getPokemon().size(); i++) {
-					Pokemon pokemon = player.getPokemon().get(i);
-					PokemonView pv = new PokemonView(pokemon);
+					Pokemon myPokemon = player.getPokemon().get(i);
+					PokemonView pv = new PokemonView(myPokemon);
 					pv.setLayoutX(45);
 					pv.setLayoutY(10 + i * 95);
+					pv.getUpButton().setOnAction(event -> {
+						int index = player.getPokemon().indexOf(pv.getPokemon());
+						Pokemon pokemon = player.getPokemon().get(index);
+						int newIndex = (index == 0 ? player.getPokemon().size() - 1 : index - 1);
+						PokemonView view = ((PokemonView) anchor2.getChildren().get(newIndex));
+						Pokemon temp = player.getPokemon().get(newIndex);
+						player.getPokemon().set(newIndex, pokemon);
+						player.getPokemon().set(index, temp);
+						pv.setPokemon(temp);
+						view.setPokemon(temp);
+
+					});
 					anchor2.getChildren().add(pv);
 				}
 			} else {
 				for (int i = 0; i < player.getPokemon().size(); i++) {
-					((PokemonView) anchor2.getChildren().get(i)).update();
+					PokemonView view = ((PokemonView) anchor2.getChildren().get(i));
+					view.update();
 				}
 			}
-
+			mapView.requestFocus();
 		});
 	}
 
@@ -122,7 +135,8 @@ public class GameLogic extends Thread {
 
 		if (player.getPokemon().size() > 0) {
 			listOfPokemons = mapView.getMap().getPokemons();
-			listOfPokemons.forEach(each -> each.setLevel(1 + new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemon().size()));
+			listOfPokemons.forEach(each -> each
+					.setLevel(1 + new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemon().size()));
 		} else {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
@@ -143,7 +157,7 @@ public class GameLogic extends Thread {
 				sumChances -= currentPokemon.getSpawn();
 			}
 		}
-		
+		System.out.println(spawnedPokemon.getName());
 		int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
 		String entryOutput = "";
 		if (entryPokedex == 1) {
@@ -155,8 +169,8 @@ public class GameLogic extends Thread {
 			player.setPokedex(spawnedPokemon, 1);
 		}
 
-		alert.setHeaderText(
-				"Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel() + " ist erschienen.\n" + entryOutput);
+		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel()
+				+ " ist erschienen.\n" + entryOutput);
 		String pathToImg = "/pokemon/images/" + spawnedPokemon.getId() + ".png";
 		ImageView picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
 		picture.setLayoutX(0);
@@ -249,6 +263,7 @@ public class GameLogic extends Thread {
 	public void moveEvent(String keyName) {
 		double newX = player.getField().getX();
 		double newY = player.getField().getY();
+		Optional<Field> newField = null;
 		
 		switch (keyName) {
 		case "W":
@@ -269,28 +284,20 @@ public class GameLogic extends Thread {
 			break;
 		case "Space":
 			Optional<Field> oField = null;
-			if (lastMovement != null) {
-				switch (lastMovement) {
-				case "W":
-					oField = mapView.getMap().upField(player.getField());
-					break;
-				case "A":
+			if (player.getImage() != null) {
+				Image playerImage = player.getImage();
+				if(playerImage.equals(Main.player_left))
 					oField = mapView.getMap().leftField(player.getField());
-					break;
-				case "S":
-					oField = mapView.getMap().bottomField(player.getField());
-					break;
-				case "D":
+				else if(playerImage.equals(Main.player_right))
 					oField = mapView.getMap().rightField(player.getField());
-					break;
-				default:
-					break;
-				}
-				System.out.println(oField);
+				else if(playerImage.equals(Main.player_straight))
+					oField = mapView.getMap().upField(player.getField());
+				else if(playerImage.equals(Main.player_back))
+					oField = mapView.getMap().bottomField(player.getField());
 				if (oField.isPresent()) {
 					Field field = oField.get();
 					if (field.getEntity() != null) {
-						field.getEntity().interact(player);
+						fightAgainstTrainer((Trainer) field.getEntity());
 					}
 				}
 			}
@@ -298,19 +305,17 @@ public class GameLogic extends Thread {
 		default:
 			break;
 		}
-		
+
 		double x = newX;
 		double y = newY;
 
-		// System.out.println("Playerposition: (" + x + "|" + y + ")");
-		
-		Optional<Field> newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
+		newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y)
 				.findFirst();
-		
+
 		if (newField.isPresent()) {
 			if (!newField.get().equals(player.getField())) {
 				if (!newField.get().isBlocked()) {
-					int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 250 : 110;
+					int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 300 : 110;
 					if (lastMovementTime == 0 || System.currentTimeMillis() - lastMovementTime > difference) {
 						for (Pokemon mon : player.getPokemon()) {
 							double hp = mon.getHp();
@@ -321,24 +326,24 @@ public class GameLogic extends Thread {
 							}
 						}
 						lastMovementTime = System.currentTimeMillis();
-						lastMovement = keyName;
+
 						Field newF = newField.get();
 						if (newF.getType().equals(FieldType.UEBERGANG)) {
-							if (x == 570) {
-								newX = 0;
-							} else if (x == 0) {
-								newX = 570;
-							} else if (y == 480) {
-								newY = 0;
-							} else if (y == 0) {
-								newY = 480;
-							}
-							newF.setX(newX);
-							newF.setY(newY);
-							double xx = newX;
-							double yy = newY;
-							newField = mapView.getFields().stream().filter(each -> each.getX() == xx && each.getY() == yy)
-									.findFirst();
+								if (x == 570) {
+									newX = 0;
+								} else if (x == 0) {
+									newX = 570;
+								} else if (y == 480) {
+									newY = 0;
+								} else if (y == 0) {
+									newY = 480;
+								}
+								newF.setX(newX);
+								newF.setY(newY);
+								double xx = newX;
+								double yy = newY;
+								newField = mapView.getFields().stream()
+										.filter(each -> each.getX() == xx && each.getY() == yy).findFirst();
 						}
 						player.getField().setEntity(null);
 						newF.setEntity(player);
@@ -347,11 +352,10 @@ public class GameLogic extends Thread {
 						if (newF.getType().equals(FieldType.HOHESGRASS)
 								|| newF.getType().equals(FieldType.TIEFERSAND)) {
 							int randDig = new Random().nextInt(100);
-							if (randDig < 14) {
-								System.out.println("Ein wildes Pokemon greift an...");
+							if (randDig < 12) {
 								fightMenu();
 							}
-						}else if(newF.getNextMap()!= null){
+						} else if (newF.getNextMap() != null) {
 							Map map = Main.xmlControll.getMap(new File(newF.getNextMap()));
 							mapView.setMap(map);
 							Main.gameData.setMap(map);
@@ -360,9 +364,57 @@ public class GameLogic extends Thread {
 					}
 
 				}
-				
+
 			}
 		}
 
+	}
+
+	private void fightAgainstTrainer(Trainer entity) {
+//		new Alert(AlertType.CONFIRMATION, "Kampf gegen " + entity.getName() + ". Bereits gewonnen: " + entity.isWin()).show();
+		ButtonType acceptButton = new ButtonType("Ok");
+		Alert acceptAlert = new Alert(AlertType.CONFIRMATION);
+		acceptAlert.setHeaderText("Hey, du!");
+		acceptAlert.setContentText(entity.getName() + ": Ja, du! Meinen Pokemon ist langweilig.\nIch wette, dass sie deine mit links besiegen!");
+		acceptAlert.getButtonTypes().setAll(acceptButton);
+		acceptAlert.showAndWait();
+		Pokemon winner = null;
+		for (int j = 0; j < entity.getPokemons().size(); j++) {
+			Pokemon enemyPokemon = entity.getPokemons().get(j);
+			acceptAlert.setHeaderText("Kampf gegen " + entity.getName());
+			acceptAlert.setContentText(entity.getName() + " schickt " + enemyPokemon.getName() + " Lvl " + enemyPokemon.getLevel() + " in den Kampf.");
+			acceptAlert.getButtonTypes().setAll(acceptButton);
+			acceptAlert.showAndWait();
+			for (int i = 0; i < player.getPokemon().size(); i++) {
+				Pokemon pokemon = player.getPokemon().get(i);
+				int currentLvl = pokemon.getLevel();
+				winner = pokemon.fight(enemyPokemon);
+				if (winner != null) {
+					if (player.getPokemon().contains(winner)) {
+						System.out.println(pokemon.getName() + " hat " + enemyPokemon.calcXp() + " Xp erhalten");
+						winner.addXp(enemyPokemon.calcXp());
+						acceptAlert.setHeaderText(winner.getName() + " hat " + enemyPokemon.calcXp()
+								+ " Erfahrungspunkte erhalten.");
+						if (winner.getLevel() != currentLvl) {
+							acceptAlert.setContentText(winner.getName() + " ist ein Level aufgestiegen.");
+						}
+						acceptAlert.getButtonTypes().setAll(acceptButton);
+						Optional<ButtonType> result = acceptAlert.showAndWait();
+						entity.setWin(true);
+						break;
+					} else {
+//						new Alert(AlertType.INFORMATION, "Haha! Was habe ich gesagt? Meine Pokemon sind nicht so einfach zu besiegen!\n" + winner.getName() + " hat " + " dein Pokemon besiegt.").show();
+						acceptAlert.setHeaderText(winner.getName() + " hat " + " dein Pokemon besiegt.");
+						acceptAlert.setContentText(entity.getName() + ": Haha! Was habe ich gesagt?\nMeine Pokemon sind nicht so einfach zu besiegen!");
+						acceptAlert.getButtonTypes().setAll(acceptButton);
+						acceptAlert.showAndWait();
+						for (int k = 0; k < entity.getPokemons().size(); k++) {
+							entity.getPokemons().get(k).setHp(entity.getPokemons().get(k).getBase_hp());;
+						}
+					}
+				}
+			}
+		}
+		
 	}
 }

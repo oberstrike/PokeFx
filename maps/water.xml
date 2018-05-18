@@ -43,27 +43,27 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>MTB_GRASS</type>
 			<x>0.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>0.0</x>
 			<y>270.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_WATER</type>
 			<x>0.0</x>
 			<y>300.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRF_WATER</type>
 			<x>0.0</x>
 			<y>330.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>0.0</x>
 			<y>360.0</y>
 		</FIELD>
@@ -128,17 +128,17 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTB_GRASS</type>
 			<x>30.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_WATER</type>
 			<x>30.0</x>
 			<y>270.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRF_WATER</type>
 			<x>30.0</x>
 			<y>300.0</y>
 		</FIELD>
@@ -148,7 +148,7 @@
 			<y>330.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>30.0</x>
 			<y>360.0</y>
 		</FIELD>
@@ -213,12 +213,12 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTB_GRASS</type>
 			<x>60.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTF_WATER</type>
 			<x>60.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -248,12 +248,12 @@
 			<y>420.0</y>
 		</FIELD>
 		<FIELD>
-			<type>TIEFERSAND</type>
+			<type>FELS_SAND</type>
 			<x>60.0</x>
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>TIEFERSAND</type>
+			<type>FELS_SAND</type>
 			<x>60.0</x>
 			<y>480.0</y>
 		</FIELD>
@@ -293,17 +293,17 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTLB_GRASS</type>
 			<x>90.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_WATER</type>
 			<x>90.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRF_WATER</type>
 			<x>90.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -313,7 +313,7 @@
 			<y>300.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>90.0</x>
 			<y>330.0</y>
 		</FIELD>
@@ -338,17 +338,17 @@
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>TIEFERSAND</type>
+			<type>FELS_SAND</type>
 			<x>90.0</x>
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_SAND</type>
 			<x>120.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTLF_GRASS</type>
 			<x>120.0</x>
 			<y>30.0</y>
 		</FIELD>
@@ -368,22 +368,22 @@
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTLB_GRASS</type>
 			<x>120.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_GRASS</type>
 			<x>120.0</x>
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_WATER</type>
 			<x>120.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRF_WATER</type>
 			<x>120.0</x>
 			<y>240.0</y>
 		</FIELD>
@@ -423,47 +423,47 @@
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTLB_GRASS</type>
 			<x>120.0</x>
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS_BL</type>
 			<x>150.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTILF_GRASS</type>
 			<x>150.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_GRASS</type>
 			<x>150.0</x>
 			<y>60.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_GRASS</type>
 			<x>150.0</x>
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTL_GRASS</type>
 			<x>150.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTILB_GRASS</type>
 			<x>150.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTIRF_WATER</type>
 			<x>150.0</x>
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRF_WATER</type>
 			<x>150.0</x>
 			<y>210.0</y>
 		</FIELD>
@@ -478,7 +478,7 @@
 			<y>270.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>150.0</x>
 			<y>300.0</y>
 		</FIELD>
@@ -508,42 +508,42 @@
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRB_GRASS</type>
 			<x>150.0</x>
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>MTR_WATER</type>
 			<x>180.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>SAND</type>
+			<type>MTR_WATER</type>
 			<x>180.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>SAND</type>
+			<type>MTR_WATER</type>
 			<x>180.0</x>
 			<y>60.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTR_WATER</type>
 			<x>180.0</x>
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTR_WATER</type>
 			<x>180.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTR_WATER</type>
 			<x>180.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>MTRF_WATER</type>
 			<x>180.0</x>
 			<y>180.0</y>
 		</FIELD>
@@ -608,12 +608,12 @@
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>SAND</type>
+			<type>FELS_WATER</type>
 			<x>210.0</x>
 			<y>60.0</y>
 		</FIELD>
 		<FIELD>
-			<type>SAND</type>
+			<type>FELS_WATER</type>
 			<x>210.0</x>
 			<y>90.0</y>
 		</FIELD>
@@ -633,7 +633,7 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>210.0</x>
 			<y>210.0</y>
 		</FIELD>
@@ -768,12 +768,12 @@
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>270.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>270.0</x>
 			<y>30.0</y>
 		</FIELD>
@@ -818,7 +818,7 @@
 			<y>270.0</y>
 		</FIELD>
 		<FIELD>
-			<type>SAND</type>
+			<type>FELS_SAND</type>
 			<x>270.0</x>
 			<y>300.0</y>
 		</FIELD>
@@ -853,12 +853,12 @@
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>300.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>300.0</x>
 			<y>30.0</y>
 		</FIELD>
@@ -938,7 +938,7 @@
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>330.0</x>
 			<y>0.0</y>
 		</FIELD>
@@ -958,17 +958,17 @@
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_3a</type>
 			<x>330.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3d</type>
 			<x>330.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3g</type>
 			<x>330.0</x>
 			<y>180.0</y>
 		</FIELD>
@@ -978,17 +978,17 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_1a</type>
 			<x>330.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_1c</type>
 			<x>330.0</x>
 			<y>270.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>SAND</type>
 			<x>330.0</x>
 			<y>300.0</y>
 		</FIELD>
@@ -1018,7 +1018,7 @@
 			<y>450.0</y>
 		</FIELD>
 		<FIELD>
-			<type>WASSER</type>
+			<type>FELS_WATER</type>
 			<x>330.0</x>
 			<y>480.0</y>
 		</FIELD>
@@ -1028,12 +1028,12 @@
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_1a</type>
 			<x>360.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_1c</type>
 			<x>360.0</x>
 			<y>60.0</y>
 		</FIELD>
@@ -1043,17 +1043,17 @@
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3b</type>
 			<x>360.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3e</type>
 			<x>360.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3h</type>
 			<x>360.0</x>
 			<y>180.0</y>
 		</FIELD>
@@ -1063,12 +1063,12 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_1b</type>
 			<x>360.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_1d</type>
 			<x>360.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -1113,12 +1113,12 @@
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_1b</type>
 			<x>390.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_1d</type>
 			<x>390.0</x>
 			<y>60.0</y>
 		</FIELD>
@@ -1128,17 +1128,17 @@
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3c</type>
 			<x>390.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3f</type>
 			<x>390.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3i</type>
 			<x>390.0</x>
 			<y>180.0</y>
 		</FIELD>
@@ -1148,12 +1148,12 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS</type>
 			<x>390.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>GRASS</type>
 			<x>390.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -1163,7 +1163,7 @@
 			<y>300.0</y>
 		</FIELD>
 		<FIELD>
-			<type>HOHESGRASS</type>
+			<type>SAND</type>
 			<x>390.0</x>
 			<y>330.0</y>
 		</FIELD>
@@ -1208,12 +1208,12 @@
 			<y>60.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_TOP</type>
 			<x>420.0</x>
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_BOTTOM</type>
 			<x>420.0</x>
 			<y>120.0</y>
 		</FIELD>
@@ -1223,22 +1223,22 @@
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_TOP</type>
 			<x>420.0</x>
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_BOTTOM</type>
 			<x>420.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_4a</type>
 			<x>420.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_4d</type>
 			<x>420.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -1248,7 +1248,7 @@
 			<y>300.0</y>
 		</FIELD>
 		<FIELD>
-			<type>HOHESGRASS</type>
+			<type>SAND</type>
 			<x>420.0</x>
 			<y>330.0</y>
 		</FIELD>
@@ -1276,6 +1276,25 @@
 			<type>GRASS</type>
 			<x>420.0</x>
 			<y>480.0</y>
+			<entity class="Trainer">
+				<name>Dude</name>
+				<pokemons>
+					<Pokemon name="Pikachu">
+						<id>25</id>
+						<level>11</level>
+						<type>ELEKTRIZITAET</type>
+						<att>55.0</att>
+						<deff>50.0</deff>
+						<motivation>100.0</motivation>
+						<init>90.0</init>
+						<hp>11.0</hp>
+						<xp>112</xp>
+						<base__hp>35.0</base__hp>
+						<spawn>0.21</spawn>
+						<trained>true</trained>
+					</Pokemon>
+				</pokemons>
+			</entity>
 		</FIELD>
 		<FIELD>
 			<type>UEBERGANG</type>
@@ -1319,12 +1338,12 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_4b</type>
 			<x>450.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_4e</type>
 			<x>450.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -1370,27 +1389,27 @@
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_TOP</type>
 			<x>480.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>SAND</type>
+			<type>BAUM_BOTTOM</type>
 			<x>480.0</x>
 			<y>60.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>SAND</type>
 			<x>480.0</x>
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_2a</type>
 			<x>480.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_2d</type>
 			<x>480.0</x>
 			<y>150.0</y>
 		</FIELD>
@@ -1405,12 +1424,12 @@
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_4c</type>
 			<x>480.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_4f</type>
 			<x>480.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -1450,32 +1469,32 @@
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_3a</type>
 			<x>510.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3d</type>
 			<x>510.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3g</type>
 			<x>510.0</x>
 			<y>60.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>SAND</type>
 			<x>510.0</x>
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_2b</type>
 			<x>510.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_2e</type>
 			<x>510.0</x>
 			<y>150.0</y>
 		</FIELD>
@@ -1535,17 +1554,17 @@
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_3b</type>
 			<x>540.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3e</type>
 			<x>540.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_3h</type>
 			<x>540.0</x>
 			<y>60.0</y>
 		</FIELD>
@@ -1555,32 +1574,32 @@
 			<y>90.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_2c</type>
 			<x>540.0</x>
 			<y>120.0</y>
 		</FIELD>
 		<FIELD>
-			<type>STEIN</type>
+			<type>HAUS_2f</type>
 			<x>540.0</x>
 			<y>150.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_TOP</type>
 			<x>540.0</x>
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_BOTTOM</type>
 			<x>540.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_TOP</type>
 			<x>540.0</x>
 			<y>240.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_BOTTOM</type>
 			<x>540.0</x>
 			<y>270.0</y>
 		</FIELD>
@@ -1620,17 +1639,17 @@
 			<y>480.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_3c</type>
 			<x>570.0</x>
 			<y>0.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_3f</type>
 			<x>570.0</x>
 			<y>30.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>HAUS_3i</type>
 			<x>570.0</x>
 			<y>60.0</y>
 		</FIELD>
@@ -1655,12 +1674,12 @@
 			<y>180.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_TOP</type>
 			<x>570.0</x>
 			<y>210.0</y>
 		</FIELD>
 		<FIELD>
-			<type>GRASS</type>
+			<type>BAUM_BOTTOM</type>
 			<x>570.0</x>
 			<y>240.0</y>
 		</FIELD>

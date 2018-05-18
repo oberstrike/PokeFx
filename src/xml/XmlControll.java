@@ -3,7 +3,6 @@ package xml;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +18,7 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 import field.Field;
 import logic.Map;
 import logic.Player;
+import logic.Trainer;
 //import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
@@ -28,13 +28,15 @@ public class XmlControll {
 	XStream stream;
 	private final List<Pokemon> pokedex;
 	private final HashMap<String, HashMap<Integer, String>> evolutiondex;
-
+	private final HashMap<PokemonType,HashMap<PokemonType,Double>> effectives;
+	
 	private static String pokeFileName = "pokedex.xml";
 	private static String evolveFileName = "evolvingdex.xml";
-
+	private static String effectivesFileName = "effectives.xml";
+	
+	
 	@SuppressWarnings("unchecked")
 	public XmlControll() {
-		// Client client = new Client();
 		stream = new XStream(new StaxDriver());
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);
@@ -44,6 +46,7 @@ public class XmlControll {
 		stream.processAnnotations(Pokemon.class);
 		stream.processAnnotations(PokemonType.class);
 		stream.processAnnotations(Player.class);
+		stream.processAnnotations(Trainer.class);
 		stream.allowTypeHierarchy(Collection.class);
 		stream.allowTypeHierarchy(Field.class);
 		stream.allowTypeHierarchy(Pokemon.class);
@@ -53,11 +56,15 @@ public class XmlControll {
 		stream.allowTypeHierarchy(Integer.class);
 		stream.allowTypeHierarchy(GameData.class);
 		stream.allowTypeHierarchy(Player.class);
+		stream.allowTypeHierarchy(Trainer.class);
+		
 		stream.alias("map", java.util.Map.class);
 		stream.allowTypeHierarchy(Map.class);
 
 		pokedex = (List<Pokemon>) this.getObject(new File(pokeFileName));
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(new File(evolveFileName));
+		effectives = (HashMap<PokemonType, HashMap<PokemonType, Double>>) stream.fromXML(new File(effectivesFileName));
+	
 	}
 
 	public Pokemon getPokemonByName(String name) {
@@ -70,7 +77,7 @@ public class XmlControll {
 		return pokedex.stream().anyMatch(each -> each.getName().equals(name));
 	}
 
-	synchronized public List<Pokemon> getPokemonsByType(PokemonType type) {
+	public List<Pokemon> getPokemonsByType(PokemonType type) {
 		List<Pokemon> pokemons = pokedex.stream().filter(each -> each.getType().equals(type))
 				.collect(Collectors.toList());
 		pokemons.forEach(each -> new Pokemon(each));
@@ -121,6 +128,10 @@ public class XmlControll {
 
 	public Pokemon getPokemonsById(int id) {
 		return new Pokemon(pokedex.get(id - 1));
+	}
+
+	public HashMap<PokemonType,HashMap<PokemonType,Double>> getEffectives() {
+		return effectives;
 	}
 
 }

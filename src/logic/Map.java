@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,10 +10,10 @@ import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
+import application.Main;
 import field.Field;
 import field.FieldType;
 import pokemon.Pokemon;
-import pokemon.PokemonType;
 
 @XStreamAlias("PokemonMap")
 public class Map {
@@ -26,7 +27,7 @@ public class Map {
 	private double height = 500;
 
 	@XStreamOmitField
-	private double sides = 30;
+	private static final double sides = 30;
 
 	private List<Pokemon> pokemons = new ArrayList<>();
 
@@ -39,11 +40,16 @@ public class Map {
 	}
 
 	public Map(FieldType fieldType) {
+		
 		for (int i = 0; i < width; i += sides) {
 			for (int j = 0; j < height; j += sides) {
 				fields.add(new Field(i, j, fieldType));
 			}
 		}
+		
+		Trainer trainer = new Trainer(Main.man_1_straight, "Dude", Arrays.asList(Main.xmlControll.getPokemonByName("Pikachu")));
+		fields.get(0).setEntity(trainer);
+		
 	}
 
 	public List<Field> getSuccesors(Field field) {
@@ -60,30 +66,37 @@ public class Map {
 		Vec2d v2 = new Vec2d(field2.getX(), field2.getY());
 		return v1.distance(v2);
 	}
-	
-
-	
 
 	public Optional<Field> leftField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() - sides && each.getY() == field.getY()).findFirst();
+		return getFieldWithCoordinates((field.getX()-30), field.getY());
 	}
 
 	public Optional<Field> rightField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() + sides && each.getY() == field.getY()).findFirst();
+		return getFieldWithCoordinates((field.getX()+30), field.getY());
 	}
 
 	public Optional<Field> bottomField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() && each.getY() == field.getY() + sides).findFirst();
+		return getFieldWithCoordinates(field.getX(), (field.getY()+30));
 	}
 
 	public Optional<Field> upField(Field field) {
-		return this.getFields().stream()
-				.filter(each -> each.getX() == field.getX() && each.getY() == field.getY() - sides).findFirst();
+		return getFieldWithCoordinates(field.getX(), (field.getY()-30));
 	}
 
+	public Optional<Field> getFieldWithCoordinates(double x, double y){
+		System.out.println(x + " " + y);
+		Optional<Field> ofield = Optional.empty();
+		
+		for(Field field: getFields()) {
+			if(field.getX() == x && field.getY() == y)
+				ofield = Optional.of(field);
+		}
+		return ofield;
+		
+	}
+	
+	
+	
 	public List<Field> getFields() {
 		return fields;
 	}
