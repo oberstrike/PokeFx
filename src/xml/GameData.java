@@ -1,7 +1,5 @@
 package xml;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import logic.Map;
 import logic.Player;
 

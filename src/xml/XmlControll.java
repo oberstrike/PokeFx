@@ -3,6 +3,8 @@ package xml;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -28,43 +30,36 @@ public class XmlControll {
 	XStream stream;
 	private final List<Pokemon> pokedex;
 	private final HashMap<String, HashMap<Integer, String>> evolutiondex;
-	private final HashMap<PokemonType,HashMap<PokemonType,Double>> effectives;
-	
+	private final HashMap<PokemonType, HashMap<PokemonType, Double>> effectives;
+
 	private static String pokeFileName = "pokedex.xml";
 	private static String evolveFileName = "evolvingdex.xml";
 	private static String effectivesFileName = "effectives.xml";
-	
-	
+
 	@SuppressWarnings("unchecked")
 	public XmlControll() {
+		Class<?>[] arrayOfClasses = {Field.class, Map.class, PokemonType.class, Player.class,
+				Trainer.class, Collection.class, java.util.Map.class, Integer.class, GameData.class, Pokemon.class, String.class};
+		
+		
+		
 		stream = new XStream(new StaxDriver());
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);
 		stream.addPermission(PrimitiveTypePermission.PRIMITIVES);
-		stream.processAnnotations(Field.class);
-		stream.processAnnotations(Map.class);
-		stream.processAnnotations(Pokemon.class);
-		stream.processAnnotations(PokemonType.class);
-		stream.processAnnotations(Player.class);
-		stream.processAnnotations(Trainer.class);
-		stream.allowTypeHierarchy(Collection.class);
-		stream.allowTypeHierarchy(Field.class);
-		stream.allowTypeHierarchy(Pokemon.class);
-		stream.allowTypeHierarchy(PokemonType.class);
-		stream.allowTypeHierarchy(java.util.Map.class);
-		stream.allowTypeHierarchy(String.class);
-		stream.allowTypeHierarchy(Integer.class);
-		stream.allowTypeHierarchy(GameData.class);
-		stream.allowTypeHierarchy(Player.class);
-		stream.allowTypeHierarchy(Trainer.class);
+		
+		for(Class<?> cl: arrayOfClasses) {
+			stream.processAnnotations(cl);
+			stream.allowTypeHierarchy(cl);
+		}
 		
 		stream.alias("map", java.util.Map.class);
-		stream.allowTypeHierarchy(Map.class);
-
+		stream.alias("list", ArrayList.class);
+		
 		pokedex = (List<Pokemon>) this.getObject(new File(pokeFileName));
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(new File(evolveFileName));
 		effectives = (HashMap<PokemonType, HashMap<PokemonType, Double>>) stream.fromXML(new File(effectivesFileName));
-	
+
 	}
 
 	public Pokemon getPokemonByName(String name) {
@@ -89,7 +84,7 @@ public class XmlControll {
 		map.getFields().forEach(each -> each.applyImage());
 		return map;
 	}
-	
+
 	public GameData getGame(File file) {
 		GameData data = (GameData) getObject(file);
 		return data;
@@ -98,7 +93,7 @@ public class XmlControll {
 	public Object getObject(File file) {
 		return stream.fromXML(file);
 	}
-	
+
 	public void saveGameData(GameData gameData, FileWriter writer) {
 		this.saveObject(gameData, writer);
 	}
@@ -130,7 +125,7 @@ public class XmlControll {
 		return new Pokemon(pokedex.get(id - 1));
 	}
 
-	public HashMap<PokemonType,HashMap<PokemonType,Double>> getEffectives() {
+	public HashMap<PokemonType, HashMap<PokemonType, Double>> getEffectives() {
 		return effectives;
 	}
 

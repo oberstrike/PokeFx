@@ -10,6 +10,8 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import application.Main;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 
 @XStreamAlias("Pokemon")
@@ -174,10 +176,6 @@ public class Pokemon {
 	public Pokemon fight(Pokemon mon2) {
 		Pokemon winner;
 
-		
-		
-		
-
 		if (mon2.getHp() <= 0) {
 			return this;
 		}
@@ -187,22 +185,24 @@ public class Pokemon {
 		double multiplierMon1 = 1;
 		if (Main.xmlControll.getEffectives().get(mon2.getType()).containsKey(this.getType()))
 			multiplierMon1 = Main.xmlControll.getEffectives().get(mon2.getType()).get(this.getType());
-		
+
 		// System.out.println(effekt.table.get(this.getType()).get(this.getType()));
-		output = "==================== \n\nDein Pokemon:\n" + this.getName() + " Lvl: " + this.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
+		output = "==================== \n\nDein Pokemon:\n" + this.getName() + " Lvl: " + this.getLevel()
+				+ "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
 
 		double multiplierMon2 = 1;
 		if (Main.xmlControll.getEffectives().get(this.getType()).containsKey(mon2.getType()))
 			multiplierMon2 = Main.xmlControll.getEffectives().get(this.getType()).get(mon2.getType());
-		
+
 		// System.out.println(effekt.table.get(mon2.getType()).get(mon2.getType()));
-		output2 = "___________________ \n\nGegnerisches Pokemon:\n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
+		output2 = "___________________ \n\nGegnerisches Pokemon:\n" + mon2.getName() + " Lvl: " + mon2.getLevel()
+				+ "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
 
 		int attMon1 = (int) (this.calculateAtt() * multiplierMon1);
 		int deffMon1 = this.calculateDeff();
 		int attMon2 = (int) (mon2.calculateAtt() * multiplierMon2);
 		int deffMon2 = mon2.calculateDeff();
-		
+
 		output += "\n ATK: " + attMon1 + " || DEF: " + deffMon1 + " || MOT: " + this.motivation + "\n-------------- \n";
 		output2 += "\n ATK: " + attMon2 + " || DEF: " + deffMon2 + " || MOT " + mon2.motivation + "\n-------------- \n";
 
@@ -211,7 +211,9 @@ public class Pokemon {
 			while (this.getHp() > 0 && mon2.getHp() > 0) {
 				double crit = randomCrit();
 				double damage = (attMon1 * crit - (deffMon2 * 0.75));
-				if (damage <= 0) { damage = 1; }
+				if (damage <= 0) {
+					damage = 1;
+				}
 				mon2.setHp(mon2.getHp() - damage);
 				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + ") || Crit: " + crit;
 				if (mon2.getHp() <= 0) {
@@ -220,7 +222,9 @@ public class Pokemon {
 					return this;
 				}
 				damage = (attMon2 * randomCrit() - (deffMon1 * 0.5));
-				if (damage <= 0) { damage = 1; }
+				if (damage <= 0) {
+					damage = 1;
+				}
 				this.setHp(this.getHp() - damage);
 				output += "\n HP: " + this.getHp() + " (-" + damage + ") || Crit: " + crit;
 				if (this.getHp() <= 0) {
@@ -235,7 +239,9 @@ public class Pokemon {
 			while (this.getHp() > 0 && mon2.getHp() > 0) {
 				double crit = randomCrit();
 				double damage = (attMon2 * crit - (deffMon1 * 0.5));
-				if (damage <= 0) { damage = 1; }
+				if (damage <= 0) {
+					damage = 1;
+				}
 				this.setHp(this.getHp() - damage);
 				output += "\n HP: " + this.getHp() + " (-" + damage + ") || Crit: " + crit;
 				if (this.getHp() <= 0) {
@@ -245,7 +251,9 @@ public class Pokemon {
 					return winner;
 				}
 				damage = (attMon1 * randomCrit() - (deffMon2 * 0.5));
-				if (damage <= 0) { damage = 1; }
+				if (damage <= 0) {
+					damage = 1;
+				}
 				mon2.setHp(mon2.getHp() - damage);
 				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + " ||) Crit: " + crit;
 				if (mon2.getHp() <= 0) {
@@ -265,7 +273,7 @@ public class Pokemon {
 	}
 
 	public int calculateAtt() {
-		int att = (int) ((level + 0.5) / 50 * this.att * (this.motivation/100));
+		int att = (int) ((level + 0.5) / 50 * this.att * (this.motivation / 100));
 		// int att = (int) (((this.att + 8) * 2 + (1/4)) * level / 100) + 5;
 		if (this.trained == true) {
 			att = (int) (att * 1.5);
@@ -274,7 +282,7 @@ public class Pokemon {
 	}
 
 	public int calculateDeff() {
-		int deff = (int) ((level + 0.5) / 50 * this.deff * (this.motivation/100));
+		int deff = (int) ((level + 0.5) / 50 * this.deff * (this.motivation / 100));
 		// int deff = (int) (((this.deff + 8) * 2 + (1/4)) * level / 100) + 5;
 		if (this.trained == true) {
 			deff = (int) (deff * 1.5);
@@ -310,7 +318,7 @@ public class Pokemon {
 
 		return (a * t * b * e * l) / (7 * s);
 	}
-	
+
 	public void evolveTo(Pokemon pokemon) {
 		this.id = pokemon.id;
 		this.type = pokemon.type;
@@ -328,20 +336,21 @@ public class Pokemon {
 		int xpForNextLevel = getXpForNextLevel();
 		if (xp >= xpForNextLevel) {
 			System.out.println(this.name + " ist eine Stufe aufgestiegen.");
-			this.xp = (xpForNextLevel - xp) < 0 ? 0 : (xpForNextLevel - xp); 
+			this.xp = (xpForNextLevel - xp) < 0 ? 0 : (xpForNextLevel - xp);
 			this.level++;
-			
+
 			HashMap<Integer, String> evolvingdex = Main.xmlControll.getEvolutiondex().get(name);
 			if (evolvingdex != null) {
-				Optional<Integer> key = evolvingdex.keySet().stream().filter(each -> each.intValue() <= level).findFirst();
-				if(key.isPresent()) {
+				Optional<Integer> key = evolvingdex.keySet().stream().filter(each -> each.intValue() <= level)
+						.findFirst();
+				if (key.isPresent()) {
 					Pokemon pokemon = Main.xmlControll.getPokemonByName(evolvingdex.get(key.get()));
 					evolveTo(pokemon);
-				}	
+				}
 			}
 		}
 	}
-	
+
 	public void updateMotivation(boolean win) {
 		if (win == true) {
 			if (this.motivation < 100) {
@@ -369,13 +378,23 @@ public class Pokemon {
 	public void setBase_hp(int base_hp) {
 		this.base_hp = base_hp;
 	}
-	
+
 	public boolean isTrained() {
 		return trained;
 	}
 
 	public void setTrained(boolean trained) {
 		this.trained = trained;
+	}
+
+	public Image getFrontImage() {
+		String pathToImg = "/pokemon/images/" + this.getId() + ".png";
+		return new Image(getClass().getResource(pathToImg).toExternalForm());
+	}
+
+	public Image getBackImage() {
+		String pathToImg = "/pokemon/images/back/" + this.getId() + ".png";
+		return new Image(getClass().getResource(pathToImg).toExternalForm());
 	}
 
 }

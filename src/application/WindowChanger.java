@@ -1,58 +1,62 @@
 package application;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
+import java.util.function.Consumer;
+
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class WindowChanger {
 	
-	public void changeWindow(String url, ActionEvent event) {
-		Stage window = stageCreator(url, event);
-		window.show();
-	}
-	public void changeWindow(String url, ActionEvent event, String title) {
-		Stage window = stageCreator(url, event);
-		window.setTitle(title);
-		window.show();
+	private Stage stage;
+	
+	
+	public void changeWindow(String url) {
+		this.changeWindow(url, (loader) ->{
+			
+		});
 	}
 	
-	public void changeWindow(String url, ActionEvent event, String title, double width, double heigt) {
-		Stage window = stageCreator(url, event);
-		window.setTitle(title);
-		window.setWidth(width);
-		window.setHeight(heigt);
-		window.show();
+	public void changeWindow(String url, String title) {
+		this.changeWindow(url, (loader) -> {
+			
+		});
+		this.stage.setTitle(title);
 	}
 	
 	
-	public Stage stageCreator(String url, ActionEvent event) {
+	public Stage getStage() {
+		return stage;
+	}
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+	}
+
+	public void changeWindow(String url, Consumer<FXMLLoader> consumer) {
 		FXMLLoader loader = new FXMLLoader();
+		if(consumer != null)
+			consumer.accept(loader);
 		loader.setLocation(getClass().getResource(url));
 		Parent parent = null;
-		Stage window = null;
-		try {
+		try{
 			parent = loader.load();
 			Scene scene = new Scene(parent);
-			window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			window.hide();
-			window.setScene(scene);
-			window.setResizable(false);
-			return window;
-		} catch (Exception e) {
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			this.stage.setScene(scene);
+			this.stage.setResizable(false);
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 	
 	
-	public WindowChanger() {
-		// TODO Auto-generated constructor stub
-	}
 	
+	
+	public WindowChanger(Stage stage) {
+		this.stage = stage;
+	}
 	
 	
 }
