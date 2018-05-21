@@ -2,9 +2,11 @@ package logic;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
 import com.sun.media.jfxmedia.events.NewFrameEvent;
@@ -77,40 +79,43 @@ public class GameLogic extends Thread {
 		Platform.runLater(() -> {
 
 			// Wenn der Spieler noch auf keinem Feld registriert ist
-			if (this.mapView.getFields().stream().anyMatch(each -> each.getEntity()!=null)) {
+			if (this.mapView.getFields().stream().anyMatch(each -> each.getEntity() != null)) {
 				Field field = player.getField();
-				field.getEntity().getClass().equals(Player.class);
-				Field new_field = this.mapView.getFields().stream()
-						.filter(each -> each.getX() == field.getX() && each.getY() == field.getY()).findFirst().get();
-				player.setField(new_field);
-				new_field.setEntity(player);
+				if(field.getEntity()!=null) {
+					if(field.getEntity().getClass().equals(Player.class)) {
+						Field new_field = this.mapView.getFields().stream()
+								.filter(each -> each.getX() == field.getX() && each.getY() == field.getY()).findFirst().get();
+						player.setField(new_field);
+						new_field.setEntity(player);	
+					};
+				}
 			}
 
 			this.mapView.update();
 
-			long countOfPokeViews = anchor2.getChildren().stream().filter(each -> each.getClass().equals(PokemonView.class))
-					.count();
+			long countOfPokeViews = anchor2.getChildren().stream()
+					.filter(each -> each.getClass().equals(PokemonView.class)).count();
 
-			if (countOfPokeViews < player.getPokemon().size()) {
-				for (int i = (int) countOfPokeViews; i < player.getPokemon().size(); i++) {
-					Pokemon myPokemon = player.getPokemon().get(i);
+			if (countOfPokeViews < player.getPokemons().size()) {
+				for (int i = (int) countOfPokeViews; i < player.getPokemons().size(); i++) {
+					Pokemon myPokemon = player.getPokemons().get(i);
 					PokemonView pv = new PokemonView(myPokemon);
 					pv.setLayoutX(45);
 					pv.setLayoutY(10 + i * 95);
 					pv.getUpButton().setOnAction(event -> {
 
 						// Pokemon Swap Mechanic
-						int oldIndex = player.getPokemon().indexOf(pv.getPokemon());
-						int newIndex = (oldIndex == 0 ? player.getPokemon().size() - 1 : oldIndex - 1);
+						int oldIndex = player.getPokemons().indexOf(pv.getPokemon());
+						int newIndex = (oldIndex == 0 ? player.getPokemons().size() - 1 : oldIndex - 1);
 
-						Pokemon oldPokemon = player.getPokemon().get(oldIndex);
-						Pokemon newPokemon = player.getPokemon().get(newIndex);
+						Pokemon oldPokemon = player.getPokemons().get(oldIndex);
+						Pokemon newPokemon = player.getPokemons().get(newIndex);
 
 						PokemonView oldView = (PokemonView) anchor2.getChildren().get(oldIndex);
 						PokemonView newView = (PokemonView) anchor2.getChildren().get(newIndex);
 
-						player.getPokemon().set(newIndex, oldPokemon);
-						player.getPokemon().set(oldIndex, newPokemon);
+						player.getPokemons().set(newIndex, oldPokemon);
+						player.getPokemons().set(oldIndex, newPokemon);
 
 						oldView.setPokemon(newPokemon);
 						newView.setPokemon(oldPokemon);
@@ -119,7 +124,7 @@ public class GameLogic extends Thread {
 					anchor2.getChildren().add(pv);
 				}
 			} else {
-				for (int i = 0; i < player.getPokemon().size(); i++) {
+				for (int i = 0; i < player.getPokemons().size(); i++) {
 					((PokemonView) anchor2.getChildren().get(i)).update();
 				}
 			}
@@ -139,18 +144,17 @@ public class GameLogic extends Thread {
 		}
 	}
 
-	private void fightMenu() {	
-		
-		
+	private void fightMenu() {
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		Alert acceptAlert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktionsfenster");
 		List<Pokemon> listOfPokemons = new ArrayList<>();
 
-		if (player.getPokemon().size() > 0) {
+		if (player.getPokemons().size() > 0) {
 			listOfPokemons = mapView.getMap().getPokemons();
 			listOfPokemons.forEach(each -> each
-					.setLevel(1 + new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemon().size()));
+					.setLevel(1 + new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemons().size()));
 		} else {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
@@ -171,119 +175,53 @@ public class GameLogic extends Thread {
 				sumChances -= currentPokemon.getSpawn();
 			}
 		}
+
+		System.out.println("Ein wildes " + spawnedPokemon.getName());
 		
-//		Kampf
-//		if(player.getPokemon().size()>0) {
-//			FightGuiController controller = FightGuiController.create(player.getPokemon().get(0), spawnedPokemon);
-//			Platform.runLater(() -> {
-//				Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> {
-//					loader.setController(controller);
-//				});
-//			});
-//		}
-		
-
-		
-		
-		int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
-		String entryOutput = "";
-		if (entryPokedex == 1) {
-			entryOutput = "Du hast dieses Pokemon bereits gesehen.";
-		} else if (entryPokedex == 2) {
-			entryOutput = "Du hast dieses Pokemon bereits gefangen.";
-		} else {
-			entryOutput = "Ein Eintrag im Pokedex wurde hinzugefügt";
-			player.setPokedex(spawnedPokemon, 1);
-		}
-
-		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel()
-				+ " ist erschienen.\n" + entryOutput);
-		//Pokemonbild
-		String pathToImg = "/pokemon/images/" + spawnedPokemon.getId() + ".png";
-		ImageView picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
-		picture.setLayoutX(0);
-		picture.setLayoutY(0);
-		picture.setFitWidth(128);
-		picture.setFitHeight(128);
-		alert.setGraphic(picture);
-
-		alert.setContentText("Bitte waehle deine Aktion.");
-
-		ButtonType kampfButton = new ButtonType("Angreifen");
-		ButtonType fangButton = new ButtonType("Fangen");
-		ButtonType fliehButton = new ButtonType("Fliehen");
-
-		alert.getButtonTypes().setAll(fliehButton);
-		if (player.getPokemon().size() != 0) {
-			alert.getButtonTypes().add(kampfButton);
-		}
-
-		if (player.getPokemon().size() < 5) {
-			alert.getButtonTypes().add(fangButton);
-		}
-
-		Optional<ButtonType> result = alert.showAndWait();
-		ButtonType buttonType = result.get();
-		if (buttonType != null) {
-			if (buttonType.equals(kampfButton)) {
-				Pokemon winner = null;
-				for (int i = 0; i < player.getPokemon().size(); i++) {
-					Pokemon pokemon = player.getPokemon().get(i);
-					int currentLvl = pokemon.getLevel();
-					winner = pokemon.fight(spawnedPokemon);
-					if (winner != null) {
-						if (player.getPokemon().contains(winner)) {
-							winner.addXp(spawnedPokemon.calcXp());
-							acceptAlert.setHeaderText(winner.getName() + " hat " + spawnedPokemon.calcXp()
-									+ " Erfahrungspunkte erhalten.");
-							if (winner.getLevel() != currentLvl) {
-								acceptAlert.setContentText(winner.getName() + " ist ein Level aufgestiegen.");
-							}
-							ButtonType acceptButton = new ButtonType("Ok");
-							acceptAlert.getButtonTypes().setAll(acceptButton);
-							acceptAlert.show();
-							break;
-						} else {
-							System.out.println("Dein Pokemon: " + pokemon.getName() + " wurde besiegt");
-						}
-					}
+		// Kampf
+		if (player.getPokemons().size() > 0) {
+			FightGuiController controller = FightGuiController.create(player.getPokemons(),
+					new Vector<>(Arrays.asList(spawnedPokemon)), false);
+			Platform.runLater(() -> {
+				Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> {
+					loader.setController(controller);
+				});
+			});
+		}else {
+			alert.setContentText("Ein wildes " + spawnedPokemon.getName() + " erscheint willst du es behalten?");
+			ButtonType yes = new ButtonType("Ja");
+			ButtonType no = new ButtonType("Nein");
+			alert.getButtonTypes().setAll(yes, no);
+			Optional<ButtonType> btn = alert.showAndWait();
+			if(btn.isPresent()) {
+				ButtonType btnValue = btn.get();
+				System.out.println(btnValue);
+				if(btnValue.getClass().equals(yes.getClass())) {
+					player.getPokemons().add(spawnedPokemon);
 				}
-			} else if (buttonType.equals(fangButton)) {
-				spawnedPokemon.setXp(0);
-				if (player.getPokemon().size() == 0) {
-					player.getPokemon().add(spawnedPokemon);
-					spawnedPokemon.setTrained(true);
-				} else {
-					int iValue = new Random().nextInt(100);
-					if (spawnedPokemon.getSpawn() > 3) {
-						if (iValue > 45) {
-							player.getPokemon().add(spawnedPokemon);
-							spawnedPokemon.setTrained(true);
-						}
-					} else if (spawnedPokemon.getSpawn() > 2) {
-						if (iValue > 60) {
-							player.getPokemon().add(spawnedPokemon);
-							spawnedPokemon.setTrained(true);
-						}
-					} else if (spawnedPokemon.getSpawn() > 1) {
-						if (iValue > 70) {
-							player.getPokemon().add(spawnedPokemon);
-							spawnedPokemon.setTrained(true);
-						}
-					} else {
-						if (iValue > 80) {
-							player.getPokemon().add(spawnedPokemon);
-							spawnedPokemon.setTrained(true);
-						}
-					}
-					if (spawnedPokemon.isTrained() == true) {
-						player.setPokedex(spawnedPokemon, 2);
-					}
-				}
-			} else {
-
 			}
+			
 		}
+		
+		
+//
+//		int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
+//		String entryOutput = "";
+//		if (entryPokedex == 1) {
+//			entryOutput = "Du hast dieses Pokemon bereits gesehen.";
+//		} else if (entryPokedex == 2) {
+//			entryOutput = "Du hast dieses Pokemon bereits gefangen.";
+//		} else {
+//			entryOutput = "Ein Eintrag im Pokedex wurde hinzugefügt";
+//			player.setPokedex(spawnedPokemon, 1);
+//		}
+//
+//		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel()
+//				+ " ist erschienen.\n" + entryOutput);
+//		// Pokemonbild
+
+
+		
 	}
 
 	public void moveEvent(String keyName) {
@@ -323,7 +261,8 @@ public class GameLogic extends Thread {
 				if (oField.isPresent()) {
 					Field field = oField.get();
 					if (field.getEntity() != null) {
-						fightAgainstTrainer((Trainer) field.getEntity());
+						if(field.getEntity().getClass().equals(Trainer.class))
+							fightAgainstTrainer((Trainer) field.getEntity());
 					}
 				}
 			}
@@ -342,7 +281,7 @@ public class GameLogic extends Thread {
 				if (!newField.get().isBlocked()) {
 					int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 300 : 110;
 					if (lastMovementTime == 0 || System.currentTimeMillis() - lastMovementTime > difference) {
-						for (Pokemon mon : player.getPokemon()) {
+						for (Pokemon mon : player.getPokemons()) {
 							double hp = mon.getHp();
 							double hpBase = mon.calculateHp();
 							if (hpBase > hp) {
@@ -354,6 +293,10 @@ public class GameLogic extends Thread {
 
 						Field newF = newField.get();
 						if (newF.getType().equals(FieldType.UEBERGANG)) {
+							
+							Map map = Main.xmlControll.getMap(new File(newF.getNextMap()));
+							mapView.setMap(map);
+							Main.gameData.setMap(map);
 							if (x == 570) {
 								newX = 0;
 							} else if (x == 0) {
@@ -377,13 +320,9 @@ public class GameLogic extends Thread {
 						if (newF.getType().equals(FieldType.HOHESGRASS)
 								|| newF.getType().equals(FieldType.TIEFERSAND)) {
 							int randDig = new Random().nextInt(100);
-							if (randDig < 12) {
+							if (randDig < 13) {
 								fightMenu();
 							}
-						} else if (newF.getNextMap() != null) {
-							Map map = Main.xmlControll.getMap(new File(newF.getNextMap()));
-							mapView.setMap(map);
-							Main.gameData.setMap(map);
 						}
 						mapView.update();
 					}
@@ -413,12 +352,12 @@ public class GameLogic extends Thread {
 					+ enemyPokemon.getLevel() + " in den Kampf.");
 			acceptAlert.getButtonTypes().setAll(acceptButton);
 			acceptAlert.showAndWait();
-			for (int i = 0; i < player.getPokemon().size(); i++) {
-				Pokemon pokemon = player.getPokemon().get(i);
+			for (int i = 0; i < player.getPokemons().size(); i++) {
+				Pokemon pokemon = player.getPokemons().get(i);
 				int currentLvl = pokemon.getLevel();
 				winner = pokemon.fight(enemyPokemon);
 				if (winner != null) {
-					if (player.getPokemon().contains(winner)) {
+					if (player.getPokemons().contains(winner)) {
 						System.out.println(pokemon.getName() + " hat " + enemyPokemon.calcXp() + " Xp erhalten");
 						winner.addXp(enemyPokemon.calcXp());
 						acceptAlert.setHeaderText(

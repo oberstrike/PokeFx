@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -27,9 +28,10 @@ public class Player implements Entity {
 		return "Player [name=" + name + ", field=" + field + ", pokemons=" + pokemons + "]";
 	}
 
-	private List<Pokemon> pokemons = new ArrayList<>();
-	private Item[] item = new Item[5];
-	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
+	
+	private Vector<Pokemon> pokemons = new Vector<>();
+// 	private Item[] item = new Item[5];
+//	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
 	private List<Integer> pokedex = new ArrayList<>();
 	
 	public Player(){
@@ -52,11 +54,11 @@ public class Player implements Entity {
 		this.name = name;
 	}
 
-	public List<Pokemon> getPokemon() {
+	public Vector<Pokemon> getPokemons() {
 		return pokemons;
 	}
 
-	public void setPokemon(List<Pokemon> pokemons) {
+	public void setPokemons(Vector<Pokemon> pokemons) {
 		this.pokemons = pokemons;
 	}
 

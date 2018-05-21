@@ -2,7 +2,9 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import application.Main;
 import application.WindowChanger;
@@ -16,6 +18,7 @@ import views.MapView;
 import xml.GameData;
 import javafx.stage.FileChooser.ExtensionFilter;
 import logic.GenericBuilder;
+import pokemon.Pokemon;
 
 public class MenuGuiController implements Initializable {
 
@@ -37,22 +40,14 @@ public class MenuGuiController implements Initializable {
 
 	@FXML
 	void load(ActionEvent event) {
-		System.out.println("Wechsel");
-		// FightGuiController controller =
-		// FightGuiController.create(Main.xmlControll.getPokemonsById(1),
-		// Main.xmlControll.getPokemonsById(4));
-		// Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> {
-		// loader.setController(controller);
-		// });
-		//
-
-		File selectedFile = new File("maps/start.xml");
-		// File selectedFile = new File("save.xml");
-		MapView mapView = new MapView();
-		mapView.setMap(Main.xmlControll.getMap(selectedFile));
-		Main.gameData = new GameData(mapView.getMap());
-
-		Main.changer.changeWindow("/guis/GameGui.fxml");
+		
+		 File selectedFile = new File("maps/start.xml");
+		 // File selectedFile = new File("save.xml");
+		 MapView mapView = new MapView();
+		 mapView.setMap(Main.xmlControll.getMap(selectedFile));
+		 Main.gameData = new GameData(mapView.getMap());
+		
+		 Main.changer.changeWindow("/guis/GameGui.fxml");
 
 	}
 

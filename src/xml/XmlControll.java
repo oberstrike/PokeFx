@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
 import com.thoughtworks.xstream.XStream;
@@ -39,7 +40,7 @@ public class XmlControll {
 	@SuppressWarnings("unchecked")
 	public XmlControll() {
 		Class<?>[] arrayOfClasses = {Field.class, Map.class, PokemonType.class, Player.class,
-				Trainer.class, Collection.class, java.util.Map.class, Integer.class, GameData.class, Pokemon.class, String.class};
+				Trainer.class, Collection.class, java.util.Map.class, Integer.class, GameData.class, Pokemon.class, String.class, Vector.class};
 		
 		
 		

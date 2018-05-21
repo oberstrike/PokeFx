@@ -23,22 +23,22 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Kampf">
+                  <Label onMouseClicked="#fight" text="Kampf" GridPane.columnIndex="0" GridPane.rowIndex="0">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label text="Pokemon" GridPane.rowIndex="1">
+                  <Label text="Pokemons" GridPane.rowIndex="1">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label text="Beute" GridPane.columnIndex="1">
+                  <Label onMouseClicked="#catchEvent" fx:id="catchLabel" text="Fangen" GridPane.columnIndex="1">
                      <font>
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label text="Flucht" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Label fx:id="escapeLabel" onMouseClicked="#escape" text="Flucht" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="22.0" />
                      </font>
