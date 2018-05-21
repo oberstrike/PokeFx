@@ -178,6 +178,7 @@ public class GameLogic extends Thread {
 
 		System.out.println("Ein wildes " + spawnedPokemon.getName());
 		
+<<<<<<< HEAD
 		// Kampf
 		if (player.getPokemons().size() > 0) {
 			FightGuiController controller = FightGuiController.create(player.getPokemons(),
@@ -198,6 +199,82 @@ public class GameLogic extends Thread {
 				System.out.println(btnValue);
 				if(btnValue.getClass().equals(yes.getClass())) {
 					player.getPokemons().add(spawnedPokemon);
+=======
+		
+		int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
+		String entryOutput = "";
+		if (entryPokedex == 1) {
+			entryOutput = "Du hast dieses Pokemon bereits gesehen.";
+		} else if (entryPokedex == 2) {
+			entryOutput = "Du hast dieses Pokemon bereits gefangen.";
+		} else {
+			entryOutput = "Ein Eintrag im Pokedex wurde hinzugefügt";
+			player.setPokedex(spawnedPokemon, 1);
+		}
+
+		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel()
+				+ " ist erschienen.\n" + entryOutput);
+		//Pokemonbild
+		String pathToImg = "/pokemon/images/" + spawnedPokemon.getId() + ".png";
+		ImageView picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
+		picture.setLayoutX(0);
+		picture.setLayoutY(0);
+		picture.setFitWidth(128);
+		picture.setFitHeight(128);
+		alert.setGraphic(picture);
+
+		alert.setContentText("Bitte waehle deine Aktion.");
+
+		ButtonType kampfButton = new ButtonType("Angreifen");
+		ButtonType fangButton = new ButtonType("Fangen");
+		ButtonType fliehButton = new ButtonType("Fliehen");
+
+		alert.getButtonTypes().setAll(fliehButton);
+		if (player.getPokemon().size() != 0) {
+			alert.getButtonTypes().add(kampfButton);
+		}
+
+		if (player.getPokemon().size() < 5) {
+			alert.getButtonTypes().add(fangButton);
+		}
+
+		Optional<ButtonType> result = alert.showAndWait();
+		ButtonType buttonType = result.get();
+		if (buttonType != null) {
+			if (buttonType.equals(kampfButton)) {
+				fight(spawnedPokemon);
+			} else if (buttonType.equals(fangButton)) {
+				spawnedPokemon.setXp(0);
+				if (player.getPokemon().size() == 0) {
+					player.getPokemon().add(spawnedPokemon);
+					spawnedPokemon.setTrained(true);
+				} else {
+					int iValue = new Random().nextInt(100);
+					if (spawnedPokemon.getSpawn() > 3) {
+						if (iValue > 45) {
+							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
+					} else if (spawnedPokemon.getSpawn() > 2) {
+						if (iValue > 60) {
+							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
+					} else if (spawnedPokemon.getSpawn() > 1) {
+						if (iValue > 70) {
+							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
+					} else {
+						if (iValue > 80) {
+							player.getPokemon().add(spawnedPokemon);
+							spawnedPokemon.setTrained(true);
+						}
+					}
+					if (spawnedPokemon.isTrained() == true) {
+						player.setPokedex(spawnedPokemon, 2);
+					}
+>>>>>>> adad536c664c2b6cd5d4eeb8a6a74f6216008305
 				}
 			}
 			
@@ -261,8 +338,12 @@ public class GameLogic extends Thread {
 				if (oField.isPresent()) {
 					Field field = oField.get();
 					if (field.getEntity() != null) {
+<<<<<<< HEAD
 						if(field.getEntity().getClass().equals(Trainer.class))
 							fightAgainstTrainer((Trainer) field.getEntity());
+=======
+						fight((Trainer) field.getEntity());
+>>>>>>> adad536c664c2b6cd5d4eeb8a6a74f6216008305
 					}
 				}
 			}
@@ -333,20 +414,22 @@ public class GameLogic extends Thread {
 		}
 
 	}
+//
+//	private void fightAgainstTrainer(Trainer entity) {
+//		// new Alert(AlertType.CONFIRMATION, "Kampf gegen " + entity.getName() + ".
+//		// Bereits gewonnen: " + entity.isWin()).show();
+//		
+//		Pokemon winner = null;
+//		
+//
+//	}
+	
+	private void fight(Trainer entity) {
+		showConfirmationMessage("Hey, du!", entity.getName() + ": Ja, du! Meinen Pokemon ist langweilig.\nIch wette, dass sie deine mit links besiegen!");
 
-	private void fightAgainstTrainer(Trainer entity) {
-		// new Alert(AlertType.CONFIRMATION, "Kampf gegen " + entity.getName() + ".
-		// Bereits gewonnen: " + entity.isWin()).show();
-		ButtonType acceptButton = new ButtonType("Ok");
-		Alert acceptAlert = new Alert(AlertType.CONFIRMATION);
-		acceptAlert.setHeaderText("Hey, du!");
-		acceptAlert.setContentText(entity.getName()
-				+ ": Ja, du! Meinen Pokemon ist langweilig.\nIch wette, dass sie deine mit links besiegen!");
-		acceptAlert.getButtonTypes().setAll(acceptButton);
-		acceptAlert.showAndWait();
-		Pokemon winner = null;
 		for (int j = 0; j < entity.getPokemons().size(); j++) {
 			Pokemon enemyPokemon = entity.getPokemons().get(j);
+<<<<<<< HEAD
 			acceptAlert.setHeaderText("Kampf gegen " + entity.getName());
 			acceptAlert.setContentText(entity.getName() + " schickt " + enemyPokemon.getName() + " Lvl "
 					+ enemyPokemon.getLevel() + " in den Kampf.");
@@ -369,23 +452,148 @@ public class GameLogic extends Thread {
 						Optional<ButtonType> result = acceptAlert.showAndWait();
 						entity.setWin(true);
 						break;
+=======
+			
+			showConfirmationMessage("Kampf gegen " + entity.getName(), entity.getName() + " schickt " + enemyPokemon.getName() + " Lvl " + enemyPokemon.getLevel() + " in den Kampf.");
+			
+			for (int i = 0; i < player.getPokemon().size(); i++) {
+				Pokemon pokemon = player.getPokemon().get(i);
+				int currentLvl = pokemon.getLevel();
+				double damage = 0.0;
+				
+				String output = "";
+				String output2 = "";
+
+				output = "==================== \n\nDein Pokemon:\n" + pokemon.getName() + " Lvl: " + pokemon.getLevel()
+						+ "\n-------------- \nHP: " + pokemon.getHp() + "\n";
+
+				output2 = "___________________ \n\nGegnerisches Pokemon:\n" + enemyPokemon.getName() + " Lvl: " + enemyPokemon.getLevel()
+						+ "\n-------------- \n HP: " + enemyPokemon.getHp() + "\n";
+
+				boolean playersTurn = false;
+				
+				// Erster Angriff wenn Trainerpokemon anfängt
+				if ((pokemon.getInit()*1.2) >= enemyPokemon.getInit()) {
+					playersTurn = true;
+					
+					// Hier die Entscheidungsmöglichkeiten des Spielers einfügen
+					damage = pokemon.getDamage(enemyPokemon);
+					output2 = output2 + (enemyPokemon.getHp() + "-" + damage + "\n");
+					enemyPokemon.setHp(enemyPokemon.getHp() - damage);
+					playersTurn = false;
+				}
+					
+				// Kampf
+				while(pokemon.getHp() > 0 && enemyPokemon.getHp() > 0) {
+					if (playersTurn == false) {
+						damage = enemyPokemon.getDamage(pokemon);
+						output = output + (pokemon.getHp() + "-" + damage + "\n");
+						pokemon.setHp(pokemon.getHp() - damage);
+						playersTurn = true;
+>>>>>>> adad536c664c2b6cd5d4eeb8a6a74f6216008305
 					} else {
-						// new Alert(AlertType.INFORMATION, "Haha! Was habe ich gesagt? Meine Pokemon
-						// sind nicht so einfach zu besiegen!\n" + winner.getName() + " hat " + " dein
-						// Pokemon besiegt.").show();
-						acceptAlert.setHeaderText(winner.getName() + " hat " + " dein Pokemon besiegt.");
-						acceptAlert.setContentText(entity.getName()
-								+ ": Haha! Was habe ich gesagt?\nMeine Pokemon sind nicht so einfach zu besiegen!");
-						acceptAlert.getButtonTypes().setAll(acceptButton);
-						acceptAlert.showAndWait();
+						// Hier die Entscheidungsmöglichkeiten des Spielers einfügen
+						damage = pokemon.getDamage(enemyPokemon);
+						output2 = output2 + (enemyPokemon.getHp() + "-" + damage + "\n");
+						enemyPokemon.setHp(enemyPokemon.getHp() - damage);
+						playersTurn = false;
+					}
+				}
+				System.out.println(output + "\nHP: " + pokemon.getHp() + "\n" + output2 + "\nHP: " + enemyPokemon.getHp());
+				
+				if (enemyPokemon.getHp() <= 0) {
+					enemyPokemon.setHp(0);
+					showConfirmationMessage(pokemon.getName() + " hat " + enemyPokemon.getName() + " besiegt.", "Es erhält dafür " + enemyPokemon.calcXp() + " Erfahrungspunkte.");
+						pokemon.addXp(enemyPokemon.calcXp());
+					if (pokemon.getLevel() != currentLvl) {
+						showConfirmationMessage(pokemon.getName() + " ist ein Level aufgestiegen.","");
+					}
+					if (j == entity.getPokemons().size()) {
+						showConfirmationMessage("Du hast " + entity.getName() + " besiegt.", entity.getName() + ": Wow, nicht schlecht!");
+						entity.setWin(true);
+					}
+				} else {
+					showConfirmationMessage(enemyPokemon.getName() + " hat " + pokemon.getName() + " besiegt.", "");
+					// Pokemonwahl einfügen?
+					if (i == player.getPokemon().size()) {
+						showConfirmationMessage(enemyPokemon.getName() + " hat " + pokemon.getName() + " besiegt.", entity.getName() + ": Haha! Was habe ich gesagt?\nMeine Pokemon sind nicht so einfach zu besiegen!");
 						for (int k = 0; k < entity.getPokemons().size(); k++) {
 							entity.getPokemons().get(k).setHp(entity.getPokemons().get(k).getBase_hp());
 							;
 						}
 					}
 				}
+
+			}
+		}		
+	}
+	
+	private void fight(Pokemon enemyPokemon) {
+		for (int i = 0; i < player.getPokemon().size(); i++) {
+			Pokemon pokemon = player.getPokemon().get(i);
+			int currentLvl = pokemon.getLevel();
+			double damage = 0.0;
+			
+			String output = "";
+			String output2 = "";
+
+			output = "==================== \n\nDein Pokemon:\n" + pokemon.getName() + " Lvl: " + pokemon.getLevel()
+					+ "\n-------------- \nHP: " + pokemon.getHp() + "\n";
+
+			output2 = "___________________ \n\nGegnerisches Pokemon:\n" + enemyPokemon.getName() + " Lvl: " + enemyPokemon.getLevel()
+					+ "\n-------------- \n HP: " + enemyPokemon.getHp() + "\n";
+
+			boolean playersTurn = false;
+			
+			// Erster Angriff wenn Trainerpokemon anfängt
+			if ((pokemon.getInit()*1.2) >= enemyPokemon.getInit()) {
+				playersTurn = true;
+				
+				// Hier die Entscheidungsmöglichkeiten des Spielers einfügen
+				damage = pokemon.getDamage(enemyPokemon);
+				output2 = output2 + (enemyPokemon.getHp() + "-" + damage + "\n");
+				enemyPokemon.setHp(enemyPokemon.getHp() - damage);
+				playersTurn = false;
+			}
+				
+			// Kampf
+			while(pokemon.getHp() > 0 && enemyPokemon.getHp() > 0) {
+				if (playersTurn == false) {
+					damage = enemyPokemon.getDamage(pokemon);
+					output = output + (pokemon.getHp() + "-" + damage + "\n");
+					pokemon.setHp(pokemon.getHp() - damage);
+					playersTurn = true;
+				} else {
+					// Hier die Entscheidungsmöglichkeiten des Spielers einfügen
+					damage = pokemon.getDamage(enemyPokemon);
+					output2 = output2 + (enemyPokemon.getHp() + "-" + damage + "\n");
+					enemyPokemon.setHp(enemyPokemon.getHp() - damage);
+					playersTurn = false;
+				}
+			}
+			System.out.println(output + "\nHP: " + pokemon.getHp() + "\n" + output2 + "\nHP: " + enemyPokemon.getHp());
+			
+			if (enemyPokemon.getHp() <= 0) {
+				enemyPokemon.setHp(0);
+				showConfirmationMessage(pokemon.getName() + " hat " + enemyPokemon.getName() + " besiegt.", "Es erhält dafür " + enemyPokemon.calcXp() + " Erfahrungspunkte.");
+					pokemon.addXp(enemyPokemon.calcXp());
+				if (pokemon.getLevel() != currentLvl) {
+					showConfirmationMessage(pokemon.getName() + " ist ein Level aufgestiegen.","");
+				}
+				break;
+			} else {
+				showConfirmationMessage(enemyPokemon.getName() + " hat " + pokemon.getName() + " besiegt.", "");
+				// Pokemonwahl einfügen?
 			}
 		}
-
+	}
+	
+	private void showConfirmationMessage(String header, String text) {
+		ButtonType button = new ButtonType("Ok");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(header);
+		alert.setContentText(text);
+		alert.getButtonTypes().setAll(button);
+		alert.showAndWait();
 	}
 }
