@@ -82,21 +82,38 @@ public class FightGuiController implements Initializable, Controller {
 	void fight(MouseEvent event) {
 		Pokemon myPokemon = this.myPokemons.get(actMyPokemon);
 		Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
+		Pokemon winner = null;
+		
+		Pokemon fasterPokemon = myPokemon.faster(enemyPokemon);
+		Pokemon slowerPokemon = fasterPokemon.equals(myPokemon) ? enemyPokemon : myPokemon;
+		
+		System.out.println(fasterPokemon.toString());
+		System.out.println(slowerPokemon.toString());
 
-		Pokemon winner = myPokemon.fight(enemyPokemon);
 
-		if(myPokemons.contains(winner)) {
-			actMyPokemon++;
-			myPokemon.addXp(enemyPokemon.calcXp());
+		slowerPokemon.setHp(slowerPokemon.getHp() - fasterPokemon.getDamage(slowerPokemon));
+		if(slowerPokemon.isDead()) {
+			if(slowerPokemon.equals(myPokemon)) {
+				actMyPokemon++;
+			}else {
+				actEnemyPokemon++;
+			}
 		}else {
-			actEnemyPokemon++;
-		}
-		if (actEnemyPokemon == enemyPokemons.size()) {
-			swapBack();
-		} else if (actMyPokemon == myPokemons.size()) {
-			swapBack();
+
+			fasterPokemon.setHp(fasterPokemon.getHp()-fasterPokemon.getDamage(slowerPokemon));
+			if(fasterPokemon.isDead()) {
+				if(fasterPokemon.equals(myPokemon)) {
+					actMyPokemon++;
+				}else {
+					actEnemyPokemon++;
+				}
+			}
 		}
 	}
+	
+	
+	
+	
 
 	@FXML
 	void escape(MouseEvent event) {
@@ -134,9 +151,14 @@ public class FightGuiController implements Initializable, Controller {
 		}
 		executor.scheduleAtFixedRate(() -> {
 			Platform.runLater(() -> {
-
-				Pokemon myPokemon = this.myPokemons.get(actMyPokemon);
-				Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
+				Pokemon myPokemon = null;
+				Pokemon enemyPokemon = null;
+				try {
+					myPokemon = this.myPokemons.get(actMyPokemon);
+					enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);	
+				}catch (Exception e) {
+					swapBack();
+				}
 				if (myPokemon != null) {
 					myPokemonView.setImage(myPokemon.getBackImage());
 					myPokemonNameLabel.setText(myPokemon.getName());

@@ -1,6 +1,5 @@
 package logic;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class GenericBuilder<T> {

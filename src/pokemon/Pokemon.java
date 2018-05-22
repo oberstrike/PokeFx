@@ -171,6 +171,47 @@ public class Pokemon {
 	public void setSpawn(double spawn) {
 		this.spawn = spawn;
 	}
+	
+	public Pokemon faster(Pokemon mon) {
+		return mon.calculateInit() > this.calculateInit() ? mon : this;
+	}
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(base_hp);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + id;
+		result = prime * result + level;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pokemon other = (Pokemon) obj;
+		if (Double.doubleToLongBits(base_hp) != Double.doubleToLongBits(other.base_hp))
+			return false;
+		if (id != other.id)
+			return false;
+		if (level != other.level)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
 
 	// Aufruf: angreifer.getDamage(verteidiger)
 	public double getDamage(Pokemon mon2) {
@@ -179,27 +220,26 @@ public class Pokemon {
 		if (Main.xmlControll.getEffectives().get(mon2.getType()).containsKey(this.getType()))
 			multiplierMon1 = Main.xmlControll.getEffectives().get(mon2.getType()).get(this.getType());
 
-		int att = (int) ((level + 0.5) / 50 * this.att * (this.motivation / 100) * multiplierMon1);
-		if (this.trained == true) {
-			att = (int) (att * 1.5);
-		}
-		
-		int deff = (int) ((mon2.level + 0.5) / 50 * mon2.deff * (mon2.motivation / 100));
-		if (this.trained == true) {
-			deff = (int) (deff * 1.5);
-		}
-
-		double crit = randomCrit();
-		double damage = (att * crit - (deff * 0.75));
+		int att = (int) (((this.att + 8) * 2 + (1 / 4)) * level / 100) + level ;
+		int deff = (int) (((mon2.getDeff() + 8) * 2 + (1 / 4)) * level / 100) + level ;
+	
+		double crit = randomCrit() * (this.motivation/100);
+		double damage = (att * crit - (deff * 0.5));
 		if (damage <= 0) {
 			damage = 1;
 		}
-		return damage;
+		System.out.println(this.getName() + " fügt " + mon2.getName() + " " + Math.floor(damage) + " zu ");
+		return Math.floor(damage);
 
 	}
 
 	public int calculateHp() {
 		int hp = (int) (((base_hp + 8) * 2 + (1 / 4)) * level / 100) + level + 10;
+		return hp;
+	}
+	
+	public int calculateInit() {
+		int hp = (int) (((init + 8) * 2 + (1 / 4)) * level / 100) + level ;
 		return hp;
 	}
 
@@ -289,6 +329,10 @@ public class Pokemon {
 
 	public void setBase_hp(int base_hp) {
 		this.base_hp = base_hp;
+	}
+	
+	public boolean isDead() {
+		return this.getHp() <= 0 ;
 	}
 
 	public boolean isTrained() {
