@@ -210,6 +210,7 @@ public class Main extends Application {
 			man_1_straight = new Image("/images/man_1_straight.png");
 			man_2_straight = new Image("/images/man_2_straight.png");
 			xmlControll = new XmlControll();
+			System.out.println("Bilder wurden geladen");
 			
 			Scene scene = new Scene(root, 330, 400);
 			// Scene scene = new Scene(root,900,500);
