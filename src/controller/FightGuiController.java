@@ -111,9 +111,6 @@ public class FightGuiController implements Initializable, Controller {
 		}
 	}
 	
-	
-	
-	
 
 	@FXML
 	void escape(MouseEvent event) {
