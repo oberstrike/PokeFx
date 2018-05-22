@@ -1,8 +1,10 @@
 package application;
 
+import controller.FightGuiController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import logic.GenericBuilder;
 import xml.GameData;
 import xml.XmlControll;
 import javafx.scene.Scene;
@@ -105,8 +107,7 @@ public class Main extends Application {
 	public static Image man_1_straight;
 	public static Image man_2_straight;
 	public static XmlControll xmlControll;
-	public static Stage kprimaryStage;
-	
+	public static WindowChanger changer;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -210,14 +211,16 @@ public class Main extends Application {
 			man_1_straight = new Image("/images/man_1_straight.png");
 			man_2_straight = new Image("/images/man_2_straight.png");
 			xmlControll = new XmlControll();
+<<<<<<< HEAD
 			System.out.println("Bilder wurden geladen");
+=======
+			changer = new WindowChanger(primaryStage);
+>>>>>>> 9e2c2a7fbc3be8ac389c6dc31e3737bfa236a913
 			
 			Scene scene = new Scene(root, 330, 400);
-			// Scene scene = new Scene(root,900,500);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setResizable(false);
-			kprimaryStage = primaryStage;
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();

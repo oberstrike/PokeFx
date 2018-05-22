@@ -3,5 +3,34 @@
 .context {
 	-fx-border-color: black;
 	-fx-border-style: dashed;
-	-fx-border-radius: 5;
+	-fx-border-radius: 5.0;
+}
+
+.button	{
+	-fx-background-color:  #54a0ff;
+}
+
+.button:hover{
+	-fx-background-color: #2e86de;
+}
+
+.root {
+	-fx-background-color:  #0abde3;
+}
+
+.list-cell {
+	-fx-background-color: #2e86de;
+}
+
+.list-cell:filled:hover {
+	-fx-background-color: #00d2d3;
+}
+
+.list-cell:filled:selected:focused {
+	-fx-background-color: #00d2d3;
+}
+
+.menu-bar{
+	-fx-background-color: #2e86de;
+	-fx-border-color: black;
 }

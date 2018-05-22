@@ -74,8 +74,7 @@ public class CreateGuiController implements Initializable {
 	@FXML
 	void back(ActionEvent event) {
 		Main.gameData = new GameData(mapView.getMap());
-		WindowChanger changer = new WindowChanger();
-		changer.changeWindow("/guis/MenuGui.fxml", event);
+		Main.changer.changeWindow("/guis/MenuGui.fxml");
 	}
 
 	@FXML
@@ -156,7 +155,7 @@ public class CreateGuiController implements Initializable {
 		fileChooser.setTitle("Choose XML");
 		fileChooser.getExtensionFilters().add(new ExtensionFilter(".xml", "*.xml"));
 
-		File selectedFile = fileChooser.showOpenDialog(Main.kprimaryStage);
+		File selectedFile = fileChooser.showOpenDialog(Main.changer.getStage());
 		if (selectedFile == null) {
 			System.out.println("Keine Datei geladen");
 		} else {
@@ -244,7 +243,7 @@ public class CreateGuiController implements Initializable {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Choose XML");
 		fileChooser.getExtensionFilters().add(new ExtensionFilter(".xml", "*.xml"));
-		File selectedFile = fileChooser.showOpenDialog(Main.kprimaryStage);
+		File selectedFile = fileChooser.showOpenDialog(Main.changer.getStage());
 		if (selectedFile == null) {
 
 		} else {

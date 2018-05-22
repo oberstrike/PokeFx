@@ -1,7 +1,5 @@
 package xml;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import logic.Map;
 import logic.Player;
 
@@ -25,7 +23,7 @@ public class GameData {
 		return map;
 	}
 
-	synchronized public void setMap(Map map) {
+	public void setMap(Map map) {
 		this.map = map;
 	}
 
@@ -33,7 +31,7 @@ public class GameData {
 		return player;
 	}
 
-	synchronized public void setPlayer(Player player) {
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
 }

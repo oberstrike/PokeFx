@@ -10,6 +10,8 @@ import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import application.Main;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 
 @XStreamAlias("Pokemon")
@@ -169,118 +171,76 @@ public class Pokemon {
 	public void setSpawn(double spawn) {
 		this.spawn = spawn;
 	}
+	
+	public Pokemon faster(Pokemon mon) {
+		return mon.calculateInit() > this.calculateInit() ? mon : this;
+	}
+	
 
-	// Kampfsimulator
-	public Pokemon fight(Pokemon mon2) {
-		Pokemon winner;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(base_hp);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + id;
+		result = prime * result + level;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
 
-		
-		
-		
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pokemon other = (Pokemon) obj;
+		if (Double.doubleToLongBits(base_hp) != Double.doubleToLongBits(other.base_hp))
+			return false;
+		if (id != other.id)
+			return false;
+		if (level != other.level)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
 
-		if (mon2.getHp() <= 0) {
-			return this;
-		}
-		String output = "";
-		String output2 = "";
+	// Aufruf: angreifer.getDamage(verteidiger)
+	public double getDamage(Pokemon mon2) {
 
 		double multiplierMon1 = 1;
 		if (Main.xmlControll.getEffectives().get(mon2.getType()).containsKey(this.getType()))
 			multiplierMon1 = Main.xmlControll.getEffectives().get(mon2.getType()).get(this.getType());
-		
-		// System.out.println(effekt.table.get(this.getType()).get(this.getType()));
-		output = "==================== \n\nDein Pokemon:\n" + this.getName() + " Lvl: " + this.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon1 + "\n HP: " + this.getHp();
 
-		double multiplierMon2 = 1;
-		if (Main.xmlControll.getEffectives().get(this.getType()).containsKey(mon2.getType()))
-			multiplierMon2 = Main.xmlControll.getEffectives().get(this.getType()).get(mon2.getType());
-		
-		// System.out.println(effekt.table.get(mon2.getType()).get(mon2.getType()));
-		output2 = "___________________ \n\nGegnerisches Pokemon:\n" + mon2.getName() + " Lvl: " + mon2.getLevel() + "\n-------------- \n Effektivität: " + multiplierMon2 + "\n HP: " + mon2.getHp();
-
-		int attMon1 = (int) (this.calculateAtt() * multiplierMon1);
-		int deffMon1 = this.calculateDeff();
-		int attMon2 = (int) (mon2.calculateAtt() * multiplierMon2);
-		int deffMon2 = mon2.calculateDeff();
-		
-		output += "\n ATK: " + attMon1 + " || DEF: " + deffMon1 + " || MOT: " + this.motivation + "\n-------------- \n";
-		output2 += "\n ATK: " + attMon2 + " || DEF: " + deffMon2 + " || MOT " + mon2.motivation + "\n-------------- \n";
-
-		// wer beginnt?
-		if (this.getInit() >= mon2.getInit()) {
-			while (this.getHp() > 0 && mon2.getHp() > 0) {
-				double crit = randomCrit();
-				double damage = (attMon1 * crit - (deffMon2 * 0.75));
-				if (damage <= 0) { damage = 1; }
-				mon2.setHp(mon2.getHp() - damage);
-				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + ") || Crit: " + crit;
-				if (mon2.getHp() <= 0) {
-					System.out.println(output + "\n" + output2);
-					this.updateMotivation(true);
-					return this;
-				}
-				damage = (attMon2 * randomCrit() - (deffMon1 * 0.5));
-				if (damage <= 0) { damage = 1; }
-				this.setHp(this.getHp() - damage);
-				output += "\n HP: " + this.getHp() + " (-" + damage + ") || Crit: " + crit;
-				if (this.getHp() <= 0) {
-					System.out.println(output + "\n" + output2);
-					winner = mon2;
-					this.updateMotivation(false);
-					return winner;
-				}
-			}
-			return null;
-		} else {
-			while (this.getHp() > 0 && mon2.getHp() > 0) {
-				double crit = randomCrit();
-				double damage = (attMon2 * crit - (deffMon1 * 0.5));
-				if (damage <= 0) { damage = 1; }
-				this.setHp(this.getHp() - damage);
-				output += "\n HP: " + this.getHp() + " (-" + damage + ") || Crit: " + crit;
-				if (this.getHp() <= 0) {
-					System.out.println(output + "\n" + output2);
-					winner = mon2;
-					this.updateMotivation(false);
-					return winner;
-				}
-				damage = (attMon1 * randomCrit() - (deffMon2 * 0.5));
-				if (damage <= 0) { damage = 1; }
-				mon2.setHp(mon2.getHp() - damage);
-				output2 += "\n HP: " + mon2.getHp() + " (-" + damage + " ||) Crit: " + crit;
-				if (mon2.getHp() <= 0) {
-					System.out.println(output + "\n" + output2);
-					winner = this;
-					this.updateMotivation(true);
-					return winner;
-				}
-			}
-			return null;
+		int att = (int) (((this.att + 8) * 2 + (1 / 4)) * level / 100) + level ;
+		int deff = (int) (((mon2.getDeff() + 8) * 2 + (1 / 4)) * level / 100) + level ;
+	
+		double crit = randomCrit() * (this.motivation/100);
+		double damage = (att * crit - (deff * 0.5));
+		if (damage <= 0) {
+			damage = 1;
 		}
+		System.out.println(this.getName() + " fügt " + mon2.getName() + " " + Math.floor(damage) + " zu ");
+		return Math.floor(damage);
+
 	}
 
 	public int calculateHp() {
 		int hp = (int) (((base_hp + 8) * 2 + (1 / 4)) * level / 100) + level + 10;
 		return hp;
 	}
-
-	public int calculateAtt() {
-		int att = (int) ((level + 0.5) / 50 * this.att * (this.motivation/100));
-		// int att = (int) (((this.att + 8) * 2 + (1/4)) * level / 100) + 5;
-		if (this.trained == true) {
-			att = (int) (att * 1.5);
-		}
-		return att;
-	}
-
-	public int calculateDeff() {
-		int deff = (int) ((level + 0.5) / 50 * this.deff * (this.motivation/100));
-		// int deff = (int) (((this.deff + 8) * 2 + (1/4)) * level / 100) + 5;
-		if (this.trained == true) {
-			deff = (int) (deff * 1.5);
-		}
-		System.out.println("\nTrainerpokemon: " + this.trained + "\n");
-		return deff;
+	
+	public int calculateInit() {
+		int hp = (int) (((init + 8) * 2 + (1 / 4)) * level / 100) + level ;
+		return hp;
 	}
 
 	public float randomCrit() {
@@ -310,7 +270,7 @@ public class Pokemon {
 
 		return (a * t * b * e * l) / (7 * s);
 	}
-	
+
 	public void evolveTo(Pokemon pokemon) {
 		this.id = pokemon.id;
 		this.type = pokemon.type;
@@ -328,20 +288,21 @@ public class Pokemon {
 		int xpForNextLevel = getXpForNextLevel();
 		if (xp >= xpForNextLevel) {
 			System.out.println(this.name + " ist eine Stufe aufgestiegen.");
-			this.xp = (xpForNextLevel - xp) < 0 ? 0 : (xpForNextLevel - xp); 
+			this.xp = (xpForNextLevel - xp) < 0 ? 0 : (xpForNextLevel - xp);
 			this.level++;
-			
+
 			HashMap<Integer, String> evolvingdex = Main.xmlControll.getEvolutiondex().get(name);
 			if (evolvingdex != null) {
-				Optional<Integer> key = evolvingdex.keySet().stream().filter(each -> each.intValue() <= level).findFirst();
-				if(key.isPresent()) {
+				Optional<Integer> key = evolvingdex.keySet().stream().filter(each -> each.intValue() <= level)
+						.findFirst();
+				if (key.isPresent()) {
 					Pokemon pokemon = Main.xmlControll.getPokemonByName(evolvingdex.get(key.get()));
 					evolveTo(pokemon);
-				}	
+				}
 			}
 		}
 	}
-	
+
 	public void updateMotivation(boolean win) {
 		if (win == true) {
 			if (this.motivation < 100) {
@@ -370,12 +331,26 @@ public class Pokemon {
 		this.base_hp = base_hp;
 	}
 	
+	public boolean isDead() {
+		return this.getHp() <= 0 ;
+	}
+
 	public boolean isTrained() {
 		return trained;
 	}
 
 	public void setTrained(boolean trained) {
 		this.trained = trained;
+	}
+
+	public Image getFrontImage() {
+		String pathToImg = "/pokemon/images/" + this.getId() + ".png";
+		return new Image(getClass().getResource(pathToImg).toExternalForm());
+	}
+
+	public Image getBackImage() {
+		String pathToImg = "/pokemon/images/back/" + this.getId() + ".png";
+		return new Image(getClass().getResource(pathToImg).toExternalForm());
 	}
 
 }
