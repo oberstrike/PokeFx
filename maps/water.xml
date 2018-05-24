@@ -1277,20 +1277,32 @@
 			<x>420.0</x>
 			<y>480.0</y>
 			<entity class="Trainer">
-				<name>Dude</name>
+				<name>Misty</name>
 				<pokemons>
-					<Pokemon name="Pikachu">
-						<id>25</id>
-						<level>11</level>
-						<type>ELEKTRIZITAET</type>
-						<att>55.0</att>
-						<deff>50.0</deff>
+					<Pokemon name="Goldini">
+						<id>118</id>
+						<level>20</level>
+						<type>WASSER</type>
+						<att>67.0</att>
+						<deff>60.0</deff>
 						<motivation>100.0</motivation>
-						<init>90.0</init>
-						<hp>11.0</hp>
-						<xp>112</xp>
-						<base__hp>35.0</base__hp>
-						<spawn>0.21</spawn>
+						<init>85.0</init>
+						<base_hp>45.0</base_hp>
+						<xp>64</xp>
+						<spawn>2.18</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Starmie">
+						<id>121</id>
+						<level>15</level>
+						<type>WASSER</type>
+						<att>100.0</att>
+						<deff>85.0</deff>
+						<motivation>100.0</motivation>
+						<init>95.0</init>
+						<base_hp>60.0</base_hp>
+						<xp>182</xp>
+						<spawn>0.034</spawn>
 						<trained>true</trained>
 					</Pokemon>
 				</pokemons>

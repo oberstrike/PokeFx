@@ -1277,20 +1277,32 @@
 			<x>420.0</x>
 			<y>480.0</y>
 			<entity class="Trainer">
-				<name>Dude</name>
+				<name>Wanderer</name>
 				<pokemons>
-					<Pokemon name="Pikachu">
-						<id>25</id>
-						<level>11</level>
-						<type>ELEKTRIZITAET</type>
-						<att>55.0</att>
+					<Pokemon name="Ultrigaria">
+						<id>70</id>
+						<level>10</level>
+						<type>PFLANZE</type>
+						<att>90.0</att>
 						<deff>50.0</deff>
 						<motivation>100.0</motivation>
 						<init>90.0</init>
-						<hp>11.0</hp>
-						<xp>112</xp>
-						<base__hp>35.0</base__hp>
-						<spawn>0.21</spawn>
+						<base_hp>65.0</base_hp>
+						<xp>137</xp>
+						<spawn>0.072</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Kokowei">
+						<id>103</id>
+						<level>15</level>
+						<type>PFLANZE</type>
+						<att>125.0</att>
+						<deff>85.0</deff>
+						<motivation>100.0</motivation>
+						<init>95.0</init>
+						<base_hp>95.0</base_hp>
+						<xp>186</xp>
+						<spawn>0.014</spawn>
 						<trained>true</trained>
 					</Pokemon>
 				</pokemons>
