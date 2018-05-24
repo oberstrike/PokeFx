@@ -806,6 +806,76 @@
 			<type>SAND</type>
 			<x>270.0</x>
 			<y>210.0</y>
+			<entity class="Trainer">
+				<name>Bart</name>
+				<pokemons>
+					<Pokemon name="Garados">
+						<id>130</id>
+						<level>45</level>
+						<type>WASSER</type>
+						<att>125.0</att>
+						<deff>100.0</deff>
+						<motivation>100.0</motivation>
+						<init>95.0</init>
+						<base_hp>95.0</base_hp>
+						<xp>189</xp>
+						<spawn>0.0032</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Kangama">
+						<id>115</id>
+						<level>49</level>
+						<type>NORMAL</type>
+						<att>95.0</att>
+						<deff>80.0</deff>
+						<motivation>100.0</motivation>
+						<init>99.0</init>
+						<base_hp>105.0</base_hp>
+						<xp>172</xp>
+						<spawn>0.0086</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Sichlor">
+						<id>123</id>
+						<level>51</level>
+						<type>KAEFER</type>
+						<att>110.0</att>
+						<deff>80.0</deff>
+						<motivation>100.0</motivation>
+						<init>99.0</init>
+						<base_hp>70.0</base_hp>
+						<xp>100</xp>
+						<spawn>0.14</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Tauros">
+						<id>128</id>
+						<level>52</level>
+						<type>NORMAL</type>
+						<att>100.0</att>
+						<deff>95.0</deff>
+						<motivation>100.0</motivation>
+						<init>99.0</init>
+						<base_hp>75.0</base_hp>
+						<xp>172</xp>
+						<spawn>0.12</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Dragoran">
+						<id>149</id>
+						<level>47</level>
+						<type>DRACHE</type>
+						<att>134.0</att>
+						<deff>100.0</deff>
+						<motivation>100.0</motivation>
+						<init>100.0</init>
+						<base_hp>91.0</base_hp>
+						<xp>270</xp>
+						<spawn>0.0011</spawn>
+						<trained>true</trained>
+					</Pokemon>
+				</pokemons>
+			</entity>
 		</FIELD>
 		<FIELD>
 			<type>SAND</type>
@@ -891,6 +961,76 @@
 			<type>SAND</type>
 			<x>300.0</x>
 			<y>210.0</y>
+			<entity class="Trainer">
+				<name>Tom</name>
+				<pokemons>
+					<Pokemon name="Relaxo">
+						<id>143</id>
+						<level>48</level>
+						<type>NORMAL</type>
+						<att>110.0</att>
+						<deff>110.0</deff>
+						<motivation>100.0</motivation>
+						<init>99.0</init>
+						<base_hp>160.0</base_hp>
+						<xp>189</xp>
+						<spawn>0.016</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Aquana">
+						<id>134</id>
+						<level>51</level>
+						<type>WASSER</type>
+						<att>110.0</att>
+						<deff>95.0</deff>
+						<motivation>100.0</motivation>
+						<init>95.0</init>
+						<base_hp>130.0</base_hp>
+						<xp>184</xp>
+						<spawn>0.014</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Pinsir">
+						<id>127</id>
+						<level>52</level>
+						<type>KAEFER</type>
+						<att>125.0</att>
+						<deff>100.0</deff>
+						<motivation>100.0</motivation>
+						<init>99.0</init>
+						<base_hp>65.0</base_hp>
+						<xp>175</xp>
+						<spawn>0.99</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Rossana">
+						<id>124</id>
+						<level>55</level>
+						<type>PSYCHO</type>
+						<att>115.0</att>
+						<deff>95.0</deff>
+						<motivation>100.0</motivation>
+						<init>99.0</init>
+						<base_hp>65.0</base_hp>
+						<xp>159</xp>
+						<spawn>0.35</spawn>
+						<trained>true</trained>
+					</Pokemon>
+					<Pokemon name="Gengar">
+						<id>94</id>
+						<level>53</level>
+						<type>GEIST</type>
+						<att>130.0</att>
+						<deff>75.0</deff>
+						<motivation>100.0</motivation>
+						<init>100.0</init>
+						<base_hp>60.0</base_hp>
+						<xp>225</xp>
+						<spawn>0.0067</spawn>
+						<trained>true</trained>
+					</Pokemon>
+				</pokemons>
+			</entity>
 		</FIELD>
 		<FIELD>
 			<type>SAND</type>

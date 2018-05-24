@@ -1653,18 +1653,17 @@
 			<entity class="Trainer">
 				<name>Dude</name>
 				<pokemons>
-					<Pokemon name="Pikachu">
-						<id>25</id>
-						<level>11</level>
-						<type>ELEKTRIZITAET</type>
-						<att>55.0</att>
-						<deff>50.0</deff>
+					<Pokemon name="Smettbo">
+						<id>12</id>
+						<level>10</level>
+						<type>KAEFER</type>
+						<att>90.0</att>
+						<deff>80.0</deff>
 						<motivation>100.0</motivation>
-						<init>90.0</init>
-						<hp>11.0</hp>
-						<xp>112</xp>
-						<base__hp>35.0</base__hp>
-						<spawn>0.21</spawn>
+						<init>100.0</init>
+						<base_hp>60.0</base_hp>
+						<xp>178</xp>
+						<spawn>0.022</spawn>
 						<trained>true</trained>
 					</Pokemon>
 				</pokemons>
