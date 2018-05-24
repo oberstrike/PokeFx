@@ -7,15 +7,16 @@
 }
 
 .button	{
-	-fx-background-color:  #54a0ff;
+	-fx-text-fill: #000000;
+	-fx-background-color:  #ffffff;
 }
 
-.button:hover{
+.button:hover {
 	-fx-background-color: #2e86de;
 }
 
 .root {
-	-fx-background-color:  #0abde3;
+	-fx-background-color:  #0f264c;
 }
 
 .list-cell {
@@ -30,7 +31,31 @@
 	-fx-background-color: #00d2d3;
 }
 
-.menu-bar{
-	-fx-background-color: #2e86de;
-	-fx-border-color: black;
+.menu-bar {
+	-fx-background-color: #0f264c;
+	-fx-border-color: #ffffff;
+}
+
+.label {
+	-fx-text-fill: #000000;
+}
+
+#anchor2 {
+	-fx-background-color:  #ffffff;
+}
+
+#fightGui {
+	-fx-background-image:  url('/images/bg5.png');
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+}
+
+#fightControl {
+	-fx-background-color:  #ffffff;
+}
+
+#wsidLabel {
+	-fx-padding: 5px;
+	-fx-border-color: #ffffff #ffffff #000000 #ffffff;
 }
