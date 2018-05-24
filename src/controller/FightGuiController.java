@@ -9,6 +9,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import application.Main;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -171,7 +174,19 @@ public class FightGuiController implements Initializable {
 					myPokemonView.setImage(myPokemon.getBackImage());
 					myPokemonNameLabel.setText(myPokemon.getName());
 					myPokemonLevelLabel.setText("Lvl." + myPokemon.getLevel());
-					myPokemonHealthBar.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateHp());
+					
+					if (myPokemon.getHp() != myPokemon.calculateHp()) {
+						Timeline timeline = new Timeline();
+
+						KeyValue keyValue = new KeyValue(myPokemonHealthBar.progressProperty(), (double) myPokemon.getHp() / (double) myPokemon.calculateHp());
+						KeyFrame keyFrame = new KeyFrame(new Duration(500), keyValue);
+						timeline.getKeyFrames().add(keyFrame);
+
+						timeline.play();
+					} else {
+						myPokemonHealthBar.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateHp());
+					}
+					
 					myPokemonHpLabel.setText((int) myPokemon.getHp() + "/" + myPokemon.calculateHp());
 					wsidLabel.setText("Was soll " + myPokemon.getName() + " tun?");
 				}
@@ -180,7 +195,18 @@ public class FightGuiController implements Initializable {
 					enemyPokemonView.setImage(enemyPokemon.getFrontImage());
 					enemyPokemonNameLabel.setText(enemyPokemon.getName());
 					enemyLevelLabel.setText("Lvl." + enemyPokemon.getLevel());
-					enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
+					if (enemyPokemon.getHp() != enemyPokemon.calculateHp()) {
+						Timeline timeline = new Timeline();
+
+						KeyValue keyValue = new KeyValue(enemyHealthBar.progressProperty(), (double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
+						KeyFrame keyFrame = new KeyFrame(new Duration(500), keyValue);
+						timeline.getKeyFrames().add(keyFrame);
+
+						timeline.play();
+					} else {
+						enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
+					}
+					
 				}
 			
 			});
