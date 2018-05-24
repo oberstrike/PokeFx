@@ -29,24 +29,24 @@ public class Main extends Application {
 	public static Image player_back;
 	public static Image uebergang;
 	public static Image inGrass;
-	
+
 	public static Image cactus_bottom;
 	public static Image cactus_top;
 	public static Image baum_bottom;
 	public static Image baum_top;
-	
+
 	public static Image haus_1a;
 	public static Image haus_1b;
 	public static Image haus_1c;
 	public static Image haus_1d;
-	
+
 	public static Image haus_2a;
 	public static Image haus_2b;
 	public static Image haus_2c;
 	public static Image haus_2d;
 	public static Image haus_2e;
 	public static Image haus_2f;
-	
+
 	public static Image haus_3a;
 	public static Image haus_3b;
 	public static Image haus_3c;
@@ -56,19 +56,19 @@ public class Main extends Application {
 	public static Image haus_3g;
 	public static Image haus_3h;
 	public static Image haus_3i;
-	
+
 	public static Image haus_4a;
 	public static Image haus_4b;
 	public static Image haus_4c;
 	public static Image haus_4d;
 	public static Image haus_4e;
 	public static Image haus_4f;
-	
+
 	public static Image fels_water;
 	public static Image fels_grass;
 	public static Image fels_sand;
 	public static Image grass_bl;
-	
+
 	public static Image mtr_grass;
 	public static Image mtb_grass;
 	public static Image mtf_grass;
@@ -81,7 +81,7 @@ public class Main extends Application {
 	public static Image mtirb_grass;
 	public static Image mtilf_grass;
 	public static Image mtilb_grass;
-	
+
 	public static Image mtr_water;
 	public static Image mtb_water;
 	public static Image mtf_water;
@@ -94,7 +94,7 @@ public class Main extends Application {
 	public static Image mtirb_water;
 	public static Image mtilf_water;
 	public static Image mtilb_water;
-	
+
 	public static Image mtr_sand;
 	public static Image mtb_sand;
 	public static Image mtf_sand;
@@ -111,16 +111,17 @@ public class Main extends Application {
 	public static Image man_2_straight;
 	public static XmlControll xmlControll;
 	public static WindowChanger changer;
-	public static MediaPlayer mediaPlayer;
-	
+	public static MediaPlayer routeMediaPlayer;
+	public static MediaPlayer fightMediaPlayer;
+
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 
 			changer = new WindowChanger(primaryStage);
-		
+
 			AnchorPane root = FXMLLoader.load(getClass().getResource("/guis/MenuGui.fxml"));
-			
+
 			Scene scene = new Scene(root, 330, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
@@ -139,7 +140,7 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
+
 	public void init() {
 		stein = new Image("/images/stein.png");
 		wasser = new Image("/images/wasser.png");
@@ -149,24 +150,24 @@ public class Main extends Application {
 		tiefersand = new Image("/images/tiefersand.png");
 		uebergang = new Image("/images/uebergang.png");
 		inGrass = new Image("/images/inGrass.png");
-		
+
 		cactus_bottom = new Image("/images/cactus_bottom.png");
 		cactus_top = new Image("/images/cactus_top.png");
 		baum_bottom = new Image("/images/baum_bottom.png");
 		baum_top = new Image("/images/baum_top.png");
-		
+
 		haus_1a = new Image("/images/haus_1a.png");
 		haus_1b = new Image("/images/haus_1b.png");
 		haus_1c = new Image("/images/haus_1c.png");
 		haus_1d = new Image("/images/haus_1d.png");
-		
+
 		haus_2a = new Image("/images/haus_2a.png");
 		haus_2b = new Image("/images/haus_2b.png");
 		haus_2c = new Image("/images/haus_2c.png");
 		haus_2d = new Image("/images/haus_2d.png");
 		haus_2e = new Image("/images/haus_2e.png");
 		haus_2f = new Image("/images/haus_2f.png");
-		
+
 		haus_3a = new Image("/images/haus_3a.png");
 		haus_3b = new Image("/images/haus_3b.png");
 		haus_3c = new Image("/images/haus_3c.png");
@@ -176,19 +177,19 @@ public class Main extends Application {
 		haus_3g = new Image("/images/haus_3g.png");
 		haus_3h = new Image("/images/haus_3h.png");
 		haus_3i = new Image("/images/haus_3i.png");
-		
+
 		haus_4a = new Image("/images/haus_4a.png");
 		haus_4b = new Image("/images/haus_4b.png");
 		haus_4c = new Image("/images/haus_4c.png");
 		haus_4d = new Image("/images/haus_4d.png");
 		haus_4e = new Image("/images/haus_4e.png");
 		haus_4f = new Image("/images/haus_4f.png");
-		
+
 		fels_water = new Image("/images/fels_water.png");
 		fels_grass = new Image("/images/fels_grass.png");
 		fels_sand = new Image("/images/fels_sand.png");
 		grass_bl = new Image("/images/grass_bl.png");
-		
+
 		mtr_grass = new Image("/images/mtr_grass.png");
 		mtl_grass = new Image("/images/mtl_grass.png");
 		mtb_grass = new Image("/images/mtb_grass.png");
@@ -201,7 +202,7 @@ public class Main extends Application {
 		mtilb_grass = new Image("/images/mtilb_grass.png");
 		mtirf_grass = new Image("/images/mtirf_grass.png");
 		mtirb_grass = new Image("/images/mtirb_grass.png");
-		
+
 		mtr_water = new Image("/images/mtr_water.png");
 		mtl_water = new Image("/images/mtl_water.png");
 		mtb_water = new Image("/images/mtb_water.png");
@@ -214,7 +215,7 @@ public class Main extends Application {
 		mtilb_water = new Image("/images/mtilb_water.png");
 		mtirf_water = new Image("/images/mtirf_water.png");
 		mtirb_water = new Image("/images/mtirb_water.png");
-		
+
 		mtr_sand = new Image("/images/mtr_sand.png");
 		mtl_sand = new Image("/images/mtl_sand.png");
 		mtb_sand = new Image("/images/mtb_sand.png");
@@ -227,11 +228,20 @@ public class Main extends Application {
 		mtilb_sand = new Image("/images/mtilb_sand.png");
 		mtirf_sand = new Image("/images/mtirf_sand.png");
 		mtirb_sand = new Image("/images/mtirb_sand.png");
-		
+
 		player_left = new Image("/images/player_left.png");
 		player_right = new Image("/images/player_right.png");
 		player_straight = new Image("/images/player_straight.png");
 		player_back = new Image("/images/player_back.png");
+		Main.routeMediaPlayer = new MediaPlayer(
+				new Media(getClass().getResource("/musik/Route1.mp3").toExternalForm()));
+		Main.fightMediaPlayer = new MediaPlayer(new Media(getClass().getResource("/musik/Kampf.mp3").toExternalForm()));
+		Main.routeMediaPlayer.setOnEndOfMedia(() -> {
+			Main.routeMediaPlayer.seek(Duration.ZERO);
+		});
+		Main.fightMediaPlayer.setOnEndOfMedia(() -> {
+			Main.fightMediaPlayer.seek(Duration.ZERO);
+		});
 
 		man_1_straight = new Image("/images/man_1_straight.png");
 		man_2_straight = new Image("/images/man_2_straight.png");

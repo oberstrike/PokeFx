@@ -23,7 +23,6 @@ import views.MapView;
 public class GameGuiController implements Initializable {
 
 	private GameLogic logic;
-	private ExecutorService executor;
 	
 	@FXML
 	void save(ActionEvent event) {
@@ -48,14 +47,10 @@ public class GameGuiController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Main.mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/musik/Route1.mp3").toExternalForm()));
-		Main.mediaPlayer.setOnEndOfMedia(() -> {
-			Main.mediaPlayer.seek(Duration.ZERO);
-		});
-		Main.mediaPlayer.setVolume(0.6);
-		Main.mediaPlayer.play();
+
+		Main.routeMediaPlayer.setVolume(0.5);
+		Main.routeMediaPlayer.play();
 		MapView mapView = null;
-		executor = Executors.newFixedThreadPool(1);
 		
 		
 		if (Main.gameData.getMap() == null) {
@@ -75,8 +70,7 @@ public class GameGuiController implements Initializable {
 		anchor.requestFocus();
 
 		logic = new GameLogic(mapView, anchor2, Main.gameData);
-		logic.setDaemon(true);
-		executor.execute(logic);
+		logic.start();
 		mapView.setOnKeyPressed(event -> {
 			logic.moveEvent(event.getCode().getName());
 		});

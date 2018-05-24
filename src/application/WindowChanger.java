@@ -58,11 +58,28 @@ public class WindowChanger {
 			Thread.sleep(200);
 			this.stage.show();
 			System.out.println("neu: " + Thread.activeCount());
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public static void showGroupInfo(String indent, ThreadGroup group) {
+		Thread[] threads = new Thread[group.activeCount()];
+		group.enumerate(threads, false);
+		System.out.println(group);
+
+		for (Thread t : threads)
+			if (t != null)
+				System.out.printf("%s%s -> %s ist %sDaemon-Thread%n", indent, group.getName(), t,
+						t.isDaemon() ? "" : "kein ");
+
+		ThreadGroup[] activeGroup = new ThreadGroup[group.activeGroupCount()];
+		group.enumerate(activeGroup, false);
+
+		for (ThreadGroup g : activeGroup)
+			showGroupInfo(indent + indent, g);
+	}
 	
 	
 	

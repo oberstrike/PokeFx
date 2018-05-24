@@ -53,6 +53,7 @@ public class GameLogic extends Thread {
 
 	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
 		this.mapView = mapView;
+		this.setDaemon(true);
 		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
 				.collect(Collectors.toList());
 
@@ -130,7 +131,7 @@ public class GameLogic extends Thread {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("Ich schließe mich... ");
+		this.interrupt();
 	}
 
 	private void fightMenu() {
@@ -168,7 +169,6 @@ public class GameLogic extends Thread {
 		if (player.getPokemons().size() > 0) {
 			FightGuiController controller = FightGuiController.create(player.getPokemons(),
 					new Vector<>(Arrays.asList(spawnedPokemon)), false);
-			Main.mediaPlayer.stop();
 			Platform.runLater(() -> {
 				Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> {
 					loader.setController(controller);
