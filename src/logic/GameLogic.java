@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Vector;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Collectors;
 
@@ -50,11 +49,11 @@ public class GameLogic extends Thread {
 	private Player player;
 	private long lastMovementTime = 0;
 	private AnchorPane anchor2;
-	private ExecutorService executor;
+	boolean isRunning = true;
 
-	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData, ExecutorService executor) {
+	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
 		this.mapView = mapView;
-		this.executor = executor;
+		this.setDaemon(true);
 		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
 				.collect(Collectors.toList());
 
@@ -124,7 +123,7 @@ public class GameLogic extends Thread {
 
 	@Override
 	public void run() {
-		while (true) {
+		while (isRunning) {
 			update();
 			try {
 				Thread.sleep(200);
@@ -132,12 +131,12 @@ public class GameLogic extends Thread {
 				e.printStackTrace();
 			}
 		}
+		this.interrupt();
 	}
 
 	private void fightMenu() {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		Alert acceptAlert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Aktionsfenster");
 		List<Pokemon> listOfPokemons = new ArrayList<>();
 
@@ -170,12 +169,12 @@ public class GameLogic extends Thread {
 		if (player.getPokemons().size() > 0) {
 			FightGuiController controller = FightGuiController.create(player.getPokemons(),
 					new Vector<>(Arrays.asList(spawnedPokemon)), false);
-			executor.shutdown();
 			Platform.runLater(() -> {
 				Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> {
 					loader.setController(controller);
 				});
 			});
+			isRunning = false;
 		} else {
 			// Starter Pokemon fangen.
 			alert.setContentText("Ein wildes " + spawnedPokemon.getName() + " erscheint willst du es behalten?");
@@ -275,7 +274,7 @@ public class GameLogic extends Thread {
 						Field newF = newField.get();
 						for (Pokemon mon : player.getPokemons()) {
 							if (mon.calculateHp() > mon.getHp()) {
-								mon.setHp(mon.getHp()+1);
+								mon.setHp(mon.getHp() + 1);
 							}
 						}
 						if (newF.getType().equals(FieldType.UEBERGANG)) {
@@ -293,8 +292,8 @@ public class GameLogic extends Thread {
 							}
 							newF.setX(newX);
 							newF.setY(newY);
-							
-							//Kind of Final Variable fuer das Closure
+
+							// Kind of Final Variable fuer das Closure
 							double xx = newX;
 							double yy = newY;
 							newField = mapView.getFields().stream()
@@ -323,14 +322,15 @@ public class GameLogic extends Thread {
 
 	private void fightAgainstTrainer(Trainer entity) {
 		if (entity.getPokemons() != null) {
-			if(entity.getPokemons().size()>0) {
+			if (entity.getPokemons().size() > 0) {
 				entity.getPokemons().forEach(each -> each.setHp(each.calculateHp()));
-				FightGuiController controller = FightGuiController.create(player.getPokemons(), entity.getPokemons(), true);
-				executor.shutdown();
+				FightGuiController controller = FightGuiController.create(player.getPokemons(), entity.getPokemons(),
+						true);
+
 				Platform.runLater(() -> {
 					Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> loader.setController(controller));
-				}); 
-				
+				});
+				isRunning = false;
 			}
 		}
 

@@ -78,7 +78,7 @@ public class FightGuiController implements Initializable, Controller {
 	private Label wsidLabel;
 
 	private void swapBack() {
-		Main.mediaPlayer.stop();
+		Main.fightMediaPlayer.stop();
 		executor.shutdownNow();
 		System.out.println(Thread.activeCount());
 		Main.changer.changeWindow("/guis/GameGui.fxml");
@@ -148,12 +148,10 @@ public class FightGuiController implements Initializable, Controller {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		executor = Executors.newScheduledThreadPool(1);
-		Main.mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/musik/Kampf.mp3").toExternalForm()));
-		Main.mediaPlayer.setOnEndOfMedia(() -> {
-			Main.mediaPlayer.seek(Duration.ZERO);
-		});
-		Main.mediaPlayer.play();
-		Main.mediaPlayer.setVolume(0.5);
+		Main.routeMediaPlayer.stop();
+		Main.fightMediaPlayer.setVolume(0.6);
+		Main.fightMediaPlayer.play();
+		
 		
 		if (isTrainerFight) {
 			this.catchLabel.setDisable(true);
@@ -184,6 +182,7 @@ public class FightGuiController implements Initializable, Controller {
 					enemyLevelLabel.setText("Lvl." + enemyPokemon.getLevel());
 					enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
 				}
+			
 			});
 
 		}, 0, 500, TimeUnit.MILLISECONDS);
