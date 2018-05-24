@@ -82,7 +82,7 @@ public class FightGuiController implements Initializable, Controller {
 	void fight(MouseEvent event) {
 		Pokemon myPokemon = this.myPokemons.get(actMyPokemon);
 		Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
-		Pokemon winner = null;
+	//	Pokemon winner = null;
 		
 		Pokemon fasterPokemon = myPokemon.faster(enemyPokemon);
 		Pokemon slowerPokemon = fasterPokemon.equals(myPokemon) ? enemyPokemon : myPokemon;
@@ -97,6 +97,7 @@ public class FightGuiController implements Initializable, Controller {
 				actMyPokemon++;
 			}else {
 				actEnemyPokemon++;
+				myPokemon.addXp(slowerPokemon.calcXp());
 			}
 		}else {
 
@@ -106,6 +107,7 @@ public class FightGuiController implements Initializable, Controller {
 					actMyPokemon++;
 				}else {
 					actEnemyPokemon++;
+					myPokemon.addXp(slowerPokemon.calcXp());
 				}
 			}
 		}

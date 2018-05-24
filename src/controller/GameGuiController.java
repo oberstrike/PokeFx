@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import application.Main;
 import application.WindowChanger;
+import javafx.animation.TranslateTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.Duration;
 import logic.GameLogic;
 import logic.GenericBuilder;
 import views.MapView;
@@ -81,12 +83,6 @@ public class GameGuiController implements Initializable {
 		});
 		mapView.setFocusTraversable(true);
 		mapView.requestFocus();
-		
-		//test
-
-
-		
-
 	}
 
 }

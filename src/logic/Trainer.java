@@ -58,13 +58,9 @@ public class Trainer implements Entity{
 		return pokemons;
 	}
 
-
-
 	public void setPokemons(List<Pokemon> pokemons) {
 		this.pokemons = pokemons;
 	}
-
-
 
 	public void setImage(Image image) {
 		this.image = image;

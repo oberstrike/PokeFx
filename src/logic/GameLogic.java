@@ -78,18 +78,6 @@ public class GameLogic extends Thread {
 	public void update() {
 		Platform.runLater(() -> {
 
-			// Wenn der Spieler noch auf keinem Feld registriert ist
-			if (this.mapView.getFields().stream().anyMatch(each -> each.getEntity() != null)) {
-				Field field = player.getField();
-				if(field.getEntity()!=null) {
-					if(field.getEntity().getClass().equals(Player.class)) {
-						Field new_field = this.mapView.getFields().stream()
-								.filter(each -> each.getX() == field.getX() && each.getY() == field.getY()).findFirst().get();
-						player.setField(new_field);
-						new_field.setEntity(player);	
-					};
-				}
-			}
 
 			this.mapView.update();
 

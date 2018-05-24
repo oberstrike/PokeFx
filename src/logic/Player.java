@@ -30,8 +30,6 @@ public class Player implements Entity {
 
 	
 	private Vector<Pokemon> pokemons = new Vector<>();
-// 	private Item[] item = new Item[5];
-//	private float motivation; // Teil der Kampfsimulation. Damit könnte man den Endgegner (oder generell Trainerpokemon) stärker als normale machen
 	private List<Integer> pokedex = new ArrayList<>();
 	
 	public Player(){

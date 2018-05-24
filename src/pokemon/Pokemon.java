@@ -228,7 +228,6 @@ public class Pokemon {
 		if (damage <= 0) {
 			damage = 1;
 		}
-		System.out.println(this.getName() + " fügt " + mon2.getName() + " " + Math.floor(damage) + " zu ");
 		return Math.floor(damage);
 
 	}
