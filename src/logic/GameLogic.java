@@ -190,6 +190,7 @@ public class GameLogic extends Thread {
 
 		}
 
+
 	}
 
 	public void moveEvent(String keyName) {
@@ -286,7 +287,7 @@ public class GameLogic extends Thread {
 						if (newF.getType().equals(FieldType.HOHESGRASS)
 								|| newF.getType().equals(FieldType.TIEFERSAND)) {
 							int randDig = new Random().nextInt(100);
-							if (randDig < 11) {
+							if (randDig < 13) {
 								fightMenu();
 							}
 						}
@@ -306,6 +307,7 @@ public class GameLogic extends Thread {
 				entity.getPokemons().forEach(each -> each.setHp(each.calculateHp()));
 				FightGuiController controller = FightGuiController.create(player.getPokemons(), entity.getPokemons(),
 						true);
+
 				Platform.runLater(() -> {
 					Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> loader.setController(controller));
 				});

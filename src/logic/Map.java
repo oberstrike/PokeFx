@@ -82,6 +82,7 @@ public class Map {
 	public Optional<Field> upField(Field field) {
 		return getFieldWithCoordinates(field.getX(), (field.getY()-30));
 	}
+
 	public Optional<Field> getFieldWithCoordinates(double x, double y){
 		System.out.println(x + " " + y);
 		Optional<Field> ofield = Optional.empty();
@@ -91,6 +92,7 @@ public class Map {
 				ofield = Optional.of(field);
 		}
 		return ofield;
+		
 	}
 	
 	
