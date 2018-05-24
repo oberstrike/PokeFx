@@ -134,11 +134,12 @@ public class FightGuiController implements Initializable {
 				int randInt = new Random().nextInt(100) + 1;
 				int pokeInt = 20 + (int) (enemyPokemon.getSpawn()*100);
 				if(randInt <= pokeInt)
-					this.myPokemons.add(enemyPokemon);	
+					this.myPokemons.add(enemyPokemon);
+
 			}
 		}
+		swapBack();
 	}
-
 	@FXML
 	private Label catchLabel;
 
