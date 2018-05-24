@@ -211,7 +211,11 @@ public class Main extends Application {
 			man_1_straight = new Image("/images/man_1_straight.png");
 			man_2_straight = new Image("/images/man_2_straight.png");
 			xmlControll = new XmlControll();
+<<<<<<< HEAD
+			System.out.println("Bilder wurden geladen");
+=======
 			changer = new WindowChanger(primaryStage);
+>>>>>>> 9e2c2a7fbc3be8ac389c6dc31e3737bfa236a913
 			
 			Scene scene = new Scene(root, 330, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
