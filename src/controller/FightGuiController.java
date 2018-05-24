@@ -179,7 +179,7 @@ public class FightGuiController implements Initializable {
 						Timeline timeline = new Timeline();
 
 						KeyValue keyValue = new KeyValue(myPokemonHealthBar.progressProperty(), (double) myPokemon.getHp() / (double) myPokemon.calculateHp());
-						KeyFrame keyFrame = new KeyFrame(new Duration(500), keyValue);
+						KeyFrame keyFrame = new KeyFrame(new Duration(300), keyValue);
 						timeline.getKeyFrames().add(keyFrame);
 
 						timeline.play();
@@ -199,7 +199,7 @@ public class FightGuiController implements Initializable {
 						Timeline timeline = new Timeline();
 
 						KeyValue keyValue = new KeyValue(enemyHealthBar.progressProperty(), (double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
-						KeyFrame keyFrame = new KeyFrame(new Duration(500), keyValue);
+						KeyFrame keyFrame = new KeyFrame(new Duration(300), keyValue);
 						timeline.getKeyFrames().add(keyFrame);
 
 						timeline.play();
