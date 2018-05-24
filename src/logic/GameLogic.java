@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Collectors;
 
 import com.sun.media.jfxmedia.events.NewFrameEvent;
@@ -48,9 +50,11 @@ public class GameLogic extends Thread {
 	private Player player;
 	private long lastMovementTime = 0;
 	private AnchorPane anchor2;
+	private ExecutorService executor;
 
-	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
+	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData, ExecutorService executor) {
 		this.mapView = mapView;
+		this.executor = executor;
 		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
 				.collect(Collectors.toList());
 
@@ -166,6 +170,7 @@ public class GameLogic extends Thread {
 		if (player.getPokemons().size() > 0) {
 			FightGuiController controller = FightGuiController.create(player.getPokemons(),
 					new Vector<>(Arrays.asList(spawnedPokemon)), false);
+			executor.shutdown();
 			Platform.runLater(() -> {
 				Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> {
 					loader.setController(controller);
@@ -321,6 +326,7 @@ public class GameLogic extends Thread {
 			if(entity.getPokemons().size()>0) {
 				entity.getPokemons().forEach(each -> each.setHp(each.calculateHp()));
 				FightGuiController controller = FightGuiController.create(player.getPokemons(), entity.getPokemons(), true);
+				executor.shutdown();
 				Platform.runLater(() -> {
 					Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> loader.setController(controller));
 				}); 

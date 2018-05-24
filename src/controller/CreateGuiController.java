@@ -38,8 +38,6 @@ import views.MapView;
 import xml.GameData;
 
 public class CreateGuiController implements Initializable {
-
-	private XStream stream;
 	private MapView mapView;
 
 	@FXML

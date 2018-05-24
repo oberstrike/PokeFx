@@ -27,6 +27,7 @@ public class FightGuiController implements Initializable, Controller {
 	private Vector<Pokemon> myPokemons;
 	int actMyPokemon = 0;
 
+	
 	private Vector<Pokemon> enemyPokemons;
 	int actEnemyPokemon = 0;
 
@@ -78,7 +79,8 @@ public class FightGuiController implements Initializable, Controller {
 
 	private void swapBack() {
 		Main.mediaPlayer.stop();
-		executor.shutdown();
+		executor.shutdownNow();
+		System.out.println(Thread.activeCount());
 		Main.changer.changeWindow("/guis/GameGui.fxml");
 	}
 

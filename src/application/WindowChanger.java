@@ -44,6 +44,7 @@ public class WindowChanger {
 			parent = loader.load();
 			Scene scene = new Scene(parent);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		
 			this.stage.setScene(scene);
 			this.stage.setResizable(false);
 		}catch (Exception e) {

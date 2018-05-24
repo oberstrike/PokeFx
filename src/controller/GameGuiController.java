@@ -5,6 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import application.Main;
 import javafx.event.ActionEvent;
@@ -19,8 +22,9 @@ import views.MapView;
 
 public class GameGuiController implements Initializable {
 
-	GameLogic logic;
-
+	private GameLogic logic;
+	private ExecutorService executor;
+	
 	@FXML
 	void save(ActionEvent event) {
 		String gameFileName = "Spielstand.xml";
@@ -34,9 +38,6 @@ public class GameGuiController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 
 	@FXML
@@ -54,6 +55,7 @@ public class GameGuiController implements Initializable {
 		Main.mediaPlayer.setVolume(0.6);
 		Main.mediaPlayer.play();
 		MapView mapView = null;
+		executor = Executors.newFixedThreadPool(1);
 		
 		
 		if (Main.gameData.getMap() == null) {
@@ -72,10 +74,9 @@ public class GameGuiController implements Initializable {
 		anchor.setFocusTraversable(false);
 		anchor.requestFocus();
 
-		logic = new GameLogic(mapView, anchor2, Main.gameData);
+		logic = new GameLogic(mapView, anchor2, Main.gameData, executor);
 		logic.setDaemon(true);
-		logic.start();
-
+		executor.execute(logic);
 		mapView.setOnKeyPressed(event -> {
 			logic.moveEvent(event.getCode().getName());
 		});
