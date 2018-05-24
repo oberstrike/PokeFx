@@ -7,19 +7,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import application.Main;
-import application.WindowChanger;
-import javafx.animation.TranslateTransitionBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import logic.GameLogic;
-import logic.GenericBuilder;
 import views.MapView;
 
 public class GameGuiController implements Initializable {
@@ -28,24 +23,20 @@ public class GameGuiController implements Initializable {
 
 	@FXML
 	void save(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open XML");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
-		File selectedFile = fileChooser.showOpenDialog(Main.changer.getStage());
-		if (selectedFile == null) {
-
-		} else {
-			try {
-				FileWriter writer = new FileWriter(selectedFile);
-				Main.xmlControll.saveGameData(Main.gameData, writer);
-				System.out.println("Gespeichert.");
-
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+		String gameFileName = "Spielstand.xml";
+		File file = new File(gameFileName);
+		System.out.println(file.exists());
+		try {
+			FileWriter writer = new FileWriter(file);
+			Main.xmlControll.saveGameData(Main.gameData, writer);
+			System.out.println("Gespeichert");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
+		
 	}
 
 	@FXML
@@ -56,8 +47,15 @@ public class GameGuiController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		Main.mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/musik/Route1.mp3").toExternalForm()));
+		Main.mediaPlayer.setOnEndOfMedia(() -> {
+			Main.mediaPlayer.seek(Duration.ZERO);
+		});
+		Main.mediaPlayer.setVolume(0.6);
+		Main.mediaPlayer.play();
 		MapView mapView = null;
-
+		
+		
 		if (Main.gameData.getMap() == null) {
 			mapView = new MapView();
 			Main.gameData.setMap(mapView.getMap());

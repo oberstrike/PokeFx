@@ -39,9 +39,8 @@ import xml.GameData;
 
 public class CreateGuiController implements Initializable {
 
-	XStream stream;
-	String active = "";
-	MapView mapView;
+	private XStream stream;
+	private MapView mapView;
 
 	@FXML
 	private TextField name;
@@ -64,11 +63,6 @@ public class CreateGuiController implements Initializable {
 	@FXML
 	private Button addBtn;
 	
-    @FXML
-    void entityMenu(ActionEvent event) {
-    	
-    	
-    }
 	
 
 	@FXML
@@ -121,7 +115,6 @@ public class CreateGuiController implements Initializable {
 	@FXML
 	void setMaterial(MouseEvent event) {
 		String selected = liste.getSelectionModel().getSelectedItem();
-
 		if (selected != null) {
 			Field field = Field.findFieldNextTo(event.getX(), event.getY(), mapView.getFields());
 			field.setType(FieldType.valueOf(selected));
@@ -140,6 +133,8 @@ public class CreateGuiController implements Initializable {
 					if(file.exists()) {
 						field.setNextMap("maps/" + string + ".xml");
 					}
+				}else {
+					new Alert(AlertType.ERROR, "Falscher Mapname");
 				}
 				
 				

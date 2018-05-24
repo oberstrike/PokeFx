@@ -69,7 +69,6 @@ public class GameLogic extends Thread {
 			Main.gameData.setPlayer(player);
 		} else {
 			player = gameData.getPlayer();
-			System.out.println("Player: " + player);
 		}
 		mapView.update();
 		this.anchor2 = anchor2;
@@ -77,7 +76,6 @@ public class GameLogic extends Thread {
 
 	public void update() {
 		Platform.runLater(() -> {
-
 
 			this.mapView.update();
 
@@ -142,7 +140,7 @@ public class GameLogic extends Thread {
 		if (player.getPokemons().size() > 0) {
 			listOfPokemons = mapView.getMap().getPokemons();
 			listOfPokemons.forEach(each -> each
-					.setLevel(1 + new Random().nextInt(player.getAverageLevel()) + 1 + player.getPokemons().size()));
+					.setLevel(1 + new Random().nextInt(player.getAverageLevel()) + player.getPokemons().size()));
 		} else {
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Schiggy"));
 			listOfPokemons.add(Main.xmlControll.getPokemonByName("Bisasam"));
@@ -165,7 +163,6 @@ public class GameLogic extends Thread {
 		}
 
 		System.out.println("Ein wildes " + spawnedPokemon.getName());
-		// Kampf
 		if (player.getPokemons().size() > 0) {
 			FightGuiController controller = FightGuiController.create(player.getPokemons(),
 					new Vector<>(Arrays.asList(spawnedPokemon)), false);
@@ -174,41 +171,41 @@ public class GameLogic extends Thread {
 					loader.setController(controller);
 				});
 			});
-		}else {
+		} else {
+			// Starter Pokemon fangen.
 			alert.setContentText("Ein wildes " + spawnedPokemon.getName() + " erscheint willst du es behalten?");
 			ButtonType yes = new ButtonType("Ja");
 			ButtonType no = new ButtonType("Nein");
 			alert.getButtonTypes().setAll(yes, no);
 			Optional<ButtonType> btn = alert.showAndWait();
-			if(btn.isPresent()) {
+			if (btn.isPresent()) {
 				ButtonType btnValue = btn.get();
 				System.out.println(btnValue);
-				if(btnValue.getClass().equals(yes.getClass())) {
+				if (btnValue.equals(yes)) {
+					spawnedPokemon.setXp(0);
 					player.getPokemons().add(spawnedPokemon);
 				}
 			}
-			
+
 		}
-		
-		
-//
-//		int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
-//		String entryOutput = "";
-//		if (entryPokedex == 1) {
-//			entryOutput = "Du hast dieses Pokemon bereits gesehen.";
-//		} else if (entryPokedex == 2) {
-//			entryOutput = "Du hast dieses Pokemon bereits gefangen.";
-//		} else {
-//			entryOutput = "Ein Eintrag im Pokedex wurde hinzugefügt";
-//			player.setPokedex(spawnedPokemon, 1);
-//		}
-//
-//		alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " + spawnedPokemon.getLevel()
-//				+ " ist erschienen.\n" + entryOutput);
-//		// Pokemonbild
 
+		//
+		// int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
+		// String entryOutput = "";
+		// if (entryPokedex == 1) {
+		// entryOutput = "Du hast dieses Pokemon bereits gesehen.";
+		// } else if (entryPokedex == 2) {
+		// entryOutput = "Du hast dieses Pokemon bereits gefangen.";
+		// } else {
+		// entryOutput = "Ein Eintrag im Pokedex wurde hinzugefügt";
+		// player.setPokedex(spawnedPokemon, 1);
+		// }
+		//
+		// alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " +
+		// spawnedPokemon.getLevel()
+		// + " ist erschienen.\n" + entryOutput);
+		// // Pokemonbild
 
-		
 	}
 
 	public void moveEvent(String keyName) {
@@ -248,7 +245,7 @@ public class GameLogic extends Thread {
 				if (oField.isPresent()) {
 					Field field = oField.get();
 					if (field.getEntity() != null) {
-						if(field.getEntity().getClass().equals(Trainer.class))
+						if (field.getEntity().getClass().equals(Trainer.class))
 							fightAgainstTrainer((Trainer) field.getEntity());
 					}
 				}
@@ -264,23 +261,19 @@ public class GameLogic extends Thread {
 		newField = mapView.getFields().stream().filter(each -> each.getX() == x && each.getY() == y).findFirst();
 
 		if (newField.isPresent()) {
+			Field playerField = player.getField();
 			if (!newField.get().equals(player.getField())) {
 				if (!newField.get().isBlocked()) {
 					int difference = player.getField().getType().equals(FieldType.TIEFERSAND) ? 300 : 110;
 					if (lastMovementTime == 0 || System.currentTimeMillis() - lastMovementTime > difference) {
+						lastMovementTime = System.currentTimeMillis();
+						Field newF = newField.get();
 						for (Pokemon mon : player.getPokemons()) {
-							double hp = mon.getHp();
-							double hpBase = mon.calculateHp();
-							if (hpBase > hp) {
-								hp = hp + 1.0;
-								mon.setHp(hp);
+							if (mon.calculateHp() > mon.getHp()) {
+								mon.setHp(mon.getHp()+1);
 							}
 						}
-						lastMovementTime = System.currentTimeMillis();
-
-						Field newF = newField.get();
 						if (newF.getType().equals(FieldType.UEBERGANG)) {
-							
 							Map map = Main.xmlControll.getMap(new File(newF.getNextMap()));
 							mapView.setMap(map);
 							Main.gameData.setMap(map);
@@ -295,12 +288,14 @@ public class GameLogic extends Thread {
 							}
 							newF.setX(newX);
 							newF.setY(newY);
+							
+							//Kind of Final Variable fuer das Closure
 							double xx = newX;
 							double yy = newY;
 							newField = mapView.getFields().stream()
 									.filter(each -> each.getX() == xx && each.getY() == yy).findFirst();
 						}
-						player.getField().setEntity(null);
+						playerField.setEntity(null);
 						newF.setEntity(player);
 						player.setField(newField.get());
 						Platform.runLater(() -> mapView.update());
@@ -320,20 +315,19 @@ public class GameLogic extends Thread {
 		}
 
 	}
-//
-//	private void fightAgainstTrainer(Trainer entity) {
-//		// new Alert(AlertType.CONFIRMATION, "Kampf gegen " + entity.getName() + ".
-//		// Bereits gewonnen: " + entity.isWin()).show();
-//		
-//		Pokemon winner = null;
-//		
-//
-//	}
 
 	private void fightAgainstTrainer(Trainer entity) {
-		
-		
+		if (entity.getPokemons() != null) {
+			if(entity.getPokemons().size()>0) {
+				entity.getPokemons().forEach(each -> each.setHp(each.calculateHp()));
+				FightGuiController controller = FightGuiController.create(player.getPokemons(), entity.getPokemons(), true);
+				Platform.runLater(() -> {
+					Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> loader.setController(controller));
+				}); 
+				
+			}
+		}
+
 	}
-	
 
 }

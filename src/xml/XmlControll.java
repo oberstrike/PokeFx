@@ -33,9 +33,9 @@ public class XmlControll {
 	private final HashMap<String, HashMap<Integer, String>> evolutiondex;
 	private final HashMap<PokemonType, HashMap<PokemonType, Double>> effectives;
 
-	private static String pokeFileName = "pokedex.xml";
-	private static String evolveFileName = "evolvingdex.xml";
-	private static String effectivesFileName = "effectives.xml";
+	private static String pokeFileName = "/ressources/pokedex.xml";
+	private static String evolveFileName = "/ressources/evolvingdex.xml";
+	private static String effectivesFileName = "/ressources/effectives.xml";
 
 	@SuppressWarnings("unchecked")
 	public XmlControll() {
@@ -57,7 +57,7 @@ public class XmlControll {
 		stream.alias("map", java.util.Map.class);
 		stream.alias("list", ArrayList.class);
 		
-		pokedex = (List<Pokemon>) this.getObject(new File(pokeFileName));
+		pokedex = (List<Pokemon>) this.getObject(new File(getClass().getResource(pokeFileName).toExternalForm()));
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(new File(evolveFileName));
 		effectives = (HashMap<PokemonType, HashMap<PokemonType, Double>>) stream.fromXML(new File(effectivesFileName));
 

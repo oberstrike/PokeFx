@@ -54,7 +54,7 @@ public class PokemonView extends AnchorPane {
 			upButton.setPrefWidth(40);
 			upButton.setPrefHeight(10);
 			upButton.setText("Up");
-			upButton.setLayoutX(130);
+			upButton.setLayoutX(140);
 			upButton.setLayoutY(15);
 			this.getChildren().add(upButton);
 			

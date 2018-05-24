@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
@@ -16,7 +17,7 @@ public class Trainer implements Entity{
 	
 	private String name;
 	private boolean win;
-	private List<Pokemon> pokemons = new ArrayList<>();
+	private Vector<Pokemon> pokemons = new Vector<>();
 	
 	public Trainer(Image image, String name, List<Pokemon> pokemons) {
 		this.setImage(image);
@@ -54,11 +55,11 @@ public class Trainer implements Entity{
 
 
 
-	public List<Pokemon> getPokemons() {
+	public Vector<Pokemon> getPokemons() {
 		return pokemons;
 	}
 
-	public void setPokemons(List<Pokemon> pokemons) {
+	public void setPokemons(Vector<Pokemon> pokemons) {
 		this.pokemons = pokemons;
 	}
 

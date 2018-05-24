@@ -260,12 +260,12 @@ public class Pokemon {
 	 */
 
 	public int calcXp() {
-		int a = 1; // Wildes Pokemon
-		int t = 1; // Eigenes Pokemon
+		int a = 5; // Wildes Pokemon
+		int t = 5; // Eigenes Pokemon
 		int b = Main.xmlControll.getPokemonByName(name).getXp(); // Basiserfahrung
-		int e = 1; // Glückseifaktor
+		int e = 5; // Glückseifaktor
 		int l = level; // Level des gegnerischen Pokemons;
-		int s = 1; // Anzahl an Pokemon die beteiligt waren;
+		int s = 5; // Anzahl an Pokemon die beteiligt waren;
 
 		return (a * t * b * e * l) / (7 * s);
 	}

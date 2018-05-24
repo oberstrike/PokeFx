@@ -40,22 +40,7 @@ public class MenuGuiController implements Initializable {
 
 	@FXML
 	void load(ActionEvent event) {
-		
-//		Pokemon pikachu = Main.xmlControll.getPokemonByName("Pikachu");
-//		pikachu.setLevel(10);
-//		
-//		
-//		Vector<Pokemon> v1 = new Vector<>(Arrays.asList(Main.xmlControll.getPokemonsById(2), Main.xmlControll.getPokemonsById(4)));
-//
-//		Vector<Pokemon> v2 = new Vector<>(Arrays.asList(pikachu));
-//		
-//		FightGuiController controller = FightGuiController.create(v1, v2, false);
-//		
-//		Main.changer.changeWindow("/guis/FightGui.fxml", (loader) -> loader.setController(controller) ); 
-//		
-		
 		 File selectedFile = new File("maps/start.xml");
-		 // File selectedFile = new File("save.xml");
 		 MapView mapView = new MapView();
 		 mapView.setMap(Main.xmlControll.getMap(selectedFile));
 		 Main.gameData = new GameData(mapView.getMap());

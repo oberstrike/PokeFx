@@ -16,6 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import logic.GenericBuilder;
 import pokemon.Pokemon;
 
@@ -74,42 +77,41 @@ public class FightGuiController implements Initializable, Controller {
 	private Label wsidLabel;
 
 	private void swapBack() {
-		executor.shutdownNow();
+		Main.mediaPlayer.stop();
+		executor.shutdown();
 		Main.changer.changeWindow("/guis/GameGui.fxml");
 	}
 
 	@FXML
 	void fight(MouseEvent event) {
-		Pokemon myPokemon = this.myPokemons.get(actMyPokemon);
-		Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
-	//	Pokemon winner = null;
-		
-		Pokemon fasterPokemon = myPokemon.faster(enemyPokemon);
-		Pokemon slowerPokemon = fasterPokemon.equals(myPokemon) ? enemyPokemon : myPokemon;
-		
-		System.out.println(fasterPokemon.toString());
-		System.out.println(slowerPokemon.toString());
-
-
-		slowerPokemon.setHp(slowerPokemon.getHp() - fasterPokemon.getDamage(slowerPokemon));
-		if(slowerPokemon.isDead()) {
-			if(slowerPokemon.equals(myPokemon)) {
-				actMyPokemon++;
-			}else {
-				actEnemyPokemon++;
-				myPokemon.addXp(slowerPokemon.calcXp());
-			}
-		}else {
-
-			fasterPokemon.setHp(fasterPokemon.getHp()-fasterPokemon.getDamage(slowerPokemon));
-			if(fasterPokemon.isDead()) {
-				if(fasterPokemon.equals(myPokemon)) {
+		if(actMyPokemon < this.myPokemons.size() && actEnemyPokemon < this.enemyPokemons.size()) {
+			Pokemon myPokemon = this.myPokemons.get(actMyPokemon);
+			Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
+			Pokemon fasterPokemon = myPokemon.faster(enemyPokemon);
+			Pokemon slowerPokemon = fasterPokemon.equals(myPokemon) ? enemyPokemon : myPokemon;
+			slowerPokemon.setHp(slowerPokemon.getHp() - fasterPokemon.getDamage(slowerPokemon));
+			if(slowerPokemon.isDead()) {
+				if(slowerPokemon.equals(myPokemon)) {
 					actMyPokemon++;
 				}else {
 					actEnemyPokemon++;
+					System.out.println(enemyPokemon.getName() + " wurde besiegt");
 					myPokemon.addXp(slowerPokemon.calcXp());
 				}
+			}else {
+				fasterPokemon.setHp(fasterPokemon.getHp()-fasterPokemon.getDamage(slowerPokemon));
+				if(fasterPokemon.isDead()) {
+					if(fasterPokemon.equals(myPokemon)) {
+						actMyPokemon++;
+					}else {
+						actEnemyPokemon++;
+						System.out.println(enemyPokemon.getName() + " wurde besiegt");
+						myPokemon.addXp(slowerPokemon.calcXp());
+					}
+				}
 			}
+		}else {
+			swapBack();
 		}
 	}
 	
@@ -144,6 +146,13 @@ public class FightGuiController implements Initializable, Controller {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		executor = Executors.newScheduledThreadPool(1);
+		Main.mediaPlayer = new MediaPlayer(new Media(getClass().getResource("/musik/Kampf.mp3").toExternalForm()));
+		Main.mediaPlayer.setOnEndOfMedia(() -> {
+			Main.mediaPlayer.seek(Duration.ZERO);
+		});
+		Main.mediaPlayer.play();
+		Main.mediaPlayer.setVolume(0.5);
+		
 		if (isTrainerFight) {
 			this.catchLabel.setDisable(true);
 			this.escapeLabel.setDisable(true);
