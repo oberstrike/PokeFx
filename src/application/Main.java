@@ -116,7 +116,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			init();
+
 			changer = new WindowChanger(primaryStage);
 		
 			AnchorPane root = FXMLLoader.load(getClass().getResource("/guis/MenuGui.fxml"));
@@ -141,8 +141,6 @@ public class Main extends Application {
 	}
 	
 	public void init() {
-		System.out.println("Bilder werden geladen:");
-
 		stein = new Image("/images/stein.png");
 		wasser = new Image("/images/wasser.png");
 		grass = new Image("/images/grass.png");
@@ -238,5 +236,6 @@ public class Main extends Application {
 		man_1_straight = new Image("/images/man_1_straight.png");
 		man_2_straight = new Image("/images/man_2_straight.png");
 		xmlControll = new XmlControll();
+		System.out.println(Thread.activeCount());
 	}
 }
