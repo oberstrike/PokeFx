@@ -58,7 +58,6 @@ public class WindowChanger {
 			Thread.sleep(200);
 			this.stage.show();
 			System.out.println("neu: " + Thread.activeCount());
-
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

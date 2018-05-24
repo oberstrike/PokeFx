@@ -38,10 +38,8 @@ import xml.GameData;
 	- CHECK	Klick auf Beenden beendet Spiel
 	- CHECK Spielerposition bei Kartenwechsel anpassen
 	- CHECK	mehrere Übergänge auf einer Map
-	- 		Bild bei Entwicklung anpassen
+	- CHECK	Bild bei Entwicklung anpassen
 	- CHECK	Maps bauen
-	- CHECK	Pokedex im Spiel
-
 */
 
 public class GameLogic extends Thread {
@@ -65,7 +63,6 @@ public class GameLogic extends Thread {
 			for (int i = 0; i <= 150; i++) {
 				pokedexList.add(0);
 			}
-			player.setPokedex(pokedexList);
 			player.setImage(new Image("/images/player_straight.png"));
 			player.setField(f);
 			f.setEntity(player);
@@ -193,22 +190,6 @@ public class GameLogic extends Thread {
 
 		}
 
-		//
-		// int entryPokedex = player.getPokedex().get(spawnedPokemon.getId());
-		// String entryOutput = "";
-		// if (entryPokedex == 1) {
-		// entryOutput = "Du hast dieses Pokemon bereits gesehen.";
-		// } else if (entryPokedex == 2) {
-		// entryOutput = "Du hast dieses Pokemon bereits gefangen.";
-		// } else {
-		// entryOutput = "Ein Eintrag im Pokedex wurde hinzugefügt";
-		// player.setPokedex(spawnedPokemon, 1);
-		// }
-		//
-		// alert.setHeaderText("Ein wildes " + spawnedPokemon.getName() + " Lvl. " +
-		// spawnedPokemon.getLevel()
-		// + " ist erschienen.\n" + entryOutput);
-		// // Pokemonbild
 
 	}
 

@@ -30,7 +30,6 @@ public class Player implements Entity {
 
 	
 	private Vector<Pokemon> pokemons = new Vector<>();
-	private List<Integer> pokedex = new ArrayList<>();
 	
 	public Player(){
 		
@@ -78,21 +77,7 @@ public class Player implements Entity {
 	}
 	
 
-	public List<Integer> getPokedex() {
-		return pokedex;
-	}
 
-	public void setPokedex(Pokemon mon, int type) {
-		this.pokedex.set(mon.getId(), type);
-	}
-
-	public void setPokedex(int i, int type) {
-		this.pokedex.set(i, type);
-	}
-
-	public void setPokedex(List<Integer> pokedex) {
-		this.pokedex = pokedex;
-	}
 
 	public List<Boolean> getWins() {
 		return wins;

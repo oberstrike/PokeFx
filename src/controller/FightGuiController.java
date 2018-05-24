@@ -22,7 +22,7 @@ import javafx.util.Duration;
 import logic.GenericBuilder;
 import pokemon.Pokemon;
 
-public class FightGuiController implements Initializable, Controller {
+public class FightGuiController implements Initializable {
 
 	private Vector<Pokemon> myPokemons;
 	int actMyPokemon = 0;
