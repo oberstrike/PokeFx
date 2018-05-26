@@ -269,6 +269,10 @@ public class Pokemon {
 
 		return (a * t * b * e * l) / (7 * s);
 	}
+	
+	public double getHpRealtion() {
+		return this.hp / calculateHp();
+	}
 
 	public void evolveTo(Pokemon pokemon) {
 		this.id = pokemon.id;

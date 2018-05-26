@@ -47,7 +47,7 @@ public class GameLogic extends Thread {
 	private Player player;
 	private long lastMovementTime = 0;
 	private AnchorPane anchor2;
-	boolean isRunning = true;
+	public boolean isRunning = true;
 
 	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
 		this.mapView = mapView;

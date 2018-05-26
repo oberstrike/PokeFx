@@ -26,7 +26,10 @@ public class GameGuiController implements Initializable {
 	
 	@FXML
 	void back(ActionEvent event) {
+		logic.isRunning = false;
+		Main.routeMediaPlayer.stop();
 		Main.changer.changeWindow("/guis/MenuGui.fxml");
+		
 	}
 	
 	@FXML
