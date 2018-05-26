@@ -16,6 +16,14 @@
 	-fx-cursor: hand;
 }
 
+#mainMenu .button:hover {
+	-fx-text-alignment: left;
+	-fx-background-image:  url('/images/pokeball_bg.png');
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+}
+
 .root {
 	-fx-background-color:  #0f264c;
 }
@@ -49,6 +57,7 @@
 }
 
 #wsidLabel {
+	-fx-font-size: 1.3em;
 	-fx-padding: 5px;
 	-fx-border-color: transparent transparent #000000 transparent;
 }
