@@ -24,18 +24,10 @@ public class MenuGuiController implements Initializable {
 
 	@FXML
 	void loadGame(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Save as xml");
-		fileChooser.getExtensionFilters().add(new ExtensionFilter("Xml Files", "*.xml"));
-		File selectedFile = fileChooser.showOpenDialog((Stage) ((Button) event.getSource()).getScene().getWindow());
-		if (selectedFile == null) {
-
-		} else {
-
-			Main.gameData = Main.xmlControll.getGame(selectedFile);
-			System.out.println(Main.gameData.getPlayer());
-			Main.changer.changeWindow("/guis/GameGui.fxml");
-		}
+		File selectedFile = new File("Spielstand.xml");
+		Main.gameData = Main.xmlControll.getGame(selectedFile);
+		System.out.println(Main.gameData.getPlayer());
+		Main.changer.changeWindow("/guis/GameGui.fxml");
 	}
 
 	@FXML

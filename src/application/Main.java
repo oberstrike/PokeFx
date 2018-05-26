@@ -1,7 +1,5 @@
 package application;
 
-import java.io.File;
-
 import controller.FightGuiController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -143,7 +141,7 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	public void init() {		
+	public void init() {
 		stein = new Image("/images/stein.png");
 		wasser = new Image("/images/wasser.png");
 		grass = new Image("/images/grass.png");
@@ -217,6 +215,7 @@ public class Main extends Application {
 		mtilb_water = new Image("/images/mtilb_water.png");
 		mtirf_water = new Image("/images/mtirf_water.png");
 		mtirb_water = new Image("/images/mtirb_water.png");
+
 		mtr_sand = new Image("/images/mtr_sand.png");
 		mtl_sand = new Image("/images/mtl_sand.png");
 		mtb_sand = new Image("/images/mtb_sand.png");
@@ -246,6 +245,7 @@ public class Main extends Application {
 		xmlControll = XmlControll.getInstance();
 		man_1_straight = new Image("/images/man_1_straight.png");
 		man_2_straight = new Image("/images/man_2_straight.png");
+		xmlControll = new XmlControll();
 		System.out.println(Thread.activeCount());
 	}
 }

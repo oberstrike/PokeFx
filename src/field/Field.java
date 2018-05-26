@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;

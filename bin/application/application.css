@@ -6,31 +6,64 @@
 	-fx-border-radius: 5.0;
 }
 
-.button	{
-	-fx-background-color:  #54a0ff;
+.button, #save, .menuItem	{
+	-fx-text-fill: #000000;
+	-fx-background-color:  #ffffff;
 }
 
-.button:hover{
+.button:hover, #save:hover, .menuItem:hover {
 	-fx-background-color: #2e86de;
+	-fx-cursor: hand;
+}
+
+#mainMenu .button:hover {
+	-fx-text-alignment: left;
+	-fx-background-image:  url('/images/pokeball_bg.png');
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
 }
 
 .root {
-	-fx-background-color:  #0abde3;
+	-fx-background-color:  #0f264c;
 }
 
-.list-cell {
-	-fx-background-color: #2e86de;
+.menu-bar {
+	-fx-background-color: #0f264c;
+	-fx-border-color: #ffffff;
 }
 
-.list-cell:filled:hover {
-	-fx-background-color: #00d2d3;
+.label {
+	-fx-text-fill: #000000;
 }
 
-.list-cell:filled:selected:focused {
-	-fx-background-color: #00d2d3;
+#anchor2 {
+	-fx-background-color:  #ffffff;
 }
 
-.menu-bar{
-	-fx-background-color: #2e86de;
-	-fx-border-color: black;
+#fightGui {
+	-fx-background-image:  url('/images/bg5.png');
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+}
+
+#fightControl {
+	-fx-background-color:  #ffffff;
+	-fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-border-style: solid;
+    -fx-border-radius: 3px;
+}
+
+#wsidLabel {
+	-fx-font-size: 1.3em;
+	-fx-padding: 5px;
+	-fx-border-color: transparent transparent #000000 transparent;
+}
+
+#myPokemonAnchor .label, #enemyPokemonAnchor .label {
+	-fx-font-size: 1.5em;
+	-fx-text-fill: #ffffff;
+	-fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 0,0,0,1 );
 }

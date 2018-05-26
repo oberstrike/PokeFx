@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.JAXB;
-
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.StaxDriver;
 import com.thoughtworks.xstream.security.NoTypePermission;
@@ -41,21 +39,13 @@ public class XmlControll {
 	private static String evolveFileName = "evolvingdex.xml";
 	private static String effectivesFileName = "effectives.xml";
 
-	private static XmlControll instance;
-	
-	public static XmlControll getInstance() {
-		if (instance == null) {
-			instance = new XmlControll();
-		}
-		return instance;
-		
-	}
-	
-	
 	@SuppressWarnings("unchecked")
-	private XmlControll() {
+	public XmlControll() {
 		Class<?>[] arrayOfClasses = {Field.class, Map.class, PokemonType.class, Player.class,
 				Trainer.class, Collection.class, java.util.Map.class, Integer.class, GameData.class, Pokemon.class, String.class, Vector.class};
+		
+		
+		
 		stream = new XStream(new StaxDriver());
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);
@@ -72,6 +62,7 @@ public class XmlControll {
 		InputStream is1 = this.getClass().getResourceAsStream(pokeFileName);
 		InputStream is2 = this.getClass().getResourceAsStream(evolveFileName);
 		InputStream is3 = this.getClass().getResourceAsStream(effectivesFileName);
+		
 		
 		pokedex = (List<Pokemon>) this.getObject(is1);
 		evolutiondex = (HashMap<String, HashMap<Integer, String>>) this.getObject(is2);

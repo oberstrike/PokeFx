@@ -11,7 +11,11 @@
       <AnchorPane layoutX="43.0" layoutY="325.0" prefHeight="155.0" prefWidth="464.0" />
       <MenuBar prefHeight="30.0" prefWidth="900.0">
         <menus>
+<<<<<<< HEAD
           <Menu mnemonicParsing="false" text="Optionen">
+=======
+          <Menu fx:id="save" mnemonicParsing="false" text="Speichern">
+>>>>>>> eeefc96bb851b754f7632191f172249c5bb93f71
             <items>
               <MenuItem mnemonicParsing="false" onAction="#save" text="Speichern" />
                   <MenuItem mnemonicParsing="false" onAction="#back" text="Zurück" />
