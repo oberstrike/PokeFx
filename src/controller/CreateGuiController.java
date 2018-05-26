@@ -60,8 +60,6 @@ public class CreateGuiController implements Initializable {
 
 	@FXML
 	private Button addBtn;
-	
-	
 
 	@FXML
 	void back(ActionEvent event) {
@@ -116,28 +114,27 @@ public class CreateGuiController implements Initializable {
 		if (selected != null) {
 			Field field = Field.findFieldNextTo(event.getX(), event.getY(), mapView.getFields());
 			field.setType(FieldType.valueOf(selected));
-			if(field.getType().equals(FieldType.UEBERGANG)) {
+			if (field.getType().equals(FieldType.UEBERGANG)) {
 				TextInputDialog dialog = new TextInputDialog();
 				dialog.setTitle("Map Name");
 				dialog.setHeaderText("Fuellen Sie den Map-Namen ein");
 				dialog.setContentText("Name: ");
-				
+
 				Optional<String> result = dialog.showAndWait();
-				if(result.isPresent()) {
+				if (result.isPresent()) {
 					String string = result.get();
 					File file = new File("maps/" + string + ".xml");
 					System.out.println(file.exists());
 					System.out.println(file.getAbsolutePath());
-					if(file.exists()) {
+					if (file.exists()) {
 						field.setNextMap("maps/" + string + ".xml");
 					}
-				}else {
+				} else {
 					new Alert(AlertType.ERROR, "Falscher Mapname");
 				}
-				
-				
+
 			}
-			
+
 			mapView.update();
 		}
 
@@ -279,7 +276,6 @@ public class CreateGuiController implements Initializable {
 			@Override
 			protected void updateItem(Pokemon item, boolean empty) {
 				super.updateItem(item, empty);
-
 				if (empty || item == null || item.getName() == null) {
 					setText(null);
 				} else {

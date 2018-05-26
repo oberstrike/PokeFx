@@ -25,6 +25,11 @@ public class GameGuiController implements Initializable {
 	private GameLogic logic;
 	
 	@FXML
+	void back(ActionEvent event) {
+		Main.changer.changeWindow("/guis/MenuGui.fxml");
+	}
+	
+	@FXML
 	void save(ActionEvent event) {
 		String gameFileName = "Spielstand.xml";
 		File file = new File(gameFileName);

@@ -243,7 +243,7 @@ public class Main extends Application {
 		Main.fightMediaPlayer.setOnEndOfMedia(() -> {
 			Main.fightMediaPlayer.seek(Duration.ZERO);
 		});
-
+		xmlControll = XmlControll.getInstance();
 		man_1_straight = new Image("/images/man_1_straight.png");
 		man_2_straight = new Image("/images/man_2_straight.png");
 		System.out.println(Thread.activeCount());

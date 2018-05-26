@@ -46,10 +46,6 @@ public class Map {
 				fields.add(new Field(i, j, fieldType));
 			}
 		}
-		
-		Trainer trainer = new Trainer(Main.man_1_straight, "Dude", Arrays.asList(Main.xmlControll.getPokemonByName("Pikachu")));
-		fields.get(0).setEntity(trainer);
-		
 	}
 
 	public List<Field> getSuccesors(Field field) {
