@@ -28,7 +28,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label onMouseClicked="#fight" text="Kampf" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                  <Label fx:id="fightLabel" onMouseClicked="#fight" text="Kampf" GridPane.columnIndex="0" GridPane.rowIndex="0">
                      <font>
                         <Font size="16.0" />
                      </font>

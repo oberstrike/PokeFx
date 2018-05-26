@@ -91,6 +91,7 @@ public class FightGuiController implements Initializable {
 
 	@FXML
 	void fight(MouseEvent event) {
+		block();
 		Timeline faster = new Timeline();
 		Timeline slower = new Timeline();
 		Timeline dead = new Timeline();
@@ -179,22 +180,55 @@ public class FightGuiController implements Initializable {
 	void escape(MouseEvent event) {
 		swapBack();
 	}
+	
+	@FXML
+	private Label fightLabel;
+	
+	void block() {
+		Thread thread = new Thread(() ->{
+			try {
+				
+				Platform.runLater(() ->{
+					this.catchLabel.setDisable(true);
+					this.escapeLabel.setDisable(true);
+					this.fightLabel.setDisable(true);
+				}); 
+				Thread.sleep(1000);
+				
+				Platform.runLater(() ->{
+					this.catchLabel.setDisable(false);
+					this.escapeLabel.setDisable(false);
+					this.fightLabel.setDisable(false);
+				}); 
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+	
+			
+		});
+		thread.setDaemon(true);
+		thread.start();
+		
+	}
 
 	@FXML
 	void catchEvent(MouseEvent event) {
+		//Blockieren der Auswahl
+		block();
+		
 		Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
 		enemyPokemon.setXp(0);
-		System.out.println("catchEvent");
 		if (this.myPokemons != null) {
 			int randInt = new Random().nextInt(100) + 1;
-			System.out.println(randInt);
 			int pokeInt = (int) (20 + (int) (enemyPokemon.getSpawn() * 2) + 3 / (enemyPokemon.getHpRealtion()));
-			System.out.println(pokeInt);
-			System.out.println(5 / (enemyPokemon.getHpRealtion()));
 			if (randInt <= pokeInt) {
 				this.myPokemons.add(enemyPokemon);
 				swapBack();
-			} 
+			} else {
+				Pokemon myPokemon = myPokemons.get(actMyPokemon);
+				myPokemon.setHp(enemyPokemon.getDamage(myPokemon));
+			}
 		}
 	}
 
@@ -237,6 +271,8 @@ public class FightGuiController implements Initializable {
 						wsidLabel.setText("Was soll " + myPokemon.getName() + " tun?");
 					}
 				}
+				
+				
 
 				if (enemyPokemon != null) {
 					enemyPokemonView.setImage(enemyPokemon.getFrontImage());
@@ -249,7 +285,7 @@ public class FightGuiController implements Initializable {
 
 			});
 
-		}, 0, 500, TimeUnit.MILLISECONDS);
+		}, 0, 200, TimeUnit.MILLISECONDS);
 	}
 
 	public static FightGuiController create(Vector<Pokemon> pokemon, Vector<Pokemon> pokemon2, boolean isTrainerFight) {
