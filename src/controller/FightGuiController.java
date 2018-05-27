@@ -12,7 +12,6 @@ import application.Main;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -22,8 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import logic.GenericBuilder;
 import pokemon.Pokemon;
@@ -92,11 +89,12 @@ public class FightGuiController implements Initializable {
 	@FXML
 	void fight(MouseEvent event) {
 		block();
-		Timeline faster = new Timeline();
-		Timeline slower = new Timeline();
+		Timeline firstHp = new Timeline();
+		Timeline secondHp = new Timeline();
+		Timeline firstText = new Timeline();
+		Timeline secondText = new Timeline();
 		Timeline dead = new Timeline();
-		KeyValue keyHpBar, keyText, keyDead;
-		KeyFrame frameHpBar, frameText, frameDead;
+		KeyValue keyHpFirst, keyHpSecond, keyDead;
 		String text = "";
 
 		if (actMyPokemon < this.myPokemons.size() && actEnemyPokemon < this.enemyPokemons.size()) {
@@ -106,22 +104,13 @@ public class FightGuiController implements Initializable {
 			Pokemon slowerPokemon = fasterPokemon.equals(myPokemon) ? enemyPokemon : myPokemon;
 			String deadText = "Was soll " + myPokemon.getName() + " tun?";
 
+			// Schadensberechnung
 			slowerPokemon.setHp(slowerPokemon.getHp() - fasterPokemon.getDamage(slowerPokemon));
-
-			// Animation
-			if (slowerPokemon.equals(myPokemon)) {
-				keyHpBar = new KeyValue(myPokemonHealthBar.progressProperty(),
-						(double) myPokemon.getHp() / (double) myPokemon.calculateHp(), Interpolator.EASE_OUT);
-				text = "Das gegnerische " + enemyPokemon.getName() + " greift an!";
-			} else {
-				keyHpBar = new KeyValue(enemyHealthBar.progressProperty(),
-						(double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp(), Interpolator.EASE_OUT);
-				text = myPokemon.getName() + " greift an!";
-			}
-			keyText = new KeyValue(wsidLabel.textProperty(), text);
-			faster.getKeyFrames().add(new KeyFrame(new Duration(100), keyText));
-			faster.getKeyFrames().add(new KeyFrame(new Duration(400), keyHpBar));
-
+			
+			text = slowerPokemon.equals(myPokemon) ? "Das gegnerische " + enemyPokemon.getName() + " greift an!" : myPokemon.getName() + " greift an!";			
+			firstText.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), text)));
+			
+			// Todesnachrichten
 			if (slowerPokemon.isDead()) {
 				if (slowerPokemon.equals(myPokemon)) {
 					actMyPokemon++;
@@ -129,25 +118,18 @@ public class FightGuiController implements Initializable {
 				} else {
 					actEnemyPokemon++;
 					deadText = "Das gegnerische " + enemyPokemon.getName() + " wurde besiegt";
-					myPokemon.addXp(slowerPokemon.calcXp());
+					System.out.println("Das gegnerische " + enemyPokemon.getName() + " wurde besiegt");
+					myPokemon.addXp(enemyPokemon.calcXp());
 				}
 			} else {
-				fasterPokemon.setHp(fasterPokemon.getHp() - fasterPokemon.getDamage(slowerPokemon));
+				
+				// Schadensberechnung
+				fasterPokemon.setHp(fasterPokemon.getHp() - slowerPokemon.getDamage(fasterPokemon));
+				
+				text = fasterPokemon.equals(myPokemon) ? "Das gegnerische " + enemyPokemon.getName() + " greift an!" : myPokemon.getName() + " greift an!";
+				secondText.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), text)));
 
-				if (fasterPokemon.equals(myPokemon)) {
-					keyHpBar = new KeyValue(myPokemonHealthBar.progressProperty(),
-							(double) myPokemon.getHp() / (double) myPokemon.calculateHp(), Interpolator.EASE_OUT);
-					text = "Das gegnerische " + enemyPokemon.getName() + " greift an!";
-
-				} else {
-					keyHpBar = new KeyValue(enemyHealthBar.progressProperty(),
-							(double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp(), Interpolator.EASE_OUT);
-					text = myPokemon.getName() + " greift an!";
-				}
-				keyText = new KeyValue(wsidLabel.textProperty(), text);
-				slower.getKeyFrames().add(new KeyFrame(new Duration(100), keyText));
-				slower.getKeyFrames().add(new KeyFrame(new Duration(400), keyHpBar));
-
+				// Todesnachrichten die Zweite
 				if (fasterPokemon.isDead()) {
 					if (fasterPokemon.equals(myPokemon)) {
 						actMyPokemon++;
@@ -155,23 +137,30 @@ public class FightGuiController implements Initializable {
 					} else {
 						actEnemyPokemon++;
 						deadText = "Das gegnerische " + enemyPokemon.getName() + " wurde besiegt";
-						myPokemon.addXp(slowerPokemon.calcXp());
+						System.out.println("Enemy = faster; Das gegnerische " + enemyPokemon.getName() + " wurde besiegt");
+						myPokemon.addXp(enemyPokemon.calcXp());
 					}
 				}
 			}
+			
+			// Animationen vorbereiten
+			if (slowerPokemon.equals(myPokemon)) {
+				keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(), (double) slowerPokemon.getHp() / (double) slowerPokemon.calculateHp(), Interpolator.EASE_OUT);
+				keyHpSecond = new KeyValue(enemyHealthBar.progressProperty(), (double) fasterPokemon.getHp() / (double) fasterPokemon.calculateHp(), Interpolator.EASE_OUT);
+			} else {
+				keyHpFirst = new KeyValue(enemyHealthBar.progressProperty(), (double) slowerPokemon.getHp() / (double) slowerPokemon.calculateHp(), Interpolator.EASE_OUT);
+				keyHpSecond = new KeyValue(myPokemonHealthBar.progressProperty(), (double) fasterPokemon.getHp() / (double) fasterPokemon.calculateHp(), Interpolator.EASE_OUT);
+			}
+			firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
+			secondHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpSecond));
+			
 			keyDead = new KeyValue(wsidLabel.textProperty(), deadText);
-			dead.getKeyFrames().add(new KeyFrame(new Duration(400), keyText));
-			PauseTransition pause = new PauseTransition(Duration.millis(2000));
-			PauseTransition pause2 = new PauseTransition(Duration.millis(2000));
-			PauseTransition pause3 = new PauseTransition(Duration.millis(4000));
-			SequentialTransition sequence = new SequentialTransition(faster, pause, slower, pause2, dead, pause3);
+			dead.getKeyFrames().add(new KeyFrame(new Duration(1000), keyDead));
+			
+			// Sequenz abspielen
+			SequentialTransition sequence = new SequentialTransition(firstText, firstHp, secondText, secondHp, dead);
 			sequence.play();
 		} else {
-			try {
-				Thread.sleep(1500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 			swapBack();
 		}
 	}
@@ -193,7 +182,7 @@ public class FightGuiController implements Initializable {
 					this.escapeLabel.setDisable(true);
 					this.fightLabel.setDisable(true);
 				}); 
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 				
 				Platform.runLater(() ->{
 					this.catchLabel.setDisable(false);
@@ -264,28 +253,30 @@ public class FightGuiController implements Initializable {
 					myPokemonNameLabel.setText(myPokemon.getName());
 					myPokemonLevelLabel.setText("Lvl." + myPokemon.getLevel());
 
-					myPokemonHealthBar.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateHp());
+					if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateHp())) {
+						myPokemonHealthBar.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateHp());
+					}
 
 					myPokemonHpLabel.setText((int) myPokemon.getHp() + "/" + myPokemon.calculateHp());
 					if (wsidLabel.getText() == "") {
 						wsidLabel.setText("Was soll " + myPokemon.getName() + " tun?");
 					}
 				}
-				
-				
 
 				if (enemyPokemon != null) {
 					enemyPokemonView.setImage(enemyPokemon.getFrontImage());
 					enemyPokemonNameLabel.setText(enemyPokemon.getName());
 					enemyLevelLabel.setText("Lvl." + enemyPokemon.getLevel());
 
-					enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
+					if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateHp())) {
+						enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
+					}
 
 				}
 
 			});
 
-		}, 0, 200, TimeUnit.MILLISECONDS);
+		}, 0, 2000, TimeUnit.MILLISECONDS);
 	}
 
 	public static FightGuiController create(Vector<Pokemon> pokemon, Vector<Pokemon> pokemon2, boolean isTrainerFight) {
