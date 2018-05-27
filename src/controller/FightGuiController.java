@@ -94,7 +94,7 @@ public class FightGuiController implements Initializable {
 		Timeline firstText = new Timeline();
 		Timeline secondText = new Timeline();
 		Timeline dead = new Timeline();
-		KeyValue keyHpFirst, keyHpSecond, keyDead;
+		KeyValue keyHpFirst, keyHpSecond;
 		String text = "";
 
 		if (actMyPokemon < this.myPokemons.size() && actEnemyPokemon < this.enemyPokemons.size()) {
@@ -151,15 +151,54 @@ public class FightGuiController implements Initializable {
 				keyHpFirst = new KeyValue(enemyHealthBar.progressProperty(), (double) slowerPokemon.getHp() / (double) slowerPokemon.calculateHp(), Interpolator.EASE_OUT);
 				keyHpSecond = new KeyValue(myPokemonHealthBar.progressProperty(), (double) fasterPokemon.getHp() / (double) fasterPokemon.calculateHp(), Interpolator.EASE_OUT);
 			}
+		
 			firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
 			secondHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpSecond));
+			dead.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), deadText)));
 			
-			keyDead = new KeyValue(wsidLabel.textProperty(), deadText);
-			dead.getKeyFrames().add(new KeyFrame(new Duration(1000), keyDead));
+			// Bewegung eigenes Pokemon
+			KeyValue myMoveValueX, myMoveValueY;
+			Timeline myMove = new Timeline();
+			Timeline myMoveBack = new Timeline();
+			if (!myPokemon.isDead()) {
+				myMoveValueX = new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT);
+				myMoveValueY = new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT);
+				
+				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueX));
+				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueY));
+				myMoveValueX = new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX(), Interpolator.EASE_OUT);
+				myMoveValueY = new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY(), Interpolator.EASE_OUT);
+				
+				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueX));
+				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueY));
+			}
 			
+			// Bewegung gegnerisches Pokemon
+			KeyValue enemyMoveValueX, enemyMoveValueY;
+			Timeline enemyMove = new Timeline();
+			Timeline enemyMoveBack = new Timeline();
+			if (!enemyPokemon.isDead()) {
+				enemyMoveValueX = new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() - 30, Interpolator.EASE_OUT);
+				enemyMoveValueY = new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() + 30, Interpolator.EASE_OUT);	
+				
+				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueX));
+				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueY));		
+				enemyMoveValueX = new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX(), Interpolator.EASE_OUT);
+				enemyMoveValueY = new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY(), Interpolator.EASE_OUT);		
+				
+				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueX));
+				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueY));
+			}
+					
 			// Sequenz abspielen
-			SequentialTransition sequence = new SequentialTransition(firstText, firstHp, secondText, secondHp, dead);
-			sequence.play();
+			if (slowerPokemon.equals(myPokemon)) {
+				SequentialTransition sequence = new SequentialTransition(firstText, enemyMove, enemyMoveBack, firstHp, secondText, myMove, myMoveBack, secondHp, dead);
+				sequence.play();
+			} else {
+				SequentialTransition sequence = new SequentialTransition(firstText, myMove, myMoveBack, firstHp, secondText, enemyMove, enemyMoveBack, secondHp, dead);
+				sequence.play();
+			}
+			
 		} else {
 			swapBack();
 		}
@@ -249,7 +288,7 @@ public class FightGuiController implements Initializable {
 					swapBack();
 				}
 				if (myPokemon != null) {
-					myPokemonView.setImage(myPokemon.getBackImage());
+					myPokemonView.setImage(myPokemon.getBackImage());					
 					myPokemonNameLabel.setText(myPokemon.getName());
 					myPokemonLevelLabel.setText("Lvl." + myPokemon.getLevel());
 
@@ -276,7 +315,7 @@ public class FightGuiController implements Initializable {
 
 			});
 
-		}, 0, 2000, TimeUnit.MILLISECONDS);
+		}, 0, 3000, TimeUnit.MILLISECONDS);
 	}
 
 	public static FightGuiController create(Vector<Pokemon> pokemon, Vector<Pokemon> pokemon2, boolean isTrainerFight) {
