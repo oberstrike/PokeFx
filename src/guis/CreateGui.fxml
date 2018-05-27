@@ -81,11 +81,6 @@
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-              <items>
-                <MenuItem mnemonicParsing="false" onAction="#entityMenu" text="Entity hinzufügen" />
-              </items>
-            </Menu>
         </menus>
       </MenuBar>
    </children>

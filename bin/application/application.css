@@ -17,16 +17,11 @@
 	-fx-cursor: hand;
 }
 
-<<<<<<< HEAD
-
 #white {
 	-fx-text-fill: white;
 }
 
-#mainMenu .button:hover {
-=======
 .button:hover {
->>>>>>> 3e32d91c2a466c31b93afdda16be8baac5a71097
 	-fx-text-alignment: left;
 	-fx-background-image:  url('/images/pokeball_bg.png');
 	-fx-background-repeat: no-repeat;   
@@ -40,11 +35,8 @@
 }
 
 .menu-bar {
-<<<<<<< HEAD
-	-fx-background-color: #51D9FF;
-=======
+
 	-fx-background-color: #1B4A96;
->>>>>>> 3e32d91c2a466c31b93afdda16be8baac5a71097
 	-fx-border-color: #ffffff;
 }
 

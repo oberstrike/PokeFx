@@ -11,7 +11,9 @@ import application.WindowChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import views.MapView;
@@ -23,15 +25,25 @@ import pokemon.Pokemon;
 public class MenuGuiController implements Initializable {
 
 	@FXML
+	private Button loadBtn;
+	
+	@FXML
 	void loadGame(ActionEvent event) {
 		File selectedFile = new File("Spielstand.xml");
-		Main.gameData = Main.xmlControll.getGame(selectedFile);
-		System.out.println(Main.gameData.getPlayer());
-		Main.changer.changeWindow("/guis/GameGui.fxml");
+		if(selectedFile.exists()) {
+			Main.gameData = Main.xmlControll.getGame(selectedFile);
+			System.out.println(Main.gameData.getPlayer());
+			Main.changer.changeWindow("/guis/GameGui.fxml");
+		}else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setHeaderText("Kein Spielstand vorhanden");
+			alert.show();
+			this.loadBtn.setDisable(true);
+		}
 	}
 
 	@FXML
-	void load(ActionEvent event) {
+	void createGame(ActionEvent event) {
 		File selectedFile = new File("maps/start.xml");
 		MapView mapView = new MapView();
 		mapView.setMap(Main.xmlControll.getMap(selectedFile));

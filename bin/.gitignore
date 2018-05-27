@@ -1,11 +1,9 @@
 /application/
 /guis/
 /images/
-/musik/
 /pokemon/
-/controller/
-/field/
 /logic/
 /resource/
 /views/
 /xml/
+/controller/

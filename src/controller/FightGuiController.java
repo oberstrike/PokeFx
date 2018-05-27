@@ -142,20 +142,7 @@ public class FightGuiController implements Initializable {
 					}
 				}
 			}
-<<<<<<< HEAD
-			keyDead = new KeyValue(wsidLabel.textProperty(), deadText);
-			dead.getKeyFrames().add(new KeyFrame(new Duration(400), keyText));
-			PauseTransition pause = new PauseTransition(Duration.millis(1000));
-			PauseTransition pause2 = new PauseTransition(Duration.millis(1000));
-			PauseTransition pause3 = new PauseTransition(Duration.millis(2000));
-			SequentialTransition sequence = new SequentialTransition(faster, pause, slower, pause2, dead, pause3);
-			sequence.play();
-		} else {
-			try {
-				Thread.sleep(1500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-=======
+
 			
 			// Animationen vorbereiten
 			if (slowerPokemon.equals(myPokemon)) {
@@ -164,7 +151,6 @@ public class FightGuiController implements Initializable {
 			} else {
 				keyHpFirst = new KeyValue(enemyHealthBar.progressProperty(), (double) slowerPokemon.getHp() / (double) slowerPokemon.calculateHp(), Interpolator.EASE_OUT);
 				keyHpSecond = new KeyValue(myPokemonHealthBar.progressProperty(), (double) fasterPokemon.getHp() / (double) fasterPokemon.calculateHp(), Interpolator.EASE_OUT);
->>>>>>> 3e32d91c2a466c31b93afdda16be8baac5a71097
 			}
 		
 			firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
@@ -178,6 +164,7 @@ public class FightGuiController implements Initializable {
 			if (!myPokemon.isDead()) {
 				myMoveValueX = new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT);
 				myMoveValueY = new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT);
+				
 				
 				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueX));
 				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueY));
@@ -278,15 +265,20 @@ public class FightGuiController implements Initializable {
 	@FXML
 	private Label catchLabel;
 
+
 	@FXML
 	private Label escapeLabel;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		executor = Executors.newScheduledThreadPool(1);
-		Main.routeMediaPlayer.stop();
-		Main.fightMediaPlayer.setVolume(0.6);
-		Main.fightMediaPlayer.play();
+		if(!Main.routeMediaPlayer.isMute()) {
+			Main.routeMediaPlayer.stop();
+			Main.fightMediaPlayer.setVolume(0.6);
+			Main.fightMediaPlayer.play();
+		}
+			
+
 
 		if (isTrainerFight) {
 			this.catchLabel.setDisable(true);

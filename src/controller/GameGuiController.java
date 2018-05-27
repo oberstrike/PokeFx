@@ -46,6 +46,14 @@ public class GameGuiController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+    @FXML
+    void toggleMusic(ActionEvent event) {
+    	if(Main.routeMediaPlayer.isMute())
+    		Main.routeMediaPlayer.setMute(false);
+    	else
+    		Main.routeMediaPlayer.setMute(true);
+    }
 
 	@FXML
 	private AnchorPane anchor2;
