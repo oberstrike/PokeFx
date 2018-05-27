@@ -7,8 +7,9 @@
 }
 
 .button, #save, .menuItem	{
-	-fx-text-fill: #000000;
-	-fx-background-color:  #ffffff;
+	-fx-text-fill: #ffffff;
+	-fx-background-color:  #1B4A96;
+	-fx-font-weight: bold;
 }
 
 .button:hover, #save:hover, .menuItem:hover {
@@ -16,15 +17,19 @@
 	-fx-cursor: hand;
 }
 
+<<<<<<< HEAD
 
 #white {
 	-fx-text-fill: white;
 }
 
 #mainMenu .button:hover {
+=======
+.button:hover {
+>>>>>>> 3e32d91c2a466c31b93afdda16be8baac5a71097
 	-fx-text-alignment: left;
 	-fx-background-image:  url('/images/pokeball_bg.png');
-	-fx-background-repeat: stretch;   
+	-fx-background-repeat: no-repeat;   
     -fx-background-size: 100% 100%;
     -fx-background-position: center center;
 }
@@ -35,7 +40,11 @@
 }
 
 .menu-bar {
+<<<<<<< HEAD
 	-fx-background-color: #51D9FF;
+=======
+	-fx-background-color: #1B4A96;
+>>>>>>> 3e32d91c2a466c31b93afdda16be8baac5a71097
 	-fx-border-color: #ffffff;
 }
 
@@ -49,7 +58,7 @@
 
 #fightGui {
 	-fx-background-image:  url('/images/bg5.png');
-	-fx-background-repeat: stretch;   
+	-fx-background-repeat: no-repeat;   
     -fx-background-size: 100% 100%;
     -fx-background-position: center center;
 }
@@ -62,9 +71,26 @@
     -fx-border-radius: 3px;
 }
 
+#choice .label {
+	-fx-font-size: 16;
+	-fx-text-alignment: center;
+	-fx-min-width: 150px;
+	-fx-padding: 5px 25px 5px 25px;
+}
+
+#choice .label:hover {
+	-fx-cursor: hand;
+	-fx-text-alignment: left;
+	-fx-text-fill: #ffffff;
+	-fx-background-image:  url('/images/pokeball_bg.png');
+	-fx-background-repeat: no-repeat;   
+    -fx-background-size: 100% 100%;
+    -fx-background-position: center center;
+}
+
 #wsidLabel {
 	-fx-font-size: 1.3em;
-	-fx-padding: 5px;
+	-fx-padding: 5px 10px 5px 10px;
 	-fx-border-color: transparent transparent #000000 transparent;
 }
 

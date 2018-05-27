@@ -1,12 +1,18 @@
 package views;
 
 
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import pokemon.Pokemon;
 
 public class PokemonView extends AnchorPane {
@@ -104,11 +110,20 @@ public class PokemonView extends AnchorPane {
 
 	public void update() {
 		try {
-			hpBar.setProgress(pokemon.getHp()/pokemon.calculateHp());
+			Timeline timeline = new Timeline();
+			KeyValue xpBarValue, hpBarValue;
+
+			hpBarValue = new KeyValue(hpBar.progressProperty(), (double) pokemon.getHp() / (double) pokemon.calculateHp(), Interpolator.EASE_OUT);
+			timeline.getKeyFrames().add(new KeyFrame(new Duration(300), hpBarValue));
+			
 			hp.setText("HP: " + String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateHp())));
 			name.setText(pokemon.getName());
 			level.setText("Lvl: " + String.valueOf(pokemon.getLevel()));
-			xpBar.setProgress((double)pokemon.getXp()/(double)pokemon.getXpForNextLevel());
+
+			xpBarValue = new KeyValue(xpBar.progressProperty(), (double) pokemon.getXp() / (double) pokemon.getXpForNextLevel(), Interpolator.EASE_OUT);
+			timeline.getKeyFrames().add(new KeyFrame(new Duration(300), xpBarValue));
+			timeline.play();
+			
 			xp.setText("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())));
 			String pathToImg = "/pokemon/images/" + pokemon.getId() + ".png";
 			picture.setImage(new Image(getClass().getResource(pathToImg).toExternalForm()));
