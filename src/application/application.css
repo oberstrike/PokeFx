@@ -16,6 +16,11 @@
 	-fx-cursor: hand;
 }
 
+
+#white {
+	-fx-text-fill: white;
+}
+
 #mainMenu .button:hover {
 	-fx-text-alignment: left;
 	-fx-background-image:  url('/images/pokeball_bg.png');
@@ -26,10 +31,11 @@
 
 .root {
 	-fx-background-color:  #0f264c;
+
 }
 
 .menu-bar {
-	-fx-background-color: #0f264c;
+	-fx-background-color: #51D9FF;
 	-fx-border-color: #ffffff;
 }
 

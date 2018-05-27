@@ -161,9 +161,9 @@ public class FightGuiController implements Initializable {
 			}
 			keyDead = new KeyValue(wsidLabel.textProperty(), deadText);
 			dead.getKeyFrames().add(new KeyFrame(new Duration(400), keyText));
-			PauseTransition pause = new PauseTransition(Duration.millis(2000));
-			PauseTransition pause2 = new PauseTransition(Duration.millis(2000));
-			PauseTransition pause3 = new PauseTransition(Duration.millis(4000));
+			PauseTransition pause = new PauseTransition(Duration.millis(1000));
+			PauseTransition pause2 = new PauseTransition(Duration.millis(1000));
+			PauseTransition pause3 = new PauseTransition(Duration.millis(2000));
 			SequentialTransition sequence = new SequentialTransition(faster, pause, slower, pause2, dead, pause3);
 			sequence.play();
 		} else {

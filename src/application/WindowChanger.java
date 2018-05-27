@@ -55,7 +55,6 @@ public class WindowChanger {
 			this.stage.close();
 			this.stage.setScene(scene);
 			this.stage.setResizable(false);
-			Thread.sleep(50);
 			this.stage.show();
 		}catch (Exception e) {
 			e.printStackTrace();

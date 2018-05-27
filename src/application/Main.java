@@ -233,9 +233,12 @@ public class Main extends Application {
 		player_right = new Image("/images/player_right.png");
 		player_straight = new Image("/images/player_straight.png");
 		player_back = new Image("/images/player_back.png");
-		Main.routeMediaPlayer = new MediaPlayer(
-				new Media(getClass().getResource("/musik/Route1.mp3").toExternalForm()));
-		Main.fightMediaPlayer = new MediaPlayer(new Media(getClass().getResource("/musik/Kampf.mp3").toExternalForm()));
+		this.getClass().getResourceAsStream("/musik/Route1.mp3");
+		String documentBase = getHostServices().getDocumentBase();
+		Media media = new Media(documentBase + "/musik/Route1.mp3");
+		Main.routeMediaPlayer = new MediaPlayer(media);
+		media = new Media(documentBase + "/musik/Kampf.mp3");
+		Main.fightMediaPlayer = new MediaPlayer(media);
 		Main.routeMediaPlayer.setOnEndOfMedia(() -> {
 			Main.routeMediaPlayer.seek(Duration.ZERO);
 		});
