@@ -159,38 +159,19 @@ public class FightGuiController implements Initializable {
 			dead.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), deadText)));
 			
 			// Bewegung eigenes Pokemon
-			KeyValue myMoveValueX, myMoveValueY;
-			Timeline myMove = new Timeline();
 			Timeline myMoveBack = new Timeline();
+			Timeline myMove = new Timeline();
 			if (!myPokemon.isDead()) {
-				myMoveValueX = new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT);
-				myMoveValueY = new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT);
-				
-				
-				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueX));
-				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueY));
-				myMoveValueX = new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX(), Interpolator.EASE_OUT);
-				myMoveValueY = new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY(), Interpolator.EASE_OUT);
-				
-				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueX));
-				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueY));
+				myMove = movement(myPokemonView, myPokemon, 30, -30);
+				myMoveBack = movement(myPokemonView, myPokemon, 0, 0);
 			}
 			
 			// Bewegung gegnerisches Pokemon
-			KeyValue enemyMoveValueX, enemyMoveValueY;
 			Timeline enemyMove = new Timeline();
 			Timeline enemyMoveBack = new Timeline();
 			if (!enemyPokemon.isDead()) {
-				enemyMoveValueX = new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() - 30, Interpolator.EASE_OUT);
-				enemyMoveValueY = new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() + 30, Interpolator.EASE_OUT);	
-				
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueX));
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueY));		
-				enemyMoveValueX = new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX(), Interpolator.EASE_OUT);
-				enemyMoveValueY = new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY(), Interpolator.EASE_OUT);		
-				
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueX));
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueY));
+				enemyMove = movement(enemyPokemonView, enemyPokemon, -30, 30);
+				enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
 			}
 					
 			// Sequenz abspielen
@@ -258,14 +239,38 @@ public class FightGuiController implements Initializable {
 				swapBack();
 			} else {
 				Pokemon myPokemon = myPokemons.get(actMyPokemon);
-				myPokemon.setHp(enemyPokemon.getDamage(myPokemon));
+				
+				Timeline text1 = new Timeline();
+				Timeline text2 = new Timeline();
+				text1.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Du hast den Pokeball daneben geworfen!")));
+				text2.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), "Das gegnerische " + enemyPokemon.getName() + " greift an!")));
+				
+				Timeline enemyMove = movement(enemyPokemonView, enemyPokemon, -30, 30);
+				Timeline enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
+								
+				myPokemon.setHp(myPokemon.getHp() - enemyPokemon.getDamage(myPokemon));
 				KeyValue keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(), (double) myPokemon.getHp() / (double) myPokemon.calculateHp(), Interpolator.EASE_OUT);
 				Timeline firstHp = new Timeline();
 				firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
-				SequentialTransition transition = new SequentialTransition(firstHp);
-				transition.play();
+				
+				Timeline deadText = new Timeline();
+				if (myPokemon.isDead()) {
+					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), myPokemon.getName() + " wurde besiegt!")));
+				} else {
+					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Was soll " + myPokemon.getName() + " tun?")));
+				}
+								
+				SequentialTransition sequence = new SequentialTransition(text1, text2, enemyMove, enemyMoveBack, firstHp, deadText);
+				sequence.play();
 			}
 		}
+	}
+	
+	public Timeline movement(ImageView view, Pokemon mon, double x, double y) {
+		Timeline move = new Timeline();
+		move.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(view.layoutXProperty(), view.getLayoutX() + x, Interpolator.EASE_OUT)));
+		move.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(view.layoutYProperty(), view.getLayoutY() + y, Interpolator.EASE_OUT)));
+		return move;
 	}
 
 	@FXML
