@@ -88,7 +88,7 @@ public class FightGuiController implements Initializable {
 
 	@FXML
 	void fight(MouseEvent event) {
-		block();
+		block(3000);
 		Timeline firstHp = new Timeline();
 		Timeline secondHp = new Timeline();
 		Timeline firstText = new Timeline();
@@ -214,7 +214,7 @@ public class FightGuiController implements Initializable {
 	@FXML
 	private Label fightLabel;
 	
-	void block() {
+	void block(int duration) {
 		Thread thread = new Thread(() ->{
 			try {
 				
@@ -223,7 +223,7 @@ public class FightGuiController implements Initializable {
 					this.escapeLabel.setDisable(true);
 					this.fightLabel.setDisable(true);
 				}); 
-				Thread.sleep(3000);
+				Thread.sleep(duration);
 				
 				Platform.runLater(() ->{
 					this.catchLabel.setDisable(false);
@@ -245,7 +245,7 @@ public class FightGuiController implements Initializable {
 	@FXML
 	void catchEvent(MouseEvent event) {
 		//Blockieren der Auswahl
-		block();
+		block(2000);
 		
 		Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
 		enemyPokemon.setXp(0);
@@ -258,6 +258,11 @@ public class FightGuiController implements Initializable {
 			} else {
 				Pokemon myPokemon = myPokemons.get(actMyPokemon);
 				myPokemon.setHp(enemyPokemon.getDamage(myPokemon));
+				KeyValue keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(), (double) myPokemon.getHp() / (double) myPokemon.calculateHp(), Interpolator.EASE_OUT);
+				Timeline firstHp = new Timeline();
+				firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
+				SequentialTransition transition = new SequentialTransition(firstHp);
+				transition.play();
 			}
 		}
 	}

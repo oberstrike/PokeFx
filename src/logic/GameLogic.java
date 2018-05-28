@@ -56,20 +56,19 @@ public class GameLogic extends Thread {
 	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
 		this.mapView = mapView;
 		this.setDaemon(true);
-		List<Field> field = this.mapView.getFields().stream().filter(each -> !each.isBlocked())
-				.collect(Collectors.toList());
-
-		Field f = field.get(new Random().nextInt(field.size()));
-
 		if (gameData.getPlayer() == null) {
 			this.player = new Player();
+			List<Field> freeFields = this.mapView.getFields().stream().filter(each -> each.getType().equals(FieldType.HOHESGRASS))
+					.collect(Collectors.toList());
+
+			Field field = freeFields.get(new Random().nextInt(freeFields.size()));			
 			List<Integer> pokedexList = new ArrayList<>();
 			for (int i = 0; i <= 150; i++) {
 				pokedexList.add(0);
 			}
 			player.setImage(new Image("/images/player_straight.png"));
-			player.setField(f);
-			f.setEntity(player);
+			player.setField(field);
+			field.setEntity(player);
 			Main.gameData.setPlayer(player);
 		} else {
 			player = gameData.getPlayer();
