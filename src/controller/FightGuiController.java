@@ -158,38 +158,25 @@ public class FightGuiController implements Initializable {
 			dead.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), deadText)));
 			
 			// Bewegung eigenes Pokemon
-			KeyValue myMoveValueX, myMoveValueY;
 			Timeline myMove = new Timeline();
 			Timeline myMoveBack = new Timeline();
 			if (!myPokemon.isDead()) {
-				myMoveValueX = new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT);
-				myMoveValueY = new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT);
-				
-				
-				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueX));
-				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueY));
-				myMoveValueX = new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX(), Interpolator.EASE_OUT);
-				myMoveValueY = new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY(), Interpolator.EASE_OUT);
-				
-				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueX));
-				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), myMoveValueY));
+				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT)));
+				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT)));
+
+				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX(), Interpolator.EASE_OUT)));
+				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY(), Interpolator.EASE_OUT)));
 			}
 			
 			// Bewegung gegnerisches Pokemon
-			KeyValue enemyMoveValueX, enemyMoveValueY;
 			Timeline enemyMove = new Timeline();
 			Timeline enemyMoveBack = new Timeline();
 			if (!enemyPokemon.isDead()) {
-				enemyMoveValueX = new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() - 30, Interpolator.EASE_OUT);
-				enemyMoveValueY = new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() + 30, Interpolator.EASE_OUT);	
-				
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueX));
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueY));		
-				enemyMoveValueX = new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX(), Interpolator.EASE_OUT);
-				enemyMoveValueY = new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY(), Interpolator.EASE_OUT);		
-				
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueX));
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), enemyMoveValueY));
+				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() - 30, Interpolator.EASE_OUT)));
+				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() + 30, Interpolator.EASE_OUT)));		
+
+				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX(), Interpolator.EASE_OUT)));
+				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY(), Interpolator.EASE_OUT)));
 			}
 					
 			// Sequenz abspielen
@@ -257,12 +244,34 @@ public class FightGuiController implements Initializable {
 				swapBack();
 			} else {
 				Pokemon myPokemon = myPokemons.get(actMyPokemon);
-				myPokemon.setHp(enemyPokemon.getDamage(myPokemon));
+				
+				Timeline text1 = new Timeline();
+				Timeline text2 = new Timeline();
+				text1.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Du hast den Pokeball daneben geworfen!")));
+				text2.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), "Das gegnerische " + enemyPokemon.getName() + " greift an!")));
+				
+				Timeline enemyMoveBack = new Timeline();
+				Timeline enemyMove = new Timeline();
+				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() - 30, Interpolator.EASE_OUT)));
+				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() + 30, Interpolator.EASE_OUT)));
+
+				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT)));
+				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT)));
+				
+				myPokemon.setHp(myPokemon.getHp() - enemyPokemon.getDamage(myPokemon));
 				KeyValue keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(), (double) myPokemon.getHp() / (double) myPokemon.calculateHp(), Interpolator.EASE_OUT);
 				Timeline firstHp = new Timeline();
 				firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
-				SequentialTransition transition = new SequentialTransition(firstHp);
-				transition.play();
+				
+				Timeline deadText = new Timeline();
+				if (myPokemon.isDead()) {
+					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), myPokemon.getName() + " wurde besiegt!")));
+				} else {
+					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Was soll " + myPokemon.getName() + " tun?")));
+				}
+								
+				SequentialTransition sequence = new SequentialTransition(text1, text2, enemyMove, enemyMoveBack, firstHp, deadText);
+				sequence.play();
 			}
 		}
 	}
