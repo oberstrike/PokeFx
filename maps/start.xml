@@ -1659,9 +1659,9 @@
 						<type>KAEFER</type>
 						<att>90.0</att>
 						<deff>80.0</deff>
-						<motivation>100.0</motivation>
+						<motivation>105.0</motivation>
 						<init>100.0</init>
-						<base_hp>60.0</base_hp>
+						<base_hp>70.0</base_hp>
 						<xp>178</xp>
 						<spawn>0.022</spawn>
 						<trained>true</trained>

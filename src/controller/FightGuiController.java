@@ -8,6 +8,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import com.sun.org.apache.xalan.internal.xsltc.runtime.Node;
+
 import application.Main;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -82,7 +84,6 @@ public class FightGuiController implements Initializable {
 	private void swapBack() {
 		Main.fightMediaPlayer.stop();
 		executor.shutdownNow();
-		System.out.println(Thread.activeCount());
 		Main.changer.changeWindow("/guis/GameGui.fxml");
 	}
 

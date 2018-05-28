@@ -57,11 +57,15 @@ public class PokemonView extends AnchorPane {
 			xp = registerLabel("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())), 0, 85);
 			
 			upButton = new Button();
-			upButton.setPrefWidth(40);
-			upButton.setPrefHeight(10);
 			upButton.setText("Up");
-			upButton.setLayoutX(140);
+			upButton.setLayoutX(name.getLayoutX() +  65 + 20);
 			upButton.setLayoutY(15);
+			upButton.setMinSize(50, 40);
+			upButton.setPrefSize(50, 40);
+			upButton.setMaxSize(50, 40);
+			upButton.setStyle(String.format("-fx-font-size: %dpx" , (int) 0.45 * 40));
+			
+			
 			this.getChildren().add(upButton);
 			
 			hpBar = new ProgressBar();
@@ -71,6 +75,8 @@ public class PokemonView extends AnchorPane {
 			hpBar.setLayoutX(80);
 			hpBar.setLayoutY(60);
 			this.getChildren().add(hpBar);
+			
+			
 			
 			String pathToImg = "/pokemon/images/" + pokemon.getId() + ".png";
 			picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
