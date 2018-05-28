@@ -158,25 +158,19 @@ public class FightGuiController implements Initializable {
 			dead.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), deadText)));
 			
 			// Bewegung eigenes Pokemon
-			Timeline myMove = new Timeline();
 			Timeline myMoveBack = new Timeline();
+			Timeline myMove = new Timeline();
 			if (!myPokemon.isDead()) {
-				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT)));
-				myMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT)));
-
-				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutXProperty(), myPokemonView.getLayoutX(), Interpolator.EASE_OUT)));
-				myMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(myPokemonView.layoutYProperty(), myPokemonView.getLayoutY(), Interpolator.EASE_OUT)));
+				myMove = movement(myPokemonView, myPokemon, 30, -30);
+				myMoveBack = movement(myPokemonView, myPokemon, 0, 0);
 			}
 			
 			// Bewegung gegnerisches Pokemon
 			Timeline enemyMove = new Timeline();
 			Timeline enemyMoveBack = new Timeline();
 			if (!enemyPokemon.isDead()) {
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() - 30, Interpolator.EASE_OUT)));
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() + 30, Interpolator.EASE_OUT)));		
-
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX(), Interpolator.EASE_OUT)));
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY(), Interpolator.EASE_OUT)));
+				enemyMove = movement(enemyPokemonView, enemyPokemon, -30, 30);
+				enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
 			}
 					
 			// Sequenz abspielen
@@ -250,14 +244,9 @@ public class FightGuiController implements Initializable {
 				text1.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Du hast den Pokeball daneben geworfen!")));
 				text2.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), "Das gegnerische " + enemyPokemon.getName() + " greift an!")));
 				
-				Timeline enemyMoveBack = new Timeline();
-				Timeline enemyMove = new Timeline();
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() - 30, Interpolator.EASE_OUT)));
-				enemyMove.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() + 30, Interpolator.EASE_OUT)));
-
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutXProperty(), enemyPokemonView.getLayoutX() + 30, Interpolator.EASE_OUT)));
-				enemyMoveBack.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(enemyPokemonView.layoutYProperty(), enemyPokemonView.getLayoutY() - 30, Interpolator.EASE_OUT)));
-				
+				Timeline enemyMove = movement(enemyPokemonView, enemyPokemon, -30, 30);
+				Timeline enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
+								
 				myPokemon.setHp(myPokemon.getHp() - enemyPokemon.getDamage(myPokemon));
 				KeyValue keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(), (double) myPokemon.getHp() / (double) myPokemon.calculateHp(), Interpolator.EASE_OUT);
 				Timeline firstHp = new Timeline();
@@ -274,6 +263,13 @@ public class FightGuiController implements Initializable {
 				sequence.play();
 			}
 		}
+	}
+	
+	public Timeline movement(ImageView view, Pokemon mon, double x, double y) {
+		Timeline move = new Timeline();
+		move.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(view.layoutXProperty(), view.getLayoutX() + x, Interpolator.EASE_OUT)));
+		move.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(view.layoutYProperty(), view.getLayoutY() + y, Interpolator.EASE_OUT)));
+		return move;
 	}
 
 	@FXML
