@@ -31,6 +31,7 @@
 
 .root {
 	-fx-background-color:  #0f264c;
+	-fx-text-fill: white;
 
 }
 

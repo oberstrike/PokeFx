@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,8 +22,8 @@ import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 //import api.Client;
 import field.Field;
 import logic.Map;
-import logic.Player;
 import logic.Trainer;
+import player.Player;
 //import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
@@ -139,6 +140,22 @@ public class XmlControll {
 
 	public HashMap<PokemonType, HashMap<PokemonType, Double>> getEffectives() {
 		return effectives;
+	}
+
+	public Serializable toXml(Object obj) {
+		try {
+			return stream.toXML(obj);
+		}catch (Exception e) {
+			return null;
+		}
+	}
+
+	public Map getObject(String xml) {
+		try {
+			return (Map) stream.fromXML(xml);
+		}catch (Exception e) {
+			return null;
+		}
 	}
 
 }

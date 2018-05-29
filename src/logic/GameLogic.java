@@ -27,6 +27,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import player.Player;
+import player.PlayerType;
 import pokemon.Pokemon;
 import views.MapView;
 import views.PokemonView;
@@ -52,7 +54,7 @@ public class GameLogic extends Thread {
 	private long lastMovementTime = 0;
 	private AnchorPane anchor2;
 	public boolean isRunning = true;
-
+	
 	public GameLogic(MapView mapView, AnchorPane anchor2, GameData gameData) {
 		this.mapView = mapView;
 		this.setDaemon(true);
@@ -66,7 +68,7 @@ public class GameLogic extends Thread {
 			for (int i = 0; i <= 150; i++) {
 				pokedexList.add(0);
 			}
-			player.setImage(new Image("/images/player_straight.png"));
+			player.setType(PlayerType.STRAIGHT);
 			player.setField(field);
 			field.setEntity(player);
 			Main.gameData.setPlayer(player);
@@ -126,7 +128,7 @@ public class GameLogic extends Thread {
 		while (isRunning) {
 			update();
 			try {
-				Thread.sleep(200);
+				Thread.sleep(300);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -204,31 +206,31 @@ public class GameLogic extends Thread {
 		switch (keyName) {
 		case "W":
 			newY -= 30;
-			player.setImage(Main.player_straight);
+			player.setType(PlayerType.STRAIGHT);
 			break;
 		case "D":
 			newX += 30;
-			player.setImage(Main.player_right);
+			player.setType(PlayerType.RIGHT);
 			break;
 		case "S":
 			newY += 30;
-			player.setImage(Main.player_back);
+			player.setType(PlayerType.BACK);
 			break;
 		case "A":
 			newX -= 30;
-			player.setImage(Main.player_left);
+			player.setType(PlayerType.LEFT);
 			break;
 		case "Space":
 			Optional<Field> oField = null;
 			if (player.getImage() != null) {
-				Image playerImage = player.getImage();
-				if (playerImage.equals(Main.player_left))
+				PlayerType playerType = player.getType();
+				if (playerType.equals(PlayerType.LEFT))
 					oField = mapView.getMap().leftField(player.getField());
-				else if (playerImage.equals(Main.player_right))
+				else if (playerType.equals(PlayerType.RIGHT))
 					oField = mapView.getMap().rightField(player.getField());
-				else if (playerImage.equals(Main.player_straight))
+				else if (playerType.equals(PlayerType.STRAIGHT))
 					oField = mapView.getMap().upField(player.getField());
-				else if (playerImage.equals(Main.player_back))
+				else if (playerType.equals(PlayerType.BACK))
 					oField = mapView.getMap().bottomField(player.getField());
 				if (oField.isPresent()) {
 					Field field = oField.get();
@@ -292,6 +294,12 @@ public class GameLogic extends Thread {
 							int randDig = new Random().nextInt(100);
 							if (randDig < 13) {
 								fightMenu();
+							}
+						}
+
+						if(Main.server != null) {
+							if(Main.server.getListOfHandler().size()>0) {
+								Main.server.sendAll(Main.xmlControll.toXml(Main.gameData.getMap()));
 							}
 						}
 						mapView.update();

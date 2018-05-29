@@ -94,7 +94,7 @@ public class Map implements Serializable {
 
 	}
 
-	public List<Field> getFields() {
+	public Vector<Field> getFields() {
 		return fields;
 	}
 

@@ -1,4 +1,9 @@
+/application/
 /controller/
 /logic/
 /guis/
+/field/
+/resource/
 /views/
+/player/
+/xml/

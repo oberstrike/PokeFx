@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.GenericBuilder;
+import logic.PokemonClient;
+import logic.PokemonServer;
 import resource.XmlControll;
 import xml.GameData;
 import javafx.scene.Scene;
@@ -114,6 +116,8 @@ public class Main extends Application {
 	public static MediaPlayer routeMediaPlayer;
 	public static MediaPlayer fightMediaPlayer;
 	public static boolean allowViewer;
+	public static PokemonClient client;
+	public static PokemonServer server;
 	
 	@Override
 	public void start(Stage primaryStage) {

@@ -18,6 +18,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import logic.GameLogic;
+import logic.PokemonServer;
+import pokemon.Pokemon;
 import tcp.TcpServer;
 import tcp.TcpServer.Handler;
 import views.MapView;
@@ -25,15 +27,14 @@ import views.MapView;
 public class GameGuiController implements Initializable {
 
 	private GameLogic logic;
-	private TcpServer server;
 	
 	
 	@FXML
 	void back(ActionEvent event) {
 		logic.isRunning = false;
 		Main.routeMediaPlayer.stop();
-		if(server!=null)
-			server.shutdown();
+		if(Main.server!=null)
+			Main.server.shutdown();
 		Main.changer.changeWindow("/guis/MenuGui.fxml");
 		
 	}
@@ -67,24 +68,10 @@ public class GameGuiController implements Initializable {
 	private AnchorPane anchor;
 	
 	private void setUpServer() {
-		this.server = new TcpServer() {			
-			@Override
-			public void onReceive(Handler handler, Object obj) {
-				if(Main.gameData.getMap()!=null) {
-					try {
-						handler.send(Main.gameData.getMap());
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-			
-			@Override
-			public void onDisconnect(Handler handler) {
-				System.out.println(handler.getName() + " guckt nicht mehr zu.");
-			}
-		};		
-		server.start();
+		if(Main.server==null) {
+			Main.server = new PokemonServer(333);
+			Main.server.start();	
+		}
 	}
 
 	@Override

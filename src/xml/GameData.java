@@ -1,7 +1,7 @@
 package xml;
 
 import logic.Map;
-import logic.Player;
+import player.Player;
 
 public class GameData {
 	private Map map;
