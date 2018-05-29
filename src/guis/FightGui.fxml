@@ -38,7 +38,7 @@
             
          </children>
       </AnchorPane>
-      <ImageView fx:id="myPokemonView" fitHeight="400.0" fitWidth="400.0" layoutX="0.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="myPokemonView" fitHeight="200.0" fitWidth="200.0" layoutX="50.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" />
       <AnchorPane fx:id="myPokemonAnchor" layoutX="20.0" layoutY="200.0" prefHeight="80.0" prefWidth="180.0">
          <children>
             <Label fx:id="myPokemonNameLabel" layoutX="0.0" layoutY="0.0" text="Pokemonname" />
@@ -47,10 +47,10 @@
             <Label fx:id="myPokemonHpLabel" layoutX="125.0" layoutY="55.0" text="100/100" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="enemyPokemonAnchor" layoutX="14.0" layoutY="14.0" prefHeight="116.0" prefWidth="675.0">
+      <AnchorPane fx:id="enemyPokemonAnchor" layoutX="300.0" layoutY="14.0" prefHeight="116.0" prefWidth="375.0">
          <children>
-            <ImageView fx:id="enemyPokemonView" fitHeight="300.0" fitWidth="300.0" layoutX="350.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" />
-            <AnchorPane layoutX="300.0" layoutY="8.0" prefHeight="88.0" prefWidth="260.0">
+            <ImageView fx:id="enemyPokemonView" fitHeight="150.0" layoutX="130.0" layoutY="150.0" pickOnBounds="true" preserveRatio="true" />
+            <AnchorPane layoutX="0.0" layoutY="8.0" prefHeight="88.0" prefWidth="260.0">
                <children>
                   <ProgressBar fx:id="enemyHealthBar" layoutX="60.0" layoutY="30.0" prefWidth="200.0" progress="0.0" />
                   <Label fx:id="enemyPokemonNameLabel" layoutX="60.0" layoutY="0.0" text="Pokemonname" />
