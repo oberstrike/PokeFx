@@ -1,9 +1,3 @@
-/application/
+/tcp/
 /controller/
-/logic/
-/guis/
-/field/
-/resource/
-/views/
-/player/
-/xml/
+/design/

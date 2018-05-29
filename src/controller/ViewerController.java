@@ -2,10 +2,6 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import application.Main;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
