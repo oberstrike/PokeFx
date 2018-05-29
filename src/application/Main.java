@@ -113,7 +113,8 @@ public class Main extends Application {
 	public static WindowChanger changer;
 	public static MediaPlayer routeMediaPlayer;
 	public static MediaPlayer fightMediaPlayer;
-
+	public static boolean allowViewer;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {

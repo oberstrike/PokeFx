@@ -198,8 +198,7 @@ public class FightGuiController implements Initializable {
 	
 	void block(int duration) {
 		Thread thread = new Thread(() ->{
-			try {
-				
+			try {				
 				Platform.runLater(() ->{
 					this.catchLabel.setDisable(true);
 					this.escapeLabel.setDisable(true);
@@ -216,12 +215,8 @@ public class FightGuiController implements Initializable {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-	
-			
 		});
-		thread.setDaemon(true);
 		thread.start();
-		
 	}
 
 	@FXML

@@ -277,7 +277,7 @@ public class GameLogic extends Thread {
 							newF.setX(newX);
 							newF.setY(newY);
 
-							// Kind of Final Variable fuer das Closure
+							// Kind of Final Variablen fuer das Closure
 							double xx = newX;
 							double yy = newY;
 							newField = mapView.getFields().stream()

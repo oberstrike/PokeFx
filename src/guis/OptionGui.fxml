@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <RadioButton fx:id="musicOptn" layoutX="70.0" layoutY="104.0" mnemonicParsing="false" text="Musik" />
+      <RadioButton fx:id="viewerOptn" layoutX="70.0" layoutY="144.0" mnemonicParsing="false" text="Zuschauer erlauben" />
+      <AnchorPane layoutX="50.0" layoutY="186.0" prefHeight="99.0" prefWidth="313.0">
+         <children>
+            <CheckBox fx:id="slow" layoutX="18.0" layoutY="39.0" mnemonicParsing="false" text="Langsam" />
+            <CheckBox fx:id="normal" layoutX="118.0" layoutY="40.0" mnemonicParsing="false" text="Normal" />
+            <CheckBox fx:id="fast" layoutX="215.0" layoutY="40.0" mnemonicParsing="false" text="Schnell" />
+            <Label layoutX="18.0" layoutY="1.0" text="Geschwindigkeit">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="224.0" layoutY="14.0" text="Optionen">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

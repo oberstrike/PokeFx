@@ -1,9 +1,11 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.Vector;
 import java.util.stream.Collectors;
 
 import com.sun.javafx.geom.Vec2d;
@@ -16,9 +18,10 @@ import field.FieldType;
 import pokemon.Pokemon;
 
 @XStreamAlias("PokemonMap")
-public class Map {
+public class Map implements Serializable {
+	private static final long serialVersionUID = -1775940921375005636L;
 
-	private List<Field> fields = new ArrayList<Field>();
+	private Vector<Field> fields = new Vector<>();
 
 	@XStreamOmitField
 	private double width = 600;
@@ -31,7 +34,7 @@ public class Map {
 
 	private List<Pokemon> pokemons = new ArrayList<>();
 
-	public Map(List<Field> fields) {
+	public Map(Vector<Field> fields) {
 		this.fields = fields;
 	}
 
@@ -40,7 +43,7 @@ public class Map {
 	}
 
 	public Map(FieldType fieldType) {
-		
+
 		for (int i = 0; i < width; i += sides) {
 			for (int j = 0; j < height; j += sides) {
 				fields.add(new Field(i, j, fieldType));
@@ -56,7 +59,7 @@ public class Map {
 		oList.add(bottomField(field));
 		return oList.stream().filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
 	}
-	
+
 	public double distanceTo(Field field1, Field field2) {
 		Vec2d v1 = new Vec2d(field1.getX(), field1.getY());
 		Vec2d v2 = new Vec2d(field2.getX(), field2.getY());
@@ -64,40 +67,38 @@ public class Map {
 	}
 
 	public Optional<Field> leftField(Field field) {
-		return getFieldWithCoordinates((field.getX()-30), field.getY());
+		return getFieldWithCoordinates((field.getX() - 30), field.getY());
 	}
 
 	public Optional<Field> rightField(Field field) {
-		return getFieldWithCoordinates((field.getX()+30), field.getY());
+		return getFieldWithCoordinates((field.getX() + 30), field.getY());
 	}
 
 	public Optional<Field> bottomField(Field field) {
-		return getFieldWithCoordinates(field.getX(), (field.getY()+30));
+		return getFieldWithCoordinates(field.getX(), (field.getY() + 30));
 	}
 
 	public Optional<Field> upField(Field field) {
-		return getFieldWithCoordinates(field.getX(), (field.getY()-30));
+		return getFieldWithCoordinates(field.getX(), (field.getY() - 30));
 	}
 
-	public Optional<Field> getFieldWithCoordinates(double x, double y){
+	public Optional<Field> getFieldWithCoordinates(double x, double y) {
 		System.out.println(x + " " + y);
 		Optional<Field> ofield = Optional.empty();
-		
-		for(Field field: getFields()) {
-			if(field.getX() == x && field.getY() == y)
+
+		for (Field field : getFields()) {
+			if (field.getX() == x && field.getY() == y)
 				ofield = Optional.of(field);
 		}
 		return ofield;
-		
+
 	}
-	
-	
-	
+
 	public List<Field> getFields() {
 		return fields;
 	}
 
-	public void setFields(List<Field> fields) {
+	public void setFields(Vector<Field> fields) {
 		this.fields = fields;
 	}
 

@@ -1,6 +1,7 @@
 package views;
 
 import java.util.List;
+import java.util.Vector;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
@@ -17,7 +18,7 @@ public class MapView extends AnchorPane {
 	private Map map;
 	
 
-	public MapView(List<Field> fields) {
+	public MapView(Vector<Field> fields) {
 		map = new Map(fields);
 		for(Field field: map.getFields()) {
 			ImageView image = new ImageView(field.getImage());
