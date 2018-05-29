@@ -8,11 +8,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 
 import application.Main;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.control.Alert.AlertType;
 
 @XStreamAlias("Pokemon")
 public class Pokemon {
@@ -224,7 +220,7 @@ public class Pokemon {
 		int deff = (int) (((mon2.getDeff() + 8) * 2 + (1 / 4)) * level / 100) + level ;
 	
 		double crit = randomCrit() * (this.motivation/100);
-		double damage = (att * crit - (deff * 0.5));
+		double damage = (att * crit - (deff * 0.5)) * multiplierMon1;
 		if (damage <= 0) {
 			damage = 1;
 		}
@@ -350,9 +346,24 @@ public class Pokemon {
 		String pathToImg = "/pokemon/images/" + this.getId() + ".png";
 		return new Image(getClass().getResource(pathToImg).toExternalForm());
 	}
+	
+	public Image getFrontGif() {
+		String pathToImg = "/pokemon/images/gifs/" + this.getId() + ".gif";
+		return new Image(getClass().getResource(pathToImg).toExternalForm());
+	}
 
 	public Image getBackImage() {
 		String pathToImg = "/pokemon/images/back/" + this.getId() + ".png";
+		return new Image(getClass().getResource(pathToImg).toExternalForm());
+	}
+	
+	public Image getBackGif() {
+		String pathToImg = "/pokemon/images/back/" + this.getId() + ".gif";
+		return new Image(getClass().getResource(pathToImg).toExternalForm());
+	}
+	
+	public Image getFightGif() {
+		String pathToImg = "/pokemon/images/gifs/" + this.getId() + "-2.gif";
 		return new Image(getClass().getResource(pathToImg).toExternalForm());
 	}
 
