@@ -6,13 +6,17 @@
 	-fx-border-radius: 5.0;
 }
 
-.button, #save, .menuItem	{
+.button, #save, .menuItem, .radio-button	{
 	-fx-text-fill: #ffffff;
 	-fx-background-color:  #1B4A96;
 	-fx-font-weight: bold;
 }
 
-.button:hover, #save:hover, .menuItem:hover {
+.radio-button {
+	-fx-padding: 7px;
+}
+
+.button:hover, #save:hover, .menuItem:hover, .radio-button:hover {
 	-fx-background-color: #2e86de;
 	-fx-cursor: hand;
 }
