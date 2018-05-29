@@ -3,8 +3,11 @@ package controller;
 import java.io.File;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Vector;
+
+import com.sun.glass.ui.Window;
 
 import application.Main;
 import application.WindowChanger;
@@ -14,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -21,6 +25,7 @@ import views.MapView;
 import xml.GameData;
 import javafx.stage.FileChooser.ExtensionFilter;
 import logic.GenericBuilder;
+import logic.PokemonClient;
 import pokemon.Pokemon;
 import tcp.TcpServer;
 import tcp.TcpServer.Handler;
@@ -66,6 +71,23 @@ public class MenuGuiController implements Initializable {
 	void create(ActionEvent event) {
 		Main.changer.changeWindow("/guis/CreateGui.fxml", "Erstellen einer Karte");
 	}
+	
+	@FXML
+	void view(ActionEvent event) {
+		TextInputDialog dialog = new TextInputDialog("Verbindung starten");
+		dialog.setTitle("Verbindung");
+		dialog.setHeaderText("Bitte geben Sie die Ip-Addresse ein");
+		dialog.setContentText("Ip: ");
+		Optional<String> result = dialog.showAndWait();
+		result.ifPresent(ip -> {
+			if(ip.length() > 0) {
+				Main.client = new PokemonClient(ip, 333);
+				Main.client.start();
+				if(Main.client.isConnected())
+					Main.changer.changeWindow("/guis/ViewerGui.fxml");
+			}
+		});
+	}
 
 	@FXML
 	private RadioButton viewerOptn;
@@ -74,7 +96,6 @@ public class MenuGuiController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		if (Main.gameData == null)
 			Main.gameData = new GameData();
-
 	}
 
 }

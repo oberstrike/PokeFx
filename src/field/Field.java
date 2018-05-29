@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,11 +22,14 @@ import application.Main;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import logic.Entity;
-import logic.Player;
+import player.Player;
+import player.PlayerType;
 import xml.GameData;
 
 @XStreamAlias("FIELD")
-public class Field {
+public class Field implements Serializable{
+
+	private static final long serialVersionUID = -2002801737277339736L;
 
 	@Override
 	public String toString() {
@@ -102,7 +106,7 @@ public class Field {
 			Image eImage = entity.getImage();
 			if(entity.getClass().equals(Player.class)) {
 				if(eImage==null) {
-					eImage = Main.player_straight;
+					eImage = ((Player)entity).getType().getImage();
 				}
 			}
 			BufferedImage entitysImage = null;

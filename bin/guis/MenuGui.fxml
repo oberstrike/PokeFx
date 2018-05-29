@@ -6,10 +6,11 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuGuiController">
    <children>
-      <Button layoutX="90.0" layoutY="75.0" mnemonicParsing="false" onAction="#create" prefHeight="45.0" prefWidth="195.0" text="Karte erstellen" />
-      <Button layoutX="90.0" layoutY="135.0" mnemonicParsing="false" onAction="#createGame" prefHeight="45.0" prefWidth="195.0" text="Neues Spiel" />
-   	  <Button fx:id="loadBtn" layoutX="90.0" layoutY="195.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="45.0" prefWidth="195.0" text="Spielstand laden" />
-      <Button layoutX="90.0" layoutY="252.0" mnemonicParsing="false" onAction="#exit" prefHeight="45.0" prefWidth="195.0" text="Beenden" />
+      <Button layoutX="90.0" layoutY="104.0" mnemonicParsing="false" onAction="#create" prefHeight="45.0" prefWidth="195.0" text="Karte erstellen" />
+      <Button layoutX="91.0" layoutY="161.0" mnemonicParsing="false" onAction="#createGame" prefHeight="45.0" prefWidth="195.0" text="Neues Spiel" />
+   	  <Button fx:id="loadBtn" layoutX="90.0" layoutY="218.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="45.0" prefWidth="195.0" text="Spielstand laden" />
+      <Button layoutX="91.0" layoutY="272.0" mnemonicParsing="false" onAction="#exit" prefHeight="45.0" prefWidth="195.0" text="Beenden" />
       <RadioButton fx:id="viewerOptn" layoutX="109.0" layoutY="350.0" mnemonicParsing="false" text="Zuschauer erlauben" />
+      <Button layoutX="91.0" layoutY="46.0" mnemonicParsing="false" onAction="#view" prefHeight="45.0" prefWidth="195.0" text="Zuschauen" />
    </children>
 </AnchorPane>

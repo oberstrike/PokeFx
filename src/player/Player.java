@@ -1,4 +1,4 @@
-package logic;
+package player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import application.Main;
 import field.Field;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import logic.Entity;
 import pokemon.Pokemon;
 
 @XStreamAlias("player")
@@ -19,10 +20,8 @@ public class Player implements Entity {
 	private String name;
 	private Field field;
 	private List<Boolean> wins = new ArrayList<>();
-
-	@XStreamOmitField
-	private Image image;
-
+	private PlayerType type;
+	
 	@Override
 	public String toString() {
 		return "Player [name=" + name + ", field=" + field + ", pokemons=" + pokemons + "]";
@@ -67,17 +66,10 @@ public class Player implements Entity {
 		this.field = field;
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
-	}
-
 	@Override
 	public Image getImage() {
-		return this.image;
+		return this.type.getImage();
 	}
-	
-
-
 
 	public List<Boolean> getWins() {
 		return wins;
@@ -89,6 +81,20 @@ public class Player implements Entity {
 
 	public void setWins(List<Boolean> wins) {
 		this.wins = wins;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public PlayerType getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(PlayerType type) {
+		this.type = type;
 	}
 
 
