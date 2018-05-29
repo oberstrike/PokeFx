@@ -39,6 +39,8 @@ public class FightGuiController implements Initializable {
 
 	private boolean isTrainerFight = false;
 	private boolean busy = false;
+	private boolean changeEnemy = true;
+	private boolean changeOwn = true;
 
 	private ScheduledExecutorService executor;
 
@@ -100,6 +102,8 @@ public class FightGuiController implements Initializable {
 			@Override
 			public void run() {
 				busy = false;
+				changeEnemy = true;
+				changeOwn = true;
 			}
 		}, 3500);
 		
@@ -242,6 +246,8 @@ public class FightGuiController implements Initializable {
 			@Override
 			public void run() {
 				busy = false;
+				changeEnemy = true;
+				changeOwn = true;
 			}
 		}, 3000);
 		
@@ -324,7 +330,10 @@ public class FightGuiController implements Initializable {
 						swapBack();
 					}
 					if (myPokemon != null) {
-						myPokemonView.setImage(myPokemon.getBackImage());					
+						if (changeOwn == true) {
+							myPokemonView.setImage(myPokemon.getBackGif());	
+							changeOwn = false;
+						}				
 						myPokemonNameLabel.setText(myPokemon.getName());
 						myPokemonLevelLabel.setText("Lvl." + myPokemon.getLevel());
 	
@@ -337,7 +346,10 @@ public class FightGuiController implements Initializable {
 					}
 	
 					if (enemyPokemon != null) {
-						enemyPokemonView.setImage(enemyPokemon.getFrontImage());
+						if (changeEnemy == true) {
+							enemyPokemonView.setImage(enemyPokemon.getFrontGif());
+							changeEnemy = false;
+						}
 						enemyPokemonNameLabel.setText(enemyPokemon.getName());
 						enemyLevelLabel.setText("Lvl." + enemyPokemon.getLevel());
 	
