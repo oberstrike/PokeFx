@@ -3,6 +3,8 @@ package controller;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,6 +38,7 @@ public class FightGuiController implements Initializable {
 	int actEnemyPokemon = 0;
 
 	private boolean isTrainerFight = false;
+	private boolean busy = false;
 
 	private ScheduledExecutorService executor;
 
@@ -90,6 +93,16 @@ public class FightGuiController implements Initializable {
 	@FXML
 	void fight(MouseEvent event) {
 		block(3000);
+		busy = true;
+		
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				busy = false;
+			}
+		}, 3500);
+		
 		Timeline firstHp = new Timeline();
 		Timeline secondHp = new Timeline();
 		Timeline firstText = new Timeline();
@@ -115,7 +128,7 @@ public class FightGuiController implements Initializable {
 			if (slowerPokemon.isDead()) {
 				if (slowerPokemon.equals(myPokemon)) {
 					actMyPokemon++;
-					deadText = myPokemon.getName() + "wurde besiegt";
+					deadText = myPokemon.getName() + " wurde besiegt";
 				} else {
 					actEnemyPokemon++;
 					deadText = "Das gegnerische " + enemyPokemon.getName() + " wurde besiegt";
@@ -222,7 +235,15 @@ public class FightGuiController implements Initializable {
 	@FXML
 	void catchEvent(MouseEvent event) {
 		//Blockieren der Auswahl
-		block(2000);
+		block(3000);
+		busy = true;
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				busy = false;
+			}
+		}, 3000);
 		
 		Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
 		enemyPokemon.setXp(0);
@@ -251,6 +272,7 @@ public class FightGuiController implements Initializable {
 				Timeline deadText = new Timeline();
 				if (myPokemon.isDead()) {
 					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), myPokemon.getName() + " wurde besiegt!")));
+					actMyPokemon++;				
 				} else {
 					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Was soll " + myPokemon.getName() + " tun?")));
 				}
@@ -292,43 +314,43 @@ public class FightGuiController implements Initializable {
 		}
 		executor.scheduleAtFixedRate(() -> {
 			Platform.runLater(() -> {
-				Pokemon myPokemon = null;
-				Pokemon enemyPokemon = null;
-				try {
-					myPokemon = this.myPokemons.get(actMyPokemon);
-					enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
-				} catch (Exception e) {
-					swapBack();
-				}
-				if (myPokemon != null) {
-					myPokemonView.setImage(myPokemon.getBackImage());					
-					myPokemonNameLabel.setText(myPokemon.getName());
-					myPokemonLevelLabel.setText("Lvl." + myPokemon.getLevel());
-
-					if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateHp())) {
-						myPokemonHealthBar.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateHp());
+				if (busy == false) {
+					Pokemon myPokemon = null;
+					Pokemon enemyPokemon = null;
+					try {
+						myPokemon = this.myPokemons.get(actMyPokemon);
+						enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
+					} catch (Exception e) {
+						swapBack();
 					}
-
-					myPokemonHpLabel.setText((int) myPokemon.getHp() + "/" + myPokemon.calculateHp());
-					if (wsidLabel.getText() == "") {
+					if (myPokemon != null) {
+						myPokemonView.setImage(myPokemon.getBackImage());					
+						myPokemonNameLabel.setText(myPokemon.getName());
+						myPokemonLevelLabel.setText("Lvl." + myPokemon.getLevel());
+	
+						if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateHp())) {
+							myPokemonHealthBar.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateHp());
+						}
+	
+						myPokemonHpLabel.setText((int) myPokemon.getHp() + "/" + myPokemon.calculateHp());
 						wsidLabel.setText("Was soll " + myPokemon.getName() + " tun?");
 					}
-				}
-
-				if (enemyPokemon != null) {
-					enemyPokemonView.setImage(enemyPokemon.getFrontImage());
-					enemyPokemonNameLabel.setText(enemyPokemon.getName());
-					enemyLevelLabel.setText("Lvl." + enemyPokemon.getLevel());
-
-					if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateHp())) {
-						enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
+	
+					if (enemyPokemon != null) {
+						enemyPokemonView.setImage(enemyPokemon.getFrontImage());
+						enemyPokemonNameLabel.setText(enemyPokemon.getName());
+						enemyLevelLabel.setText("Lvl." + enemyPokemon.getLevel());
+	
+						if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateHp())) {
+							enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateHp());
+						}
+	
 					}
-
 				}
 
 			});
 
-		}, 0, 3000, TimeUnit.MILLISECONDS);
+		}, 0, 200, TimeUnit.MILLISECONDS);
 	}
 
 	public static FightGuiController create(Vector<Pokemon> pokemon, Vector<Pokemon> pokemon2, boolean isTrainerFight) {
