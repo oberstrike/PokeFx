@@ -349,6 +349,9 @@ public class Pokemon {
 	
 	public Image getFrontGif() {
 		String pathToImg = "/pokemon/images/gifs/" + this.getId() + ".gif";
+		if (this.getId() == 123) {
+			pathToImg = "/pokemon/images/" + this.getId() + ".png";
+		}
 		return new Image(getClass().getResource(pathToImg).toExternalForm());
 	}
 
@@ -359,6 +362,9 @@ public class Pokemon {
 	
 	public Image getBackGif() {
 		String pathToImg = "/pokemon/images/back/" + this.getId() + ".gif";
+		if (this.getId() == 123) {
+			pathToImg = "/pokemon/images/back/" + this.getId() + ".png";
+		}
 		return new Image(getClass().getResource(pathToImg).toExternalForm());
 	}
 	
