@@ -187,7 +187,8 @@ public class FightGuiController implements Initializable {
 			Timeline enemyMove = new Timeline();
 			Timeline enemyMoveBack = new Timeline();
 			if (!enemyPokemon.isDead()) {
-				enemyMove = movement(enemyPokemonView, enemyPokemon, -30, 30);
+				Random random = new Random();
+				enemyMove = movement(enemyPokemonView, enemyPokemon, -15 - random.nextInt(30) , 30);
 				enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
 			}
 					
@@ -213,19 +214,29 @@ public class FightGuiController implements Initializable {
 	@FXML
 	private Label fightLabel;
 	
+	@FXML
+	void switchPokemon(MouseEvent event) {
+		
+	}
+	
+	
 	void block(int duration) {
 		Thread thread = new Thread(() ->{
 			try {				
 				Platform.runLater(() ->{
-					this.catchLabel.setDisable(true);
-					this.escapeLabel.setDisable(true);
+					if(!isTrainerFight) {
+						this.catchLabel.setDisable(true);
+						this.escapeLabel.setDisable(true);	
+					}
 					this.fightLabel.setDisable(true);
 				}); 
 				Thread.sleep(duration);
 				
 				Platform.runLater(() ->{
-					this.catchLabel.setDisable(false);
-					this.escapeLabel.setDisable(false);
+					if(!isTrainerFight) {
+						this.catchLabel.setDisable(false);
+						this.escapeLabel.setDisable(false);
+					}
 					this.fightLabel.setDisable(false);
 				}); 
 				

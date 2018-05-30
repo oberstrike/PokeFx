@@ -15,6 +15,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import application.Main;
 import field.Field;
 import field.FieldType;
+import player.Player;
 import pokemon.Pokemon;
 
 @XStreamAlias("PokemonMap")
@@ -49,6 +50,12 @@ public class Map implements Serializable {
 				fields.add(new Field(i, j, fieldType));
 			}
 		}
+	}
+
+	public Player getPlayer() {
+		return (Player) fields.stream().filter(each -> each.getEntity() != null)
+				.filter(each -> each.getEntity().getClass().equals(Player.class)).findFirst().get().getEntity();
+
 	}
 
 	public List<Field> getSuccesors(Field field) {

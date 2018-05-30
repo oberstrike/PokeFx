@@ -130,6 +130,8 @@ public class Main extends Application {
 			Scene scene = new Scene(root, 330, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.getIcons().add(new Image("/images/Pokeball.png"));
+			primaryStage.setTitle("PokeFx");
 			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch (Exception e) {
@@ -240,9 +242,9 @@ public class Main extends Application {
 		player_back = new Image("/images/player_back.png");
 		this.getClass().getResourceAsStream("/musik/Route1.mp3");
 		String documentBase = getHostServices().getDocumentBase();
-		Media media = new Media(documentBase + "/musik/Route1.mp3");
+		Media media = new Media(documentBase + "/ressources/musik/Route1.mp3");
 		Main.routeMediaPlayer = new MediaPlayer(media);
-		media = new Media(documentBase + "/musik/Kampf.mp3");
+		media = new Media(documentBase + "/ressources/musik/Kampf.mp3");
 		Main.fightMediaPlayer = new MediaPlayer(media);
 		Main.routeMediaPlayer.setOnEndOfMedia(() -> {
 			Main.routeMediaPlayer.seek(Duration.ZERO);

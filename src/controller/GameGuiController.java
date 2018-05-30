@@ -41,7 +41,7 @@ public class GameGuiController implements Initializable {
 	
 	@FXML
 	void save(ActionEvent event) {
-		String gameFileName = "Spielstand.xml";
+		String gameFileName = "ressources/Spielstand.xml";
 		File file = new File(gameFileName);
 		System.out.println(file.exists());
 		try {

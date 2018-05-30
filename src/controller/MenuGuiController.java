@@ -37,7 +37,7 @@ public class MenuGuiController implements Initializable {
 	
 	@FXML
 	void loadGame(ActionEvent event) {
-		File selectedFile = new File("Spielstand.xml");
+		File selectedFile = new File("ressources/Spielstand.xml");
 		if(selectedFile.exists()) {
 			Main.gameData = Main.xmlControll.getGame(selectedFile);
 			System.out.println(Main.gameData.getPlayer());
@@ -53,7 +53,7 @@ public class MenuGuiController implements Initializable {
 
 	@FXML
 	void createGame(ActionEvent event) {
-		File selectedFile = new File("maps/start.xml");
+		File selectedFile = new File("ressources/maps/start.xml");
 		MapView mapView = new MapView();
 		mapView.setMap(Main.xmlControll.getMap(selectedFile));
 		Main.gameData = new GameData(mapView.getMap());

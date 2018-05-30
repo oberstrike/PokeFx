@@ -264,7 +264,7 @@ public class GameLogic extends Thread {
 							}
 						}
 						if (newF.getType().equals(FieldType.UEBERGANG)) {
-							Map map = Main.xmlControll.getMap(new File(newF.getNextMap()));
+							Map map = Main.xmlControll.getMap(new File("ressources/" + newF.getNextMap()));
 							mapView.setMap(map);
 							Main.gameData.setMap(map);
 							if (x == 570) {
