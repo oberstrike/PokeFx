@@ -21,21 +21,23 @@
 	-fx-cursor: hand;
 }
 
-#white {
-	-fx-text-fill: white;
+#white, #white .menu-item {
+	-fx-background-color: #ffffff;
+	-fx-text-fill: #000000;
 }
 
-.button:hover {
+.button:hover, #white:hover, #white .menu-item:hover {
+	-fx-cursor: hand;
 	-fx-text-alignment: left;
 	-fx-background-image:  url('/images/pokeball_bg.png');
 	-fx-background-repeat: no-repeat;   
-    -fx-background-size: 100% 100%;
     -fx-background-position: center center;
+    -fx-text-fill: #ffffff;
 }
 
 .root {
 	-fx-background-color:  #0f264c;
-	-fx-text-fill: white;
+	-fx-text-fill: #ffffff;
 
 }
 

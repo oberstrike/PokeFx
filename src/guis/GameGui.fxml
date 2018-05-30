@@ -16,7 +16,7 @@
         <menus> 
           <Menu id="white" mnemonicParsing="false" text="Optionen">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#toggleMusic" text="Musik Ausschalten" />
+                  <MenuItem fx:id="musicToggle" mnemonicParsing="false" onAction="#toggleMusic" text="Musik ausschalten" />
               <MenuItem mnemonicParsing="false" onAction="#save" text="Speichern" />
                   <MenuItem mnemonicParsing="false" onAction="#back" text="Zurück" />
             </items>

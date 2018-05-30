@@ -13,6 +13,7 @@ import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -27,6 +28,8 @@ import views.MapView;
 public class GameGuiController implements Initializable {
 
 	private GameLogic logic;
+	@FXML
+	private MenuItem musicToggle;
 	
 	
 	@FXML
@@ -55,10 +58,13 @@ public class GameGuiController implements Initializable {
 	
     @FXML
     void toggleMusic(ActionEvent event) {
-    	if(Main.routeMediaPlayer.isMute())
+    	if(Main.routeMediaPlayer.isMute()) {
     		Main.routeMediaPlayer.setMute(false);
-    	else
+    		musicToggle.setText("Musik ausschalten");
+    	} else {
     		Main.routeMediaPlayer.setMute(true);
+    		musicToggle.setText("Musik einschalten");
+    	}
     }
 
 	@FXML
