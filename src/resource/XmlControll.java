@@ -1,12 +1,11 @@
 package resource;
 
 import java.io.File;
+
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -19,16 +18,14 @@ import com.thoughtworks.xstream.security.NoTypePermission;
 import com.thoughtworks.xstream.security.NullPermission;
 import com.thoughtworks.xstream.security.PrimitiveTypePermission;
 
-//import api.Client;
 import field.Field;
 import logic.Map;
 import logic.Trainer;
 import player.Player;
-//import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
-import sun.misc.ClassLoaderUtil;
 import xml.GameData;
+
 public class XmlControll {
 
 	XStream stream;
@@ -94,7 +91,7 @@ public class XmlControll {
 		return map;
 	}
 
-	public GameData getGame(File file) {
+	public GameData getGameData(File file) {
 		GameData data = (GameData) getObject(file);
 		return data;
 	}

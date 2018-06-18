@@ -2,15 +2,9 @@ package controller;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.Vector;
-
-import com.sun.glass.ui.Window;
-
 import application.Main;
-import application.WindowChanger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,16 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import views.MapView;
 import xml.GameData;
-import javafx.stage.FileChooser.ExtensionFilter;
-import logic.GenericBuilder;
 import logic.PokemonClient;
-import pokemon.Pokemon;
-import tcp.TcpServer;
-import tcp.TcpServer.Handler;
 
 public class MenuGuiController implements Initializable {
 
@@ -39,7 +26,7 @@ public class MenuGuiController implements Initializable {
 	void loadGame(ActionEvent event) {
 		File selectedFile = new File("ressources/Spielstand.xml");
 		if(selectedFile.exists()) {
-			Main.gameData = Main.xmlControll.getGame(selectedFile);
+			Main.gameData = Main.xmlControll.getGameData(selectedFile);
 			System.out.println(Main.gameData.getPlayer());
 			Main.allowViewer = this.viewerOptn.isSelected();
 			Main.changer.changeWindow("/guis/GameGui.fxml");
@@ -74,7 +61,7 @@ public class MenuGuiController implements Initializable {
 	
 	@FXML
 	void view(ActionEvent event) {
-		TextInputDialog dialog = new TextInputDialog("Verbindung starten");
+		TextInputDialog dialog = new TextInputDialog("Ip-Adddresse");
 		dialog.setTitle("Verbindung");
 		dialog.setHeaderText("Bitte geben Sie die Ip-Addresse ein");
 		dialog.setContentText("Ip: ");
@@ -85,6 +72,9 @@ public class MenuGuiController implements Initializable {
 				Main.client.start();
 				if(Main.client.isConnected())
 					Main.changer.changeWindow("/guis/ViewerGui.fxml");
+				else {
+					new Alert(AlertType.ERROR, "Verbindung konnte nicht hergestellt werden.");
+				}
 			}
 		});
 	}

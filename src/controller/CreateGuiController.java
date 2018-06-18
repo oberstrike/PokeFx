@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import com.thoughtworks.xstream.XStream;
 import application.Main;
-import application.WindowChanger;
 import field.Field;
 import field.FieldType;
 import javafx.collections.FXCollections;
@@ -33,7 +31,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.StringConverter;
 import logic.Map;
 import pokemon.Pokemon;
-import javafx.stage.Stage;
 import views.MapView;
 import xml.GameData;
 

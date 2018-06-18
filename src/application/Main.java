@@ -1,11 +1,9 @@
 package application;
 
-import controller.FightGuiController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import logic.GenericBuilder;
 import logic.PokemonClient;
 import logic.PokemonServer;
 import resource.XmlControll;
@@ -149,6 +147,8 @@ public class Main extends Application {
 	}
 
 	public void init() {
+		
+		//Ressourcen laden
 		stein = new Image("/images/stein.png");
 		wasser = new Image("/images/wasser.png");
 		grass = new Image("/images/grass.png");
@@ -240,22 +240,30 @@ public class Main extends Application {
 		player_right = new Image("/images/player_right.png");
 		player_straight = new Image("/images/player_straight.png");
 		player_back = new Image("/images/player_back.png");
-		this.getClass().getResourceAsStream("/musik/Route1.mp3");
+		
+		//Pfad
 		String documentBase = getHostServices().getDocumentBase();
+		
+		//Musik ausserhalb des Kampfes
 		Media media = new Media(documentBase + "/ressources/musik/Route1.mp3");
 		Main.routeMediaPlayer = new MediaPlayer(media);
+		
+		//Musik innerhalb des Kampfes
 		media = new Media(documentBase + "/ressources/musik/Kampf.mp3");
 		Main.fightMediaPlayer = new MediaPlayer(media);
+		
+		
 		Main.routeMediaPlayer.setOnEndOfMedia(() -> {
 			Main.routeMediaPlayer.seek(Duration.ZERO);
 		});
+		
 		Main.fightMediaPlayer.setOnEndOfMedia(() -> {
 			Main.fightMediaPlayer.seek(Duration.ZERO);
 		});
+		
 		xmlControll = new XmlControll();
 		man_1_straight = new Image("/images/man_1_straight.png");
 		man_2_straight = new Image("/images/man_2_straight.png");
-		xmlControll = new XmlControll();
-		System.out.println(Thread.activeCount());
+
 	}
 }

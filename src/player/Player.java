@@ -5,11 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
-import application.Main;
 import field.Field;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import logic.Entity;
 import pokemon.Pokemon;

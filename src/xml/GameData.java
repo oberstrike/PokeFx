@@ -9,16 +9,16 @@ public class GameData {
 
 	public GameData() {
 	}
-	
+
 	public GameData(Map map, Player player) {
 		this.setMap(map);
 		this.setPlayer(player);
 	}
-	
+
 	public GameData(Map map) {
 		this.setMap(map);
 	}
-	
+
 	public Map getMap() {
 		return map;
 	}
