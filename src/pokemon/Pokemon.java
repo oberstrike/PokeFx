@@ -37,23 +37,6 @@ public class Pokemon {
 		super();
 	}
 
-	// --------------------------------------------------------
-
-	// Konstruktor
-	public Pokemon(int id, int level, PokemonType type, String name, double att, double deff, double motivation,
-			double init, int base_hp, int xp) {
-		this();
-		this.id = id;
-		this.level = level;
-		this.type = type;
-		this.name = name;
-		this.att = att;
-		this.deff = deff;
-		this.motivation = motivation;
-		this.init = init;
-		this.base_hp = base_hp;
-		this.xp = xp;
-	}
 
 	public void setXp(int xp) {
 		this.xp = xp;
@@ -77,8 +60,7 @@ public class Pokemon {
 		this.trained = false;
 	}
 
-	// Getter + Setter
-
+	// Getter & Setter
 	public int getLevel() {
 		return level;
 	}

@@ -25,8 +25,6 @@ public class ViewerController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(Main.gameData.getMap()!=null)
 			mapView.setMap(Main.gameData.getMap());
-//		anchor.setPrefWidth(880);
-//		anchor.setPrefHeight(550);
 		if(Main.client != null) {
 			Main.client.setOnReceive(each -> {
 				Platform.runLater(() -> {

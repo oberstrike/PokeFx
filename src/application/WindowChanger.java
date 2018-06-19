@@ -1,12 +1,10 @@
 package application;
 
-import java.io.IOException;
 import java.util.function.Consumer;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class WindowChanger {
@@ -42,13 +40,11 @@ public class WindowChanger {
 
 	public void changeWindow(String url, Consumer<FXMLLoader> consumer) {
 		FXMLLoader loader = new FXMLLoader();
-		System.out.println("alt: " + Thread.activeCount());
 		if(consumer != null)
 			consumer.accept(loader);
 		loader.setLocation(getClass().getResource(url));
 		Parent parent = null;
 		try{
-
 			parent = loader.load();
 			Scene scene = new Scene(parent);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
@@ -60,25 +56,6 @@ public class WindowChanger {
 			e.printStackTrace();
 		}
 	}
-
-	public static void showGroupInfo(String indent, ThreadGroup group) {
-		Thread[] threads = new Thread[group.activeCount()];
-		group.enumerate(threads, false);
-		System.out.println(group);
-
-		for (Thread t : threads)
-			if (t != null)
-				System.out.printf("%s%s -> %s ist %sDaemon-Thread%n", indent, group.getName(), t,
-						t.isDaemon() ? "" : "kein ");
-
-		ThreadGroup[] activeGroup = new ThreadGroup[group.activeGroupCount()];
-		group.enumerate(activeGroup, false);
-
-		for (ThreadGroup g : activeGroup)
-			showGroupInfo(indent + indent, g);
-	}
-	
-	
 	
 	public WindowChanger(Stage stage) {
 		this.stage = stage;
