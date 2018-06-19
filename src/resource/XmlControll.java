@@ -2,11 +2,9 @@ package resource;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +25,6 @@ import player.Player;
 //import models.evolution.EvolutionChain;
 import pokemon.Pokemon;
 import pokemon.PokemonType;
-import sun.misc.ClassLoaderUtil;
 import xml.GameData;
 public class XmlControll {
 
@@ -44,9 +41,6 @@ public class XmlControll {
 	public XmlControll() {
 		Class<?>[] arrayOfClasses = {Field.class, Map.class, PokemonType.class, Player.class,
 				Trainer.class, Collection.class, java.util.Map.class, Integer.class, GameData.class, Pokemon.class, String.class, Vector.class};
-		
-		
-		
 		stream = new XStream(new StaxDriver());
 		stream.addPermission(NoTypePermission.NONE);
 		stream.addPermission(NullPermission.NULL);

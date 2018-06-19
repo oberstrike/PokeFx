@@ -1,11 +1,9 @@
 package application;
 
-import controller.FightGuiController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import logic.GenericBuilder;
 import logic.PokemonClient;
 import logic.PokemonServer;
 import resource.XmlControll;
