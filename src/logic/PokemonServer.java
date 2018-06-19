@@ -4,8 +4,6 @@ package logic;
 import tcp.TcpServer;
 
 public class PokemonServer extends TcpServer {
-	
-	
 
 	public PokemonServer(int i) {
 		super(i);

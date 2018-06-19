@@ -1,12 +1,12 @@
 /application/
-/guis/
-/images/
-/pokemon/
 /controller/
 /design/
 /field/
+/guis/
+/images/
 /logic/
 /player/
+/pokemon/
 /resource/
 /tcp/
 /views/

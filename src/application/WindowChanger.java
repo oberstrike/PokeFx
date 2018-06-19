@@ -23,9 +23,7 @@ public class WindowChanger {
 	}
 	
 	public void changeWindow(String url, String title) {
-		this.changeWindow(url, (loader) -> {
-			
-		});
+		this.changeWindow(url, (loader) -> {});
 		this.stage.setTitle(title);
 	}
 	

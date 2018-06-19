@@ -13,8 +13,9 @@ import logic.Map;
 
 @XStreamAlias("Map")
 public class MapView extends AnchorPane {
-
-	
+	/*
+	 * Klasse zur Visualisierung der Map
+	 */
 	private Map map;
 	
 

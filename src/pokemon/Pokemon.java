@@ -56,7 +56,7 @@ public class Pokemon {
 		this.base_hp = pokemon.base_hp;
 		this.spawn = pokemon.spawn;
 		this.xp = pokemon.xp;
-		this.hp = calculateHp();
+		this.hp = calculateMaxHp();
 		this.trained = false;
 	}
 
@@ -150,7 +150,7 @@ public class Pokemon {
 		this.spawn = spawn;
 	}
 	
-	public Pokemon faster(Pokemon mon) {
+	public Pokemon	isOtherFaster(Pokemon mon) {
 		return mon.calculateInit() > this.calculateInit() ? mon : this;
 	}
 	
@@ -192,7 +192,7 @@ public class Pokemon {
 	}
 
 	// Aufruf: angreifer.getDamage(verteidiger)
-	public double getDamage(Pokemon mon2) {
+	public double howMuchDamage(Pokemon mon2) {
 
 		double multiplierMon1 = 1;
 		if (Main.xmlControll.getEffectives().get(mon2.getType()).containsKey(this.getType()))
@@ -210,7 +210,7 @@ public class Pokemon {
 
 	}
 
-	public int calculateHp() {
+	public int calculateMaxHp() {
 		int hp = (int) (((base_hp + 8) * 2 + (1 / 4)) * level / 100) + level + 10;
 		return hp;
 	}
@@ -249,7 +249,7 @@ public class Pokemon {
 	}
 	
 	public double getHpRealtion() {
-		return this.hp / calculateHp();
+		return this.hp / calculateMaxHp();
 	}
 
 	public void evolveTo(Pokemon pokemon) {
@@ -268,7 +268,6 @@ public class Pokemon {
 		int xp = this.getXp();
 		int xpForNextLevel = getXpForNextLevel();
 		if (xp >= xpForNextLevel) {
-			System.out.println(this.name + " ist eine Stufe aufgestiegen.");
 			this.xp = (xpForNextLevel - xp) < 0 ? 0 : (xpForNextLevel - xp);
 			this.level++;
 

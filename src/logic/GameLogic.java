@@ -7,26 +7,17 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 import java.util.Vector;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Collectors;
-
-import com.sun.media.jfxmedia.events.NewFrameEvent;
 
 import application.Main;
 import controller.FightGuiController;
 import field.Field;
 import field.FieldType;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Duration;
 import player.Player;
 import player.PlayerType;
 import pokemon.Pokemon;
@@ -88,6 +79,8 @@ public class GameLogic extends Thread {
 					.filter(each -> each.getClass().equals(PokemonView.class)).count();
 
 			if (countOfPokeViews < player.getPokemons().size()) {
+				//Falls ein neues Pokemon gefangen wurde muss das Gui aktualisiert werden
+				
 				for (int i = (int) countOfPokeViews; i < player.getPokemons().size(); i++) {
 					Pokemon myPokemon = player.getPokemons().get(i);
 					PokemonView pv = new PokemonView(myPokemon);
@@ -167,7 +160,6 @@ public class GameLogic extends Thread {
 			}
 		}
 
-		System.out.println("Ein wildes " + spawnedPokemon.getName());
 		if (player.getPokemons().size() > 0) {
 			FightGuiController controller = FightGuiController.create(player.getPokemons(),
 					new Vector<>(Arrays.asList(spawnedPokemon)), false);
@@ -244,7 +236,7 @@ public class GameLogic extends Thread {
 		default:
 			break;
 		}
-
+		//Effective Final 
 		double x = newX;
 		double y = newY;
 
@@ -259,7 +251,7 @@ public class GameLogic extends Thread {
 						lastMovementTime = System.currentTimeMillis();
 						Field newF = newField.get();
 						for (Pokemon mon : player.getPokemons()) {
-							if (mon.calculateHp() > mon.getHp()) {
+							if (mon.calculateMaxHp() > mon.getHp()) {
 								mon.setHp(mon.getHp() + 1);
 							}
 						}
@@ -279,7 +271,7 @@ public class GameLogic extends Thread {
 							newF.setX(newX);
 							newF.setY(newY);
 
-							// Kind of Final Variablen fuer das Closure
+							// Effective Final
 							double xx = newX;
 							double yy = newY;
 							newField = mapView.getFields().stream()
@@ -315,7 +307,7 @@ public class GameLogic extends Thread {
 	private void fightAgainstTrainer(Trainer entity) {
 		if (entity.getPokemons() != null) {
 			if (entity.getPokemons().size() > 0) {
-				entity.getPokemons().forEach(each -> each.setHp(each.calculateHp()));
+				entity.getPokemons().forEach(each -> each.setHp(each.calculateMaxHp()));
 				FightGuiController controller = FightGuiController.create(player.getPokemons(), entity.getPokemons(),
 						true);
 

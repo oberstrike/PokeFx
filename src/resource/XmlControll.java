@@ -27,8 +27,9 @@ import pokemon.PokemonType;
 import xml.GameData;
 
 public class XmlControll {
+	
 
-	XStream stream;
+	private XStream stream;
 	private final List<Pokemon> pokedex;
 	private final HashMap<String, HashMap<Integer, String>> evolutiondex;
 	private final HashMap<PokemonType, HashMap<PokemonType, Double>> effectives;
@@ -66,12 +67,12 @@ public class XmlControll {
 	}
 
 	public Pokemon getPokemonByName(String name) {
-		if (contains(name))
+		if (pokedexContains(name))
 			return new Pokemon(pokedex.stream().filter(each -> each.getName().equals(name)).findFirst().get());
 		return null;
 	}
 
-	public boolean contains(String name) {
+	public boolean pokedexContains(String name) {
 		return pokedex.stream().anyMatch(each -> each.getName().equals(name));
 	}
 

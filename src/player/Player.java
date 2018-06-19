@@ -26,13 +26,7 @@ public class Player implements Entity {
 	
 	private Vector<Pokemon> pokemons = new Vector<>();
 	
-	public Player(){
-		
-	}
-
-	public Player(double x, double y) {
-
-	}
+	public Player() {	}
 	
 	public int getAverageLevel() {
 		return (int) pokemons.stream().mapToInt(Pokemon::getLevel).average().getAsDouble();
@@ -79,16 +73,10 @@ public class Player implements Entity {
 		this.wins = wins;
 	}
 
-	/**
-	 * @return the type
-	 */
 	public PlayerType getType() {
 		return type;
 	}
 
-	/**
-	 * @param type the type to set
-	 */
 	public void setType(PlayerType type) {
 		this.type = type;
 	}

@@ -5,6 +5,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -50,14 +51,14 @@ public class PokemonView extends AnchorPane {
 
 	public PokemonView(Pokemon pokemon) {
 		if(pokemon != null) {
-			hp = registerLabel(String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateHp())) , 0, 60);
+			hp = registerLabel(String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateMaxHp())) , 0, 60);
 			name = registerLabel(pokemon.getName(), 65, 15);
 			level = registerLabel(String.valueOf(pokemon.getLevel()), 65, 35);
 			xp = registerLabel("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())), 0, 85);
+			upButton = new Button("Up");
+
+
 			
-			upButton = new Button();
-			upButton.setText("Up");
-			upButton.setLayoutX(name.getLayoutX() +  65 + 20);
 			upButton.setLayoutY(15);
 			upButton.setMinSize(50, 40);
 			upButton.setPrefSize(50, 40);
@@ -76,7 +77,6 @@ public class PokemonView extends AnchorPane {
 			this.getChildren().add(hpBar);
 			
 			
-			
 			String pathToImg = "/pokemon/images/" + pokemon.getId() + ".png";
 			picture = new ImageView(getClass().getResource(pathToImg).toExternalForm());
 			picture.setLayoutX(0);
@@ -93,6 +93,11 @@ public class PokemonView extends AnchorPane {
 			xpBar.setLayoutX(80);
 			xpBar.setLayoutY(85);
 			this.getChildren().add(xpBar);
+	
+			Platform.runLater(() -> {
+				upButton.setLayoutX(name.getLayoutX() +  name.prefWidth(-1) + 20);
+			});
+			
 		}
 	}
 	
@@ -118,10 +123,10 @@ public class PokemonView extends AnchorPane {
 			Timeline timeline = new Timeline();
 			KeyValue xpBarValue, hpBarValue;
 
-			hpBarValue = new KeyValue(hpBar.progressProperty(), (double) pokemon.getHp() / (double) pokemon.calculateHp(), Interpolator.EASE_OUT);
+			hpBarValue = new KeyValue(hpBar.progressProperty(), (double) pokemon.getHp() / (double) pokemon.calculateMaxHp(), Interpolator.EASE_OUT);
 			timeline.getKeyFrames().add(new KeyFrame(new Duration(300), hpBarValue));
 			
-			hp.setText("HP: " + String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateHp())));
+			hp.setText("HP: " + String.valueOf((int)pokemon.getHp() + "/" + String.valueOf((int)pokemon.calculateMaxHp())));
 			name.setText(pokemon.getName());
 			level.setText("Lvl: " + String.valueOf(pokemon.getLevel()));
 

@@ -2,7 +2,6 @@ package logic;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
@@ -12,7 +11,6 @@ import com.sun.javafx.geom.Vec2d;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import application.Main;
 import field.Field;
 import field.FieldType;
 import player.Player;
