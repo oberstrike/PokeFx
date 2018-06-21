@@ -1,13 +1,5 @@
-/application/
-/controller/
-/design/
-/field/
-/guis/
-/images/
-/logic/
-/player/
 /pokemon/
-/resource/
-/tcp/
 /views/
-/xml/
+/guis/
+/controller/
+/application/

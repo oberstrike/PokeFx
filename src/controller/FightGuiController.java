@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -19,6 +20,9 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
@@ -94,7 +98,7 @@ public class FightGuiController implements Initializable {
 	void fight(MouseEvent event) {
 		block(3000);
 		busy = true;
-		
+
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
@@ -104,7 +108,7 @@ public class FightGuiController implements Initializable {
 				changeOwn = true;
 			}
 		}, 3500);
-		
+
 		Timeline firstHp = new Timeline();
 		Timeline secondHp = new Timeline();
 		Timeline firstText = new Timeline();
@@ -122,10 +126,11 @@ public class FightGuiController implements Initializable {
 
 			// Schadensberechnung
 			slowerPokemon.setHp(slowerPokemon.getHp() - fasterPokemon.howMuchDamage(slowerPokemon));
-			
-			text = slowerPokemon.equals(myPokemon) ? "Das gegnerische " + enemyPokemon.getName() + " greift an!" : myPokemon.getName() + " greift an!";			
+
+			text = slowerPokemon.equals(myPokemon) ? "Das gegnerische " + enemyPokemon.getName() + " greift an!"
+					: myPokemon.getName() + " greift an!";
 			firstText.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), text)));
-			
+
 			// Todesnachrichten
 			if (slowerPokemon.isDead()) {
 				if (slowerPokemon.equals(myPokemon)) {
@@ -138,12 +143,14 @@ public class FightGuiController implements Initializable {
 					myPokemon.addXp(enemyPokemon.calcXp());
 				}
 			} else {
-				
+
 				// Schadensberechnung
 				fasterPokemon.setHp(fasterPokemon.getHp() - slowerPokemon.howMuchDamage(fasterPokemon));
-				
-				text = fasterPokemon.equals(myPokemon) ? "Das gegnerische " + enemyPokemon.getName() + " greift an!" : myPokemon.getName() + " greift an!";
-				secondText.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), text)));
+
+				text = fasterPokemon.equals(myPokemon) ? "Das gegnerische " + enemyPokemon.getName() + " greift an!"
+						: myPokemon.getName() + " greift an!";
+				secondText.getKeyFrames()
+						.add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), text)));
 
 				// Todesnachrichten die Zweite
 				if (fasterPokemon.isDead()) {
@@ -153,26 +160,34 @@ public class FightGuiController implements Initializable {
 					} else {
 						actEnemyPokemon++;
 						deadText = "Das gegnerische " + enemyPokemon.getName() + " wurde besiegt";
-						System.out.println("Enemy = faster; Das gegnerische " + enemyPokemon.getName() + " wurde besiegt");
+						System.out.println(
+								"Enemy = faster; Das gegnerische " + enemyPokemon.getName() + " wurde besiegt");
 						myPokemon.addXp(enemyPokemon.calcXp());
 					}
 				}
 			}
 
-			
 			// Animationen vorbereiten
 			if (slowerPokemon.equals(myPokemon)) {
-				keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(), (double) slowerPokemon.getHp() / (double) slowerPokemon.calculateMaxHp(), Interpolator.EASE_OUT);
-				keyHpSecond = new KeyValue(enemyHealthBar.progressProperty(), (double) fasterPokemon.getHp() / (double) fasterPokemon.calculateMaxHp(), Interpolator.EASE_OUT);
+				keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(),
+						(double) slowerPokemon.getHp() / (double) slowerPokemon.calculateMaxHp(),
+						Interpolator.EASE_OUT);
+				keyHpSecond = new KeyValue(enemyHealthBar.progressProperty(),
+						(double) fasterPokemon.getHp() / (double) fasterPokemon.calculateMaxHp(),
+						Interpolator.EASE_OUT);
 			} else {
-				keyHpFirst = new KeyValue(enemyHealthBar.progressProperty(), (double) slowerPokemon.getHp() / (double) slowerPokemon.calculateMaxHp(), Interpolator.EASE_OUT);
-				keyHpSecond = new KeyValue(myPokemonHealthBar.progressProperty(), (double) fasterPokemon.getHp() / (double) fasterPokemon.calculateMaxHp(), Interpolator.EASE_OUT);
+				keyHpFirst = new KeyValue(enemyHealthBar.progressProperty(),
+						(double) slowerPokemon.getHp() / (double) slowerPokemon.calculateMaxHp(),
+						Interpolator.EASE_OUT);
+				keyHpSecond = new KeyValue(myPokemonHealthBar.progressProperty(),
+						(double) fasterPokemon.getHp() / (double) fasterPokemon.calculateMaxHp(),
+						Interpolator.EASE_OUT);
 			}
-		
+
 			firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
 			secondHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpSecond));
 			dead.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), deadText)));
-			
+
 			// Bewegung eigenes Pokemon
 			Timeline myMoveBack = new Timeline();
 			Timeline myMove = new Timeline();
@@ -180,25 +195,27 @@ public class FightGuiController implements Initializable {
 				myMove = movement(myPokemonView, myPokemon, 30, -30);
 				myMoveBack = movement(myPokemonView, myPokemon, 0, 0);
 			}
-			
+
 			// Bewegung gegnerisches Pokemon
 			Timeline enemyMove = new Timeline();
 			Timeline enemyMoveBack = new Timeline();
 			if (!enemyPokemon.isDead()) {
 				Random random = new Random();
-				enemyMove = movement(enemyPokemonView, enemyPokemon, -15 - random.nextInt(30) , 30);
+				enemyMove = movement(enemyPokemonView, enemyPokemon, -15 - random.nextInt(30), 30);
 				enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
 			}
-					
+
 			// Sequenz abspielen
 			if (slowerPokemon.equals(myPokemon)) {
-				SequentialTransition sequence = new SequentialTransition(firstText, enemyMove, enemyMoveBack, firstHp, secondText, myMove, myMoveBack, secondHp, dead);
+				SequentialTransition sequence = new SequentialTransition(firstText, enemyMove, enemyMoveBack, firstHp,
+						secondText, myMove, myMoveBack, secondHp, dead);
 				sequence.play();
 			} else {
-				SequentialTransition sequence = new SequentialTransition(firstText, myMove, myMoveBack, firstHp, secondText, enemyMove, enemyMoveBack, secondHp, dead);
+				SequentialTransition sequence = new SequentialTransition(firstText, myMove, myMoveBack, firstHp,
+						secondText, enemyMove, enemyMoveBack, secondHp, dead);
 				sequence.play();
 			}
-			
+
 		} else {
 			swapBack();
 		}
@@ -208,37 +225,36 @@ public class FightGuiController implements Initializable {
 	void escape(MouseEvent event) {
 		swapBack();
 	}
-	
+
 	@FXML
 	private Label fightLabel;
-	
+
 	@FXML
 	void switchPokemon(MouseEvent event) {
-		
+		//TODO switch
 	}
-	
-	
+
 	void block(int duration) {
-		Thread thread = new Thread(() ->{
-			try {				
-				Platform.runLater(() ->{
-					if(!isTrainerFight) {
+		Thread thread = new Thread(() -> {
+			try {
+				Platform.runLater(() -> {
+					if (!isTrainerFight) {
 						this.catchLabel.setDisable(true);
-						this.escapeLabel.setDisable(true);	
+						this.escapeLabel.setDisable(true);
 					}
 					this.fightLabel.setDisable(true);
-				}); 
+				});
 				Thread.sleep(duration);
-				
-				Platform.runLater(() ->{
-					if(!isTrainerFight) {
+
+				Platform.runLater(() -> {
+					if (!isTrainerFight) {
 						this.catchLabel.setDisable(false);
 						this.escapeLabel.setDisable(false);
 					}
 					this.fightLabel.setDisable(false);
-				}); 
-				
-			}catch (Exception e) {
+				});
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
@@ -247,7 +263,7 @@ public class FightGuiController implements Initializable {
 
 	@FXML
 	void catchEvent(MouseEvent event) {
-		//Blockieren der Auswahl
+		// Blockieren der Auswahl
 		block(3000);
 		busy = true;
 		Timer timer = new Timer();
@@ -259,7 +275,7 @@ public class FightGuiController implements Initializable {
 				changeOwn = true;
 			}
 		}, 3000);
-		
+
 		Pokemon enemyPokemon = this.enemyPokemons.get(actEnemyPokemon);
 		enemyPokemon.setXp(0);
 		if (this.myPokemons != null) {
@@ -270,44 +286,51 @@ public class FightGuiController implements Initializable {
 				swapBack();
 			} else {
 				Pokemon myPokemon = myPokemons.get(actMyPokemon);
-				
+
 				Timeline text1 = new Timeline();
 				Timeline text2 = new Timeline();
-				text1.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Du hast den Pokeball daneben geworfen!")));
-				text2.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(), "Das gegnerische " + enemyPokemon.getName() + " greift an!")));
-				
+				text1.getKeyFrames().add(new KeyFrame(new Duration(1000),
+						new KeyValue(wsidLabel.textProperty(), "Du hast den Pokeball daneben geworfen!")));
+				text2.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(),
+						"Das gegnerische " + enemyPokemon.getName() + " greift an!")));
+
 				Timeline enemyMove = movement(enemyPokemonView, enemyPokemon, -30, 30);
 				Timeline enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
-								
+
 				myPokemon.setHp(myPokemon.getHp() - enemyPokemon.howMuchDamage(myPokemon));
-				KeyValue keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(), (double) myPokemon.getHp() / (double) myPokemon.calculateMaxHp(), Interpolator.EASE_OUT);
+				KeyValue keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(),
+						(double) myPokemon.getHp() / (double) myPokemon.calculateMaxHp(), Interpolator.EASE_OUT);
 				Timeline firstHp = new Timeline();
 				firstHp.getKeyFrames().add(new KeyFrame(new Duration(500), keyHpFirst));
-				
+
 				Timeline deadText = new Timeline();
 				if (myPokemon.isDead()) {
-					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), myPokemon.getName() + " wurde besiegt!")));
-					actMyPokemon++;				
+					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000),
+							new KeyValue(wsidLabel.textProperty(), myPokemon.getName() + " wurde besiegt!")));
+					actMyPokemon++;
 				} else {
-					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000), new KeyValue(wsidLabel.textProperty(), "Was soll " + myPokemon.getName() + " tun?")));
+					deadText.getKeyFrames().add(new KeyFrame(new Duration(1000),
+							new KeyValue(wsidLabel.textProperty(), "Was soll " + myPokemon.getName() + " tun?")));
 				}
-								
-				SequentialTransition sequence = new SequentialTransition(text1, text2, enemyMove, enemyMoveBack, firstHp, deadText);
+
+				SequentialTransition sequence = new SequentialTransition(text1, text2, enemyMove, enemyMoveBack,
+						firstHp, deadText);
 				sequence.play();
 			}
 		}
 	}
-	
+
 	public Timeline movement(ImageView view, Pokemon mon, double x, double y) {
 		Timeline move = new Timeline();
-		move.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(view.layoutXProperty(), view.getLayoutX() + x, Interpolator.EASE_OUT)));
-		move.getKeyFrames().add(new KeyFrame(new Duration(200), new KeyValue(view.layoutYProperty(), view.getLayoutY() + y, Interpolator.EASE_OUT)));
+		move.getKeyFrames().add(new KeyFrame(new Duration(200),
+				new KeyValue(view.layoutXProperty(), view.getLayoutX() + x, Interpolator.EASE_OUT)));
+		move.getKeyFrames().add(new KeyFrame(new Duration(200),
+				new KeyValue(view.layoutYProperty(), view.getLayoutY() + y, Interpolator.EASE_OUT)));
 		return move;
 	}
 
 	@FXML
 	private Label catchLabel;
-
 
 	@FXML
 	private Label escapeLabel;
@@ -315,13 +338,11 @@ public class FightGuiController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		executor = Executors.newScheduledThreadPool(1);
-		if(!Main.routeMediaPlayer.isMute()) {
+		if (!Main.routeMediaPlayer.isMute()) {
 			Main.routeMediaPlayer.stop();
 			Main.fightMediaPlayer.setVolume(0.6);
 			Main.fightMediaPlayer.play();
 		}
-			
-
 
 		if (isTrainerFight) {
 			this.catchLabel.setDisable(true);
@@ -340,20 +361,22 @@ public class FightGuiController implements Initializable {
 					}
 					if (myPokemon != null) {
 						if (changeOwn == true) {
-							myPokemonView.setImage(myPokemon.getBackGif());	
+							myPokemonView.setImage(myPokemon.getBackGif());
 							changeOwn = false;
-						}				
+						}
 						myPokemonNameLabel.setText(myPokemon.getName());
 						myPokemonLevelLabel.setText("Lvl." + myPokemon.getLevel());
-	
-						if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateMaxHp())) {
-							myPokemonHealthBar.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateMaxHp());
+
+						if (myPokemonHealthBar
+								.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateMaxHp())) {
+							myPokemonHealthBar
+									.setProgress((double) myPokemon.getHp() / (double) myPokemon.calculateMaxHp());
 						}
-	
+
 						myPokemonHpLabel.setText((int) myPokemon.getHp() + "/" + myPokemon.calculateMaxHp());
 						wsidLabel.setText("Was soll " + myPokemon.getName() + " tun?");
 					}
-	
+
 					if (enemyPokemon != null) {
 						if (changeEnemy == true) {
 							enemyPokemonView.setImage(enemyPokemon.getFrontGif());
@@ -361,11 +384,13 @@ public class FightGuiController implements Initializable {
 						}
 						enemyPokemonNameLabel.setText(enemyPokemon.getName());
 						enemyLevelLabel.setText("Lvl." + enemyPokemon.getLevel());
-	
-						if (myPokemonHealthBar.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateMaxHp())) {
-							enemyHealthBar.setProgress((double) enemyPokemon.getHp() / (double) enemyPokemon.calculateMaxHp());
+
+						if (myPokemonHealthBar
+								.getProgress() <= (double) (myPokemon.getHp() / myPokemon.calculateMaxHp())) {
+							enemyHealthBar.setProgress(
+									(double) enemyPokemon.getHp() / (double) enemyPokemon.calculateMaxHp());
 						}
-	
+
 					}
 				}
 

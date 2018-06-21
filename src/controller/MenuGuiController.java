@@ -68,7 +68,7 @@ public class MenuGuiController implements Initializable {
 		Optional<String> result = dialog.showAndWait();
 		result.ifPresent(ip -> {
 			if(ip.length() > 0) {
-				Main.client = new PokemonClient(ip, 333);
+				Main.client = new PokemonClient(ip, 3333);
 				Main.client.start();
 				if(Main.client.isConnected())
 					Main.changer.changeWindow("/guis/ViewerGui.fxml");

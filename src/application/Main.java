@@ -128,7 +128,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root, 330, 400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.getIcons().add(new Image("/images/Pokeball.png"));
+			primaryStage.getIcons().add(new Image("/images/pokeball.png"));
 			primaryStage.setTitle("PokeFx");
 			primaryStage.setResizable(false);
 			primaryStage.show();

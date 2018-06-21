@@ -94,9 +94,7 @@ public class PokemonView extends AnchorPane {
 			xpBar.setLayoutY(85);
 			this.getChildren().add(xpBar);
 	
-			Platform.runLater(() -> {
-				upButton.setLayoutX(name.getLayoutX() +  name.prefWidth(-1) + 20);
-			});
+
 			
 		}
 	}
@@ -120,6 +118,10 @@ public class PokemonView extends AnchorPane {
 
 	public void update() {
 		try {
+			
+			Platform.runLater(() -> {
+				upButton.setLayoutX(name.getLayoutX() +  name.prefWidth(-1) + 20);
+			});
 			Timeline timeline = new Timeline();
 			KeyValue xpBarValue, hpBarValue;
 
@@ -137,6 +139,8 @@ public class PokemonView extends AnchorPane {
 			xp.setText("XP: " + String.valueOf(pokemon.getXp() + "/" + String.valueOf(pokemon.getXpForNextLevel())));
 			String pathToImg = "/pokemon/images/" + pokemon.getId() + ".png";
 			picture.setImage(new Image(getClass().getResource(pathToImg).toExternalForm()));
+			
+
 		}catch (Exception e) {
 			System.err.println(pokemon);
 			e.printStackTrace();

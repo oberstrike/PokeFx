@@ -65,7 +65,7 @@ public class GameGuiController implements Initializable {
 	
 	private void setUpServer() {
 		if(Main.server==null) {
-			Main.server = new PokemonServer(333);
+			Main.server = new PokemonServer(3333);
 			Main.server.start();	
 		}
 	}
