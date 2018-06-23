@@ -73,7 +73,7 @@ public class MenuGuiController implements Initializable {
 				if(Main.client.isConnected())
 					Main.changer.changeWindow("/guis/ViewerGui.fxml");
 				else {
-					new Alert(AlertType.ERROR, "Verbindung konnte nicht hergestellt werden.");
+					new Alert(AlertType.ERROR, "Verbindung konnte nicht hergestellt werden.").show();;
 				}
 			}
 		});

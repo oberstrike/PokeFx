@@ -1,13 +1,16 @@
 package logic;
 
 
+import java.net.InetAddress;
+
 import tcp.TcpServer;
 
 public class PokemonServer extends TcpServer {
 
-	public PokemonServer(int i) {
-		super(i);
+	public PokemonServer(int port, InetAddress inetAddress) {
+		super(inetAddress, port);
 	}
+	
 
 	@Override
 	public void onReceive(Handler handler, Object obj) {

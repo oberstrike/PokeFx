@@ -4,9 +4,12 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,10 +35,11 @@ abstract public class TcpServer extends Thread {
 
 	/***
 	 * Creates a TCP Server on Port 9999. (Standard Port)
+	 * @throws UnknownHostException 
 	 */
 	
-	public TcpServer() {
-		this(9999);
+	public TcpServer() throws UnknownHostException {
+		this(Inet4Address.getLocalHost(), 9999);
 	}
 
 	/***
@@ -43,12 +47,12 @@ abstract public class TcpServer extends Thread {
 	 * @param port : Integer
 	 */
 	
-	public TcpServer(int port) {
+	public TcpServer(InetAddress inetAddress, int port) {
 		listOfHandler = new Vector<>();
 		executor = Executors.newFixedThreadPool(10);
 		listener = new Thread(() -> {
 			try {
-				serverSocket = new ServerSocket(port);
+				serverSocket = new ServerSocket(port, 50, inetAddress);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

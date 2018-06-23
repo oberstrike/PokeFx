@@ -3,15 +3,24 @@ package controller;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import logic.GameLogic;
+import logic.PokemonClient;
 import logic.PokemonServer;
 import views.MapView;
 
@@ -65,8 +74,23 @@ public class GameGuiController implements Initializable {
 	
 	private void setUpServer() {
 		if(Main.server==null) {
-			Main.server = new PokemonServer(3333);
-			Main.server.start();	
+			TextInputDialog dialog = new TextInputDialog("Ip-Addresse");
+			dialog.setTitle("Verbindung");
+			dialog.setHeaderText("Bitte geben Sie die Ip-Addresse ein");
+			dialog.setContentText("Ip: ");
+			Optional<String> result = dialog.showAndWait();
+			result.ifPresent(ip -> {
+				if(ip.length() > 0) {
+					try {
+						Main.server = new PokemonServer(3333, InetAddress.getByName(ip));
+						Main.server.start();
+					} catch (UnknownHostException e) {
+						new Alert(AlertType.ERROR, "Server konnte nicht gestartet werden").show();
+					}
+				}
+			});
+			
+	
 		}
 	}
 
