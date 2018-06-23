@@ -2,19 +2,11 @@ package field;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import javax.imageio.ImageIO;
-
 import com.sun.javafx.geom.Vec2d;
-import com.sun.org.apache.xerces.internal.impl.validation.EntityState;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -23,8 +15,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import logic.Entity;
 import player.Player;
-import player.PlayerType;
-import xml.GameData;
 
 @XStreamAlias("FIELD")
 public class Field implements Serializable{

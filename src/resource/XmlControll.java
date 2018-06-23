@@ -34,9 +34,9 @@ public class XmlControll {
 	private final HashMap<String, HashMap<Integer, String>> evolutiondex;
 	private final HashMap<PokemonType, HashMap<PokemonType, Double>> effectives;
 
-	private static String pokeFileName = "pokedex.xml";
-	private static String evolveFileName = "evolvingdex.xml";
-	private static String effectivesFileName = "effectives.xml";
+	private final String pokeFileName = "pokedex.xml";
+	private final  String evolveFileName = "evolvingdex.xml";
+	private final String effectivesFileName = "effectives.xml";
 
 	@SuppressWarnings("unchecked")
 	public XmlControll() {

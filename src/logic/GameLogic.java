@@ -83,28 +83,31 @@ public class GameLogic extends Thread {
 				
 				for (int i = (int) countOfPokeViews; i < player.getPokemons().size(); i++) {
 					Pokemon myPokemon = player.getPokemons().get(i);
-					PokemonView pv = new PokemonView(myPokemon);
+					PokemonView pv = new PokemonView(myPokemon, i > 0 ? false : true);
 					pv.setLayoutX(45);
 					pv.setLayoutY(10 + i * 95);
-					pv.getUpButton().setOnAction(event -> {
+					if(pv.getUpButton()!=null) {
+						pv.getUpButton().setOnAction(event -> {
 
-						// Pokemon Swap Mechanic
-						int oldIndex = player.getPokemons().indexOf(pv.getPokemon());
-						int newIndex = (oldIndex == 0 ? player.getPokemons().size() - 1 : oldIndex - 1);
+							// Pokemon Swap Mechanic
+							int oldIndex = player.getPokemons().indexOf(pv.getPokemon());
+							int newIndex = (oldIndex == 0 ? player.getPokemons().size() - 1 : oldIndex - 1);
 
-						Pokemon oldPokemon = player.getPokemons().get(oldIndex);
-						Pokemon newPokemon = player.getPokemons().get(newIndex);
+							Pokemon oldPokemon = player.getPokemons().get(oldIndex);
+							Pokemon newPokemon = player.getPokemons().get(newIndex);
 
-						PokemonView oldView = (PokemonView) anchor2.getChildren().get(oldIndex);
-						PokemonView newView = (PokemonView) anchor2.getChildren().get(newIndex);
+							PokemonView oldView = (PokemonView) anchor2.getChildren().get(oldIndex);
+							PokemonView newView = (PokemonView) anchor2.getChildren().get(newIndex);
 
-						player.getPokemons().set(newIndex, oldPokemon);
-						player.getPokemons().set(oldIndex, newPokemon);
+							player.getPokemons().set(newIndex, oldPokemon);
+							player.getPokemons().set(oldIndex, newPokemon);
 
-						oldView.setPokemon(newPokemon);
-						newView.setPokemon(oldPokemon);
+							oldView.setPokemon(newPokemon);
+							newView.setPokemon(oldPokemon);
 
-					});
+						});
+					}
+				
 					anchor2.getChildren().add(pv);
 				}
 			} else {

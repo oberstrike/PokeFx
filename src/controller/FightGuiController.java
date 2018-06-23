@@ -192,8 +192,8 @@ public class FightGuiController implements Initializable {
 			Timeline myMoveBack = new Timeline();
 			Timeline myMove = new Timeline();
 			if (!myPokemon.isDead()) {
-				myMove = movement(myPokemonView, myPokemon, 30, -30);
-				myMoveBack = movement(myPokemonView, myPokemon, 0, 0);
+				myMove = movement(myPokemonView, 30, -30);
+				myMoveBack = movement(myPokemonView, 0, 0);
 			}
 
 			// Bewegung gegnerisches Pokemon
@@ -201,8 +201,8 @@ public class FightGuiController implements Initializable {
 			Timeline enemyMoveBack = new Timeline();
 			if (!enemyPokemon.isDead()) {
 				Random random = new Random();
-				enemyMove = movement(enemyPokemonView, enemyPokemon, -15 - random.nextInt(30), 30);
-				enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
+				enemyMove = movement(enemyPokemonView, -15 - random.nextInt(30), 30);
+				enemyMoveBack = movement(enemyPokemonView, 0, 0);
 			}
 
 			// Sequenz abspielen
@@ -223,7 +223,18 @@ public class FightGuiController implements Initializable {
 
 	@FXML
 	void escape(MouseEvent event) {
-		swapBack();
+		Pokemon enemyPokemon = enemyPokemons.get(actEnemyPokemon);
+		Pokemon myPokemon = myPokemons.get(actMyPokemon);
+		if(enemyPokemon.getHpRealtion()>myPokemon.getHpRealtion()) {
+			int randomInt = new Random().nextInt(3);
+			if(randomInt<=1)
+				swapBack();
+			else
+				escapeLabel.setDisable(true);
+		}else {
+			swapBack();	
+		}
+		
 	}
 
 	@FXML
@@ -264,7 +275,7 @@ public class FightGuiController implements Initializable {
 	@FXML
 	void catchEvent(MouseEvent event) {
 		// Blockieren der Auswahl
-		block(3000);
+		block(3500);
 		busy = true;
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -294,8 +305,8 @@ public class FightGuiController implements Initializable {
 				text2.getKeyFrames().add(new KeyFrame(new Duration(500), new KeyValue(wsidLabel.textProperty(),
 						"Das gegnerische " + enemyPokemon.getName() + " greift an!")));
 
-				Timeline enemyMove = movement(enemyPokemonView, enemyPokemon, -30, 30);
-				Timeline enemyMoveBack = movement(enemyPokemonView, enemyPokemon, 0, 0);
+				Timeline enemyMove = movement(enemyPokemonView, -30, 30);
+				Timeline enemyMoveBack = movement(enemyPokemonView, 0, 0);
 
 				myPokemon.setHp(myPokemon.getHp() - enemyPokemon.howMuchDamage(myPokemon));
 				KeyValue keyHpFirst = new KeyValue(myPokemonHealthBar.progressProperty(),
@@ -320,7 +331,7 @@ public class FightGuiController implements Initializable {
 		}
 	}
 
-	public Timeline movement(ImageView view, Pokemon mon, double x, double y) {
+	public Timeline movement(ImageView view, double x, double y) {
 		Timeline move = new Timeline();
 		move.getKeyFrames().add(new KeyFrame(new Duration(200),
 				new KeyValue(view.layoutXProperty(), view.getLayoutX() + x, Interpolator.EASE_OUT)));
@@ -338,6 +349,7 @@ public class FightGuiController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		executor = Executors.newScheduledThreadPool(1);
+		
 		if (!Main.routeMediaPlayer.isMute()) {
 			Main.routeMediaPlayer.stop();
 			Main.fightMediaPlayer.setVolume(0.6);

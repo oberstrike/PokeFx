@@ -11,10 +11,7 @@ public class WindowChanger {
 	
 	private Stage stage;
 	
-	public WindowChanger() {
-
-		
-	}
+	public WindowChanger() {}
 	
 	public void changeWindow(String url) {
 		this.changeWindow(url, (loader) ->{

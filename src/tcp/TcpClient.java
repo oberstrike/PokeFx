@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import design.Utilis;
 
  abstract public class TcpClient extends Thread{
 	private Socket socket;
@@ -33,7 +32,6 @@ import design.Utilis;
 			e.printStackTrace();
 		}
 	}
-	
 	
 	@Override
 	public void run() {

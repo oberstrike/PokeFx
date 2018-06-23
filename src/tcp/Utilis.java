@@ -1,4 +1,4 @@
-package design;
+package tcp;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +10,7 @@ import java.net.DatagramPacket;
 
 public final class Utilis {
 	
+	//Serializiert ein Objekt
 	public static byte[] serialize(Object obj)  {
 		ByteArrayOutputStream bStream = new ByteArrayOutputStream();
 		ObjectOutput oo;
@@ -23,7 +24,8 @@ public final class Utilis {
 
 		return bStream.toByteArray();
 	}
-	
+
+	//Fuer Udp Packete
 	public static Object deserialize(DatagramPacket packet) {
 		ObjectInputStream iStream = null;
 		try {

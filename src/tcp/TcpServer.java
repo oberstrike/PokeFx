@@ -15,10 +15,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
-import design.Utilis;
-
 abstract public class TcpServer extends Thread {
 
+	//Abstrakte Klasse fuer das Aufbauen eines Servers
+	
 	private Vector<Handler> listOfHandler;
 	private ExecutorService executor;
 	private ServerSocket serverSocket;
@@ -31,7 +31,7 @@ abstract public class TcpServer extends Thread {
 	}
 
 	/***
-	 * Creates a TCP Server on Port 9999
+	 * Creates a TCP Server on Port 9999. (Standard Port)
 	 */
 	
 	public TcpServer() {
